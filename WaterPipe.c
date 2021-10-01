@@ -1,14 +1,13 @@
-/*
+/*!
 *****************************************************************
 * Copyright (c) Lukasz Piatek. All rights reserved.
-* @file    WaterPipe_prj.c
-* @author  LP
+* @file    WaterPipe.c
+* @author  Lukasz Piatek
 * @version V1.0
-* @date    25-September-2021
-* @brief   Default main function.
+* @date    2021-09-28
+* @brief   Default main function
 *****************************************************************
 */
-
 
 /*-------------------------------------------------------------*/
 /* INCLUDES ---------------------------------------------------*/
@@ -125,8 +124,8 @@ int main()
         /*-------------------------------------------------------------*/
         funcBlinkLed();
         BME280_ReadStandby();
-        //Test Function
-        
+
+        /* Test Function */
         while(BME280_ReadStatus() & BME280_STATUS_IM_UPDATE){
             debugMsg("-----------------------------------------------------------------------STORING\n");
             //return -1;
@@ -134,7 +133,7 @@ int main()
         
 
         debugMsg("**************************\n");
-        sleep_ms(400);
+        sleep_ms(1000);
     }
     return 0;
 
