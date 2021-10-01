@@ -1,0 +1,13 @@
+/*
+     * ERRORCODES
+     * |---------------------+--------------+---------------+|
+     * | FUNCTION             | DESCRIPTION  | 0x CODE      ||
+     * |----------------------+--------------+--------------+|
+     * | (dummy)              | (don't care) | 0xFFFF       ||
+     * | (dummy)              | (don't care) | 0xFFFF       ||
+     * | (dummy)              | (don't care) | 0xFFFF       ||
+     * | (dummy)              | (....)       | 0xFFFF       ||
+     * | (dummy)              | (don't care) | 0xFFFF       ||
+     * | (dummy)              | (don't care) | 0xFFFF       ||
+     * |---------------------+--------------+---------------+|
+*/
