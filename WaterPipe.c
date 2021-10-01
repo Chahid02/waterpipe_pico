@@ -126,12 +126,12 @@ int main()
         funcBlinkLed();
         BME280_ReadStandby();
         //Test Function
-        /*
+        
         while(BME280_ReadStatus() & BME280_STATUS_IM_UPDATE){
             debugMsg("-----------------------------------------------------------------------STORING\n");
-            return -1;
+            //return -1;
         };
-        */
+        
 
         debugMsg("**************************\n");
         sleep_ms(400);
