@@ -478,8 +478,8 @@ Disassembly of section .text:
 10000470:	f000 fabc 	bl	100009ec <BME280_ReadStandby>
 10000474:	0020      	movs	r0, r4
 10000476:	f004 fb6f 	bl	10004b58 <__wrap_puts>
-1000047a:	20fa      	movs	r0, #250	; 0xfa
-1000047c:	0080      	lsls	r0, r0, #2
+1000047a:	20c8      	movs	r0, #200	; 0xc8
+1000047c:	0040      	lsls	r0, r0, #1
 1000047e:	f001 f977 	bl	10001770 <sleep_ms>
 10000482:	e7ea      	b.n	1000045a <main+0xc6>
 10000484:	480e      	ldr	r0, [pc, #56]	; (100004c0 <main+0x12c>)

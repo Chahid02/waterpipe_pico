@@ -134,7 +134,7 @@ int main()
         */
 
         debugMsg("**************************\n");
-        sleep_ms(1000);
+        sleep_ms(400);
     }
     return 0;
 
