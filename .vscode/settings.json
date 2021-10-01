@@ -13,5 +13,9 @@
       "visibility": "hidden"
                },
     },
+    "files.associations": {
+      "binary_info.h": "c",
+      "i2c.h": "c"
+    },
 
 }

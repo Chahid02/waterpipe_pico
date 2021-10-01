@@ -28,7 +28,7 @@ pico_enable_stdio_uart(waterpipe 1)
 pico_enable_stdio_usb(waterpipe 1)
 
 # Add the standard library to the build
-target_link_libraries(waterpipe pico_stdlib)
+target_link_libraries(waterpipe pico_stdlib hardware_i2c pico_binary_info)
 
 # Add any user requested libraries
 target_link_libraries(waterpipe
