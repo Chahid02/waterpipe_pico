@@ -1,3 +1,3 @@
 # Waterpipe
 
-test
+This project is a pico prototype 
