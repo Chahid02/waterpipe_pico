@@ -26,6 +26,20 @@ WaterPipe.h
 
 /home/luki/Pico-Projekte/Waterpipe/WaterPipe.h
 
+/home/luki/Pico-Projekte/Waterpipe/bme280.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+bme280.h
+/home/luki/Pico-Projekte/Waterpipe/bme280.h
+hardware/i2c.h
+/home/luki/Pico-Projekte/Waterpipe/hardware/i2c.h
+WaterPipe.h
+/home/luki/Pico-Projekte/Waterpipe/WaterPipe.h
+
 /home/luki/Pico-Projekte/Waterpipe/bme280.h
 
 /home/luki/pico/pico-sdk/src/boards/include/boards/pico.h
