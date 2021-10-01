@@ -1,10 +1,10 @@
-/*
+/*!
 *****************************************************************
 * Copyright (c) Lukasz Piatek. All rights reserved.
-* @file    main.c
-* @author  LP
+* @file    WaterPipe.h
+* @author  Lukasz Piatek
 * @version V1.0
-* @date    25-September-2021
+* @date    2021-09-28
 * @brief   Default main function.
 *****************************************************************
 */

@@ -1,12 +1,14 @@
-/**
+/*!
+*****************************************************************
 * Copyright (c) Lukasz Piatek. All rights reserved.
-*
-*
-* @file       bme280.h
-* @date       2021-09-28
-* @version    v1.0.0
-*
+* @file    bme280.h
+* @author  Lukasz Piatek
+* @version V1.0
+* @date    2021-09-28
+* @brief   BME280 Driver
+*****************************************************************
 */
+
 #ifndef BME280_H_
 #define BME280_H_
 

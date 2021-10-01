@@ -1,4 +1,4 @@
-Commentary structure
+Function structure:
 
 
 /*!
@@ -17,9 +17,9 @@ Commentary structure
  *************************************************************************
  */
 
- Header Structure:
+ Header structure:
 
- /*
+ /*!
 *****************************************************************
 * Copyright (c) ....... All rights reserved.
 * @file    .c
