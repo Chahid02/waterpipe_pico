@@ -6,6 +6,20 @@
 
 #IncludeRegexTransform: 
 
+/home/luki/Pico-Projekte/Waterpipe/bme280.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+bme280.h
+/home/luki/Pico-Projekte/Waterpipe/bme280.h
+hardware/i2c.h
+/home/luki/Pico-Projekte/Waterpipe/hardware/i2c.h
+waterpipe.h
+/home/luki/Pico-Projekte/Waterpipe/waterpipe.h
+
 /home/luki/Pico-Projekte/Waterpipe/bme280.h
 
 /home/luki/Pico-Projekte/Waterpipe/waterpipe.c

@@ -12,5 +12,6 @@
     "buildTarget" : {
       "visibility": "hidden"
                },
-     },
+    },
+
 }

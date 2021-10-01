@@ -24,8 +24,6 @@
 #include "bme280.h"
 #include "waterpipe.h"
 
-
-
 /*-------------------------------------------------------------*/
 /* BME280 VARIABLES -------------------------------------------*/
 /*-------------------------------------------------------------*/
@@ -34,8 +32,7 @@ uint8_t deviceAddr = 0x76; //BME280_I2C_ADDR_ADDR in bme280.h
 /*-------------------------------------------------------------*/
 /* PRIVATE PROTOTYPES -----------------------------------------*/
 /*-------------------------------------------------------------*/
- void funcBlinkLed();
-
+void funcBlinkLed();
 
 int main()
 {
@@ -50,11 +47,11 @@ int main()
     debugMsg("INIT I2C HARDWARE: ");
 
 #if !defined(i2c_default) || !defined(PICO_DEFAULT_I2C_SDA_PIN) || !defined(PICO_DEFAULT_I2C_SCL_PIN)
-    #warning Programm requires a board with I2C pins
-    #error "Seems hardware/i2c.h" is missing
+#warning Programm requires a board with I2C pins
+#error "Seems hardware/i2c.h" is missing
     DebugMsg("Default I2C pins were not defined\r\n");
 #else
-    
+
     gpio_set_function(PICO_DEFAULT_I2C_SDA_PIN, GPIO_FUNC_I2C);
     gpio_set_function(PICO_DEFAULT_I2C_SCL_PIN, GPIO_FUNC_I2C);
     gpio_pull_up(PICO_DEFAULT_I2C_SDA_PIN);
@@ -72,17 +69,17 @@ int main()
     debugMsg("INIT GPIO HARDWARE: ");
 
 #ifndef PICO_DEFAULT_LED_PIN
-    #warning Programm requires a board with a regular LED
+#warning Programm requires a board with a regular LED
 #else
     gpio_set_dir(LED, GPIO_OUT);
-        if (gpio_is_dir_out(LED) != GPIO_OUT)
-        {
-            debugMsg("-- CHECK YOUR DEFAULT LED CONFIGURATION OF THE BOARD --\r\n");
-        }
-        else
-        {
-            __NOP();
-        }
+    if (gpio_is_dir_out(LED) != GPIO_OUT)
+    {
+        debugMsg("-- CHECK YOUR DEFAULT LED CONFIGURATION OF THE BOARD --\r\n");
+    }
+    else
+    {
+        __NOP();
+    }
 #endif
     debugMsg("-- GPIO HARDWARE SUCCESSFULLY SET --\r\n");
     sleep_ms(1000);
@@ -107,6 +104,7 @@ int main()
     BME280_SetStandby(BME280_STBY_0_5);
     debugMsg("\n");
 
+
     while (true)
     {
         /*
@@ -126,20 +124,16 @@ int main()
         BME280_ReadStandby();
 
         /* Test Function */
-        while(BME280_ReadStatus() & BME280_STATUS_IM_UPDATE){
+        while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)
+        {
             debugMsg("-----------------------------------------------------------------------STORING\n");
             //return -1;
         };
-        
-
         debugMsg("**************************\n");
         sleep_ms(1000);
     }
     return 0;
-
 }
-
-
 
 /*!
  *************************************************************************
@@ -157,8 +151,7 @@ int main()
  *************************************************************************
  */
 void funcBlinkLed()
-{
-
+{ 
     if (gpio_get_out_level(LED) != true)
     {
         gpio_put(LED, true);
@@ -172,7 +165,7 @@ void funcBlinkLed()
 }
 
 //void printBinary(uint8_t i, int8_t *strArray) char *strArray
-void printBinary(uint8_t i, char*strArray)
+void printBinary(uint8_t i, char *strArray)
 {
     if (i > 1)
     {
@@ -182,7 +175,7 @@ void printBinary(uint8_t i, char*strArray)
     {
         __NOP();
     }
-    
+
     printf("%d", (i & 1));
     sprintf(strArray, "0x%02X\r\n", i);
 }
