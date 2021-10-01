@@ -256,7 +256,6 @@ int8_t BME280_ReadStatus(void)
     {
     case 0x09:
         debugMsg("-- New Measuring & pre-measured Data-storeage in progress --\r\n");
-        return -1;
         break;
     case 0x08:
         debugMsg("-- Measuring in progress --\r\n");
