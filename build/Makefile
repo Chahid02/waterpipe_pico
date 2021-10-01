@@ -143,17 +143,17 @@ ELF2UF2Build/fast:
 .PHONY : ELF2UF2Build/fast
 
 #=============================================================================
-# Target rules for targets named WaterPipe
+# Target rules for targets named waterpipe
 
 # Build rule for target.
-WaterPipe: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 WaterPipe
-.PHONY : WaterPipe
+waterpipe: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 waterpipe
+.PHONY : waterpipe
 
 # fast build rule for target.
-WaterPipe/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/build
-.PHONY : WaterPipe/fast
+waterpipe/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/build
+.PHONY : waterpipe/fast
 
 #=============================================================================
 # Target rules for targets named bs2_default_padded_checksummed_asm
@@ -194,40 +194,13 @@ bs2_default/fast:
 	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/build.make pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/build
 .PHONY : bs2_default/fast
 
-WaterPipe.obj: WaterPipe.c.obj
-
-.PHONY : WaterPipe.obj
-
-# target to build an object file
-WaterPipe.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/WaterPipe.c.obj
-.PHONY : WaterPipe.c.obj
-
-WaterPipe.i: WaterPipe.c.i
-
-.PHONY : WaterPipe.i
-
-# target to preprocess a source file
-WaterPipe.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/WaterPipe.c.i
-.PHONY : WaterPipe.c.i
-
-WaterPipe.s: WaterPipe.c.s
-
-.PHONY : WaterPipe.s
-
-# target to generate assembly for a file
-WaterPipe.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/WaterPipe.c.s
-.PHONY : WaterPipe.c.s
-
 bme280.obj: bme280.c.obj
 
 .PHONY : bme280.obj
 
 # target to build an object file
 bme280.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/bme280.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/bme280.c.obj
 .PHONY : bme280.c.obj
 
 bme280.i: bme280.c.i
@@ -236,7 +209,7 @@ bme280.i: bme280.c.i
 
 # target to preprocess a source file
 bme280.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/bme280.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/bme280.c.i
 .PHONY : bme280.c.i
 
 bme280.s: bme280.c.s
@@ -245,7 +218,7 @@ bme280.s: bme280.c.s
 
 # target to generate assembly for a file
 bme280.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/bme280.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/bme280.c.s
 .PHONY : bme280.c.s
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.obj: home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj
@@ -254,7 +227,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.obj: home/luki/
 
 # target to build an object file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.i: home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i
@@ -263,7 +236,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.i: home/luki/pi
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.s: home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s
@@ -272,7 +245,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.s: home/luki/pi
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.obj: home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj
@@ -281,7 +254,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.obj: home/luki/pico
 
 # target to build an object file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.i: home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i
@@ -290,7 +263,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.i: home/luki/pico/p
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.s: home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s
@@ -299,7 +272,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.s: home/luki/pico/p
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.obj: home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj
@@ -308,7 +281,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.obj: home/luki/pico
 
 # target to build an object file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.i: home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i
@@ -317,7 +290,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.i: home/luki/pico/p
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.s: home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s
@@ -326,7 +299,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.s: home/luki/pico/p
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.obj: home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj
@@ -335,7 +308,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.obj: home/luki/p
 
 # target to build an object file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.i: home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i
@@ -344,7 +317,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.i: home/luki/pic
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.s: home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s
@@ -353,7 +326,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.s: home/luki/pic
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.obj: home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj
@@ -362,7 +335,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.obj: home/luki/pico
 
 # target to build an object file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.i: home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i
@@ -371,7 +344,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.i: home/luki/pico/p
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.s: home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s
@@ -380,7 +353,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.s: home/luki/pico/p
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.obj: home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj
@@ -389,7 +362,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.obj: home/luki/pi
 
 # target to build an object file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.i: home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i
@@ -398,7 +371,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.i: home/luki/pico
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.s: home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s
@@ -407,7 +380,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.s: home/luki/pico
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.obj: home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj
@@ -416,7 +389,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.obj: home/luki/pico
 
 # target to build an object file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.i: home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i
@@ -425,7 +398,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.i: home/luki/pico/p
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.s: home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s
@@ -434,7 +407,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.s: home/luki/pico/p
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.obj: home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.c.obj
@@ -443,7 +416,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.obj: home/luki/pico
 
 # target to build an object file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.c.obj
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.c.obj
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.i: home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.c.i
@@ -452,7 +425,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.i: home/luki/pico/p
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.c.i
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.c.i
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.s: home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.c.s
@@ -461,7 +434,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.s: home/luki/pico/p
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.c.s
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/net/net_device.c.s
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.obj: home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj
@@ -470,7 +443,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.obj: home/luk
 
 # target to build an object file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.i: home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i
@@ -479,7 +452,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.i: home/luki/
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.s: home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s
@@ -488,7 +461,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.s: home/luki/
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.obj: home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj
@@ -497,7 +470,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.obj: home/luk
 
 # target to build an object file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.i: home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i
@@ -506,7 +479,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.i: home/luki/
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.s: home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s
@@ -515,7 +488,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.s: home/luki/
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.obj: home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
@@ -524,7 +497,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.obj: home/luki/pico/pic
 
 # target to build an object file
 home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.i: home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
@@ -533,7 +506,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.i: home/luki/pico/pico-
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.s: home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
@@ -542,7 +515,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.s: home/luki/pico/pico-
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.obj: home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj
@@ -551,7 +524,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.obj: home/luki/pico/pico-sdk
 
 # target to build an object file
 home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.i: home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i
@@ -560,7 +533,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.i: home/luki/pico/pico-sdk/l
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.s: home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s
@@ -569,7 +542,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.s: home/luki/pico/pico-sdk/l
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.obj: home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj
@@ -578,7 +551,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.obj: home/luki/pico/
 
 # target to build an object file
 home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.i: home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i
@@ -587,7 +560,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.i: home/luki/pico/pi
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.s: home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s
@@ -596,7 +569,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.s: home/luki/pico/pi
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.obj: home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj
@@ -605,7 +578,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.o
 
 # target to build an object file
 home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.i: home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i
@@ -614,7 +587,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.i
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.s: home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s
@@ -623,7 +596,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.s
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.obj: home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
@@ -632,7 +605,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.o
 
 # target to build an object file
 home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.i: home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
@@ -641,7 +614,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.i
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.s: home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
@@ -650,7 +623,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.s
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.obj: home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
@@ -659,7 +632,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.obj: home/luki/pico/pico-sdk/lib/ti
 
 # target to build an object file
 home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.i: home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
@@ -668,7 +641,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.i: home/luki/pico/pico-sdk/lib/tiny
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
 
 home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.s: home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
@@ -677,7 +650,7 @@ home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.s: home/luki/pico/pico-sdk/lib/tiny
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
 .PHONY : home/luki/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
 
 home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.obj: home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
@@ -686,7 +659,7 @@ home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.obj: home/luki/pic
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
 
 home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.i: home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.c.i
@@ -695,7 +668,7 @@ home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.i: home/luki/pico/
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.c.i
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.c.i
 
 home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.s: home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.c.s
@@ -704,7 +677,7 @@ home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.s: home/luki/pico/
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.c.s
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_sync/critical_section.c.s
 
 home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.obj: home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj
@@ -713,7 +686,7 @@ home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.obj: home/luki/pico/pico-
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj
 
 home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.i: home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.c.i
@@ -722,7 +695,7 @@ home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.i: home/luki/pico/pico-sd
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.c.i
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.c.i
 
 home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.s: home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.c.s
@@ -731,7 +704,7 @@ home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.s: home/luki/pico/pico-sd
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.c.s
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_sync/lock_core.c.s
 
 home/luki/pico/pico-sdk/src/common/pico_sync/mutex.obj: home/luki/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
@@ -740,7 +713,7 @@ home/luki/pico/pico-sdk/src/common/pico_sync/mutex.obj: home/luki/pico/pico-sdk/
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/common/pico_sync/mutex.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
 
 home/luki/pico/pico-sdk/src/common/pico_sync/mutex.i: home/luki/pico/pico-sdk/src/common/pico_sync/mutex.c.i
@@ -749,7 +722,7 @@ home/luki/pico/pico-sdk/src/common/pico_sync/mutex.i: home/luki/pico/pico-sdk/sr
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/common/pico_sync/mutex.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/mutex.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/mutex.c.i
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_sync/mutex.c.i
 
 home/luki/pico/pico-sdk/src/common/pico_sync/mutex.s: home/luki/pico/pico-sdk/src/common/pico_sync/mutex.c.s
@@ -758,7 +731,7 @@ home/luki/pico/pico-sdk/src/common/pico_sync/mutex.s: home/luki/pico/pico-sdk/sr
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/common/pico_sync/mutex.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/mutex.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/mutex.c.s
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_sync/mutex.c.s
 
 home/luki/pico/pico-sdk/src/common/pico_sync/sem.obj: home/luki/pico/pico-sdk/src/common/pico_sync/sem.c.obj
@@ -767,7 +740,7 @@ home/luki/pico/pico-sdk/src/common/pico_sync/sem.obj: home/luki/pico/pico-sdk/sr
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/common/pico_sync/sem.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/sem.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/sem.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_sync/sem.c.obj
 
 home/luki/pico/pico-sdk/src/common/pico_sync/sem.i: home/luki/pico/pico-sdk/src/common/pico_sync/sem.c.i
@@ -776,7 +749,7 @@ home/luki/pico/pico-sdk/src/common/pico_sync/sem.i: home/luki/pico/pico-sdk/src/
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/common/pico_sync/sem.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/sem.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/sem.c.i
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_sync/sem.c.i
 
 home/luki/pico/pico-sdk/src/common/pico_sync/sem.s: home/luki/pico/pico-sdk/src/common/pico_sync/sem.c.s
@@ -785,7 +758,7 @@ home/luki/pico/pico-sdk/src/common/pico_sync/sem.s: home/luki/pico/pico-sdk/src/
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/common/pico_sync/sem.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/sem.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_sync/sem.c.s
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_sync/sem.c.s
 
 home/luki/pico/pico-sdk/src/common/pico_time/time.obj: home/luki/pico/pico-sdk/src/common/pico_time/time.c.obj
@@ -794,7 +767,7 @@ home/luki/pico/pico-sdk/src/common/pico_time/time.obj: home/luki/pico/pico-sdk/s
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/common/pico_time/time.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_time/time.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_time/time.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_time/time.c.obj
 
 home/luki/pico/pico-sdk/src/common/pico_time/time.i: home/luki/pico/pico-sdk/src/common/pico_time/time.c.i
@@ -803,7 +776,7 @@ home/luki/pico/pico-sdk/src/common/pico_time/time.i: home/luki/pico/pico-sdk/src
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/common/pico_time/time.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_time/time.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_time/time.c.i
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_time/time.c.i
 
 home/luki/pico/pico-sdk/src/common/pico_time/time.s: home/luki/pico/pico-sdk/src/common/pico_time/time.c.s
@@ -812,7 +785,7 @@ home/luki/pico/pico-sdk/src/common/pico_time/time.s: home/luki/pico/pico-sdk/src
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/common/pico_time/time.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_time/time.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_time/time.c.s
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_time/time.c.s
 
 home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.obj: home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj
@@ -821,7 +794,7 @@ home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.obj: home/luki/pico/
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj
 
 home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.i: home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.c.i
@@ -830,7 +803,7 @@ home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.i: home/luki/pico/pi
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.c.i
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.c.i
 
 home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.s: home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.c.s
@@ -839,7 +812,7 @@ home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.s: home/luki/pico/pi
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.c.s
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_time/timeout_helper.c.s
 
 home/luki/pico/pico-sdk/src/common/pico_util/datetime.obj: home/luki/pico/pico-sdk/src/common/pico_util/datetime.c.obj
@@ -848,7 +821,7 @@ home/luki/pico/pico-sdk/src/common/pico_util/datetime.obj: home/luki/pico/pico-s
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/common/pico_util/datetime.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_util/datetime.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_util/datetime.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_util/datetime.c.obj
 
 home/luki/pico/pico-sdk/src/common/pico_util/datetime.i: home/luki/pico/pico-sdk/src/common/pico_util/datetime.c.i
@@ -857,7 +830,7 @@ home/luki/pico/pico-sdk/src/common/pico_util/datetime.i: home/luki/pico/pico-sdk
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/common/pico_util/datetime.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_util/datetime.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_util/datetime.c.i
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_util/datetime.c.i
 
 home/luki/pico/pico-sdk/src/common/pico_util/datetime.s: home/luki/pico/pico-sdk/src/common/pico_util/datetime.c.s
@@ -866,7 +839,7 @@ home/luki/pico/pico-sdk/src/common/pico_util/datetime.s: home/luki/pico/pico-sdk
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/common/pico_util/datetime.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_util/datetime.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_util/datetime.c.s
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_util/datetime.c.s
 
 home/luki/pico/pico-sdk/src/common/pico_util/pheap.obj: home/luki/pico/pico-sdk/src/common/pico_util/pheap.c.obj
@@ -875,7 +848,7 @@ home/luki/pico/pico-sdk/src/common/pico_util/pheap.obj: home/luki/pico/pico-sdk/
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/common/pico_util/pheap.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_util/pheap.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_util/pheap.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_util/pheap.c.obj
 
 home/luki/pico/pico-sdk/src/common/pico_util/pheap.i: home/luki/pico/pico-sdk/src/common/pico_util/pheap.c.i
@@ -884,7 +857,7 @@ home/luki/pico/pico-sdk/src/common/pico_util/pheap.i: home/luki/pico/pico-sdk/sr
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/common/pico_util/pheap.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_util/pheap.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_util/pheap.c.i
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_util/pheap.c.i
 
 home/luki/pico/pico-sdk/src/common/pico_util/pheap.s: home/luki/pico/pico-sdk/src/common/pico_util/pheap.c.s
@@ -893,7 +866,7 @@ home/luki/pico/pico-sdk/src/common/pico_util/pheap.s: home/luki/pico/pico-sdk/sr
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/common/pico_util/pheap.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_util/pheap.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_util/pheap.c.s
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_util/pheap.c.s
 
 home/luki/pico/pico-sdk/src/common/pico_util/queue.obj: home/luki/pico/pico-sdk/src/common/pico_util/queue.c.obj
@@ -902,7 +875,7 @@ home/luki/pico/pico-sdk/src/common/pico_util/queue.obj: home/luki/pico/pico-sdk/
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/common/pico_util/queue.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_util/queue.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_util/queue.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_util/queue.c.obj
 
 home/luki/pico/pico-sdk/src/common/pico_util/queue.i: home/luki/pico/pico-sdk/src/common/pico_util/queue.c.i
@@ -911,7 +884,7 @@ home/luki/pico/pico-sdk/src/common/pico_util/queue.i: home/luki/pico/pico-sdk/sr
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/common/pico_util/queue.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_util/queue.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_util/queue.c.i
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_util/queue.c.i
 
 home/luki/pico/pico-sdk/src/common/pico_util/queue.s: home/luki/pico/pico-sdk/src/common/pico_util/queue.c.s
@@ -920,7 +893,7 @@ home/luki/pico/pico-sdk/src/common/pico_util/queue.s: home/luki/pico/pico-sdk/sr
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/common/pico_util/queue.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/common/pico_util/queue.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/common/pico_util/queue.c.s
 .PHONY : home/luki/pico/pico-sdk/src/common/pico_util/queue.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.obj: home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
@@ -929,7 +902,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.obj: home/luki/pico/
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.i: home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.i
@@ -938,7 +911,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.i: home/luki/pico/pi
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.s: home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.s
@@ -947,7 +920,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.s: home/luki/pico/pi
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.obj: home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
@@ -956,7 +929,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.obj: home/luki/pic
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.i: home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.i
@@ -965,7 +938,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.i: home/luki/pico/
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.s: home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.s
@@ -974,7 +947,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.s: home/luki/pico/
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_divider/divider.obj: home/luki/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj
@@ -983,7 +956,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_divider/divider.obj: home/luki/p
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.obj: home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj
@@ -992,7 +965,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.obj: home/luki/pico/
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.i: home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.i
@@ -1001,7 +974,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.i: home/luki/pico/pi
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.s: home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.s
@@ -1010,7 +983,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.s: home/luki/pico/pi
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.obj: home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
@@ -1019,7 +992,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.obj: home/luki/pico/pi
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.i: home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.i
@@ -1028,7 +1001,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.i: home/luki/pico/pico
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.s: home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.s
@@ -1037,7 +1010,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.s: home/luki/pico/pico
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.obj: home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj
@@ -1046,7 +1019,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.obj: home/luki/pico/pico
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.i: home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.i
@@ -1055,7 +1028,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.i: home/luki/pico/pico-s
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.s: home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.s
@@ -1064,7 +1037,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.s: home/luki/pico/pico-s
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.obj: home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
@@ -1073,7 +1046,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.obj: home/luki/pico/pico
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.i: home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.i
@@ -1082,7 +1055,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.i: home/luki/pico/pico-s
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.s: home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.s
@@ -1091,7 +1064,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.s: home/luki/pico/pico-s
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.obj: home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
@@ -1100,7 +1073,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.obj: home/
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.obj: home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
@@ -1109,7 +1082,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.obj: home/luki/pico/pico
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.i: home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.i
@@ -1118,7 +1091,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.i: home/luki/pico/pico-s
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.s: home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.s
@@ -1127,7 +1100,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.s: home/luki/pico/pico-s
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.obj: home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
@@ -1136,7 +1109,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.obj: home/luki/pico/pi
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.i: home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.i
@@ -1145,7 +1118,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.i: home/luki/pico/pico
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.s: home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.s
@@ -1154,7 +1127,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.s: home/luki/pico/pico
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.obj: home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
@@ -1163,7 +1136,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.obj: home/luki/pico/
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.i: home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.i
@@ -1172,7 +1145,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.i: home/luki/pico/pi
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.s: home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.s
@@ -1181,7 +1154,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.s: home/luki/pico/pi
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.obj: home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
@@ -1190,7 +1163,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.obj: home/luki/pico/pi
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.i: home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.i
@@ -1199,7 +1172,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.i: home/luki/pico/pico
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.s: home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.s
@@ -1208,7 +1181,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.s: home/luki/pico/pico
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.obj: home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj
@@ -1217,7 +1190,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.obj: home/luki/pico/pi
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.i: home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.i
@@ -1226,7 +1199,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.i: home/luki/pico/pico
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.s: home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.s
@@ -1235,7 +1208,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.s: home/luki/pico/pico
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.obj: home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
@@ -1244,7 +1217,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.obj: home/luki
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.i: home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.i
@@ -1253,7 +1226,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.i: home/luki/p
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.s: home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.s
@@ -1262,7 +1235,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.s: home/luki/p
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.obj: home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
@@ -1271,7 +1244,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.obj: home/luki/pico/pi
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.i: home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.i
@@ -1280,7 +1253,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.i: home/luki/pico/pico
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.s: home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.s
@@ -1289,7 +1262,7 @@ home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.s: home/luki/pico/pico
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
@@ -1298,7 +1271,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.obj: home/luki
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
@@ -1307,7 +1280,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.obj: home/luki/pico/
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.i: home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.i
@@ -1316,7 +1289,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.i: home/luki/pico/pi
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.s: home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.s
@@ -1325,7 +1298,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.s: home/luki/pico/pi
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_divider/divider.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
@@ -1334,7 +1307,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_divider/divider.obj: home/luki/pico/
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
@@ -1343,7 +1316,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.obj: home/luki/p
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
@@ -1352,7 +1325,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.obj: home/luk
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.i: home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.i
@@ -1361,7 +1334,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.i: home/luki/
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.s: home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.s
@@ -1370,7 +1343,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.s: home/luki/
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj
@@ -1379,7 +1352,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.obj: home/luki/pi
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.i: home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.i
@@ -1388,7 +1361,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.i: home/luki/pico
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.s: home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.s
@@ -1397,7 +1370,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.s: home/luki/pico
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
@@ -1406,7 +1379,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.obj: home/
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj
@@ -1415,7 +1388,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.i: home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i
@@ -1424,7 +1397,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.s: home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s
@@ -1433,7 +1406,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
@@ -1442,7 +1415,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.obj: home/luki/pic
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
@@ -1451,7 +1424,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.obj: home/luki/
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.i: home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.i
@@ -1460,7 +1433,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.i: home/luki/pi
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.s: home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.s
@@ -1469,7 +1442,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.s: home/luki/pi
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj
@@ -1478,7 +1451,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.obj: home/luki/pico
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.i: home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.i
@@ -1487,7 +1460,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.i: home/luki/pico/p
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.s: home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.s
@@ -1496,7 +1469,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.s: home/luki/pico/p
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
@@ -1505,7 +1478,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.obj: home/lu
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
@@ -1514,7 +1487,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.obj: 
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
@@ -1523,7 +1496,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.obj: home/luki/pi
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.i: home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.i
@@ -1532,7 +1505,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.i: home/luki/pico
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.s: home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.s
@@ -1541,7 +1514,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.s: home/luki/pico
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
@@ -1550,7 +1523,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.obj: home/luki
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
@@ -1559,7 +1532,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.obj: home/luki/pic
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.i: home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.i
@@ -1568,7 +1541,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.i: home/luki/pico/
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.s: home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.s
@@ -1577,7 +1550,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.s: home/luki/pico/
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
@@ -1586,7 +1559,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.obj: home/luki/pico/pi
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.i: home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.i
@@ -1595,7 +1568,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.i: home/luki/pico/pico
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.s: home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.s
@@ -1604,7 +1577,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.s: home/luki/pico/pico
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
@@ -1613,7 +1586,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.obj: home/luki/pico/
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.i: home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.i
@@ -1622,7 +1595,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.i: home/luki/pico/pi
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.s: home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.s
@@ -1631,7 +1604,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.s: home/luki/pico/pi
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
@@ -1640,7 +1613,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.obj: home/
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.i: home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.i
@@ -1649,7 +1622,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.i: home/lu
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.s: home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.s
@@ -1658,7 +1631,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.s: home/lu
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
@@ -1667,7 +1640,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.obj: home/luki/pi
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj
@@ -1676,7 +1649,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.obj: home/l
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.i: home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.i
@@ -1685,7 +1658,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.i: home/luk
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.s: home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.s
@@ -1694,7 +1667,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.s: home/luk
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
@@ -1703,7 +1676,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.obj: home/luki/pico/pico
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.i: home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.i
@@ -1712,7 +1685,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.i: home/luki/pico/pico-s
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.s: home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.s
@@ -1721,7 +1694,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.s: home/luki/pico/pico-s
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
@@ -1730,7 +1703,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.obj: home/luki
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.i: home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.i
@@ -1739,7 +1712,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.i: home/luki/p
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.s: home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.s
@@ -1748,7 +1721,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.s: home/luki/p
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.obj
@@ -1757,7 +1730,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.obj: home/
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.i: home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.i
@@ -1766,7 +1739,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.i: home/lu
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.s: home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.s
@@ -1775,7 +1748,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.s: home/lu
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.obj
@@ -1784,7 +1757,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.obj: home/luki/p
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.i: home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.i
@@ -1793,7 +1766,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.i: home/luki/pic
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.s: home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.s
@@ -1802,7 +1775,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.s: home/luki/pic
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj
@@ -1811,7 +1784,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.obj:
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.i: home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.i
@@ -1820,7 +1793,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.i: h
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.s: home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.s
@@ -1829,7 +1802,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.s: h
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
@@ -1838,7 +1811,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.obj: home/luki/pico/pi
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.i: home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.i
@@ -1847,7 +1820,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.i: home/luki/pico/pico
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.s: home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s
@@ -1856,7 +1829,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.s: home/luki/pico/pico
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.obj: home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj
@@ -1865,7 +1838,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.obj: home/luki/p
 
 # target to build an object file
 home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.i: home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.i
@@ -1874,7 +1847,7 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.i: home/luki/pic
 
 # target to preprocess a source file
 home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.i
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.i
 
 home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.s: home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.s
@@ -1883,8 +1856,35 @@ home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.s: home/luki/pic
 
 # target to generate assembly for a file
 home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.s
 .PHONY : home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.s
+
+waterpipe.obj: waterpipe.c.obj
+
+.PHONY : waterpipe.obj
+
+# target to build an object file
+waterpipe.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/waterpipe.c.obj
+.PHONY : waterpipe.c.obj
+
+waterpipe.i: waterpipe.c.i
+
+.PHONY : waterpipe.i
+
+# target to preprocess a source file
+waterpipe.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/waterpipe.c.i
+.PHONY : waterpipe.c.i
+
+waterpipe.s: waterpipe.c.s
+
+.PHONY : waterpipe.s
+
+# target to generate assembly for a file
+waterpipe.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/waterpipe.c.s
+.PHONY : waterpipe.c.s
 
 # Help Target
 help:
@@ -1897,11 +1897,8 @@ help:
 	@echo "... ELF2UF2Build"
 	@echo "... bs2_default_bin"
 	@echo "... bs2_default_padded_checksummed_asm"
-	@echo "... WaterPipe"
 	@echo "... bs2_default"
-	@echo "... WaterPipe.obj"
-	@echo "... WaterPipe.i"
-	@echo "... WaterPipe.s"
+	@echo "... waterpipe"
 	@echo "... bme280.obj"
 	@echo "... bme280.i"
 	@echo "... bme280.s"
@@ -2087,6 +2084,9 @@ help:
 	@echo "... home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.obj"
 	@echo "... home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.i"
 	@echo "... home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.s"
+	@echo "... waterpipe.obj"
+	@echo "... waterpipe.i"
+	@echo "... waterpipe.s"
 .PHONY : help
 
 

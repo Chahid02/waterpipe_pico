@@ -73,7 +73,7 @@ CMAKE_BINARY_DIR = /home/luki/Pico-Projekte/Waterpipe/build
 
 # The main recursive "all" target.
 all: CMakeFiles/ELF2UF2Build.dir/all
-all: CMakeFiles/WaterPipe.dir/all
+all: CMakeFiles/waterpipe.dir/all
 all: pico-sdk/all
 
 .PHONY : all
@@ -85,7 +85,7 @@ preinstall: pico-sdk/preinstall
 
 # The main recursive "clean" target.
 clean: CMakeFiles/ELF2UF2Build.dir/clean
-clean: CMakeFiles/WaterPipe.dir/clean
+clean: CMakeFiles/waterpipe.dir/clean
 clean: pico-sdk/clean
 
 .PHONY : clean
@@ -1548,32 +1548,32 @@ CMakeFiles/ELF2UF2Build.dir/clean:
 .PHONY : CMakeFiles/ELF2UF2Build.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/WaterPipe.dir
+# Target rules for target CMakeFiles/waterpipe.dir
 
 # All Build rule for target.
-CMakeFiles/WaterPipe.dir/all: CMakeFiles/ELF2UF2Build.dir/all
-CMakeFiles/WaterPipe.dir/all: pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/luki/Pico-Projekte/Waterpipe/build/CMakeFiles --progress-num=9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79 "Built target WaterPipe"
-.PHONY : CMakeFiles/WaterPipe.dir/all
+CMakeFiles/waterpipe.dir/all: CMakeFiles/ELF2UF2Build.dir/all
+CMakeFiles/waterpipe.dir/all: pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/luki/Pico-Projekte/Waterpipe/build/CMakeFiles --progress-num=14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84 "Built target waterpipe"
+.PHONY : CMakeFiles/waterpipe.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/WaterPipe.dir/rule: cmake_check_build_system
+CMakeFiles/waterpipe.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/luki/Pico-Projekte/Waterpipe/build/CMakeFiles 83
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/WaterPipe.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/waterpipe.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/luki/Pico-Projekte/Waterpipe/build/CMakeFiles 0
-.PHONY : CMakeFiles/WaterPipe.dir/rule
+.PHONY : CMakeFiles/waterpipe.dir/rule
 
 # Convenience name for target.
-WaterPipe: CMakeFiles/WaterPipe.dir/rule
+waterpipe: CMakeFiles/waterpipe.dir/rule
 
-.PHONY : WaterPipe
+.PHONY : waterpipe
 
 # clean rule for target.
-CMakeFiles/WaterPipe.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WaterPipe.dir/build.make CMakeFiles/WaterPipe.dir/clean
-.PHONY : CMakeFiles/WaterPipe.dir/clean
+CMakeFiles/waterpipe.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/waterpipe.dir/build.make CMakeFiles/waterpipe.dir/clean
+.PHONY : CMakeFiles/waterpipe.dir/clean
 
 #=============================================================================
 # Target rules for target pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir
@@ -1582,7 +1582,7 @@ CMakeFiles/WaterPipe.dir/clean:
 pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/all: pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/all
 	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/build.make pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/depend
 	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/build.make pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/luki/Pico-Projekte/Waterpipe/build/CMakeFiles --progress-num=83,84 "Built target bs2_default_padded_checksummed_asm"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/luki/Pico-Projekte/Waterpipe/build/CMakeFiles --progress-num=12,13 "Built target bs2_default_padded_checksummed_asm"
 .PHONY : pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1609,7 +1609,7 @@ pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_as
 pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_bin.dir/all: pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/all
 	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_bin.dir/build.make pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_bin.dir/depend
 	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_bin.dir/build.make pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_bin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/luki/Pico-Projekte/Waterpipe/build/CMakeFiles --progress-num=82 "Built target bs2_default_bin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/luki/Pico-Projekte/Waterpipe/build/CMakeFiles --progress-num=11 "Built target bs2_default_bin"
 .PHONY : pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_bin.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1636,7 +1636,7 @@ pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_bin.dir/clean:
 pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/all:
 	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/build.make pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/depend
 	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/build.make pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/luki/Pico-Projekte/Waterpipe/build/CMakeFiles --progress-num=80,81 "Built target bs2_default"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/luki/Pico-Projekte/Waterpipe/build/CMakeFiles --progress-num=9,10 "Built target bs2_default"
 .PHONY : pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/all
 
 # Build rule for subdir invocation for target.

@@ -1,7 +1,7 @@
 /home/luki/Pico-Projekte/Waterpipe/build/CMakeFiles/rebuild_cache.dir
 /home/luki/Pico-Projekte/Waterpipe/build/CMakeFiles/edit_cache.dir
 /home/luki/Pico-Projekte/Waterpipe/build/CMakeFiles/ELF2UF2Build.dir
-/home/luki/Pico-Projekte/Waterpipe/build/CMakeFiles/WaterPipe.dir
+/home/luki/Pico-Projekte/Waterpipe/build/CMakeFiles/waterpipe.dir
 /home/luki/Pico-Projekte/Waterpipe/build/pico-sdk/CMakeFiles/rebuild_cache.dir
 /home/luki/Pico-Projekte/Waterpipe/build/pico-sdk/CMakeFiles/edit_cache.dir
 /home/luki/Pico-Projekte/Waterpipe/build/pico-sdk/tools/CMakeFiles/rebuild_cache.dir

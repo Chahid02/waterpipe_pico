@@ -19,7 +19,7 @@
 					"targetIndexes" : 
 					[
 						0,
-						1
+						4
 					]
 				},
 				{
@@ -520,9 +520,9 @@
 					"source" : "/home/luki/pico/pico-sdk/src/rp2_common/boot_stage2",
 					"targetIndexes" : 
 					[
+						1,
 						2,
-						3,
-						4
+						3
 					]
 				},
 				{
@@ -817,11 +817,11 @@
 					[
 						0
 					],
-					"name" : "WaterPipe",
+					"name" : "waterpipe",
 					"targetIndexes" : 
 					[
 						0,
-						1
+						4
 					]
 				},
 				{
@@ -901,9 +901,9 @@
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
+						1,
 						2,
-						3,
-						4
+						3
 					]
 				}
 			],
@@ -914,13 +914,6 @@
 					"id" : "ELF2UF2Build::@6890427a1f51a3e7e1df",
 					"jsonFile" : "target-ELF2UF2Build-Debug-e4a615e239c9c58f32d0.json",
 					"name" : "ELF2UF2Build",
-					"projectIndex" : 0
-				},
-				{
-					"directoryIndex" : 0,
-					"id" : "WaterPipe::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-WaterPipe-Debug-0d6d972d4f38d566370f.json",
-					"name" : "WaterPipe",
 					"projectIndex" : 0
 				},
 				{
@@ -943,6 +936,13 @@
 					"jsonFile" : "target-bs2_default_padded_checksummed_asm-Debug-a398fd16d33882f619e2.json",
 					"name" : "bs2_default_padded_checksummed_asm",
 					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "waterpipe::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-waterpipe-Debug-03a548d02736e08fe02b.json",
+					"name" : "waterpipe",
+					"projectIndex" : 0
 				}
 			]
 		}
