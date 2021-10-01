@@ -14,7 +14,7 @@
 #include <string.h>
 #include "bme280.h"
 #include "hardware/i2c.h"
-#include "WaterPipe.h" /* Insert for Error Log Function! */
+#include "waterpipe.h" /* Insert for Error Log Function! */
 
 
 /*! @file bme280.c

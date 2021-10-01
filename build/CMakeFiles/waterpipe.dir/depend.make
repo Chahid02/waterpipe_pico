@@ -117,6 +117,7 @@ CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_standard_li
 
 CMakeFiles/waterpipe.dir/bme280.c.obj: ../bme280.c
 CMakeFiles/waterpipe.dir/bme280.c.obj: ../bme280.h
+CMakeFiles/waterpipe.dir/bme280.c.obj: ../waterpipe.h
 CMakeFiles/waterpipe.dir/bme280.c.obj: /home/luki/pico/pico-sdk/src/boards/include/boards/pico.h
 CMakeFiles/waterpipe.dir/bme280.c.obj: /home/luki/pico/pico-sdk/src/common/pico_base/include/pico.h
 CMakeFiles/waterpipe.dir/bme280.c.obj: /home/luki/pico/pico-sdk/src/common/pico_base/include/pico/assert.h

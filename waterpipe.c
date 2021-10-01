@@ -1,7 +1,7 @@
 /*!
 *****************************************************************
 * Copyright (c) Lukasz Piatek. All rights reserved.
-* @file    WaterPipe.c
+* @file    waterpipe.c
 * @author  Lukasz Piatek
 * @version V1.0
 * @date    2021-09-28
