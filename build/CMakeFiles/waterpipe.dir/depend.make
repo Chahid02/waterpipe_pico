@@ -1979,6 +1979,7 @@ CMakeFiles/waterpipe.dir/home/luki/pico/pico-sdk/src/rp2_common/pico_unique_id/u
 
 CMakeFiles/waterpipe.dir/waterpipe.c.obj: ../bme280.h
 CMakeFiles/waterpipe.dir/waterpipe.c.obj: ../waterpipe.c
+CMakeFiles/waterpipe.dir/waterpipe.c.obj: ../waterpipe.h
 CMakeFiles/waterpipe.dir/waterpipe.c.obj: /home/luki/pico/pico-sdk/src/boards/include/boards/pico.h
 CMakeFiles/waterpipe.dir/waterpipe.c.obj: /home/luki/pico/pico-sdk/src/common/pico_base/include/pico.h
 CMakeFiles/waterpipe.dir/waterpipe.c.obj: /home/luki/pico/pico-sdk/src/common/pico_base/include/pico/assert.h
