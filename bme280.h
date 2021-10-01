@@ -14,26 +14,26 @@
 /*-------------------------------------------------------------*/
 /* I2C ADRESS */
 /*-------------------------------------------------------------*/
-#define BME280_I2C_ADDR_PRIMARY					(uint8_t) 0x76
+#define BME280_I2C_ADDR_PRIMARY                 (uint8_t) 0x76
 #define BME280_I2C_ADDR_SECONDARY               (uint8_t) 0x77
 /*-------------------------------------------------------------*/
 /* CHIP IDENTIFIER */
 /*-------------------------------------------------------------*/
-#define BME280_CHIP_ID 							(uint8_t) 0x60
-#define BMP280_CHIP_ID_SP 						(uint8_t) 0x56
-#define BMP280_CHIP_ID_MP 						(uint8_t) 0x58
+#define BME280_CHIP_ID                          (uint8_t) 0x60
+#define BMP280_CHIP_ID_SP                       (uint8_t) 0x56
+#define BMP280_CHIP_ID_MP                       (uint8_t) 0x58
 
 /*-------------------------------------------------------------*/
 /* REGISTER ADRESS */
 /*-------------------------------------------------------------*/
-#define BME280_CHIP_ID_ADDR 					(uint8_t) 0xD0
-#define BME280_RESET_ADDR 						(uint8_t) 0xE0
-#define BME280_TEMP_PRESS_CALIB_DATA_ADDR 		(uint8_t) 0x88
-#define BME280_HUMIDITY_CALIB_DATA_ADDR 		(uint8_t) 0xE1
-#define BME280_CTRL_HUM_ADDR 					(uint8_t) 0xF2
-#define BME280_CTRL_MEAS_ADDR 					(uint8_t) 0xF4
-#define BME280_CONFIG_ADDR 						(uint8_t) 0xF5
-#define BME280_DATA_ADDR 						(uint8_t) 0xF7
+#define BME280_CHIP_ID_ADDR                     (uint8_t) 0xD0
+#define BME280_RESET_ADDR                       (uint8_t) 0xE0
+#define BME280_TEMP_PRESS_CALIB_DATA_ADDR       (uint8_t) 0x88
+#define BME280_HUMIDITY_CALIB_DATA_ADDR         (uint8_t) 0xE1
+#define BME280_CTRL_HUM_ADDR                    (uint8_t) 0xF2
+#define BME280_CTRL_MEAS_ADDR                   (uint8_t) 0xF4
+#define BME280_CONFIG_ADDR                      (uint8_t) 0xF5
+#define BME280_DATA_ADDR                        (uint8_t) 0xF7
 
 /*-------------------------------------------------------------*/
 /* RESET REGISTER/MACROS */
