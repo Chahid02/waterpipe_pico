@@ -104,7 +104,6 @@ int main()
     BME280_SetStandby(BME280_STBY_0_5);
     debugMsg("\n");
 
-
     while (true)
     {
         /*
@@ -151,7 +150,7 @@ int main()
  *************************************************************************
  */
 void funcBlinkLed()
-{ 
+{
     if (gpio_get_out_level(LED) != true)
     {
         gpio_put(LED, true);
