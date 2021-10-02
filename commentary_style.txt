@@ -1,0 +1,32 @@
+Function structure:
+
+
+/*!
+ *************************************************************************
+ * @brief 
+ *
+ * @param[in]  : 
+ *
+ * @return Result of API execution status
+ *
+ * @retval = 0 -> Success.
+ * @retval > 0 -> Warning.
+ * @retval < 0 -> Fail.
+ *
+ * 
+ *************************************************************************
+ */
+
+ Header structure:
+
+ /*!
+*****************************************************************
+* Copyright (c) ....... All rights reserved.
+* @file    .c
+* @author  
+* @version V1.0
+* @date    25-September-2021
+* @brief   Default main function.
+*****************************************************************
+*/
+
