@@ -170,7 +170,7 @@ int8_t BME280_SoftReset(void)
  */
 int8_t BME280_SetMode(uint8_t deviceMode)
 {
-    debugMsg("------------- BME280 SETTING MODE STARTED -------------\r\n");
+    debugMsg("------------- BME280 MODE SETTING STARTED -------------\r\n");
     uint8_t ptrWrite[] = {BME280_CTRL_MEAS_ADDR};
     uint8_t status = 0x00;
     uint8_t mode = 0x00;
@@ -179,8 +179,10 @@ int8_t BME280_SetMode(uint8_t deviceMode)
     uint8_t ptrRead[1];
 
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrWrite, lenWrite, false);
+    sleep_ms(10);
     debugVal("-- Writing Mode Register:0x%02X -- \r\n", (*ptrWrite));
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrRead, lenRead, false);
+    sleep_ms(10);
     debugVal("-- Reading Mode Register:0x%02X -- \r\n", (*ptrRead));
 
     status = *ptrRead & ~(BME280_MODE_MSK);
@@ -219,7 +221,9 @@ int8_t BME280_ReadMode(void)
     size_t lenRead = sizeof(BME280_CTRL_MEAS_ADDR);
 
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenWrite, false);
+    sleep_ms(10);
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenRead, false);
+    sleep_ms(10);
     debugVal("-- Reading Mode Register:0x%02X -- \r\n", (*ptrData));
 
     return status;
@@ -248,20 +252,22 @@ int8_t BME280_ReadStatus(void)
     size_t lenRead = sizeof(BME280_REGISTER_STATUS);
 
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenWrite, false);
+    sleep_ms(10);
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenRead, false);
+    sleep_ms(10);
     debugVal("-- Reading Status Register:0x%02X -- \r\n", (*ptrData));
     //*ptrData &= ~(BME280_STATUS_MSK); //Clear unused or corrupt bits
     *ptrData &= ~BME280_STATUS_MSK;
     switch (*ptrData)
     {
     case 0x09:
-        debugMsg("-- New Measuring & pre-measured Data-storeage in progress --\r\n");
+        debugMsg("-- New Measuring & pre-measured Data-storage in progress --\r\n");
         break;
     case 0x08:
         debugMsg("-- Measuring in progress --\r\n");
         break;
     case 0x01:
-        debugMsg("-- Data-Storeage in progress --\r\n");
+        debugMsg("-- Data-Storage in progress --\r\n");
         break;
     case 0x00:
         debugMsg("-- Measuring-Data available --\r\n");
@@ -292,14 +298,16 @@ int8_t BME280_ReadComp(void)
     uint8_t ptrData[] = {BME280_REGISTER_DIG_T1};
 
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, 1, false);
+    sleep_ms(10);
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, buffer, 24, true);
+    sleep_ms(10);
 
     ptrComp->dig_T1 = buffer[0] | (buffer[1] << 8); //0x88 / 0x89 dig_T1 [7:0] / [15:8] uint8_t
     ptrComp->dig_T2 = buffer[2] | (buffer[3] << 8); //0x8A / 0x8B dig_T2 [7:0] / [15:8] int16_t
     ptrComp->dig_T3 = buffer[4] | (buffer[5] << 8); //0x8C / 0x8D dig_T3 [7:0] / [15:8] int16_t
+    ptrComp->dig_P1 = buffer[6] | (buffer[7] << 8); //0x8E / 0x8F dig_P1 [7:0] / [15:8] uint16_t
+    ptrComp->dig_P2 = buffer[8] | (buffer[9] << 8); //0x90 / 0x91 dig_P2 [7:0] / [15:8] int16_t
 
-    ptrComp->dig_P1 = buffer[6] | (buffer[7] << 8);   //0x8E / 0x8F dig_P1 [7:0] / [15:8] uint16_t
-    ptrComp->dig_P2 = buffer[8] | (buffer[9] << 8);   //0x90 / 0x91 dig_P2 [7:0] / [15:8] int16_t
     ptrComp->dig_P3 = buffer[10] | (buffer[11] << 8); //0x92 / 0x93 dig_P3 [7:0] / [15:8] int16_t
     ptrComp->dig_P4 = buffer[12] | (buffer[13] << 8); //0x94 / 0x95 dig_P4 [7:0] / [15:8] int16_t
     ptrComp->dig_P5 = buffer[14] | (buffer[15] << 8); //0x96 / 0x97 dig_P5 [7:0] / [15:8] int16_t
@@ -309,14 +317,15 @@ int8_t BME280_ReadComp(void)
     ptrComp->dig_P9 = buffer[22] | (buffer[23] << 8); //0x9E / 0x9F dig_P9 [7:0] / [15:8] int16_t
 
     /*This Same Register-> BME280_HUMIDITY_CALIB_DATA_LEN-1 */
-    ptrComp->dig_H1 = buffer[24]; //0xA1 dig_H1 [7:0] uint8_t
+    ptrComp->dig_H1 = buffer[24];                               //0xA1 dig_H1 [7:0] uint8_t
 
     *ptrData = BME280_REGISTER_DIG_H2;
     uint8_t dataLen = BME280_HUMIDITY_CALIB_DATA_LEN - 1;
 
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, 1, false);
+    sleep_ms(10);
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, &buffer[25], dataLen, true);
-    /* read_registers(0xE1, buffer, 8); */
+    sleep_ms(10);
     //memset(&buffer[25], 0, 8);
     ptrComp->dig_H2 = buffer[25] | (buffer[26] << 8);             //0xE1 / 0xE2 dig_H2 [7:0] / [15:8] int16_t
     ptrComp->dig_H3 = buffer[27];                                 //0xE3 dig_H3 [7:0] uint8_t
@@ -391,14 +400,16 @@ void BME280_SetStandby(uint8_t tsb)
     size_t lenRead = sizeof(BME280_CONFIG_ADDR);
 
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenWrite, false);
+    sleep_ms(10);
     debugVal("-- Writing STANDBY Register:0x%02X -- \r\n", (*ptrData));
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenRead, false);
+    sleep_ms(10);
     debugVal("-- Reading STANDBY Register:0x%02X -- \r\n", (*ptrData));
 
     status = *ptrData & ~BME280_STBY_MSK;
     status |= tsb & BME280_STBY_MSK;
     mode = status;
-    debugVal("-- Setting Mode:0x%02X -- \r\n", status);
+    debugVal("-- Setting STANDBY:0x%02X -- \r\n", status);
 
     uint8_t ptrWriteMode[] = {BME280_CONFIG_ADDR, mode};
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrWriteMode, 2, false);
@@ -419,7 +430,7 @@ void BME280_SetStandby(uint8_t tsb)
  * 
  *************************************************************************
  */
-void BME280_ReadStandby()
+void BME280_ReadStandby(void)
 {
     debugMsg("------------- BME280 STANDBY STATUS STARTED -------------\r\n");
     uint8_t ptrData[] = {BME280_CONFIG_ADDR};
@@ -428,7 +439,285 @@ void BME280_ReadStandby()
     size_t lenRead = sizeof(BME280_CONFIG_ADDR);
 
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenWrite, false);
-    debugVal("-- Writing STANDBY Register:0x%02X -- \r\n", (*ptrData));
+    sleep_ms(10);
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrRead, lenRead, false);
+    sleep_ms(10);
     debugVal("-- Reading STANDBY Register:0x%02X -- \r\n", (*ptrRead));
+}
+/*!
+ *************************************************************************
+ * @brief 
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+ *************************************************************************
+ */
+/*
+Oversampling settings pressure ×16, 
+temperature ×2, humidity ×1 IIR filter settings filter coefficient 16
+*/
+void BME280_SetFilter(uint8_t filter)
+{
+    uint8_t status = 0x00;
+    uint8_t mode = 0x00;
+    debugMsg("------------- BME280 FILTER SETTING STARTED -------------\r\n");
+    uint8_t ptrData[] = {BME280_CONFIG_ADDR};
+    size_t lenWrite = sizeof(BME280_CONFIG_ADDR);
+    size_t lenRead = sizeof(BME280_CONFIG_ADDR);
+    uint8_t ptrRead[lenRead];
+
+    i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenWrite, false);
+    sleep_ms(10);
+    debugVal("-- Writing FILTER Register:0x%02X -- \r\n", (*ptrData));
+    i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrRead, lenRead, false);
+    sleep_ms(10);
+    debugVal("-- Reading FILTER Register:0x%02X -- \r\n", (*ptrRead));
+
+    status = *ptrRead & ~BME280_FILTER_MSK;
+    status |= filter & BME280_FILTER_MSK;
+    mode = status;
+
+    debugVal("-- Setting Mode:0x%02X -- \r\n", mode);
+    uint8_t ptrWriteMode[] = {BME280_CONFIG_ADDR, mode};
+    i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrWriteMode, 2, false);
+
+}
+/*!
+ *************************************************************************
+ * @brief 
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+ *************************************************************************
+ */
+void BME280_ReadFilter(void)
+{
+    debugMsg("------------- BME280 FILTER READING STARTED -------------\r\n");
+    uint8_t ptrData[] = {BME280_CONFIG_ADDR};
+    size_t lenWrite = sizeof(BME280_CONFIG_ADDR);
+    size_t lenRead = sizeof(BME280_CONFIG_ADDR);
+    uint8_t ptrRead[lenRead];
+
+    i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenWrite, false);
+    sleep_ms(10);
+    i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrRead, lenRead, false);
+    sleep_ms(10);
+    debugVal("-- Reading FILTER Register:0x%02X -- \r\n", (*ptrRead));
+}
+/*!
+ *************************************************************************
+ * @brief 
+ *
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+ *************************************************************************
+ */
+void BME280_Set_OSRS_t(uint8_t osrs_t)
+{
+    uint8_t status = 0x00;
+    uint8_t mode = 0x00;
+    debugMsg("------------- BME280 OSRS_t SETTING STARTED -------------\r\n");
+    uint8_t ptrData[] = {BME280_CTRL_MEAS_ADDR};
+    size_t lenWrite = sizeof(BME280_CTRL_MEAS_ADDR);
+    size_t lenRead = sizeof(BME280_CTRL_MEAS_ADDR);
+    uint8_t ptrRead[lenRead];
+
+    i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenWrite, false);
+    debugVal("-- Writing OSRS_t Register:0x%02X -- \r\n", (*ptrData));
+    i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrRead, lenRead, false);
+    debugVal("-- Reading OSRS_t Register:0x%02X -- \r\n", (*ptrRead));
+
+    status = *ptrRead & ~BME280_OSRS_T_MSK;
+    status |= osrs_t & BME280_OSRS_T_MSK;
+    mode = status;
+
+    debugVal("-- Setting OSRS_t:0x%02X -- \r\n", mode);
+    uint8_t ptrWriteMode[] = {BME280_CTRL_MEAS_ADDR, mode};
+    i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrWriteMode, 2, false);
+}
+/*!
+ *************************************************************************
+ * @brief 
+ * the ctrl_meas register has to be set
+ *
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+ *************************************************************************
+ */
+void BME280_Set_OSRS_p(uint8_t osrs_p)
+{
+    uint8_t status = 0x00;
+    uint8_t mode = 0x00;
+    debugMsg("------------- BME280 OSRS_p SETTING STARTED -------------\r\n");
+    uint8_t ptrData[] = {BME280_CTRL_MEAS_ADDR};
+    size_t lenWrite = sizeof(BME280_CTRL_MEAS_ADDR);
+    size_t lenRead = sizeof(BME280_CTRL_MEAS_ADDR);
+    uint8_t ptrRead[lenRead];
+
+    i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenWrite, false);
+    debugVal("-- Writing OSRS_p Register:0x%02X -- \r\n", (*ptrData));
+    i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrRead, lenRead, false);
+    debugVal("-- Reading OSRS_p Register:0x%02X -- \r\n", (*ptrRead));
+
+    status = *ptrRead & ~BME280_OSRS_P_MSK;
+    status |= osrs_p & BME280_OSRS_P_MSK;
+    mode = status;
+
+    debugVal("-- Setting OSRS_p:0x%02X -- \r\n", mode);
+    uint8_t ptrWriteMode[] = {BME280_CTRL_MEAS_ADDR, mode};
+    i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrWriteMode, 2, false);
+}
+
+/*!
+ *************************************************************************
+ * @brief This function has to be set as last param after writing ctrl_hum
+ * the ctrl_meas register has to be set
+ *
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+ *************************************************************************
+ */
+void BME280_Set_OSRS_h(uint8_t osrs_h)
+{
+    uint8_t status = 0x00;
+    uint8_t mode = 0x00;
+    debugMsg("------------- BME280 OSRS_h SETTING STARTED -------------\r\n");
+    uint8_t ptrData[] = {BME280_CTRL_HUM_ADDR};
+    size_t lenWrite = sizeof(BME280_CTRL_HUM_ADDR);
+    size_t lenRead = sizeof(BME280_CTRL_HUM_ADDR);
+    uint8_t ptrRead[lenRead];
+
+    i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenWrite, false);
+    debugVal("-- Writing OSRS_h Register:0x%02X -- \r\n", (*ptrData));
+    i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrRead, lenRead, false);
+    debugVal("-- Reading OSRS_h Register:0x%02X -- \r\n", (*ptrRead));
+
+    status = *ptrRead & ~BME280_OSRS_H_MSK;
+    status |= osrs_h & BME280_OSRS_H_MSK;
+    mode = status;
+
+    debugVal("-- Setting OSRS_h:0x%02X -- \r\n", mode);
+    uint8_t ptrWriteMode[] = {BME280_CTRL_HUM_ADDR, mode};
+    i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrWriteMode, 2, false);
+
+    *ptrData = BME280_CTRL_MEAS_ADDR;
+    lenWrite = sizeof(BME280_CTRL_MEAS_ADDR);
+    lenRead = sizeof(BME280_CTRL_MEAS_ADDR);
+    
+
+    i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenWrite, false);
+    debugVal("-- Writing CTRL_MEAS Register:0x%02X -- \r\n", (*ptrData));
+    i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrRead, lenRead, false);
+    debugVal("-- Reading CTRL_MEAS Register:0x%02X -- \r\n", (*ptrRead));
+
+    
+    ptrWriteMode[0] = BME280_CTRL_MEAS_ADDR;
+    ptrWriteMode[0] = *ptrRead;
+    i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrWriteMode, 2, false);
+}
+/*!
+ *************************************************************************
+ * @brief 
+ * the ctrl_meas register has to be set
+ *
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+ *************************************************************************
+ */
+void BME280_Read_OSRS_h(void)
+{
+    debugMsg("------------- BME280 OSRS_h READING STARTED -------------\r\n");
+    uint8_t ptrData[] = {BME280_CTRL_HUM_ADDR};
+    size_t lenWrite = sizeof(BME280_CTRL_HUM_ADDR);
+    size_t lenRead = sizeof(BME280_CTRL_HUM_ADDR);
+    uint8_t ptrRead[lenRead];
+
+    i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenWrite, false);
+    debugVal("-- Writing OSRS_h Register:0x%02X -- \r\n", (*ptrData));
+    i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrRead, lenRead, false);
+    debugVal("-- Reading OSRS_h Register:0x%02X -- \r\n", (*ptrRead));
+}
+
+/*!
+ *************************************************************************
+ * @brief 
+ * the ctrl_meas register has to be set
+ *
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+ *************************************************************************
+ */
+void BME280_Read_CTRL_MEAS(void)
+{
+    debugMsg("------------- BME280 CTRL_MEAS READING STARTED -------------\r\n");
+    uint8_t ptrData[] = {BME280_CTRL_MEAS_ADDR};
+    size_t lenWrite = sizeof(BME280_CTRL_MEAS_ADDR);
+    size_t lenRead = sizeof(BME280_CTRL_MEAS_ADDR);
+    uint8_t ptrRead[lenRead];
+
+    i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenWrite, false);
+    debugVal("-- Writing CTRL_MEAS Register:0x%02X -- \r\n", (*ptrData));
+    i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrRead, lenRead, false);
+    debugVal("-- Reading CTRL_MEAS Register:0x%02X -- \r\n", (*ptrRead));
 }

@@ -16,14 +16,14 @@
 /*-------------------------------------------------------------*/
 /* I2C ADRESS */
 /*-------------------------------------------------------------*/
-#define BME280_I2C_ADDR_PRIMARY                 (uint8_t) 0x76
-#define BME280_I2C_ADDR_SECONDARY               (uint8_t) 0x77
+#define BME280_I2C_ADDR_PRIMARY     (uint8_t) 0x76
+#define BME280_I2C_ADDR_SECONDARY   (uint8_t) 0x77
 /*-------------------------------------------------------------*/
 /* CHIP IDENTIFIER */
 /*-------------------------------------------------------------*/
-#define BME280_CHIP_ID                          (uint8_t) 0x60
-#define BMP280_CHIP_ID_SP                       (uint8_t) 0x56
-#define BMP280_CHIP_ID_MP                       (uint8_t) 0x58
+#define BME280_CHIP_ID          (uint8_t) 0x60
+#define BMP280_CHIP_ID_SP       (uint8_t) 0x56
+#define BMP280_CHIP_ID_MP       (uint8_t) 0x58
 
 /*-------------------------------------------------------------*/
 /* REGISTER ADRESS */
@@ -76,36 +76,6 @@
 #define BME280_SLEEP_MODE   (uint8_t) 0x00
 #define BME280_FORCED_MODE  (uint8_t) 0x01
 #define BME280_NORMAL_MODE  (uint8_t) 0x03
-/*-------------------------------------------------------------*/
-/* BITBANDING MASKS */
-/*-------------------------------------------------------------*/
-#define BME280_SENSOR_MODE_MSK  (uint8_t) 0x03
-#define BME280_SENSOR_MODE_POS  (uint8_t) 0x00
-
-#define BME280_CTRL_HUM_MSK     (uint8_t) 0x07
-#define BME280_CTRL_HUM_POS     (uint8_t) 0x00
-
-#define BME280_CTRL_PRESS_MSK   (uint8_t) 0x1C
-#define BME280_CTRL_PRESS_POS   (uint8_t) 0x02
-
-#define BME280_CTRL_TEMP_MSK    (uint8_t) 0xE0
-#define BME280_CTRL_TEMP_POS    (uint8_t) 0x05
-
-#define BME280_FILTER_MSK       (uint8_t) 0x1C
-#define BME280_FILTER_POS       (uint8_t) 0x02
-
-#define BME280_STANDBY_MSK      (uint8_t) 0xE0
-#define BME280_STANDBY_POS      (uint8_t) 0x05
-
-/*-------------------------------------------------------------*/
-/* OVERSAMPLING MACROS */
-/*-------------------------------------------------------------*/
-#define BME280_NO_OVERSAMPLING      (uint8_t) 0x00
-#define BME280_OVERSAMPLING_1X      (uint8_t) 0x01
-#define BME280_OVERSAMPLING_2X      (uint8_t) 0x02
-#define BME280_OVERSAMPLING_4X      (uint8_t) 0x03
-#define BME280_OVERSAMPLING_8X      (uint8_t) 0x04
-#define BME280_OVERSAMPLING_16X     (uint8_t) 0x05
 
 /*-------------------------------------------------------------*/
 /* DELAY CALCULATION MACROS */
@@ -161,17 +131,51 @@ typedef struct CompData
 #define BME280_REGISTER_DIG_H4 (uint8_t) 0xE4
 #define BME280_REGISTER_DIG_H5 (uint8_t) 0xE5
 #define BME280_REGISTER_DIG_H6 (uint8_t) 0xE7
+/*-------------------------------------------------------------*/
+/* FILTER MACROS */
+/*-------------------------------------------------------------*/
+#define BME280_FILTER_MSK   (uint8_t) 0x1C
+#define BME280_FILTER_OFF   (uint8_t) 0x00
+#define BME280_FILTER_2     (uint8_t) 0x04
+#define BME280_FILTER_4     (uint8_t) 0x08
+#define BME280_FILTER_8     (uint8_t) 0x0C
+#define BME280_FILTER_16    (uint8_t) 0x10
+
+/*-------------------------------------------------------------*/
+/* OVERSAMPLING MACROS */
+/*-------------------------------------------------------------*/
+#define BME280_OSRS_T_MSK   (uint8_t) 0xE0
+#define BME280_OSRS_T_SKIP  (uint8_t)0x00
+#define BME280_OSRS_T_x1    (uint8_t)0x20
+#define BME280_OSRS_T_x2    (uint8_t)0x40
+#define BME280_OSRS_T_x4    (uint8_t)0x60
+#define BME280_OSRS_T_x8    (uint8_t)0x80
+#define BME280_OSRS_T_x16   (uint8_t)0xA0
+#define BME280_OSRS_P_MSK   (uint8_t)0x1C
+#define BME280_OSRS_P_SKIP  (uint8_t)0x00
+#define BME280_OSRS_P_x1    (uint8_t)0x04
+#define BME280_OSRS_P_x2    (uint8_t)0x08
+#define BME280_OSRS_P_x4    (uint8_t)0x0C
+#define BME280_OSRS_P_x8    (uint8_t)0x10
+#define BME280_OSRS_P_x16   (uint8_t)0x14
+#define BME280_OSRS_H_MSK   (uint8_t)0x07
+#define BME280_OSRS_H_SKIP  (uint8_t)0x00
+#define BME280_OSRS_H_x1    (uint8_t)0x01
+#define BME280_OSRS_H_x2    (uint8_t)0x02
+#define BME280_OSRS_H_x4    (uint8_t)0x03
+#define BME280_OSRS_H_x8    (uint8_t)0x04
+#define BME280_OSRS_H_x16   (uint8_t)0x05
 
 /*-------------------------------------------------------------*/
 /* ERROR CODES */
 /*-------------------------------------------------------------*/
-#define BME280_E_NULL_PTR               (int8_t) -1
-#define BME280_E_DEV_NOT_FOUND          (int8_t) -2
-#define BME280_E_INVALID_LEN            (int8_t) -3
-#define BME280_E_COMM_FAIL              (int8_t) -4
-#define BME280_E_SLEEP_MODE_FAIL        (int8_t) -5
-#define BME280_E_NVM_COPY_FAILED        (int8_t) -6
-#define BME280_E_INVALID_ID             (int8_t) -7
+#define BME280_E_NULL_PTR           (int8_t) -1
+#define BME280_E_DEV_NOT_FOUND      (int8_t) -2
+#define BME280_E_INVALID_LEN        (int8_t) -3
+#define BME280_E_COMM_FAIL          (int8_t) -4
+#define BME280_E_SLEEP_MODE_FAIL    (int8_t) -5
+#define BME280_E_NVM_COPY_FAILED    (int8_t) -6
+#define BME280_E_INVALID_ID         (int8_t) -7
 
 /*-------------------------------------------------------------*/
 /* PROTOTYPE DECLARATION --------------------------------------*/
@@ -184,7 +188,16 @@ int8_t BME280_ReadMode(void);
 int8_t BME280_ReadComp(void);
 void printCompParam(struct CompData *ptrComp);
 void BME280_SetStandby(uint8_t tsb);
-void BME280_ReadStandby();
+void BME280_ReadStandby(void);
+void BME280_SetFilter(uint8_t filter);
+void BME280_ReadFilter(void);
+void BME280_Set_OSRS_h(uint8_t osrs_h);
+void BME280_Read_OSRS_h(void);
+void BME280_Set_OSRS_t(uint8_t osrs_t);
+void BME280_Set_OSRS_p(uint8_t osrs_p);
+
+void BME280_Read_CTRL_MEAS(void);
+
 void funcReadRegister(uint8_t deviceAddr, uint8_t *regAddr, uint8_t *regData, size_t lenRead);
 
 #endif

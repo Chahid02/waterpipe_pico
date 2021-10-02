@@ -89,9 +89,7 @@ int main()
     debugMsg("***********************\r\n");
     sleep_ms(1000);
 
-    /*-------------------------------------------------------------*/
-    /* CHIP CONTROL DATA */
-    /*-------------------------------------------------------------*/
+
 
     /*-------------------------------------------------------------*/
     /* CHIP ID IDENTIFICATION */
@@ -100,8 +98,23 @@ int main()
     BME280_ReadComp();
     //BME280_SetStandby(BME280_STBY_1000);
     BME280_SoftReset();
+   
+    BME280_SetStandby(BME280_STBY_62_5);
+
+    BME280_Set_OSRS_h(BME280_OSRS_H_x8);
+    BME280_SetFilter(BME280_FILTER_16);
+    BME280_Set_OSRS_t(BME280_OSRS_T_x2);
+    BME280_Set_OSRS_p(BME280_OSRS_P_x16);
+
+    BME280_Read_CTRL_MEAS();
+    BME280_Set_OSRS_h(BME280_OSRS_H_x1);
+    
     BME280_SetMode(BME280_NORMAL_MODE);
-    BME280_SetStandby(BME280_STBY_0_5);
+    BME280_ReadMode();
+    BME280_ReadStandby();
+    BME280_Read_OSRS_h();
+  
+
     debugMsg("\n");
 
     while (true)
@@ -113,22 +126,26 @@ int main()
         debugMsg("\n");
         */
 
-        debugMsg("DEBUG TERMINAL\n");
-        debugMsg("**************************\n");
-        BME280_ReadMode();
+        //debugMsg("DEBUG TERMINAL\n");
+        //debugMsg("**************************\n");
+        //BME280_ReadMode();
         /*-------------------------------------------------------------*/
         /* LED CONTROL */
         /*-------------------------------------------------------------*/
-        funcBlinkLed();
-        BME280_ReadStandby();
+       // funcBlinkLed();
+  
 
-        /* Test Function */
-        while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)
-        {
-            debugMsg("-----------------------------------------------------------------------STORING\n");
-            //return -1;
-        };
-        debugMsg("**************************\n");
+        /*-------------------------------------------------------------*/
+        /* TEST FUNCTION */
+        /*-------------------------------------------------------------*/
+        // while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)
+        // {
+        //     debugMsg("-----------------------------------------------------------------------STORING\n");
+        //     //return -1;
+        // };
+        //BME280_ReadFilter();
+
+       // debugMsg("**************************\n");
         sleep_ms(1000);
     }
     return 0;
