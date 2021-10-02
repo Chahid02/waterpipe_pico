@@ -403,6 +403,22 @@ void BME280_SetStandby(uint8_t tsb)
     uint8_t ptrWriteMode[] = {BME280_CONFIG_ADDR, mode};
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrWriteMode, 2, false);
 }
+/*!
+ *************************************************************************
+ * @brief 
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+ *************************************************************************
+ */
 void BME280_ReadStandby()
 {
     debugMsg("------------- BME280 STANDBY STATUS STARTED -------------\r\n");
