@@ -53,7 +53,8 @@
 /*-------------------------------------------------------------*/
 /* PROTOTYPE DECLARATION --------------------------------------*/
 /*-------------------------------------------------------------*/
-//void printBinary(uint8_t i, int8_t *strArray);
-void printBinary(uint8_t i, char *strArray); //Just for the Compiler Warning
+
+void debugTerm(void);
+void toggleLed(void);
 
 #endif

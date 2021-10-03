@@ -57,13 +57,13 @@ int8_t BME280ChipID(void)
     /*== Check Memory ============================*/
     if (ptrChipID == NULL) /*== FAIL, NO MEMORY ==*/
     {
-        LOG_ERROR("[X] Fail, No Memory Allocation [X] ErrorCode: -1 [X] ");
-        debugVal("[X] Fail, No Memory Allocation [X] ErrorCode:%X [X] \r\n", BME280_E_NULL_PTR);
+        LOG_ERROR("[X] Fail, No Memory Allocation [X] ErrorCode: -8 [X] ");
+        debugVal("[X] Fail, No Memory Allocation [X] ErrorCode:%X [X] \r\n", BME280_E_MEMORY_ALLOC);
     }
     else if (ptrChipAddr == NULL)
     {
-        LOG_ERROR("[X] Fail, No Memory Allocation [X] ErrorCode: -1 [X] ");
-        debugVal("[X] Fail, No Memory Allocation [X] ErrorCode:%X [X] \r\n", BME280_E_NULL_PTR);
+        LOG_ERROR("[X] Fail, No Memory Allocation [X] ErrorCode: -8 [X] ");
+        debugVal("[X] Fail, No Memory Allocation [X] ErrorCode:%X [X] \r\n", BME280_E_MEMORY_ALLOC);
     }
     else
     {
@@ -143,13 +143,13 @@ int8_t BME280_SoftReset(void)
     /*== Check Memory ============================*/
     if (ptrSoftRst == NULL) /*== FAIL, NO MEMORY ==*/
     {
-        LOG_ERROR("[X] Fail, No Memory Allocation [X] ErrorCode: -1 [X] ");
-        debugVal("[X] Fail, No Memory Allocation [X] ErrorCode:%X [X] \r\n", BME280_E_NULL_PTR);
+        LOG_ERROR("[X] Fail, No Memory Allocation [X] ErrorCode: -8 [X] ");
+        debugVal("[X] Fail, No Memory Allocation [X] ErrorCode:%X [X] \r\n", BME280_E_MEMORY_ALLOC);
     }
     else if (ptrSoftRst == NULL)
     {
-        LOG_ERROR("[X] Fail, No Memory Allocation [X] ErrorCode: -1 [X] ");
-        debugVal("[X] Fail, No Memory Allocation [X] ErrorCode:%X [X] \r\n", BME280_E_NULL_PTR);
+        LOG_ERROR("[X] Fail, No Memory Allocation [X] ErrorCode: -8 [X] ");
+        debugVal("[X] Fail, No Memory Allocation [X] ErrorCode:%X [X] \r\n", BME280_E_MEMORY_ALLOC);
     }
     else
     {

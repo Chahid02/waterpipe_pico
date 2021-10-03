@@ -187,6 +187,7 @@ typedef struct CompData
 #define BME280_E_SLEEP_MODE_FAIL    (int8_t) -5
 #define BME280_E_NVM_COPY_FAILED    (int8_t) -6
 #define BME280_E_INVALID_ID         (int8_t) -7
+#define BME280_E_MEMORY_ALLOC       (int8_t) -8
 
 /*=========================================================*/
 /*== GLOBAL VARIABLES =====================================*/

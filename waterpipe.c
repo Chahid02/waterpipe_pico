@@ -20,24 +20,12 @@
 #include "pico/binary_info.h"
 #include "hardware/i2c.h"
 
-
 /*=========================================================*/
 /*== PRIVATE INCLUDES =====================================*/
 /*=========================================================*/
 #include "bme280.h"
 #include "waterpipe.h"
 
-/*=========================================================*/
-/*== BME280 VARIABLES =====================================*/
-/*=========================================================*/
-
-//uint8_t deviceAddr = 0x76; //BME280_I2C_ADDR_ADDR in bme280.h
-
-/*=========================================================*/
-/*== PRIVATE PROTOTYPES ===================================*/
-/*=========================================================*/
-void debugTerm(void);
-void toggleLed(void);
 
 int main()
 {
@@ -121,8 +109,9 @@ int main()
     {
         debugTerm();
         BME280_RawData();
-        int32_t temperatue = BME280_CompTemp();
-        debugVal("[X] Temperature:%.4f \r\n", temperatue / 100.0f);
+        
+        int32_t temperature = BME280_CompTemp();
+        debugVal("[X] Temperature:%.4f °C \r\n", temperature / 100.0f);
 
         toggleLed();
         BME280_MeasurementTime();
@@ -147,7 +136,7 @@ int main()
  *
  * @return Result of API execution status
  *
- * @retval   0 -> Success.
+ * @retval = 0 -> Success.
  * @retval > 0 -> Warning.
  * @retval < 0 -> Fail.
  *
@@ -167,7 +156,21 @@ void toggleLed()
         debugMsg("LED OFF\r\n");
     }
 }
-
+/*!
+**************************************************************
+ * @brief 
+ *
+ * @param[in]  : 
+ *
+ * @return Result of API execution status
+ *
+ * @retval = 0 -> Success.
+ * @retval > 0 -> Warning.
+ * @retval < 0 -> Fail.
+ *
+ * 
+**************************************************************
+ */
 void debugTerm(void)
 {
     debugMsg("\n\n======================================================================\r\n");
