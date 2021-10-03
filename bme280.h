@@ -5,7 +5,6 @@
 * @author  Lukasz Piatek
 * @version V1.0
 * @date    2021-09-28
-* @brief   BME280 Driver
 * @copyright Copyright (c) Lukasz Piatek. All rights reserved.
 **************************************************************
 */
@@ -226,8 +225,8 @@ void BME280_Read_OSRS_h(void);
 void BME280_Set_OSRS_t(uint8_t osrs_t);
 void BME280_Set_OSRS_p(uint8_t osrs_p);
 void BME280_Read_CTRL_MEAS(void);
-void BME_RawData();
-int32_t compensate_temperature();
+void BME280_RawData();
+int32_t BME280_CompTemp();
 void BME280_MeasurementTime();
 
 

@@ -5,7 +5,6 @@
 * @author  Lukasz Piatek
 * @version V1.0
 * @date    2021-09-28
-* @brief   Default main function
 * @copyright Copyright (c) Lukasz Piatek. All rights reserved.
 **************************************************************
 */
@@ -50,7 +49,7 @@ int main()
     /*=========================================================*/
 
     i2c_init(i2c_default, 400 * 1000);
-    debugMsg("******************\r\n");
+    debugMsg("==================\r\n");
     debugMsg("INIT I2C HARDWARE: ");
 
 #if !defined(i2c_default) || !defined(PICO_DEFAULT_I2C_SDA_PIN) || !defined(PICO_DEFAULT_I2C_SCL_PIN)
@@ -64,7 +63,7 @@ int main()
     gpio_pull_up(PICO_DEFAULT_I2C_SDA_PIN);
     gpio_pull_up(PICO_DEFAULT_I2C_SCL_PIN);
     bi_decl(bi_2pins_with_func(PICO_DEFAULT_I2C_SDA_PIN, PICO_DEFAULT_I2C_SCL_PIN, GPIO_FUNC_I2C));
-    debugMsg("-- I2C HARDWARE SUCCESSFULLY SET --\r\n");
+    debugMsg("[X] I2C HARDWARE SUCCESSFULLY SET [X]\r\n");
     sleep_ms(1000);
 #endif
 
@@ -72,7 +71,7 @@ int main()
     /*== GPIO SETTINGS ========================================*/
     /*=========================================================*/
     gpio_init(LED);
-    debugMsg("*******************\r\n");
+    debugMsg("==================\r\n");
     debugMsg("INIT GPIO HARDWARE: ");
 
 #ifndef PICO_DEFAULT_LED_PIN
@@ -81,19 +80,19 @@ int main()
     gpio_set_dir(LED, GPIO_OUT);
     if (gpio_is_dir_out(LED) != GPIO_OUT)
     {
-        debugMsg("-- CHECK YOUR DEFAULT LED CONFIGURATION OF THE BOARD --\r\n");
+        debugMsg("[X] CHECK YOUR DEFAULT LED CONFIGURATION OF THE BOARD [X]\r\n");
     }
     else
     {
         __NOP();
     }
 #endif
-    debugMsg("-- GPIO HARDWARE SUCCESSFULLY SET --\r\n");
+    debugMsg("[X] GPIO HARDWARE SUCCESSFULLY SET [X]\r\n");
     sleep_ms(1000);
-    debugMsg("***********************\r\n");
+    debugMsg("==========================\r\n");
     debugMsg("OPERATION MODE STARTED: ");
     debugModMsg;
-    debugMsg("***********************\r\n");
+    debugMsg("==========================\r\n");
     sleep_ms(1000);
 
 
@@ -117,16 +116,16 @@ int main()
     BME280_ReadStandby();
     BME280_Read_OSRS_h();
   
-
     debugMsg("\n");
-
+    debugMsg("======================================================================\r\n");
     while (true)
     {
-        debugMsg("DEBUG TERMINAL\n");
-        debugMsg("**************************\n");
-        BME_RawData();
-        int32_t temperatue = compensate_temperature();
-        debugVal("-- Temperature:%.4f \r\n", temperatue / 100.0f);
+        debugMsg("======================================================================\r\n");
+        debugMsg("======================== DEBUG TERMINAL===============================\r\n");
+        debugMsg("======================================================================\r\n");
+        BME280_RawData();
+        int32_t temperatue = BME280_CompTemp();
+        debugVal("[X] Temperature:%.4f \r\n", temperatue / 100.0f);
 
         // funcBlinkLed();
         BME280_MeasurementTime();
@@ -134,18 +133,18 @@ int main()
         /*== TEST FUNCTION == */
         while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)
         {
-            debugMsg("-----------------------------------------------STORING\n");
+            debugMsg("=================================== STORING\n");
+            //return -1;
         };
-        BME280_ReadFilter();
 
-       debugMsg("**************************\n");
+        debugMsg("======================================================================\r\n");
         sleep_ms(1000);
     }
     return 0;
 }
 
 /*!
- **********************************************************************
+**************************************************************
  * @brief 
  *
  * @param[in]  : 
@@ -157,7 +156,7 @@ int main()
  * @retval < 0 -> Fail.
  *
  * 
- **********************************************************************
+**************************************************************
  */
 void funcBlinkLed()
 {
