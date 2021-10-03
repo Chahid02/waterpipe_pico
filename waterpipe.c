@@ -98,7 +98,7 @@ int main()
     BME280_Set_OSRS_p(BME280_OSRS_P_x16);
     BME280_SetMode(BME280_NORMAL_MODE);
 
-    /*==  Reading the Register Values ==*/
+    /*==  Reading the register values ==*/
     BME280_Read_CTRL_MEAS();
     BME280_ReadMode();
     BME280_ReadStandby();

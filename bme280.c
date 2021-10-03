@@ -137,10 +137,10 @@ int8_t BME280ChipID(void)
 int8_t BME280_SoftReset(void)
 {
     debugMsg("====================  BME280 SOFTRESET PROGRESS STARTED ============== \r\n");
-    size_t  lenSoftRst = sizeof(BME280_SOFTRESET_ADDR) + sizeof(BME280_SOFTRESET_VALUE);
+    size_t  lenSoftRst  = sizeof(BME280_SOFTRESET_ADDR) + sizeof(BME280_SOFTRESET_VALUE);
     uint8_t *ptrSoftRst = malloc(sizeof(*ptrSoftRst) * lenSoftRst);
 
-    /*== Check Memory ============================*/
+    /*== MEMORY CHECK ============================*/
     if (ptrSoftRst == NULL) /*== FAIL, NO MEMORY ==*/
     {
         LOG_ERROR("[X] Fail, No Memory Allocation [X] ErrorCode: -8 [X] ");
@@ -156,8 +156,8 @@ int8_t BME280_SoftReset(void)
         __NOP();
     }
 
-    *ptrSoftRst = BME280_SOFTRESET_ADDR;
-    *(ptrSoftRst+1)=BME280_SOFTRESET_VALUE;
+    *ptrSoftRst     = BME280_SOFTRESET_ADDR;
+    *(ptrSoftRst+1) = BME280_SOFTRESET_VALUE;
 
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrSoftRst, lenSoftRst, false);
 
