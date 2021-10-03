@@ -15,8 +15,8 @@
 /*-------------------------------------------------------------*/
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <inttypes.h>
+#include <stdint.h>
+#include <math.h>
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
 #include "hardware/i2c.h"

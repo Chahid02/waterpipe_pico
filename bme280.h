@@ -236,12 +236,8 @@ void BME280_Set_OSRS_p(uint8_t osrs_p);
 void BME280_Read_CTRL_MEAS(void);
 void BME_RawData();
 int32_t compensate_temperature();
-
 void BME280_MeasurementTime();
 
 
-
-
-void funcReadRegister(uint8_t deviceAddr, uint8_t *regAddr, uint8_t *regData, size_t lenRead);
 
 #endif

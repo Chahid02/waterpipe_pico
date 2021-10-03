@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 #include "bme280.h"
 #include "hardware/i2c.h"
 #include "waterpipe.h" /* Insert for Error Log Function! */
@@ -48,42 +49,57 @@
 int8_t BME280ChipID(void)
 {
     debugMsg("------------- BME280 CHIP INIT PROGRESS STARTED -------------\r\n");
-    size_t lenWrite = sizeof(BME280_CHIP_ID_ADDR);
-    size_t lenRead = sizeof(BME280_CHIP_ID);
-    //int8_t rslt;
-    uint8_t ptrData[lenRead];
-    uint8_t ptrAdrr[lenWrite];
-    *ptrAdrr = BME280_CHIP_ID_ADDR;
+    size_t lenChipAddr = sizeof(BME280_CHIP_ID_ADDR);
+    size_t lenChipID = sizeof(BME280_CHIP_ID);
 
-    if (i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrAdrr, lenWrite, false) != lenWrite)
+    uint8_t *ptrChipID = malloc(sizeof(*ptrChipID) * lenChipID);
+    uint8_t *ptrChipAddr = malloc(sizeof(*ptrChipID) * lenChipAddr);
+    if (ptrChipID == NULL)    /* FAIL, NO MEMORY */
+    {
+        LOG_ERROR("-- Fail, No Memory Allocation -- ErrorCode: -1 --");
+        debugVal("-- Fail, No Memory Allocation -- ErrorCode:%X --\r\n", BME280_E_NULL_PTR);
+        
+    }
+    else if (ptrChipAddr == NULL)
+    {
+        LOG_ERROR("-- Fail, No Memory Allocation -- ErrorCode: -1 --");
+        debugVal("-- Fail, No Memory Allocation -- ErrorCode:%X --\r\n", BME280_E_NULL_PTR);
+    }
+    else
+    {
+        __NOP();
+    }
+    
+
+    *ptrChipAddr = BME280_CHIP_ID_ADDR;
+
+    if (i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrChipAddr, lenChipAddr, false) != lenChipAddr)
     {
         LOG_ERROR("-- Device not found -- ErrorCode: -2 --");
         debugVal("-- Device not found -- ErrorCode:%X --\r\n", BME280_E_DEV_NOT_FOUND);
     }
     else
     {
-        debugVal("-- Writing to Address:0x%02X -- \r\n", (*ptrAdrr));
+        debugVal("-- Writing to Address:0x%02X -- \r\n", (*ptrChipAddr));
     }
-    sleep_ms(10);
 
-    if (i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenRead, false) == lenRead)
+    if (i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrChipID, lenChipID, false) == lenChipID)
     {
-        debugVal("-- Reading Register:0x%02X -- \r\n", (*ptrAdrr));
+        debugVal("-- Reading Register:0x%02X -- \r\n", (*ptrChipAddr));
     }
     else
     {
         LOG_ERROR("-- No Data Received -- Reading I2C ChipID failed --")
     }
 
-    sleep_ms(10);
-    debugVal("-- Chip ID:0x%02X -- \r\n", (*ptrData));
+    debugVal("-- Chip ID:0x%02X -- \r\n", (*ptrChipID));
 
-    if (*ptrData == BME280_CHIP_ID)
+    if (*ptrChipID == BME280_CHIP_ID)
     {
         debugMsg("-- Chip is BME280 --\r\n");
         return 0;
     }
-    else if (*ptrData == (BMP280_CHIP_ID_MP || BMP280_CHIP_ID_SP))
+    else if (*ptrChipID == (BMP280_CHIP_ID_MP || BMP280_CHIP_ID_SP))
     {
         debugMsg("-- Chip is BMP280 -- Wrong Sensor --\r\n");
         LOG_ERROR("-- WRONG SENSOR --")
@@ -99,36 +115,8 @@ int8_t BME280ChipID(void)
         //PANIC FUNCTION !!!!
         return -1;
     }
-}
-/*!
- *************************************************************************
- * @brief Test
- *
- * @param[in]  deviceAddr Description
- * @param[out]   
- *
- * @return Result of 
- *
- * @retval = 0 -> Success
- * @retval > 0 -> Warning
- * @retval < 0 -> Fail
- *
- * 
- *************************************************************************
- */
-void funcReadRegister(uint8_t deviceAddr, uint8_t *regAddr, uint8_t *regData, size_t lenRead)
-{
-    uint8_t Data[lenRead];
-    i2c_write_blocking(i2c_default, deviceAddr, regAddr, lenRead, false);
-    sleep_ms(10);
-    i2c_read_blocking(i2c_default, deviceAddr, regData, lenRead, false);
-    sleep_ms(10);
-
-    for (uint8_t i = 0; i < lenRead; i++)
-    {
-        Data[i] = regData[i];
-        printf("Register:%d Data:0x%X \r\n", i, Data[i]);
-    }
+    free(ptrChipID);
+    free(ptrChipAddr);
 }
 
 /*!
@@ -869,77 +857,77 @@ void BME280_MeasurementTime()
 
     switch (ovsTime)
     {
-    case BME280_OSRS_T_SKIP:
-        osTime = 0;
-        break;
-    case BME280_OSRS_T_x1:
-        osTime = 1;
-        break;
-    case BME280_OSRS_T_x2:
-        osTime = 2;
-        break;
-    case BME280_OSRS_T_x4:
-        osTime = 4;
-        break;
-    case BME280_OSRS_T_x8:
-        osTime = 8;
-        break;
-    case BME280_OSRS_T_x16:
-        osTime = 16;
-        break;
+        case BME280_OSRS_T_SKIP:
+            osTime = 0;
+            break;
+        case BME280_OSRS_T_x1:
+            osTime = 1;
+            break;
+        case BME280_OSRS_T_x2:
+            osTime = 2;
+            break;
+        case BME280_OSRS_T_x4:
+            osTime = 4;
+            break;
+        case BME280_OSRS_T_x8:
+            osTime = 8;
+            break;
+        case BME280_OSRS_T_x16:
+            osTime = 16;
+            break;
 
-    default:
-        break;
+        default:
+            break;
     }
 
     switch (ovsHumidity)
     {
-    case BME280_OSRS_H_SKIP:
-        osHum = 0;
-        break;
-    case BME280_OSRS_H_x1:
-        osHum = 1;
-        break;
-    case BME280_OSRS_H_x2:
-        osHum = 2;
-        break;
-    case BME280_OSRS_H_x4:
-        osHum = 4;
-        break;
-    case BME280_OSRS_H_x8:
-        osHum = 8;
-        break;
-    case BME280_OSRS_H_x16:
-        osHum = 16;
-        break;
+        case BME280_OSRS_H_SKIP:
+            osHum = 0;
+            break;
+        case BME280_OSRS_H_x1:
+            osHum = 1;
+            break;
+        case BME280_OSRS_H_x2:
+            osHum = 2;
+            break;
+        case BME280_OSRS_H_x4:
+            osHum = 4;
+            break;
+        case BME280_OSRS_H_x8:
+            osHum = 8;
+            break;
+        case BME280_OSRS_H_x16:
+            osHum = 16;
+            break;
 
-    default:
-        break;
+        default:
+            break;
     }
 
     switch (ovsPressure)
     {
-    case BME280_OSRS_P_SKIP:
-        osPress = 0;
-        break;
-    case BME280_OSRS_P_x1:
-        osPress = 1;
-        break;
-    case BME280_OSRS_P_x2:
-        osPress = 2;
-        break;
-    case BME280_OSRS_P_x4:
-        osPress = 4;
-        break;
-    case BME280_OSRS_P_x8:
-        osPress = 8;
-        break;
-    case BME280_OSRS_P_x16:
-        osPress = 16;
-        break;
+        case BME280_OSRS_P_SKIP:
+            osPress = 0;
+            break;
+        case BME280_OSRS_P_x1:
+            osPress = 1;
+            break;
+        case BME280_OSRS_P_x2:
+            osPress = 2;
+            break;
+        case BME280_OSRS_P_x4:
+            osPress = 4;
+            break;
+        case BME280_OSRS_P_x8:
+            osPress = 8;
+            break;
+        case BME280_OSRS_P_x16:
+            osPress = 16;
+            break;
 
-    default:
-        break;
+        default:
+            break;
     }
 
     timeTyp = 1 + (2 * osTime) + (2 * osPress + 0.5) + (2 * osHum + 0.5);
@@ -947,33 +935,33 @@ void BME280_MeasurementTime()
 
     switch (stdBy)
     {
-    case BME280_STBY_0_5:
-        stdByMode = 0.5;
-        break;
-    case BME280_STBY_62_5:
-        stdByMode = 62.5;
-        break;
-    case BME280_STBY_125:
-        stdByMode = 125;
-        break;
-    case BME280_STBY_250:
-        stdByMode = 250;
-        break;
-    case BME280_STBY_500:
-        stdByMode = 5;
-        break;
-    case BME280_STBY_1000:
-        stdByMode = 1000;
-        break;
-    case BME280_STBY_10:
-        stdByMode = 10;
-        break;
-    case BME280_STBY_20:
-        stdByMode = 20;
-        break;
+        case BME280_STBY_0_5:
+            stdByMode = 0.5;
+            break;
+        case BME280_STBY_62_5:
+            stdByMode = 62.5;
+            break;
+        case BME280_STBY_125:
+            stdByMode = 125;
+            break;
+        case BME280_STBY_250:
+            stdByMode = 250;
+            break;
+        case BME280_STBY_500:
+            stdByMode = 5;
+            break;
+        case BME280_STBY_1000:
+            stdByMode = 1000;
+            break;
+        case BME280_STBY_10:
+            stdByMode = 10;
+            break;
+        case BME280_STBY_20:
+            stdByMode = 20;
+            break;
 
-    default:
-        break;
+        default:
+            break;
     }
 
     float32_t odrMs;
@@ -995,24 +983,24 @@ void BME280_MeasurementTime()
 
     switch (filtCoeff)
     {
-    case BME280_FILTER_OFF:
-        stepRsp = 1;
-        break;
-    case BME280_FILTER_2:
-        stepRsp = 2;
-        break;
-    case BME280_FILTER_4:
-        stepRsp = 5;
-        break;
-    case BME280_FILTER_8:
-        stepRsp = 11;
-        break;
-    case BME280_FILTER_16:
-        stepRsp = 22;
-        break;
+        case BME280_FILTER_OFF:
+            stepRsp = 1;
+            break;
+        case BME280_FILTER_2:
+            stepRsp = 2;
+            break;
+        case BME280_FILTER_4:
+            stepRsp = 5;
+            break;
+        case BME280_FILTER_8:
+            stepRsp = 11;
+            break;
+        case BME280_FILTER_16:
+            stepRsp = 22;
+            break;
 
-    default:
-        break;
+        default:
+            break;
     }
    
     float32_t rspTimeIIR;
