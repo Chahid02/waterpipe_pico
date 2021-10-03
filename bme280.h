@@ -226,10 +226,12 @@ void BME280_Read_OSRS_h(void);
 void BME280_Set_OSRS_t(uint8_t osrs_t);
 void BME280_Set_OSRS_p(uint8_t osrs_p);
 void BME280_Read_CTRL_MEAS(void);
-void BME280_RawData();
-int32_t BME280_CompTemp();
-void BME280_MeasurementTime();
+void BME280_RawData(void);
+int32_t BME280_CompTemp(void);
+void BME280_MeasurementTime(void);
 uint32_t BME280_CompPressure(void);
-double bme280_compensate_H_double(void);
-uint32_t bme280_compensate_H_int32();
+double BME280_CompHumDouble(void);
+uint32_t BME280_CompHumInt32(void);
+void BME280_DataRead(void);
+
 #endif

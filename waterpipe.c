@@ -110,16 +110,7 @@ int main()
         debugTerm();
         BME280_RawData();
 
-        debugMsg("====================  BME280 SENSOR DATA READING STARTED =============\r\n");
-        int32_t temperature = BME280_CompTemp();
-        debugVal("[X] Temperature: %.4f °C \r\n", temperature / 100.0f);
-        uint32_t pressure = BME280_CompPressure();
-        debugVal("[X] Pressure: %.2f °hPa \r\n", pressure / 100.0f);
-
-        double humidity = bme280_compensate_H_double();
-        debugVal("[X] Humidity: %lf \r\n", humidity);
-        uint32_t humidity2 = bme280_compensate_H_int32();
-        debugVal("[X] Humidity: %.2f \r\n", humidity2 / 1024.0f);
+        BME280_DataRead();
         BME280_MeasurementTime();
 
         toggleLed();
@@ -156,12 +147,12 @@ void toggleLed()
     if (gpio_get_out_level(LED) != true)
     {
         gpio_put(LED, true);
-        debugMsg("LED ON\r\n");
+        debugMsg("[X] LED ON\r\n");
     }
     else
     {
         gpio_put(LED, false);
-        debugMsg("LED OFF\r\n");
+        debugMsg("[X] LED OFF\r\n");
     }
 }
 /*!

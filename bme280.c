@@ -48,7 +48,7 @@
  */
 int8_t BME280ChipID(void)
 {
-    debugMsg("====================  BME280 CHIP INIT PROGRESS STARTED ============== \r\n");
+    debugMsg("====================  BME280 CHIP INIT PROGRESS STARTED  ============= \r\n");
     size_t lenChipAddr = sizeof(BME280_CHIP_ID_ADDR);
     size_t lenChipID = sizeof(BME280_CHIP_ID);
     uint8_t *ptrChipID = malloc(sizeof(*ptrChipID) * lenChipID);
@@ -136,7 +136,7 @@ int8_t BME280ChipID(void)
  */
 int8_t BME280_SoftReset(void)
 {
-    debugMsg("====================  BME280 SOFTRESET PROGRESS STARTED ============== \r\n");
+    debugMsg("====================  BME280 SOFTRESET PROGRESS STARTED  ============= \r\n");
     size_t  lenSoftRst  = sizeof(BME280_SOFTRESET_ADDR) + sizeof(BME280_SOFTRESET_VALUE);
     uint8_t *ptrSoftRst = malloc(sizeof(*ptrSoftRst) * lenSoftRst);
 
@@ -194,7 +194,7 @@ int8_t BME280_SoftReset(void)
  */
 int8_t BME280_SetMode(uint8_t deviceMode)
 {
-    debugMsg("====================  BME280 MODE SETTING STARTED ====================\r\n");
+    debugMsg("====================  BME280 MODE SETTING STARTED  ===================\r\n");
     uint8_t ptrWrite[] = {BME280_CTRL_MEAS_ADDR};
     uint8_t status = 0x00;
     uint8_t mode = 0x00;
@@ -241,7 +241,7 @@ int8_t BME280_SetMode(uint8_t deviceMode)
  */
 int8_t BME280_ReadMode(void)
 {
-    debugMsg("==================== BME280 MODE STATUS STARTED ==================== \r\n");
+    debugMsg("====================  BME280 MODE STATUS STARTED  ================== \r\n");
     uint8_t ptrData[] = {BME280_CTRL_MEAS_ADDR};
     uint8_t status = 0;
     size_t lenWrite = sizeof(BME280_CTRL_MEAS_ADDR);
@@ -273,7 +273,7 @@ int8_t BME280_ReadMode(void)
  */
 int8_t BME280_ReadStatus(void)
 {
-    debugMsg("====================  BME280 UPDATE STATUS STARTED ===================\r\n");
+    debugMsg("====================  BME280 UPDATE STATUS STARTED  ==================\r\n");
     uint8_t ptrData[] = {BME280_REGISTER_STATUS};
     size_t lenWrite = sizeof(BME280_REGISTER_STATUS);
     size_t lenRead = sizeof(BME280_REGISTER_STATUS);
@@ -287,7 +287,7 @@ int8_t BME280_ReadStatus(void)
     switch (*ptrData)
     {
     case 0x09:
-        debugMsg("[X] New Measuring & pre-measured Data-storage in progress [X] \r\n");
+        debugMsg("[X] New Measuring & pre-measured Data-Storage in progress [X] \r\n");
         break;
     case 0x08:
         debugMsg("[X] Measuring in progress [X] \r\n");
@@ -326,7 +326,7 @@ int8_t BME280_ReadStatus(void)
  */
 int8_t BME280_ReadComp(void)
 {
-    debugMsg("====================  BME280 COMP DATA READ STARTED ==================\r\n");
+    debugMsg("====================  BME280 COMP DATA READ STARTED  =================\r\n");
     /*== Table 16 : Compensation parameter storage, naming and data type ==*/
 
     ptrComp = &Comp;
@@ -431,7 +431,7 @@ void BME280_SetStandby(uint8_t tsb)
 {
     uint8_t status = 0x00;
     uint8_t mode = 0x00;
-    debugMsg("====================  BME280 STANDBY STATUS STARTED ==================\r\n");
+    debugMsg("====================  BME280 STANDBY STATUS STARTED  =================\r\n");
     uint8_t ptrData[] = {BME280_CONFIG_ADDR};
     size_t lenWrite = sizeof(BME280_CONFIG_ADDR);
     size_t lenRead = sizeof(BME280_CONFIG_ADDR);
@@ -469,7 +469,7 @@ void BME280_SetStandby(uint8_t tsb)
  */
 void BME280_ReadStandby(void)
 {
-    debugMsg("====================  BME280 STANDBY STATUS STARTED ==================\r\n");
+    debugMsg("====================  BME280 STANDBY STATUS STARTED  =================\r\n");
     uint8_t ptrData[] = {BME280_CONFIG_ADDR};
     uint8_t ptrRead[1];
     size_t lenWrite = sizeof(BME280_CONFIG_ADDR);
@@ -501,7 +501,7 @@ void BME280_SetFilter(uint8_t filter)
 {
     uint8_t status = 0x00;
     uint8_t mode = 0x00;
-    debugMsg("====================  BME280 FILTER SETTING STARTED ==================\r\n");
+    debugMsg("====================  BME280 FILTER SETTING STARTED  =================\r\n");
     uint8_t ptrData[] = {BME280_CONFIG_ADDR};
     size_t lenWrite = sizeof(BME280_CONFIG_ADDR);
     size_t lenRead = sizeof(BME280_CONFIG_ADDR);
@@ -542,7 +542,7 @@ void BME280_SetFilter(uint8_t filter)
  */
 void BME280_ReadFilter(void)
 {
-    debugMsg("====================  BME280 FILTER READING STARTED ==================\r\n");
+    debugMsg("====================  BME280 FILTER READING STARTED  =================\r\n");
     uint8_t ptrData[] = {BME280_CONFIG_ADDR};
     size_t lenWrite = sizeof(BME280_CONFIG_ADDR);
     size_t lenRead = sizeof(BME280_CONFIG_ADDR);
@@ -575,7 +575,7 @@ void BME280_Set_OSRS_t(uint8_t osrs_t)
 {
     uint8_t status = 0x00;
     uint8_t mode = 0x00;
-    debugMsg("====================  BME280 OSRS_t SETTING STARTED ==================\r\n");
+    debugMsg("====================  BME280 OSRS_t SETTING STARTED  =================\r\n");
     uint8_t ptrData[] = {BME280_CTRL_MEAS_ADDR};
     size_t lenWrite = sizeof(BME280_CTRL_MEAS_ADDR);
     size_t lenRead = sizeof(BME280_CTRL_MEAS_ADDR);
@@ -617,7 +617,7 @@ void BME280_Set_OSRS_p(uint8_t osrs_p)
 {
     uint8_t status = 0x00;
     uint8_t mode = 0x00;
-    debugMsg("====================  BME280 OSRS_p SETTING STARTED ==================\r\n");
+    debugMsg("====================  BME280 OSRS_p SETTING STARTED  =================\r\n");
     uint8_t ptrData[] = {BME280_CTRL_MEAS_ADDR};
     size_t lenWrite = sizeof(BME280_CTRL_MEAS_ADDR);
     size_t lenRead = sizeof(BME280_CTRL_MEAS_ADDR);
@@ -661,7 +661,7 @@ void BME280_Set_OSRS_h(uint8_t osrs_h)
     uint8_t status = 0x00;
     uint8_t mode = 0x00;
 
-    debugMsg("====================  BME280 OSRS_h SETTING STARTED ==================\r\n");
+    debugMsg("====================  BME280 OSRS_h SETTING STARTED  =================\r\n");
     uint8_t ptrData[] = {BME280_CTRL_HUM_ADDR};
     size_t lenWrite = sizeof(BME280_CTRL_HUM_ADDR);
     size_t lenRead = sizeof(BME280_CTRL_HUM_ADDR);
@@ -714,7 +714,7 @@ void BME280_Set_OSRS_h(uint8_t osrs_h)
  */
 void BME280_Read_OSRS_h(void)
 {
-    debugMsg("====================  BME280 OSRS_h READING STARTED ==================\r\n");
+    debugMsg("====================  BME280 OSRS_h READING STARTED  =================\r\n");
     uint8_t ptrData[] = {BME280_CTRL_HUM_ADDR};
     size_t lenWrite = sizeof(BME280_CTRL_HUM_ADDR);
     size_t lenRead = sizeof(BME280_CTRL_HUM_ADDR);
@@ -746,7 +746,7 @@ void BME280_Read_OSRS_h(void)
  */
 void BME280_Read_CTRL_MEAS(void)
 {
-    debugMsg("====================  BME280 CTRL_MEAS READING STARTED ===============\r\n");
+    debugMsg("====================  BME280 CTRL_MEAS READING STARTED  ==============\r\n");
     uint8_t ptrData[] = {BME280_CTRL_MEAS_ADDR};
     size_t lenWrite = sizeof(BME280_CTRL_MEAS_ADDR);
     size_t lenRead = sizeof(BME280_CTRL_MEAS_ADDR);
@@ -780,7 +780,7 @@ void BME280_RawData(void)
 {
     uint8_t buffer[8];
 
-    debugMsg("====================  BME280 RAW DATA READING STARTED ================\r\n");
+    debugMsg("====================  BME280 RAW DATA READING STARTED  ===============\r\n");
     uint8_t ptrData[] = {BME280_DATA_ADDR};
     size_t lenWrite = sizeof(BME280_DATA_ADDR);
     size_t lenRead = sizeof(buffer);
@@ -793,9 +793,10 @@ void BME280_RawData(void)
     temp = ((uint32_t)buffer[3] << 12) | ((uint32_t)buffer[4] << 4) | (buffer[5] >> 4);
     hum = (uint32_t)buffer[6] << 8 | buffer[7];
 
-    debugVal("[X] temp:%X [X] \r\n", temp);
-    debugVal("[X] hum:%X [X] \r\n", hum);
-    debugVal("[X] press:%X[X] \r\n", press);
+    debugVal("[X] Temperature:%X \r\n", temp);
+    debugVal("[X] Pressure:%X  \r\n", press);
+    debugVal("[X] Humidity:%X  \r\n", hum);
+    
 }
 
 /*!
@@ -816,7 +817,7 @@ void BME280_RawData(void)
  * 
 **************************************************************
  */
-int32_t BME280_CompTemp()
+int32_t BME280_CompTemp(void)
 {
     int32_t adc_T = temp;
     int32_t var1;
@@ -909,39 +910,40 @@ uint32_t BME280_CompPressure(void)
  * 
 **************************************************************
  */
-double bme280_compensate_H_double()
+double BME280_CompHumDouble(void)
 {
     int32_t adc_H=hum;
-     double var_H;
+    double var_H;
     var_H = (((double)t_fine) - 76800.0);
     var_H = (adc_H - (((double)Comp.dig_H4) * 64.0 + ((double)Comp.dig_H5) / 16384.0 * var_H)) *
-            (((double)Comp.dig_H2) / 65536.0 * (1.0 + ((double)Comp.dig_H6) / 67108864.0 * var_H * (1.0 + ((double)Comp.dig_H3) / 67108864.0 * var_H)));
+            (((double)Comp.dig_H2) / 65536.0 * (1.0 + ((double)Comp.dig_H6) / 67108864.0 * var_H * \
+             (1.0 + ((double)Comp.dig_H3) / 67108864.0 * var_H)));
     var_H = var_H * (1.0 - ((double)Comp.dig_H1) * var_H / 524288.0);
     if (var_H > 100.0)
+    {
         var_H = 100.0;
+    }
     else if (var_H < 0.0)
+    {
         var_H = 0.0;
+    }
+
     return var_H;
 }
 
-uint32_t bme280_compensate_H_int32()
+uint32_t BME280_CompHumInt32(void)
 {
     int32_t adc_H = hum;
-    int32_t v_x1_u32r;
-    v_x1_u32r = (t_fine - ((int32_t)76800));
-    v_x1_u32r = (((((adc_H << 14) - (((int32_t)Comp.dig_H4) << 20) - (((int32_t)Comp.dig_H5) * v_x1_u32r)) +
-                   ((int32_t)16384)) >>
-                  15) *
-                 (((((((v_x1_u32r * ((int32_t)Comp.dig_H6)) >> 10) * (((v_x1_u32r * ((int32_t)Comp.dig_H3)) >> 11) + ((int32_t)32768))) >> 10) +
-                    ((int32_t)2097152)) *
-                       ((int32_t)Comp.dig_H2) +
-                   8192) >>
-                  14));
-    v_x1_u32r = (v_x1_u32r - (((((v_x1_u32r >> 15) * (v_x1_u32r >> 15)) >> 7) * ((int32_t)Comp.dig_H1)) >> 4));
-    v_x1_u32r = (v_x1_u32r < 0 ? 0 : v_x1_u32r);
-    v_x1_u32r = (v_x1_u32r > 419430400 ? 419430400 : v_x1_u32r);
+    int32_t var_H;
+    var_H = (t_fine - ((int32_t)76800));
+    var_H = (((((adc_H << 14) - (((int32_t)Comp.dig_H4) << 20) - (((int32_t)Comp.dig_H5) * var_H)) + \
+        ((int32_t)16384)) >> 15) * (((((((var_H * ((int32_t)Comp.dig_H6)) >> 10) * (((var_H *((int32_t)Comp.dig_H3)) >> 11) + ((int32_t)32768))) >> 10) + \
+        ((int32_t)2097152)) * ((int32_t)Comp.dig_H2) + 8192) >> 14));
+    var_H = (var_H - (((((var_H >> 15) * (var_H >> 15)) >> 7) * ((int32_t)Comp.dig_H1)) >> 4));
+    var_H = (var_H < 0 ? 0 : var_H);
+    var_H = (var_H > 419430400 ? 419430400 : var_H);
 
-    return (uint32_t)(v_x1_u32r >> 12);
+    return (uint32_t)(var_H >> 12);
 }
 
 /*!
@@ -963,7 +965,7 @@ uint32_t bme280_compensate_H_int32()
 **************************************************************
  */
 
-        void BME280_MeasurementTime()
+        void BME280_MeasurementTime(void)
         {
             float32_t timeTyp;
             float32_t timeMax;
@@ -1125,3 +1127,18 @@ uint32_t bme280_compensate_H_int32()
             debug2Val("[X] MeasurementRate: %f Hz\n[X] ResponseTime: %.2f ms\n", odrMs, rspTimeIIR);
             debug2Val("[X] Typ. MeasurementTime: %f ms\n[X] Max. MeasurementTime: %.2f ms\n", timeTyp, timeMax);
         }
+
+void BME280_DataRead(void)
+{
+    debugMsg("====================  BME280 SENSOR DATA READING STARTED =============\r\n");
+    int32_t temperature = BME280_CompTemp();
+    debugVal("[X] Temperature: %.2f °C \r\n", temperature / 100.0f);
+    uint32_t pressure = BME280_CompPressure();
+    debugVal("[X] Pressure: %.2f °hPa \r\n", pressure / 100.0f);
+    /* 
+    double humidity = BME280_CompHumDouble();
+    debugVal("[X] Humidity: %lf \r\n", humidity); 
+    */
+    uint32_t humidity2 = BME280_CompHumInt32();
+    debugVal("[X] Humidity: %.2f %% \r\n", humidity2 / 1024.0f);
+}
