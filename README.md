@@ -2,5 +2,5 @@
 
 ### This project is a pico prototype.......
 
-![Kesselsteuerung](Kessel.png)
+![Kesselsteuerung](/images/Kessel.png)
 
