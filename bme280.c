@@ -1,6 +1,5 @@
 /*!
 *****************************************************************
-* Copyright (c) Lukasz Piatek. All rights reserved.
 * @file    bme280.c
 * @brief   BME280 Driver
 * @author  Lukasz Piatek
