@@ -145,27 +145,26 @@ typedef struct CompData
 /* OVERSAMPLING MACROS */
 /*-------------------------------------------------------------*/
 #define BME280_OSRS_T_MSK   (uint8_t) 0xE0
-#define BME280_OSRS_T_SKIP  (uint8_t)0x00
-#define BME280_OSRS_T_x1    (uint8_t)0x20
-#define BME280_OSRS_T_x2    (uint8_t)0x40
-#define BME280_OSRS_T_x4    (uint8_t)0x60
-#define BME280_OSRS_T_x8    (uint8_t)0x80
-#define BME280_OSRS_T_x16   (uint8_t)0xA0
-#define BME280_OSRS_P_MSK   (uint8_t)0x1C
-#define BME280_OSRS_P_SKIP  (uint8_t)0x00
-#define BME280_OSRS_P_x1    (uint8_t)0x04
-#define BME280_OSRS_P_x2    (uint8_t)0x08
-#define BME280_OSRS_P_x4    (uint8_t)0x0C
-#define BME280_OSRS_P_x8    (uint8_t)0x10
-#define BME280_OSRS_P_x16   (uint8_t)0x14
-#define BME280_OSRS_H_MSK   (uint8_t)0x07
-#define BME280_OSRS_H_SKIP  (uint8_t)0x00
-#define BME280_OSRS_H_x1    (uint8_t)0x01
-#define BME280_OSRS_H_x2    (uint8_t)0x02
-#define BME280_OSRS_H_x4    (uint8_t)0x03
-#define BME280_OSRS_H_x8    (uint8_t)0x04
-#define BME280_OSRS_H_x16   (uint8_t)0x05
-
+#define BME280_OSRS_T_SKIP  (uint8_t) 0x00
+#define BME280_OSRS_T_x1    (uint8_t) 0x20
+#define BME280_OSRS_T_x2    (uint8_t) 0x40
+#define BME280_OSRS_T_x4    (uint8_t) 0x60
+#define BME280_OSRS_T_x8    (uint8_t) 0x80
+#define BME280_OSRS_T_x16   (uint8_t) 0xA0
+#define BME280_OSRS_P_MSK   (uint8_t) 0x1C
+#define BME280_OSRS_P_SKIP  (uint8_t) 0x00
+#define BME280_OSRS_P_x1    (uint8_t) 0x04
+#define BME280_OSRS_P_x2    (uint8_t) 0x08
+#define BME280_OSRS_P_x4    (uint8_t) 0x0C
+#define BME280_OSRS_P_x8    (uint8_t) 0x10
+#define BME280_OSRS_P_x16   (uint8_t) 0x14
+#define BME280_OSRS_H_MSK   (uint8_t) 0x07
+#define BME280_OSRS_H_SKIP  (uint8_t) 0x00
+#define BME280_OSRS_H_x1    (uint8_t) 0x01
+#define BME280_OSRS_H_x2    (uint8_t) 0x02
+#define BME280_OSRS_H_x4    (uint8_t) 0x03
+#define BME280_OSRS_H_x8    (uint8_t) 0x04
+#define BME280_OSRS_H_x16   (uint8_t) 0x05
 /*-------------------------------------------------------------*/
 /* ERROR CODES */
 /*-------------------------------------------------------------*/
@@ -176,6 +175,17 @@ typedef struct CompData
 #define BME280_E_SLEEP_MODE_FAIL    (int8_t) -5
 #define BME280_E_NVM_COPY_FAILED    (int8_t) -6
 #define BME280_E_INVALID_ID         (int8_t) -7
+/*-------------------------------------------------------------*/
+/* GLOBAL VARIABLES -------------------------------------------*/
+/*-------------------------------------------------------------*/
+int32_t t_fine;
+int32_t press, temp, hum;
+struct CompData Comp;
+struct CompData *ptrComp;
+/*-------------------------------------------------------------*/
+/* TYPEDEF MACROS ---------------------------------------------*/
+/*-------------------------------------------------------------*/
+typedef float float32_t; 
 
 /*-------------------------------------------------------------*/
 /* PROTOTYPE DECLARATION --------------------------------------*/
@@ -195,8 +205,15 @@ void BME280_Set_OSRS_h(uint8_t osrs_h);
 void BME280_Read_OSRS_h(void);
 void BME280_Set_OSRS_t(uint8_t osrs_t);
 void BME280_Set_OSRS_p(uint8_t osrs_p);
-
 void BME280_Read_CTRL_MEAS(void);
+void BME_RawData();
+int32_t compensate_temperature();
+
+void BME280_MeasurementTime(uint8_t ovsTime, uint8_t ovsPressure, uint8_t ovsHumidity, \
+                            uint8_t measureMode, float32_t stdBy, uint8_t filtCoeff);
+
+
+
 
 void funcReadRegister(uint8_t deviceAddr, uint8_t *regAddr, uint8_t *regData, size_t lenRead);
 

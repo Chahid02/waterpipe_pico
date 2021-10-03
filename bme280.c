@@ -16,15 +16,15 @@
 #include "hardware/i2c.h"
 #include "waterpipe.h" /* Insert for Error Log Function! */
 
-/*! @file bme280.c
+    /*! @file bme280.c
  * @brief Sensor driver for BME280 sensor
  */
 
-/*-------------------------------------------------------------*/
-/* FUNCTION DEFINITION ----------------------------------------*/
-/*-------------------------------------------------------------*/
+    /*-------------------------------------------------------------*/
+    /* FUNCTION DEFINITION ----------------------------------------*/
+    /*-------------------------------------------------------------*/
 
-/*!
+    /*!
  *************************************************************************
  * @brief Attempt to read the chip-id number of BM*-280 device
  *
@@ -39,7 +39,7 @@
 
  *************************************************************************
  */
-int8_t BME280ChipID(void)
+    int8_t BME280ChipID(void)
 {
     debugMsg("------------- BME280 CHIP INIT PROGRESS STARTED -------------\r\n");
     size_t lenWrite = sizeof(BME280_CHIP_ID_ADDR);
@@ -286,12 +286,27 @@ int8_t BME280_ReadStatus(void)
     return (uint8_t)*ptrData;
 }
 
+/*!
+ *************************************************************************
+ * @brief 
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+ *************************************************************************
+ */
 int8_t BME280_ReadComp(void)
 {
     debugMsg("------------- BME280 COMP DATA READ STARTED -------------\r\n");
     /* Table 16 : Compensation parameter storage, naming and data type */
-    struct CompData Comp;
-    struct CompData *ptrComp;
+ 
     ptrComp = &Comp;
 
     uint8_t buffer[BME280_TEMP_PRESS_CALIB_DATA_LEN + BME280_HUMIDITY_CALIB_DATA_LEN] = {0};
@@ -720,4 +735,166 @@ void BME280_Read_CTRL_MEAS(void)
     debugVal("-- Writing CTRL_MEAS Register:0x%02X -- \r\n", (*ptrData));
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrRead, lenRead, false);
     debugVal("-- Reading CTRL_MEAS Register:0x%02X -- \r\n", (*ptrRead));
+}
+/*!
+ *************************************************************************
+ * @brief 
+ * the ctrl_meas register has to be set
+ *
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+ *************************************************************************
+ */
+
+int32_t compensate_temperature()
+{
+    int32_t adc_T=temp;
+    int32_t var1;
+    int32_t var2;
+    int32_t temperature;
+    int32_t temperature_min = -4000;
+    int32_t temperature_max = 8500;
+
+    var1 = (((adc_T >> 3 ) - ((int32_t)Comp.dig_T1 << 1)) * ((int32_t)Comp.dig_T2 )) >> 11;
+    var2 =  ((((adc_T >> 4) - ((int32_t)Comp.dig_T1)) * ((adc_T >> 4) -\
+            ((int32_t)Comp.dig_T1))) >> 12 * ((int32_t)Comp.dig_T3)) >> 14;
+    t_fine = var1 + var2;
+    temperature = (t_fine * 5 + 128 ) >> 8;
+
+    if (temperature < temperature_min)
+    {
+        temperature = temperature_min;
+    }
+    else if (temperature > temperature_max)
+    {
+        temperature = temperature_max;
+    }
+
+    return temperature;
+}
+/*!
+ *************************************************************************
+ * @brief 
+ * the ctrl_meas register has to be set
+ *
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+ *************************************************************************
+ */
+
+void BME_RawData(void)
+{
+    uint8_t buffer[8];
+    
+
+
+    debugMsg("------------- BME280 RAW DATA READING STARTED -------------\r\n");
+    uint8_t ptrData[] = {BME280_DATA_ADDR};
+    size_t lenWrite = sizeof(BME280_DATA_ADDR);
+    size_t lenRead = sizeof(buffer);
+
+    i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenWrite, false);
+
+    i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, buffer, lenRead, true);
+
+    press = ((uint32_t)buffer[0] << 12) | ((uint32_t)buffer[1] << 4) | (buffer[2] >> 4);
+    temp= ((uint32_t)buffer[3] << 12) | ((uint32_t)buffer[4] << 4) | (buffer[5] >> 4);
+    hum = (uint32_t)buffer[6] << 8 | buffer[7];
+
+    debugVal("-- temp:%X --\r\n", temp);
+    debugVal("-- hum:%X --\r\n", hum) ;
+    debugVal("-- press:%X--\r\n", press);
+
+}
+
+/*!
+ *************************************************************************
+ * @brief 
+ * the ctrl_meas register has to be set
+ *
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+ *************************************************************************
+ */
+
+void BME280_MeasurementTime(uint8_t ovsTime, uint8_t ovsPressure, uint8_t ovsHumidity, \
+                            uint8_t measureMode, float32_t stdBy, uint8_t filtCoeff)
+{
+    float32_t timeTyp;
+    float32_t timeMax;
+    timeTyp = 1 + (2 * ovsTime) + (2 * ovsPressure + 0.5) + (2 * ovsHumidity + 0.5);
+    timeMax = 1.25 + (2.3 * ovsTime) + (2.3 * ovsPressure + 0.5) + (2.3 * ovsHumidity + 0.575);
+
+    float32_t odrMs;
+    if (measureMode == BME280_NORMAL_MODE)
+    {
+        odrMs = 1000 / (timeMax + stdBy);
+  
+    }
+    else if (measureMode == BME280_FORCED_MODE)
+    {
+        odrMs = 1000 / (timeMax );
+
+    }
+    else
+    {
+        __NOP();
+    }
+    
+
+    uint32_t stepRsp = 0;
+    switch (filtCoeff)
+    {
+    case 0:
+        stepRsp = 1;
+        break;
+    case 2:
+        stepRsp = 2;
+        break;
+    case 4:
+        stepRsp = 5;
+        break;
+    case 8:
+        stepRsp = 11;
+        break;
+    case 16:
+        stepRsp = 22;
+        break;
+
+    default:
+        break;
+    }
+   
+    float32_t rspTimeIIR;
+    rspTimeIIR = 1000 * stepRsp / odrMs;
+
+    debug2Val("-- MeasurementRate: %f Hz\n-- ResponseTime:%.2f ms\n", odrMs, rspTimeIIR);
+    debug2Val("-- Typ. MeasurementTime: %f ms\n-- Max. MeasurementTime:%.2f ms\n", timeTyp, timeMax);
 }

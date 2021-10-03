@@ -18,16 +18,17 @@
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
 #include "hardware/i2c.h"
+
 /*-------------------------------------------------------------*/
 /* PRIVATE INCLUDES -------------------------------------------*/
 /*-------------------------------------------------------------*/
 #include "bme280.h"
 #include "waterpipe.h"
 
-/*-------------------------------------------------------------*/
-/* BME280 VARIABLES -------------------------------------------*/
-/*-------------------------------------------------------------*/
-uint8_t deviceAddr = 0x76; //BME280_I2C_ADDR_ADDR in bme280.h
+    /*-------------------------------------------------------------*/
+    /* BME280 VARIABLES -------------------------------------------*/
+    /*-------------------------------------------------------------*/
+    uint8_t deviceAddr = 0x76; //BME280_I2C_ADDR_ADDR in bme280.h
 
 /*-------------------------------------------------------------*/
 /* PRIVATE PROTOTYPES -----------------------------------------*/
@@ -98,10 +99,10 @@ int main()
     BME280_ReadComp();
     //BME280_SetStandby(BME280_STBY_1000);
     BME280_SoftReset();
-   
-    BME280_SetStandby(BME280_STBY_62_5);
 
-    BME280_Set_OSRS_h(BME280_OSRS_H_x8);
+    BME280_SetStandby(BME280_STBY_0_5);
+
+    BME280_Set_OSRS_h(BME280_OSRS_H_x1);
     BME280_SetFilter(BME280_FILTER_16);
     BME280_Set_OSRS_t(BME280_OSRS_T_x2);
     BME280_Set_OSRS_p(BME280_OSRS_P_x16);
@@ -119,6 +120,10 @@ int main()
 
     while (true)
     {
+        
+        BME_RawData();
+        int32_t temperatue = compensate_temperature(); 
+        debugVal("-- Temperature:%.4f \r\n",temperatue/100.0f);  
         /*
         //uint8_t str[50];
         char str[50];//Just for the Compiler Warning
@@ -133,19 +138,19 @@ int main()
         /* LED CONTROL */
         /*-------------------------------------------------------------*/
        // funcBlinkLed();
-  
+         BME280_MeasurementTime(2,16,1,BME280_NORMAL_MODE,0.5f,16);
 
         /*-------------------------------------------------------------*/
         /* TEST FUNCTION */
         /*-------------------------------------------------------------*/
-        // while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)
-        // {
-        //     debugMsg("-----------------------------------------------------------------------STORING\n");
-        //     //return -1;
-        // };
-        //BME280_ReadFilter();
+        while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)
+        {
+            debugMsg("-----------------------------------------------STORING\n");
+            //return -1;
+        };
+        BME280_ReadFilter();
 
-       // debugMsg("**************************\n");
+       debugMsg("**************************\n");
         sleep_ms(1000);
     }
     return 0;
