@@ -23,11 +23,11 @@
 #include "hardware/i2c.h"
 #include "waterpipe.h" /* Insert for Error Log Function! */
 
-/*-------------------------------------------------------------*/
-/* FUNCTION DEFINITION ----------------------------------------*/
-/*-------------------------------------------------------------*/
+/*=========================================================*/
+/*== FUNCTION DEFINITION ==================================*/
+/*=========================================================*/
 
-/*!
+    /*!
 **************************************************************
  * @brief Attempt to read the chip-id number of BM*-280 device
  * 
@@ -47,7 +47,7 @@
  *
 **************************************************************
  */
-int8_t BME280ChipID(void)
+    int8_t BME280ChipID(void)
 {
     debugMsg("------------- BME280 CHIP INIT PROGRESS STARTED -------------\r\n");
     size_t lenChipAddr = sizeof(BME280_CHIP_ID_ADDR);
@@ -58,7 +58,7 @@ int8_t BME280ChipID(void)
 
 
     /*== Check Memory ============================*/
-    if (ptrChipID == NULL)    /*== FAIL, NO MEMORY */
+    if (ptrChipID == NULL)    /*== FAIL, NO MEMORY ==*/
     {
         LOG_ERROR("-- Fail, No Memory Allocation -- ErrorCode: -1 --");
         debugVal("-- Fail, No Memory Allocation -- ErrorCode:%X --\r\n", BME280_E_NULL_PTR);
@@ -936,6 +936,7 @@ void BME280_MeasurementTime()
 
     timeTyp = 1 + (2 * osTime) + (2 * osPress + 0.5) + (2 * osHum + 0.5);
     timeMax = 1.25 + (2.3 * osTime) + (2.3 * osPress + 0.5) + (2.3 * osHum + 0.575);
+ 
 
     switch (stdBy)
     {

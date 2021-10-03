@@ -69,9 +69,8 @@ int main()
 #endif
 
     /*=========================================================*/
-    /* GPIO SETTINGS */
+    /*== GPIO SETTINGS ========================================*/
     /*=========================================================*/
-
     gpio_init(LED);
     debugMsg("*******************\r\n");
     debugMsg("INIT GPIO HARDWARE: ");
@@ -100,25 +99,20 @@ int main()
 
 
     /*=========================================================*/
-    /* CHIP ID IDENTIFICATION */
+    /*== BME280 SETTINGS ======================================*/
     /*=========================================================*/
-
     BME280ChipID();
     BME280_ReadComp();
-    //BME280_SetStandby(BME280_STBY_1000);
     BME280_SoftReset();
-
     BME280_SetStandby(BME280_STBY_0_5);
-
     BME280_Set_OSRS_h(BME280_OSRS_H_x1);
     BME280_SetFilter(BME280_FILTER_16);
     BME280_Set_OSRS_t(BME280_OSRS_T_x2);
     BME280_Set_OSRS_p(BME280_OSRS_P_x16);
-
-    BME280_Read_CTRL_MEAS();
-    BME280_Set_OSRS_h(BME280_OSRS_H_x1);
-    
     BME280_SetMode(BME280_NORMAL_MODE);
+
+    /*==  Reading the Register Values ==*/
+    BME280_Read_CTRL_MEAS();
     BME280_ReadMode();
     BME280_ReadStandby();
     BME280_Read_OSRS_h();
@@ -128,33 +122,19 @@ int main()
 
     while (true)
     {
-        
+        debugMsg("DEBUG TERMINAL\n");
+        debugMsg("**************************\n");
         BME_RawData();
-        int32_t temperatue = compensate_temperature(); 
-        debugVal("-- Temperature:%.4f \r\n",temperatue/100.0f);  
-        /*
-        //uint8_t str[50];
-        char str[50];//Just for the Compiler Warning
-        printBinary(0xf4, str);
-        debugMsg("\n");
-        */
+        int32_t temperatue = compensate_temperature();
+        debugVal("-- Temperature:%.4f \r\n", temperatue / 100.0f);
 
-        //debugMsg("DEBUG TERMINAL\n");
-        //debugMsg("**************************\n");
-        //BME280_ReadMode();
-        /*=========================================================*/
-        /* LED CONTROL */
-        /*=========================================================*/
-       // funcBlinkLed();
+        // funcBlinkLed();
         BME280_MeasurementTime();
 
-        /*=========================================================*/
-        /* TEST FUNCTION */
-        /*=========================================================*/
+        /*== TEST FUNCTION == */
         while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)
         {
             debugMsg("-----------------------------------------------STORING\n");
-            //return -1;
         };
         BME280_ReadFilter();
 

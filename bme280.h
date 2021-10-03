@@ -20,11 +20,12 @@
 typedef float float32_t;
 
 /*=========================================================*/
-/*== I2C ADRESS ========================================== */
+/*== I2C ADRESS ===========================================*/
 /*=========================================================*/
 
 #define BME280_I2C_ADDR_PRIMARY     (uint8_t) 0x76
 #define BME280_I2C_ADDR_SECONDARY   (uint8_t) 0x77
+
 /*=========================================================*/
 /* CHIP IDENTIFIER */
 /*=========================================================*/
@@ -34,7 +35,7 @@ typedef float float32_t;
 #define BMP280_CHIP_ID_MP       (uint8_t) 0x58
 
 /*=========================================================*/
-/* REGISTER ADRESS */
+/*== REGISTER ADRESS ======================================*/
 /*=========================================================*/
 
 #define BME280_CHIP_ID_ADDR                     (uint8_t) 0xD0
@@ -47,7 +48,7 @@ typedef float float32_t;
 #define BME280_DATA_ADDR                        (uint8_t) 0xF7
 
 /*=========================================================*/
-/* RESET REGISTER/MACROS */
+/*== RESET REGISTER/MACROS ================================*/
 /*=========================================================*/
 
 #define BME280_SOFTRESET_ADDR       (uint8_t) 0xE0 //BME280 SOFT RESET REGISTER
@@ -60,7 +61,7 @@ typedef float float32_t;
 #define BME280_STATUS_MSK           (uint8_t) 0xF6 //Corrupt BitMask
 
 /*=========================================================*/
-/* STANDBY MACROS*/
+/*== STANDBY MACROS =======================================*/
 /*=========================================================*/
 
 #define BME280_STBY_MSK     (uint8_t) 0xE0
@@ -74,7 +75,7 @@ typedef float float32_t;
 #define BME280_STBY_20      (uint8_t) 0xE0
 
 /*=========================================================*/
-/* DATA SIZE */
+/*== DATA SIZE ============================================*/
 /*=========================================================*/
 
 #define BME280_TEMP_PRESS_CALIB_DATA_LEN    (uint8_t) 24
@@ -82,7 +83,7 @@ typedef float float32_t;
 #define BME280_P_T_H_DATA_LEN               (uint8_t) 8
 
 /*=========================================================*/
-/* SENSOR MODES */
+/*== OPERATION MODES ======================================*/
 /*=========================================================*/
 
 #define BME280_MODE_MSK     (uint8_t) 0x03
@@ -91,16 +92,7 @@ typedef float float32_t;
 #define BME280_NORMAL_MODE  (uint8_t) 0x03
 
 /*=========================================================*/
-/* DELAY CALCULATION MACROS */
-/*=========================================================*/
-
-#define BME280_MEAS_OFFSET          (uint16_t) 1250
-#define BME280_MEAS_DUR             (uint16_t) 2300
-#define BME280_PRES_HUM_MEAS_OFFSET (uint16_t) 575
-#define BME280_MEAS_SCALING_FACTOR  (uint16_t) 1000
-
-/*=========================================================*/
-/* COMPENSATION PARAMETER */
+/*== COMPENSATION PARAMETER ===============================*/
 /*=========================================================*/
 
 typedef struct CompData
@@ -126,7 +118,7 @@ typedef struct CompData
 }BME280_Comp;
 
 /*=========================================================*/
-/* COMPENSATION REGISTER */
+/*== COMPENSATION REGISTER ================================*/
 /*=========================================================*/
 
 #define BME280_REGISTER_DIG_T1 (uint8_t) 0x88
@@ -147,8 +139,9 @@ typedef struct CompData
 #define BME280_REGISTER_DIG_H4 (uint8_t) 0xE4
 #define BME280_REGISTER_DIG_H5 (uint8_t) 0xE5
 #define BME280_REGISTER_DIG_H6 (uint8_t) 0xE7
+
 /*=========================================================*/
-/* FILTER MACROS */
+/*== FILTER MACROS ========================================*/
 /*=========================================================*/
 
 #define BME280_FILTER_MSK   (uint8_t) 0x1C
@@ -159,7 +152,7 @@ typedef struct CompData
 #define BME280_FILTER_16    (uint8_t) 0x10
 
 /*=========================================================*/
-/* OVERSAMPLING MACROS */
+/*== OVERSAMPLING MACROS ==================================*/
 /*=========================================================*/
 
 #define BME280_OSRS_T_MSK   (uint8_t) 0xE0
@@ -185,7 +178,7 @@ typedef struct CompData
 #define BME280_OSRS_H_x16   (uint8_t) 0x05
 
 /*=========================================================*/
-/* ERROR CODES */
+/*== ERROR CODES ==========================================*/
 /*=========================================================*/
 
 #define BME280_E_NULL_PTR           (int8_t) -1
@@ -197,24 +190,24 @@ typedef struct CompData
 #define BME280_E_INVALID_ID         (int8_t) -7
 
 /*=========================================================*/
-/* GLOBAL VARIABLES -------------------------------------------*/
+/*== GLOBAL VARIABLES =====================================*/
 /*=========================================================*/
 
-int32_t t_fine; /*! @brief t_fine carries fine temperature as global value*/
-int32_t press, temp, hum;
 struct CompData Comp;
 struct CompData *ptrComp;
 
-
-uint8_t ovsTime;/*! @brief Help variable for measurement time function */
+uint8_t ovsTime;     /*! @brief Help variable for measurement time function */
 uint8_t ovsPressure; /*! @brief Help variable for measurement time function */
 uint8_t ovsHumidity; /*! @brief Help variable for measurement time function */
 uint8_t measureMode; /*! @brief Help variable for measurement time function */
-uint8_t stdBy;     /*! @brief Help variable for measurement time function */
-uint8_t filtCoeff; /*! @brief Help variable for measurement time function */
+uint8_t stdBy;       /*! @brief Help variable for measurement time function */
+uint8_t filtCoeff;   /*! @brief Help variable for measurement time function */
+
+int32_t t_fine; /*! @brief t_fine carries fine temperature as global value*/
+int32_t press, temp, hum;
 
 /*=========================================================*/
-/* PROTOTYPE DECLARATION --------------------------------------*/
+/*== PROTOTYPE DECLARATION ================================*/
 /*=========================================================*/
 
 int8_t BME280ChipID(void);
