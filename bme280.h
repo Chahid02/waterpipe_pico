@@ -2,25 +2,34 @@
 *****************************************************************
 * Copyright (c) Lukasz Piatek. All rights reserved.
 * @file    bme280.h
+* @brief   BME280 driver Header file
 * @author  Lukasz Piatek
 * @version V1.0
 * @date    2021-09-28
 * @brief   BME280 Driver
+* @copyright Copyright (c) Lukasz Piatek. All rights reserved
 *****************************************************************
 */
 
 #ifndef BME280_H_
 #define BME280_H_
 
+/*-------------------------------------------------------------*/
+/* TYPEDEF MACROS ---------------------------------------------*/
+/*-------------------------------------------------------------*/
+
+typedef float float32_t;
 
 /*-------------------------------------------------------------*/
 /* I2C ADRESS */
 /*-------------------------------------------------------------*/
+
 #define BME280_I2C_ADDR_PRIMARY     (uint8_t) 0x76
 #define BME280_I2C_ADDR_SECONDARY   (uint8_t) 0x77
 /*-------------------------------------------------------------*/
 /* CHIP IDENTIFIER */
 /*-------------------------------------------------------------*/
+
 #define BME280_CHIP_ID          (uint8_t) 0x60
 #define BMP280_CHIP_ID_SP       (uint8_t) 0x56
 #define BMP280_CHIP_ID_MP       (uint8_t) 0x58
@@ -28,6 +37,7 @@
 /*-------------------------------------------------------------*/
 /* REGISTER ADRESS */
 /*-------------------------------------------------------------*/
+
 #define BME280_CHIP_ID_ADDR                     (uint8_t) 0xD0
 #define BME280_RESET_ADDR                       (uint8_t) 0xE0
 #define BME280_TEMP_PRESS_CALIB_DATA_ADDR       (uint8_t) 0x88
@@ -40,6 +50,7 @@
 /*-------------------------------------------------------------*/
 /* RESET REGISTER/MACROS */
 /*-------------------------------------------------------------*/
+
 #define BME280_SOFTRESET_ADDR       (uint8_t) 0xE0 //BME280 SOFT RESET REGISTER
 #define BME280_SOFTRESET_VALUE      (uint8_t) 0xB6 //BME280 SOFT RESET VALUE
 #define BME280_SOFTRESET_MSK        (uint8_t) 0x09
@@ -52,6 +63,7 @@
 /*-------------------------------------------------------------*/
 /* STANDBY MACROS*/
 /*-------------------------------------------------------------*/
+
 #define BME280_STBY_MSK     (uint8_t) 0xE0
 #define BME280_STBY_0_5     (uint8_t) 0x00
 #define BME280_STBY_62_5    (uint8_t) 0x20
@@ -65,6 +77,7 @@
 /*-------------------------------------------------------------*/
 /* DATA SIZE */
 /*-------------------------------------------------------------*/
+
 #define BME280_TEMP_PRESS_CALIB_DATA_LEN    (uint8_t) 24
 #define BME280_HUMIDITY_CALIB_DATA_LEN      (uint8_t) 9
 #define BME280_P_T_H_DATA_LEN               (uint8_t) 8
@@ -72,6 +85,7 @@
 /*-------------------------------------------------------------*/
 /* SENSOR MODES */
 /*-------------------------------------------------------------*/
+
 #define BME280_MODE_MSK     (uint8_t) 0x03
 #define BME280_SLEEP_MODE   (uint8_t) 0x00
 #define BME280_FORCED_MODE  (uint8_t) 0x01
@@ -80,6 +94,7 @@
 /*-------------------------------------------------------------*/
 /* DELAY CALCULATION MACROS */
 /*-------------------------------------------------------------*/
+
 #define BME280_MEAS_OFFSET          (uint16_t) 1250
 #define BME280_MEAS_DUR             (uint16_t) 2300
 #define BME280_PRES_HUM_MEAS_OFFSET (uint16_t) 575
@@ -88,6 +103,7 @@
 /*-------------------------------------------------------------*/
 /* COMPENSATION PARAMETER */
 /*-------------------------------------------------------------*/
+
 typedef struct CompData
 {
     uint16_t 	dig_T1:16;
@@ -113,6 +129,7 @@ typedef struct CompData
 /*-------------------------------------------------------------*/
 /* COMPENSATION REGISTER */
 /*-------------------------------------------------------------*/
+
 #define BME280_REGISTER_DIG_T1 (uint8_t) 0x88
 #define BME280_REGISTER_DIG_T2 (uint8_t) 0x8A
 #define BME280_REGISTER_DIG_T3 (uint8_t) 0x8C
@@ -134,6 +151,7 @@ typedef struct CompData
 /*-------------------------------------------------------------*/
 /* FILTER MACROS */
 /*-------------------------------------------------------------*/
+
 #define BME280_FILTER_MSK   (uint8_t) 0x1C
 #define BME280_FILTER_OFF   (uint8_t) 0x00
 #define BME280_FILTER_2     (uint8_t) 0x04
@@ -144,6 +162,7 @@ typedef struct CompData
 /*-------------------------------------------------------------*/
 /* OVERSAMPLING MACROS */
 /*-------------------------------------------------------------*/
+
 #define BME280_OSRS_T_MSK   (uint8_t) 0xE0
 #define BME280_OSRS_T_SKIP  (uint8_t) 0x00
 #define BME280_OSRS_T_x1    (uint8_t) 0x20
@@ -165,9 +184,11 @@ typedef struct CompData
 #define BME280_OSRS_H_x4    (uint8_t) 0x03
 #define BME280_OSRS_H_x8    (uint8_t) 0x04
 #define BME280_OSRS_H_x16   (uint8_t) 0x05
+
 /*-------------------------------------------------------------*/
 /* ERROR CODES */
 /*-------------------------------------------------------------*/
+
 #define BME280_E_NULL_PTR           (int8_t) -1
 #define BME280_E_DEV_NOT_FOUND      (int8_t) -2
 #define BME280_E_INVALID_LEN        (int8_t) -3
@@ -175,21 +196,28 @@ typedef struct CompData
 #define BME280_E_SLEEP_MODE_FAIL    (int8_t) -5
 #define BME280_E_NVM_COPY_FAILED    (int8_t) -6
 #define BME280_E_INVALID_ID         (int8_t) -7
+
 /*-------------------------------------------------------------*/
 /* GLOBAL VARIABLES -------------------------------------------*/
 /*-------------------------------------------------------------*/
-int32_t t_fine;
+
+int32_t t_fine; /*! @brief t_fine carries fine temperature as global value*/
 int32_t press, temp, hum;
 struct CompData Comp;
 struct CompData *ptrComp;
-/*-------------------------------------------------------------*/
-/* TYPEDEF MACROS ---------------------------------------------*/
-/*-------------------------------------------------------------*/
-typedef float float32_t; 
+
+
+uint8_t ovsTime;/*! @brief Help variable for measurement time function */
+uint8_t ovsPressure; /*! @brief Help variable for measurement time function */
+uint8_t ovsHumidity; /*! @brief Help variable for measurement time function */
+uint8_t measureMode; /*! @brief Help variable for measurement time function */
+uint8_t stdBy;     /*! @brief Help variable for measurement time function */
+uint8_t filtCoeff; /*! @brief Help variable for measurement time function */
 
 /*-------------------------------------------------------------*/
 /* PROTOTYPE DECLARATION --------------------------------------*/
 /*-------------------------------------------------------------*/
+
 int8_t BME280ChipID(void);
 int8_t BME280_ReadStatus(void);
 int8_t BME280_SoftReset(void);
@@ -209,8 +237,7 @@ void BME280_Read_CTRL_MEAS(void);
 void BME_RawData();
 int32_t compensate_temperature();
 
-void BME280_MeasurementTime(uint8_t ovsTime, uint8_t ovsPressure, uint8_t ovsHumidity, \
-                            uint8_t measureMode, float32_t stdBy, uint8_t filtCoeff);
+void BME280_MeasurementTime();
 
 
 

@@ -2,13 +2,18 @@
 *****************************************************************
 * Copyright (c) Lukasz Piatek. All rights reserved.
 * @file    bme280.c
+* @brief   BME280 Driver
 * @author  Lukasz Piatek
 * @version V1.0
 * @date    2021-09-28
 * @brief   BME280 Driver
+* @copyright Copyright (c) Lukasz Piatek. All rights reserved.
 *****************************************************************
 */
 
+/*-------------------------------------------------------------*/
+/* INCLUDES ---------------------------------------------------*/
+/*-------------------------------------------------------------*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,30 +21,30 @@
 #include "hardware/i2c.h"
 #include "waterpipe.h" /* Insert for Error Log Function! */
 
-    /*! @file bme280.c
- * @brief Sensor driver for BME280 sensor
- */
+/*-------------------------------------------------------------*/
+/* FUNCTION DEFINITION ----------------------------------------*/
+/*-------------------------------------------------------------*/
 
-    /*-------------------------------------------------------------*/
-    /* FUNCTION DEFINITION ----------------------------------------*/
-    /*-------------------------------------------------------------*/
-
-    /*!
+/*!
  *************************************************************************
  * @brief Attempt to read the chip-id number of BM*-280 device
- *
- * @param[in]  void
- * @param[out] void  
+ * 
+ * @note asdasdas
+ * 
+ * @warning
+ * 
+ * @param[in]  deviceAddr Description
+ * @param[out]
  *
  * @return Result of reading the ID-register for chip identification
  *
  * @retval = 0 -> Success
  * @retval > 0 -> Warning
  * @retval < 0 -> Fail
-
+ *
  *************************************************************************
  */
-    int8_t BME280ChipID(void)
+int8_t BME280ChipID(void)
 {
     debugMsg("------------- BME280 CHIP INIT PROGRESS STARTED -------------\r\n");
     size_t lenWrite = sizeof(BME280_CHIP_ID_ADDR);
@@ -96,7 +101,7 @@
 }
 /*!
  *************************************************************************
- * @brief 
+ * @brief Test
  *
  * @param[in]  deviceAddr Description
  * @param[out]   
@@ -186,7 +191,10 @@ int8_t BME280_SetMode(uint8_t deviceMode)
     debugVal("-- Reading Mode Register:0x%02X -- \r\n", (*ptrRead));
 
     status = *ptrRead & ~(BME280_MODE_MSK);
-    status |= (deviceMode & BME280_MODE_MSK); //set deviceMode for BME280_NORMAL_MODE
+    status |= (deviceMode & BME280_MODE_MSK);
+
+    measureMode = deviceMode;
+
     debugVal("-- Setting Mode:0x%02X -- \r\n", status);
     mode = status;
 
@@ -500,6 +508,8 @@ void BME280_SetFilter(uint8_t filter)
     status |= filter & BME280_FILTER_MSK;
     mode = status;
 
+    filtCoeff=filter;
+
     debugVal("-- Setting Mode:0x%02X -- \r\n", mode);
     uint8_t ptrWriteMode[] = {BME280_CONFIG_ADDR, mode};
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrWriteMode, 2, false);
@@ -570,6 +580,7 @@ void BME280_Set_OSRS_t(uint8_t osrs_t)
     status = *ptrRead & ~BME280_OSRS_T_MSK;
     status |= osrs_t & BME280_OSRS_T_MSK;
     mode = status;
+    ovsTime=osrs_t;
 
     debugVal("-- Setting OSRS_t:0x%02X -- \r\n", mode);
     uint8_t ptrWriteMode[] = {BME280_CTRL_MEAS_ADDR, mode};
@@ -611,6 +622,7 @@ void BME280_Set_OSRS_p(uint8_t osrs_p)
     status = *ptrRead & ~BME280_OSRS_P_MSK;
     status |= osrs_p & BME280_OSRS_P_MSK;
     mode = status;
+    ovsPressure=osrs_p;
 
     debugVal("-- Setting OSRS_p:0x%02X -- \r\n", mode);
     uint8_t ptrWriteMode[] = {BME280_CTRL_MEAS_ADDR, mode};
@@ -653,6 +665,7 @@ void BME280_Set_OSRS_h(uint8_t osrs_h)
     status = *ptrRead & ~BME280_OSRS_H_MSK;
     status |= osrs_h & BME280_OSRS_H_MSK;
     mode = status;
+    ovsHumidity = osrs_h;
 
     debugVal("-- Setting OSRS_h:0x%02X -- \r\n", mode);
     uint8_t ptrWriteMode[] = {BME280_CTRL_HUM_ADDR, mode};
@@ -844,19 +857,128 @@ void BME_RawData(void)
  *************************************************************************
  */
 
-void BME280_MeasurementTime(uint8_t ovsTime, uint8_t ovsPressure, uint8_t ovsHumidity, \
-                            uint8_t measureMode, float32_t stdBy, uint8_t filtCoeff)
+void BME280_MeasurementTime()
 {
     float32_t timeTyp;
     float32_t timeMax;
-    timeTyp = 1 + (2 * ovsTime) + (2 * ovsPressure + 0.5) + (2 * ovsHumidity + 0.5);
-    timeMax = 1.25 + (2.3 * ovsTime) + (2.3 * ovsPressure + 0.5) + (2.3 * ovsHumidity + 0.575);
+    uint8_t osTime;
+    uint8_t osHum;
+    uint8_t osPress;
+    float32_t stdByMode;
+
+    switch (ovsTime)
+    {
+    case BME280_OSRS_T_SKIP:
+        osTime = 0;
+        break;
+    case BME280_OSRS_T_x1:
+        osTime = 1;
+        break;
+    case BME280_OSRS_T_x2:
+        osTime = 2;
+        break;
+    case BME280_OSRS_T_x4:
+        osTime = 4;
+        break;
+    case BME280_OSRS_T_x8:
+        osTime = 8;
+        break;
+    case BME280_OSRS_T_x16:
+        osTime = 16;
+        break;
+
+    default:
+        break;
+    }
+
+    switch (ovsHumidity)
+    {
+    case BME280_OSRS_H_SKIP:
+        osHum = 0;
+        break;
+    case BME280_OSRS_H_x1:
+        osHum = 1;
+        break;
+    case BME280_OSRS_H_x2:
+        osHum = 2;
+        break;
+    case BME280_OSRS_H_x4:
+        osHum = 4;
+        break;
+    case BME280_OSRS_H_x8:
+        osHum = 8;
+        break;
+    case BME280_OSRS_H_x16:
+        osHum = 16;
+        break;
+
+    default:
+        break;
+    }
+
+    switch (ovsPressure)
+    {
+    case BME280_OSRS_P_SKIP:
+        osPress = 0;
+        break;
+    case BME280_OSRS_P_x1:
+        osPress = 1;
+        break;
+    case BME280_OSRS_P_x2:
+        osPress = 2;
+        break;
+    case BME280_OSRS_P_x4:
+        osPress = 4;
+        break;
+    case BME280_OSRS_P_x8:
+        osPress = 8;
+        break;
+    case BME280_OSRS_P_x16:
+        osPress = 16;
+        break;
+
+    default:
+        break;
+    }
+
+    timeTyp = 1 + (2 * osTime) + (2 * osPress + 0.5) + (2 * osHum + 0.5);
+    timeMax = 1.25 + (2.3 * osTime) + (2.3 * osPress + 0.5) + (2.3 * osHum + 0.575);
+
+    switch (stdBy)
+    {
+    case BME280_STBY_0_5:
+        stdByMode = 0.5;
+        break;
+    case BME280_STBY_62_5:
+        stdByMode = 62.5;
+        break;
+    case BME280_STBY_125:
+        stdByMode = 125;
+        break;
+    case BME280_STBY_250:
+        stdByMode = 250;
+        break;
+    case BME280_STBY_500:
+        stdByMode = 5;
+        break;
+    case BME280_STBY_1000:
+        stdByMode = 1000;
+        break;
+    case BME280_STBY_10:
+        stdByMode = 10;
+        break;
+    case BME280_STBY_20:
+        stdByMode = 20;
+        break;
+
+    default:
+        break;
+    }
 
     float32_t odrMs;
     if (measureMode == BME280_NORMAL_MODE)
     {
-        odrMs = 1000 / (timeMax + stdBy);
-  
+        odrMs = 1000 / (timeMax + stdByMode);
     }
     else if (measureMode == BME280_FORCED_MODE)
     {
@@ -868,23 +990,23 @@ void BME280_MeasurementTime(uint8_t ovsTime, uint8_t ovsPressure, uint8_t ovsHum
         __NOP();
     }
     
-
     uint32_t stepRsp = 0;
+
     switch (filtCoeff)
     {
-    case 0:
+    case BME280_FILTER_OFF:
         stepRsp = 1;
         break;
-    case 2:
+    case BME280_FILTER_2:
         stepRsp = 2;
         break;
-    case 4:
+    case BME280_FILTER_4:
         stepRsp = 5;
         break;
-    case 8:
+    case BME280_FILTER_8:
         stepRsp = 11;
         break;
-    case 16:
+    case BME280_FILTER_16:
         stepRsp = 22;
         break;
 
