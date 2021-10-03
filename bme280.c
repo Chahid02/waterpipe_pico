@@ -101,7 +101,7 @@ int8_t BME280ChipID(void)
     else if (*ptrChipID == (BMP280_CHIP_ID_MP || BMP280_CHIP_ID_SP))
     {
         debugMsg("[X] Chip is BMP280 [X] Wrong Sensor [X] \r\n");
-        LOG_ERROR("[X] WRONG SENSOR [X] ")
+        LOG_ERROR("[X] WRONG SENSOR [X]\r\n ")
         debugMsg("[X] ALARM SET [X] \r\n");
         //PANIC FUNCTION !!!!
         return -1;
@@ -363,7 +363,7 @@ int8_t BME280_ReadComp(void)
     sleep_ms(10);
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, &buffer[25], dataLen, true);
     sleep_ms(10);
-    /*==memset(&buffer[25], 0, 8);
+    
     ptrComp->dig_H2 = buffer[25] | (buffer[26] << 8);             /*== 0xE1 / 0xE2 dig_H2 [7:0] / [15:8] int16_t ==*/
     ptrComp->dig_H3 = buffer[27];                                 /*== 0xE3 dig_H3 [7:0] uint8_t ==*/
     ptrComp->dig_H4 = buffer[28] << 4 | ((buffer[29]) & ~(0x78)); /*== 0xE4 / 0xE5[3:0] dig_H4 [11:4] / [3:0] int16_t ==*/
@@ -776,53 +776,6 @@ void BME280_Read_CTRL_MEAS(void)
 **************************************************************
  */
 
-int32_t BME280_CompTemp()
-{
-    int32_t adc_T = temp;
-    int32_t var1;
-    int32_t var2;
-    int32_t temperature;
-    int32_t temperature_min = -4000;
-    int32_t temperature_max = 8500;
-
-    var1 = (((adc_T >> 3) - ((int32_t)Comp.dig_T1 << 1)) * ((int32_t)Comp.dig_T2)) >> 11;
-    var2 = ((((adc_T >> 4) - ((int32_t)Comp.dig_T1)) * ((adc_T >> 4) -
-                                                        ((int32_t)Comp.dig_T1))) >>
-            12 * ((int32_t)Comp.dig_T3)) >>
-           14;
-    t_fine = var1 + var2;
-    temperature = (t_fine * 5 + 128) >> 8;
-
-    if (temperature < temperature_min)
-    {
-        temperature = temperature_min;
-    }
-    else if (temperature > temperature_max)
-    {
-        temperature = temperature_max;
-    }
-
-    return temperature;
-}
-/*!
-**************************************************************
- * @brief 
- * the ctrl_meas register has to be set
- *
- *
- * @param[in]  deviceAddr Description
- * @param[out]   
- *
- * @return Result of 
- *
- * @retval = 0 -> Success
- * @retval > 0 -> Warning
- * @retval < 0 -> Fail
- *
- * 
-**************************************************************
- */
-
 void BME280_RawData(void)
 {
     uint8_t buffer[8];
@@ -863,166 +816,312 @@ void BME280_RawData(void)
  * 
 **************************************************************
  */
-
-void BME280_MeasurementTime()
+int32_t BME280_CompTemp()
 {
-    float32_t timeTyp;
-    float32_t timeMax;
-    uint8_t osTime;
-    uint8_t osHum;
-    uint8_t osPress;
-    float32_t stdByMode;
+    int32_t adc_T = temp;
+    int32_t var1;
+    int32_t var2;
+    int32_t temperature;
+    int32_t temperature_min = -4000;
+    int32_t temperature_max = 8500;
 
-    switch (ovsTime)
+    var1 = (((adc_T >> 3) - ((int32_t)Comp.dig_T1 << 1)) * ((int32_t)Comp.dig_T2)) >> 11;
+    var2 = ((((adc_T >> 4) - ((int32_t)Comp.dig_T1)) * ( (adc_T >> 4) - ( (int32_t)Comp.dig_T1)) >> 12) * ((int32_t)Comp.dig_T3)) >> 14;
+    t_fine = var1 + var2;
+    temperature = (t_fine * 5 + 128) >> 8;
+
+    if (temperature < temperature_min)
     {
-    case BME280_OSRS_T_SKIP:
-        osTime = 0;
-        break;
-    case BME280_OSRS_T_x1:
-        osTime = 1;
-        break;
-    case BME280_OSRS_T_x2:
-        osTime = 2;
-        break;
-    case BME280_OSRS_T_x4:
-        osTime = 4;
-        break;
-    case BME280_OSRS_T_x8:
-        osTime = 8;
-        break;
-    case BME280_OSRS_T_x16:
-        osTime = 16;
-        break;
-
-    default:
-        break;
+        temperature = temperature_min;
+    }
+    else if (temperature > temperature_max)
+    {
+        temperature = temperature_max;
     }
 
-    switch (ovsHumidity)
-    {
-    case BME280_OSRS_H_SKIP:
-        osHum = 0;
-        break;
-    case BME280_OSRS_H_x1:
-        osHum = 1;
-        break;
-    case BME280_OSRS_H_x2:
-        osHum = 2;
-        break;
-    case BME280_OSRS_H_x4:
-        osHum = 4;
-        break;
-    case BME280_OSRS_H_x8:
-        osHum = 8;
-        break;
-    case BME280_OSRS_H_x16:
-        osHum = 16;
-        break;
+    return temperature;
+}
+/*!
+**************************************************************
+ * @brief 
+ * the ctrl_meas register has to be set
+ *
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+**************************************************************
+ */
+uint32_t BME280_CompPressure(void)
+{
+    int32_t adc_P = press;
+    int32_t var1;
+    int32_t var2;
+    int32_t pressure;
 
-    default:
-        break;
+
+    var1 = (((int32_t)t_fine) >> 1) - (int32_t)64000;
+    var2 = (((var1 >> 2) * (var1 >> 2)) >> 11) * ((int32_t)Comp.dig_P6);
+    var2 = var2 + ((var1 * ((int32_t)Comp.dig_P5)) << 1);
+    var2 = (var2 >> 2) + (((int32_t)Comp.dig_P4) << 16);
+    var1 = (((Comp.dig_P3 * (((var1 >> 2) * (var1 >> 2)) >> 13)) >> 3) + ((((int32_t)Comp.dig_P2) * var1) >> 1)) >> 18;
+    var1 = ((((32768 + var1)) * ((int32_t)Comp.dig_P1)) >> 15);
+    if (var1 == 0)
+    {
+        return 0; // avoid exception caused by division by zero
     }
-
-    switch (ovsPressure)
+    pressure = (((uint32_t)(((int32_t)1048576) - adc_P) - (var2 >> 12))) * 3125;
+    if (pressure < 0x80000000)
     {
-    case BME280_OSRS_P_SKIP:
-        osPress = 0;
-        break;
-    case BME280_OSRS_P_x1:
-        osPress = 1;
-        break;
-    case BME280_OSRS_P_x2:
-        osPress = 2;
-        break;
-    case BME280_OSRS_P_x4:
-        osPress = 4;
-        break;
-    case BME280_OSRS_P_x8:
-        osPress = 8;
-        break;
-    case BME280_OSRS_P_x16:
-        osPress = 16;
-        break;
-
-    default:
-        break;
-    }
-
-    timeTyp = 1 + (2 * osTime) + (2 * osPress + 0.5) + (2 * osHum + 0.5);
-    timeMax = 1.25 + (2.3 * osTime) + (2.3 * osPress + 0.5) + (2.3 * osHum + 0.575);
-
-    switch (stdBy)
-    {
-    case BME280_STBY_0_5:
-        stdByMode = 0.5;
-        break;
-    case BME280_STBY_62_5:
-        stdByMode = 62.5;
-        break;
-    case BME280_STBY_125:
-        stdByMode = 125;
-        break;
-    case BME280_STBY_250:
-        stdByMode = 250;
-        break;
-    case BME280_STBY_500:
-        stdByMode = 5;
-        break;
-    case BME280_STBY_1000:
-        stdByMode = 1000;
-        break;
-    case BME280_STBY_10:
-        stdByMode = 10;
-        break;
-    case BME280_STBY_20:
-        stdByMode = 20;
-        break;
-
-    default:
-        break;
-    }
-
-    float32_t odrMs;
-    if (measureMode == BME280_NORMAL_MODE)
-    {
-        odrMs = 1000 / (timeMax + stdByMode);
-    }
-    else if (measureMode == BME280_FORCED_MODE)
-    {
-        odrMs = 1000 / (timeMax);
+        pressure = (pressure << 1) / ((uint32_t)var1);
     }
     else
     {
-        __NOP();
+        pressure = (pressure / (uint32_t)var1) * 2;
     }
-
-    uint32_t stepRsp = 0;
-
-    switch (filtCoeff)
-    {
-    case BME280_FILTER_OFF:
-        stepRsp = 1;
-        break;
-    case BME280_FILTER_2:
-        stepRsp = 2;
-        break;
-    case BME280_FILTER_4:
-        stepRsp = 5;
-        break;
-    case BME280_FILTER_8:
-        stepRsp = 11;
-        break;
-    case BME280_FILTER_16:
-        stepRsp = 22;
-        break;
-
-    default:
-        break;
-    }
-
-    float32_t rspTimeIIR;
-    rspTimeIIR = 1000 * stepRsp / odrMs;
-
-    debug2Val("[X] MeasurementRate: %f Hz\n[X] ResponseTime: %.2f ms\n", odrMs, rspTimeIIR);
-    debug2Val("[X] Typ. MeasurementTime: %f ms\n[X] Max. MeasurementTime: %.2f ms\n", timeTyp, timeMax);
+    var1 = (((int32_t)Comp.dig_P9) * ((int32_t)(((pressure >> 3) * (pressure >> 3)) >> 13))) >> 12;
+    var2 = (((int32_t)(pressure >> 2)) * ((int32_t)Comp.dig_P8)) >> 13;
+    pressure = (uint32_t)((int32_t)pressure + ((var1 + var2 + Comp.dig_P7) >> 4));
+    return pressure;
 }
+/*!
+**************************************************************
+ * @brief 
+ * the ctrl_meas register has to be set
+ *
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+**************************************************************
+ */
+double bme280_compensate_H_double()
+{
+    int32_t adc_H=hum;
+     double var_H;
+    var_H = (((double)t_fine) - 76800.0);
+    var_H = (adc_H - (((double)Comp.dig_H4) * 64.0 + ((double)Comp.dig_H5) / 16384.0 * var_H)) *
+            (((double)Comp.dig_H2) / 65536.0 * (1.0 + ((double)Comp.dig_H6) / 67108864.0 * var_H * (1.0 + ((double)Comp.dig_H3) / 67108864.0 * var_H)));
+    var_H = var_H * (1.0 - ((double)Comp.dig_H1) * var_H / 524288.0);
+    if (var_H > 100.0)
+        var_H = 100.0;
+    else if (var_H < 0.0)
+        var_H = 0.0;
+    return var_H;
+}
+
+uint32_t bme280_compensate_H_int32()
+{
+    int32_t adc_H = hum;
+    int32_t v_x1_u32r;
+    v_x1_u32r = (t_fine - ((int32_t)76800));
+    v_x1_u32r = (((((adc_H << 14) - (((int32_t)Comp.dig_H4) << 20) - (((int32_t)Comp.dig_H5) * v_x1_u32r)) +
+                   ((int32_t)16384)) >>
+                  15) *
+                 (((((((v_x1_u32r * ((int32_t)Comp.dig_H6)) >> 10) * (((v_x1_u32r * ((int32_t)Comp.dig_H3)) >> 11) + ((int32_t)32768))) >> 10) +
+                    ((int32_t)2097152)) *
+                       ((int32_t)Comp.dig_H2) +
+                   8192) >>
+                  14));
+    v_x1_u32r = (v_x1_u32r - (((((v_x1_u32r >> 15) * (v_x1_u32r >> 15)) >> 7) * ((int32_t)Comp.dig_H1)) >> 4));
+    v_x1_u32r = (v_x1_u32r < 0 ? 0 : v_x1_u32r);
+    v_x1_u32r = (v_x1_u32r > 419430400 ? 419430400 : v_x1_u32r);
+
+    return (uint32_t)(v_x1_u32r >> 12);
+}
+
+/*!
+**************************************************************
+ * @brief 
+ * the ctrl_meas register has to be set
+ *
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+**************************************************************
+ */
+
+        void BME280_MeasurementTime()
+        {
+            float32_t timeTyp;
+            float32_t timeMax;
+            uint8_t osTime;
+            uint8_t osHum;
+            uint8_t osPress;
+            float32_t stdByMode;
+
+            switch (ovsTime)
+            {
+            case BME280_OSRS_T_SKIP:
+                osTime = 0;
+                break;
+            case BME280_OSRS_T_x1:
+                osTime = 1;
+                break;
+            case BME280_OSRS_T_x2:
+                osTime = 2;
+                break;
+            case BME280_OSRS_T_x4:
+                osTime = 4;
+                break;
+            case BME280_OSRS_T_x8:
+                osTime = 8;
+                break;
+            case BME280_OSRS_T_x16:
+                osTime = 16;
+                break;
+
+            default:
+                break;
+            }
+
+            switch (ovsHumidity)
+            {
+            case BME280_OSRS_H_SKIP:
+                osHum = 0;
+                break;
+            case BME280_OSRS_H_x1:
+                osHum = 1;
+                break;
+            case BME280_OSRS_H_x2:
+                osHum = 2;
+                break;
+            case BME280_OSRS_H_x4:
+                osHum = 4;
+                break;
+            case BME280_OSRS_H_x8:
+                osHum = 8;
+                break;
+            case BME280_OSRS_H_x16:
+                osHum = 16;
+                break;
+
+            default:
+                break;
+            }
+
+            switch (ovsPressure)
+            {
+            case BME280_OSRS_P_SKIP:
+                osPress = 0;
+                break;
+            case BME280_OSRS_P_x1:
+                osPress = 1;
+                break;
+            case BME280_OSRS_P_x2:
+                osPress = 2;
+                break;
+            case BME280_OSRS_P_x4:
+                osPress = 4;
+                break;
+            case BME280_OSRS_P_x8:
+                osPress = 8;
+                break;
+            case BME280_OSRS_P_x16:
+                osPress = 16;
+                break;
+
+            default:
+                break;
+            }
+
+            timeTyp = 1 + (2 * osTime) + (2 * osPress + 0.5) + (2 * osHum + 0.5);
+            timeMax = 1.25 + (2.3 * osTime) + (2.3 * osPress + 0.5) + (2.3 * osHum + 0.575);
+
+            switch (stdBy)
+            {
+            case BME280_STBY_0_5:
+                stdByMode = 0.5;
+                break;
+            case BME280_STBY_62_5:
+                stdByMode = 62.5;
+                break;
+            case BME280_STBY_125:
+                stdByMode = 125;
+                break;
+            case BME280_STBY_250:
+                stdByMode = 250;
+                break;
+            case BME280_STBY_500:
+                stdByMode = 5;
+                break;
+            case BME280_STBY_1000:
+                stdByMode = 1000;
+                break;
+            case BME280_STBY_10:
+                stdByMode = 10;
+                break;
+            case BME280_STBY_20:
+                stdByMode = 20;
+                break;
+
+            default:
+                break;
+            }
+
+            float32_t odrMs;
+            if (measureMode == BME280_NORMAL_MODE)
+            {
+                odrMs = 1000 / (timeMax + stdByMode);
+            }
+            else if (measureMode == BME280_FORCED_MODE)
+            {
+                odrMs = 1000 / (timeMax);
+            }
+            else
+            {
+                __NOP();
+            }
+
+            uint32_t stepRsp = 0;
+
+            switch (filtCoeff)
+            {
+            case BME280_FILTER_OFF:
+                stepRsp = 1;
+                break;
+            case BME280_FILTER_2:
+                stepRsp = 2;
+                break;
+            case BME280_FILTER_4:
+                stepRsp = 5;
+                break;
+            case BME280_FILTER_8:
+                stepRsp = 11;
+                break;
+            case BME280_FILTER_16:
+                stepRsp = 22;
+                break;
+
+            default:
+                break;
+            }
+
+            float32_t rspTimeIIR;
+            rspTimeIIR = 1000 * stepRsp / odrMs;
+            debugMsg("====================  BME280 RESPONSE TIMING STARTED =================\r\n");
+            debug2Val("[X] MeasurementRate: %f Hz\n[X] ResponseTime: %.2f ms\n", odrMs, rspTimeIIR);
+            debug2Val("[X] Typ. MeasurementTime: %f ms\n[X] Max. MeasurementTime: %.2f ms\n", timeTyp, timeMax);
+        }

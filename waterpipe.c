@@ -109,12 +109,20 @@ int main()
     {
         debugTerm();
         BME280_RawData();
-        
+
+        debugMsg("====================  BME280 SENSOR DATA READING STARTED =============\r\n");
         int32_t temperature = BME280_CompTemp();
-        debugVal("[X] Temperature:%.4f °C \r\n", temperature / 100.0f);
+        debugVal("[X] Temperature: %.4f °C \r\n", temperature / 100.0f);
+        uint32_t pressure = BME280_CompPressure();
+        debugVal("[X] Pressure: %.2f °hPa \r\n", pressure / 100.0f);
+
+        double humidity = bme280_compensate_H_double();
+        debugVal("[X] Humidity: %lf \r\n", humidity);
+        uint32_t humidity2 = bme280_compensate_H_int32();
+        debugVal("[X] Humidity: %.2f \r\n", humidity2 / 1024.0f);
+        BME280_MeasurementTime();
 
         toggleLed();
-        BME280_MeasurementTime();
 
         /*== TEST FUNCTION == */
         while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)

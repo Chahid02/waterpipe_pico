@@ -229,7 +229,7 @@ void BME280_Read_CTRL_MEAS(void);
 void BME280_RawData();
 int32_t BME280_CompTemp();
 void BME280_MeasurementTime();
-
-
-
+uint32_t BME280_CompPressure(void);
+double bme280_compensate_H_double(void);
+uint32_t bme280_compensate_H_int32();
 #endif
