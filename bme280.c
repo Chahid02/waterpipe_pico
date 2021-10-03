@@ -996,6 +996,6 @@ void BME280_MeasurementTime()
     float32_t rspTimeIIR;
     rspTimeIIR = 1000 * stepRsp / odrMs;
 
-    debug2Val("[X] MeasurementRate: %f Hz\n[X] ResponseTime:%.2f ms\n", odrMs, rspTimeIIR);
-    debug2Val("[X] Typ. MeasurementTime: %f ms\n[X] Max. MeasurementTime:%.2f ms\n", timeTyp, timeMax);
+    debug2Val("[X] MeasurementRate: %f Hz\n[X] ResponseTime: %.2f ms\n", odrMs, rspTimeIIR);
+    debug2Val("[X] Typ. MeasurementTime: %f ms\n[X] Max. MeasurementTime: %.2f ms\n", timeTyp, timeMax);
 }

@@ -36,8 +36,8 @@
 /*=========================================================*/
 /*== PRIVATE PROTOTYPES ===================================*/
 /*=========================================================*/
-
-void funcBlinkLed();
+void debugTerm(void);
+void funcBlinkLed(void);
 
 int main()
 {
@@ -116,13 +116,10 @@ int main()
     BME280_ReadStandby();
     BME280_Read_OSRS_h();
   
-    debugMsg("\n");
-    debugMsg("======================================================================\r\n");
+
     while (true)
     {
-        debugMsg("======================================================================\r\n");
-        debugMsg("======================== DEBUG TERMINAL===============================\r\n");
-        debugMsg("======================================================================\r\n");
+        debugTerm();
         BME280_RawData();
         int32_t temperatue = BME280_CompTemp();
         debugVal("[X] Temperature:%.4f \r\n", temperatue / 100.0f);
@@ -137,7 +134,6 @@ int main()
             //return -1;
         };
 
-        debugMsg("======================================================================\r\n");
         sleep_ms(1000);
     }
     return 0;
@@ -172,18 +168,9 @@ void funcBlinkLed()
     }
 }
 
-//void printBinary(uint8_t i, int8_t *strArray) char *strArray
-void printBinary(uint8_t i, char *strArray)
+void debugTerm(void)
 {
-    if (i > 1)
-    {
-        printBinary(i >> 1, strArray);
-    }
-    else
-    {
-        __NOP();
-    }
-
-    printf("%d", (i & 1));
-    sprintf(strArray, "0x%02X\r\n", i);
+    debugMsg("\n======================================================================\r\n");
+    debugMsg("======================== DEBUG TERMINAL===============================\r\n");
+    debugMsg("======================================================================\r\n");
 }
