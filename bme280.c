@@ -46,78 +46,78 @@
  *
 **************************************************************
  */
-    int8_t BME280ChipID(void)
+int8_t BME280ChipID(void)
+{
+    debugMsg("====================  BME280 CHIP INIT PROGRESS STARTED ============== \r\n");
+    size_t lenChipAddr = sizeof(BME280_CHIP_ID_ADDR);
+    size_t lenChipID = sizeof(BME280_CHIP_ID);
+
+    uint8_t *ptrChipID = malloc(sizeof(*ptrChipID) * lenChipID);
+    uint8_t *ptrChipAddr = malloc(sizeof(*ptrChipID) * lenChipAddr);
+
+    /*== Check Memory ============================*/
+    if (ptrChipID == NULL) /*== FAIL, NO MEMORY ==*/
     {
-        debugMsg("====================  BME280 CHIP INIT PROGRESS STARTED ============== \r\n");
-        size_t lenChipAddr = sizeof(BME280_CHIP_ID_ADDR);
-        size_t lenChipID = sizeof(BME280_CHIP_ID);
-
-        uint8_t *ptrChipID = malloc(sizeof(*ptrChipID) * lenChipID);
-        uint8_t *ptrChipAddr = malloc(sizeof(*ptrChipID) * lenChipAddr);
-
-        /*== Check Memory ============================*/
-        if (ptrChipID == NULL) /*== FAIL, NO MEMORY ==*/
-        {
-            LOG_ERROR("[X] Fail, No Memory Allocation [X] ErrorCode: -1 [X] ");
-            debugVal("[X] Fail, No Memory Allocation [X] ErrorCode:%X [X] \r\n", BME280_E_NULL_PTR);
-        }
-        else if (ptrChipAddr == NULL)
-        {
-            LOG_ERROR("[X] Fail, No Memory Allocation [X] ErrorCode: -1 [X] ");
-            debugVal("[X] Fail, No Memory Allocation [X] ErrorCode:%X [X] \r\n", BME280_E_NULL_PTR);
-        }
-        else
-        {
-            __NOP();
-        }
-
-        *ptrChipAddr = BME280_CHIP_ID_ADDR;
-
-        if (i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrChipAddr, lenChipAddr, false) != lenChipAddr)
-        {
-            LOG_ERROR("[X] Device not found [X] ErrorCode: -2 [X] ");
-            debugVal("[X] Device not found [X] ErrorCode:%X [X] \r\n", BME280_E_DEV_NOT_FOUND);
-        }
-        else
-        {
-            debugVal("[X] Writing to Address:0x%02X [X] \r\n", (*ptrChipAddr));
-        }
-
-        if (i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrChipID, lenChipID, false) == lenChipID)
-        {
-            debugVal("[X] Reading Register:0x%02X [X] \r\n", (*ptrChipAddr));
-        }
-        else
-        {
-            LOG_ERROR("[X] No Data Received [X] Reading I2C ChipID failed [X] ")
-        }
-
-        debugVal("[X] Chip ID:0x%02X [X] \r\n", (*ptrChipID));
-
-        if (*ptrChipID == BME280_CHIP_ID)
-        {
-            debugMsg("[X] Chip is BME280 [X] \r\n");
-            return 0;
-        }
-        else if (*ptrChipID == (BMP280_CHIP_ID_MP || BMP280_CHIP_ID_SP))
-        {
-            debugMsg("[X] Chip is BMP280 [X] Wrong Sensor [X] \r\n");
-            LOG_ERROR("[X] WRONG SENSOR [X] ")
-            debugMsg("[X] ALARM SET [X] \r\n");
-            //PANIC FUNCTION !!!!
-            return -1;
-        }
-        else
-        {
-            debugMsg("[X]  No specific BM*-280 ID !!! CHIP IS CORRUPT [X] \r\n");
-            LOG_ERROR("[X]  CHIP IS CORRUPT [X] ")
-            debugMsg("[X]  ALARM SET [X] \r\n");
-            //PANIC FUNCTION !!!!
-            return -1;
-        }
-        free(ptrChipID);
-        free(ptrChipAddr);
+        LOG_ERROR("[X] Fail, No Memory Allocation [X] ErrorCode: -1 [X] ");
+        debugVal("[X] Fail, No Memory Allocation [X] ErrorCode:%X [X] \r\n", BME280_E_NULL_PTR);
     }
+    else if (ptrChipAddr == NULL)
+    {
+        LOG_ERROR("[X] Fail, No Memory Allocation [X] ErrorCode: -1 [X] ");
+        debugVal("[X] Fail, No Memory Allocation [X] ErrorCode:%X [X] \r\n", BME280_E_NULL_PTR);
+    }
+    else
+    {
+        __NOP();
+    }
+
+    *ptrChipAddr = BME280_CHIP_ID_ADDR;
+
+    if (i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrChipAddr, lenChipAddr, false) != lenChipAddr)
+    {
+        LOG_ERROR("[X] Device not found [X] ErrorCode: -2 [X] ");
+        debugVal("[X] Device not found [X] ErrorCode:%X [X] \r\n", BME280_E_DEV_NOT_FOUND);
+    }
+    else
+    {
+        debugVal("[X] Writing to Address:0x%02X [X] \r\n", (*ptrChipAddr));
+    }
+
+    if (i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrChipID, lenChipID, false) == lenChipID)
+    {
+        debugVal("[X] Reading Register:0x%02X [X] \r\n", (*ptrChipAddr));
+    }
+    else
+    {
+        LOG_ERROR("[X] No Data Received [X] Reading I2C ChipID failed [X] ")
+    }
+
+    debugVal("[X] Chip ID:0x%02X [X] \r\n", (*ptrChipID));
+
+    if (*ptrChipID == BME280_CHIP_ID)
+    {
+        debugMsg("[X] Chip is BME280 [X] \r\n");
+        return 0;
+    }
+    else if (*ptrChipID == (BMP280_CHIP_ID_MP || BMP280_CHIP_ID_SP))
+    {
+        debugMsg("[X] Chip is BMP280 [X] Wrong Sensor [X] \r\n");
+        LOG_ERROR("[X] WRONG SENSOR [X] ")
+        debugMsg("[X] ALARM SET [X] \r\n");
+        //PANIC FUNCTION !!!!
+        return -1;
+    }
+    else
+    {
+        debugMsg("[X]  No specific BM*-280 ID !!! CHIP IS CORRUPT [X] \r\n");
+        LOG_ERROR("[X]  CHIP IS CORRUPT [X] ")
+        debugMsg("[X]  ALARM SET [X] \r\n");
+        //PANIC FUNCTION !!!!
+        return -1;
+    }
+    free(ptrChipID);
+    free(ptrChipAddr);
+}
 
 /*!
 **************************************************************
@@ -271,7 +271,7 @@ int8_t BME280_ReadStatus(void)
 
     default:
         debugVal("[X] Corrupt Register @ 0x%02X @[7:4]-[2:1] [X] \r\n", BME280_REGISTER_STATUS);
-        *ptrData &= ~(BME280_STATUS_MSK);   /*== clear unused or corrupt bits ==*/
+        *ptrData &= ~(BME280_STATUS_MSK); /*== clear unused or corrupt bits ==*/
         break;
     }
 
@@ -298,7 +298,7 @@ int8_t BME280_ReadComp(void)
 {
     debugMsg("====================  BME280 COMP DATA READ STARTED ==================\r\n");
     /* Table 16 : Compensation parameter storage, naming and data type */
- 
+
     ptrComp = &Comp;
 
     uint8_t buffer[BME280_TEMP_PRESS_CALIB_DATA_LEN + BME280_HUMIDITY_CALIB_DATA_LEN] = {0};
@@ -324,7 +324,7 @@ int8_t BME280_ReadComp(void)
     ptrComp->dig_P9 = buffer[22] | (buffer[23] << 8); //0x9E / 0x9F dig_P9 [7:0] / [15:8] int16_t
 
     /*This Same Register-> BME280_HUMIDITY_CALIB_DATA_LEN-1 */
-    ptrComp->dig_H1 = buffer[24];                               //0xA1 dig_H1 [7:0] uint8_t
+    ptrComp->dig_H1 = buffer[24]; //0xA1 dig_H1 [7:0] uint8_t
 
     *ptrData = BME280_REGISTER_DIG_H2;
     uint8_t dataLen = BME280_HUMIDITY_CALIB_DATA_LEN - 1;
@@ -488,12 +488,11 @@ void BME280_SetFilter(uint8_t filter)
     status |= filter & BME280_FILTER_MSK;
     mode = status;
 
-    filtCoeff=filter;
+    filtCoeff = filter;
 
     debugVal("[X] Setting Mode:0x%02X [X] \r\n", mode);
     uint8_t ptrWriteMode[] = {BME280_CONFIG_ADDR, mode};
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrWriteMode, 2, false);
-
 }
 /*!
 **************************************************************
@@ -560,7 +559,7 @@ void BME280_Set_OSRS_t(uint8_t osrs_t)
     status = *ptrRead & ~BME280_OSRS_T_MSK;
     status |= osrs_t & BME280_OSRS_T_MSK;
     mode = status;
-    ovsTime=osrs_t;
+    ovsTime = osrs_t;
 
     debugVal("[X] Setting OSRS_t:0x%02X [X] \r\n", mode);
     uint8_t ptrWriteMode[] = {BME280_CTRL_MEAS_ADDR, mode};
@@ -602,7 +601,7 @@ void BME280_Set_OSRS_p(uint8_t osrs_p)
     status = *ptrRead & ~BME280_OSRS_P_MSK;
     status |= osrs_p & BME280_OSRS_P_MSK;
     mode = status;
-    ovsPressure=osrs_p;
+    ovsPressure = osrs_p;
 
     debugVal("[X] Setting OSRS_p:0x%02X [X] \r\n", mode);
     uint8_t ptrWriteMode[] = {BME280_CTRL_MEAS_ADDR, mode};
@@ -655,14 +654,12 @@ void BME280_Set_OSRS_h(uint8_t osrs_h)
     *ptrData = BME280_CTRL_MEAS_ADDR;
     lenWrite = sizeof(BME280_CTRL_MEAS_ADDR);
     lenRead = sizeof(BME280_CTRL_MEAS_ADDR);
-    
 
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenWrite, false);
     debugVal("[X] Writing CTRL_MEAS Register:0x%02X [X] \r\n", (*ptrData));
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrRead, lenRead, false);
     debugVal("[X] Reading CTRL_MEAS Register:0x%02X [X] \r\n", (*ptrRead));
 
-    
     ptrWriteMode[0] = BME280_CTRL_MEAS_ADDR;
     ptrWriteMode[0] = *ptrRead;
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrWriteMode, 2, false);
@@ -751,18 +748,20 @@ void BME280_Read_CTRL_MEAS(void)
 
 int32_t BME280_CompTemp()
 {
-    int32_t adc_T=temp;
+    int32_t adc_T = temp;
     int32_t var1;
     int32_t var2;
     int32_t temperature;
     int32_t temperature_min = -4000;
     int32_t temperature_max = 8500;
 
-    var1 = (((adc_T >> 3 ) - ((int32_t)Comp.dig_T1 << 1)) * ((int32_t)Comp.dig_T2 )) >> 11;
-    var2 =  ((((adc_T >> 4) - ((int32_t)Comp.dig_T1)) * ((adc_T >> 4) -\
-            ((int32_t)Comp.dig_T1))) >> 12 * ((int32_t)Comp.dig_T3)) >> 14;
+    var1 = (((adc_T >> 3) - ((int32_t)Comp.dig_T1 << 1)) * ((int32_t)Comp.dig_T2)) >> 11;
+    var2 = ((((adc_T >> 4) - ((int32_t)Comp.dig_T1)) * ((adc_T >> 4) -
+                                                        ((int32_t)Comp.dig_T1))) >>
+            12 * ((int32_t)Comp.dig_T3)) >>
+           14;
     t_fine = var1 + var2;
-    temperature = (t_fine * 5 + 128 ) >> 8;
+    temperature = (t_fine * 5 + 128) >> 8;
 
     if (temperature < temperature_min)
     {
@@ -808,13 +807,12 @@ void BME280_RawData(void)
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, buffer, lenRead, true);
 
     press = ((uint32_t)buffer[0] << 12) | ((uint32_t)buffer[1] << 4) | (buffer[2] >> 4);
-    temp= ((uint32_t)buffer[3] << 12) | ((uint32_t)buffer[4] << 4) | (buffer[5] >> 4);
+    temp = ((uint32_t)buffer[3] << 12) | ((uint32_t)buffer[4] << 4) | (buffer[5] >> 4);
     hum = (uint32_t)buffer[6] << 8 | buffer[7];
 
     debugVal("[X] temp:%X [X] \r\n", temp);
-    debugVal("[X] hum:%X [X] \r\n", hum) ;
+    debugVal("[X] hum:%X [X] \r\n", hum);
     debugVal("[X] press:%X[X] \r\n", press);
-
 }
 
 /*!
@@ -847,111 +845,111 @@ void BME280_MeasurementTime()
 
     switch (ovsTime)
     {
-        case BME280_OSRS_T_SKIP:
-            osTime = 0;
-            break;
-        case BME280_OSRS_T_x1:
-            osTime = 1;
-            break;
-        case BME280_OSRS_T_x2:
-            osTime = 2;
-            break;
-        case BME280_OSRS_T_x4:
-            osTime = 4;
-            break;
-        case BME280_OSRS_T_x8:
-            osTime = 8;
-            break;
-        case BME280_OSRS_T_x16:
-            osTime = 16;
-            break;
+    case BME280_OSRS_T_SKIP:
+        osTime = 0;
+        break;
+    case BME280_OSRS_T_x1:
+        osTime = 1;
+        break;
+    case BME280_OSRS_T_x2:
+        osTime = 2;
+        break;
+    case BME280_OSRS_T_x4:
+        osTime = 4;
+        break;
+    case BME280_OSRS_T_x8:
+        osTime = 8;
+        break;
+    case BME280_OSRS_T_x16:
+        osTime = 16;
+        break;
 
-        default:
-            break;
+    default:
+        break;
     }
 
     switch (ovsHumidity)
     {
-        case BME280_OSRS_H_SKIP:
-            osHum = 0;
-            break;
-        case BME280_OSRS_H_x1:
-            osHum = 1;
-            break;
-        case BME280_OSRS_H_x2:
-            osHum = 2;
-            break;
-        case BME280_OSRS_H_x4:
-            osHum = 4;
-            break;
-        case BME280_OSRS_H_x8:
-            osHum = 8;
-            break;
-        case BME280_OSRS_H_x16:
-            osHum = 16;
-            break;
+    case BME280_OSRS_H_SKIP:
+        osHum = 0;
+        break;
+    case BME280_OSRS_H_x1:
+        osHum = 1;
+        break;
+    case BME280_OSRS_H_x2:
+        osHum = 2;
+        break;
+    case BME280_OSRS_H_x4:
+        osHum = 4;
+        break;
+    case BME280_OSRS_H_x8:
+        osHum = 8;
+        break;
+    case BME280_OSRS_H_x16:
+        osHum = 16;
+        break;
 
-        default:
-            break;
+    default:
+        break;
     }
 
     switch (ovsPressure)
     {
-        case BME280_OSRS_P_SKIP:
-            osPress = 0;
-            break;
-        case BME280_OSRS_P_x1:
-            osPress = 1;
-            break;
-        case BME280_OSRS_P_x2:
-            osPress = 2;
-            break;
-        case BME280_OSRS_P_x4:
-            osPress = 4;
-            break;
-        case BME280_OSRS_P_x8:
-            osPress = 8;
-            break;
-        case BME280_OSRS_P_x16:
-            osPress = 16;
-            break;
+    case BME280_OSRS_P_SKIP:
+        osPress = 0;
+        break;
+    case BME280_OSRS_P_x1:
+        osPress = 1;
+        break;
+    case BME280_OSRS_P_x2:
+        osPress = 2;
+        break;
+    case BME280_OSRS_P_x4:
+        osPress = 4;
+        break;
+    case BME280_OSRS_P_x8:
+        osPress = 8;
+        break;
+    case BME280_OSRS_P_x16:
+        osPress = 16;
+        break;
 
-        default:
-            break;
+    default:
+        break;
     }
 
     timeTyp = 1 + (2 * osTime) + (2 * osPress + 0.5) + (2 * osHum + 0.5);
     timeMax = 1.25 + (2.3 * osTime) + (2.3 * osPress + 0.5) + (2.3 * osHum + 0.575);
- 
+
     switch (stdBy)
     {
-        case BME280_STBY_0_5:
-            stdByMode = 0.5;
-            break;
-        case BME280_STBY_62_5:
-            stdByMode = 62.5;
-            break;
-        case BME280_STBY_125:
-            stdByMode = 125;
-            break;
-        case BME280_STBY_250:
-            stdByMode = 250;
-            break;
-        case BME280_STBY_500:
-            stdByMode = 5;
-            break;
-        case BME280_STBY_1000:
-            stdByMode = 1000;
-            break;
-        case BME280_STBY_10:
-            stdByMode = 10;
-            break;
-        case BME280_STBY_20:
-            stdByMode = 20;
-            break;
+    case BME280_STBY_0_5:
+        stdByMode = 0.5;
+        break;
+    case BME280_STBY_62_5:
+        stdByMode = 62.5;
+        break;
+    case BME280_STBY_125:
+        stdByMode = 125;
+        break;
+    case BME280_STBY_250:
+        stdByMode = 250;
+        break;
+    case BME280_STBY_500:
+        stdByMode = 5;
+        break;
+    case BME280_STBY_1000:
+        stdByMode = 1000;
+        break;
+    case BME280_STBY_10:
+        stdByMode = 10;
+        break;
+    case BME280_STBY_20:
+        stdByMode = 20;
+        break;
 
-        default:
-            break;
+    default:
+        break;
     }
 
     float32_t odrMs;
@@ -961,37 +959,37 @@ void BME280_MeasurementTime()
     }
     else if (measureMode == BME280_FORCED_MODE)
     {
-        odrMs = 1000 / (timeMax );
+        odrMs = 1000 / (timeMax);
     }
     else
     {
         __NOP();
     }
-    
+
     uint32_t stepRsp = 0;
 
     switch (filtCoeff)
     {
-        case BME280_FILTER_OFF:
-            stepRsp = 1;
-            break;
-        case BME280_FILTER_2:
-            stepRsp = 2;
-            break;
-        case BME280_FILTER_4:
-            stepRsp = 5;
-            break;
-        case BME280_FILTER_8:
-            stepRsp = 11;
-            break;
-        case BME280_FILTER_16:
-            stepRsp = 22;
-            break;
+    case BME280_FILTER_OFF:
+        stepRsp = 1;
+        break;
+    case BME280_FILTER_2:
+        stepRsp = 2;
+        break;
+    case BME280_FILTER_4:
+        stepRsp = 5;
+        break;
+    case BME280_FILTER_8:
+        stepRsp = 11;
+        break;
+    case BME280_FILTER_16:
+        stepRsp = 22;
+        break;
 
-        default:
-            break;
+    default:
+        break;
     }
-   
+
     float32_t rspTimeIIR;
     rspTimeIIR = 1000 * stepRsp / odrMs;
 
