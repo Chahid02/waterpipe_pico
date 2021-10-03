@@ -37,7 +37,7 @@
 /*== PRIVATE PROTOTYPES ===================================*/
 /*=========================================================*/
 void debugTerm(void);
-void funcBlinkLed(void);
+void toggleLed(void);
 
 int main()
 {
@@ -124,7 +124,7 @@ int main()
         int32_t temperatue = BME280_CompTemp();
         debugVal("[X] Temperature:%.4f \r\n", temperatue / 100.0f);
 
-        // funcBlinkLed();
+        toggleLed();
         BME280_MeasurementTime();
 
         /*== TEST FUNCTION == */
@@ -154,7 +154,7 @@ int main()
  * 
 **************************************************************
  */
-void funcBlinkLed()
+void toggleLed()
 {
     if (gpio_get_out_level(LED) != true)
     {
@@ -170,7 +170,7 @@ void funcBlinkLed()
 
 void debugTerm(void)
 {
-    debugMsg("\n======================================================================\r\n");
+    debugMsg("\n\n======================================================================\r\n");
     debugMsg("======================== DEBUG TERMINAL===============================\r\n");
-    debugMsg("======================================================================\r\n");
+    debugMsg("======================================================================\r\n\n");
 }
