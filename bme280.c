@@ -51,7 +51,6 @@ int8_t BME280ChipID(void)
     debugMsg("====================  BME280 CHIP INIT PROGRESS STARTED ============== \r\n");
     size_t lenChipAddr = sizeof(BME280_CHIP_ID_ADDR);
     size_t lenChipID = sizeof(BME280_CHIP_ID);
-
     uint8_t *ptrChipID = malloc(sizeof(*ptrChipID) * lenChipID);
     uint8_t *ptrChipAddr = malloc(sizeof(*ptrChipID) * lenChipAddr);
 
@@ -109,9 +108,9 @@ int8_t BME280ChipID(void)
     }
     else
     {
-        debugMsg("[X]  No specific BM*-280 ID !!! CHIP IS CORRUPT [X] \r\n");
-        LOG_ERROR("[X]  CHIP IS CORRUPT [X] ")
-        debugMsg("[X]  ALARM SET [X] \r\n");
+        debugMsg("[X] No specific BM*-280 ID !!! CHIP IS CORRUPT [X] \r\n");
+        LOG_ERROR("[X] CHIP IS CORRUPT [X] ")
+        debugMsg("[X] ALARM SET [X] \r\n");
         //PANIC FUNCTION !!!!
         return -1;
     }
@@ -138,11 +137,42 @@ int8_t BME280ChipID(void)
 int8_t BME280_SoftReset(void)
 {
     debugMsg("====================  BME280 SOFTRESET PROGRESS STARTED ============== \r\n");
-    uint8_t ptrData[] = {BME280_SOFTRESET_ADDR, BME280_SOFTRESET_VALUE};
-    size_t lenWrite = sizeof(ptrData);
+    size_t  lenSoftRst = sizeof(BME280_SOFTRESET_ADDR) + sizeof(BME280_SOFTRESET_VALUE);
+    uint8_t *ptrSoftRst = malloc(sizeof(*ptrSoftRst) * lenSoftRst);
 
-    i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenWrite, false);
-    debug2Val("[X]  Writing SoftReset:0x%02X with Value:0x%X [X] \r\n", ptrData[0], ptrData[1]);
+    /*== Check Memory ============================*/
+    if (ptrSoftRst == NULL) /*== FAIL, NO MEMORY ==*/
+    {
+        LOG_ERROR("[X] Fail, No Memory Allocation [X] ErrorCode: -1 [X] ");
+        debugVal("[X] Fail, No Memory Allocation [X] ErrorCode:%X [X] \r\n", BME280_E_NULL_PTR);
+    }
+    else if (ptrSoftRst == NULL)
+    {
+        LOG_ERROR("[X] Fail, No Memory Allocation [X] ErrorCode: -1 [X] ");
+        debugVal("[X] Fail, No Memory Allocation [X] ErrorCode:%X [X] \r\n", BME280_E_NULL_PTR);
+    }
+    else
+    {
+        __NOP();
+    }
+
+    *ptrSoftRst = BME280_SOFTRESET_ADDR;
+    *(ptrSoftRst+1)=BME280_SOFTRESET_VALUE;
+
+    i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrSoftRst, lenSoftRst, false);
+
+    if (i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrSoftRst, lenSoftRst, false) != lenSoftRst)
+    {
+        LOG_ERROR("[X] Softreset failed [X] ErrorCode: -2 [X] ");
+        debugVal("[X] Softreset failed [X] ErrorCode:%X [X] \r\n", BME280_E_DEV_NOT_FOUND);
+    }
+    else
+    {
+        debug2Val("[X] Writing SoftReset:0x%02X with Value:0x%X [X] \r\n", ptrSoftRst[0], ptrSoftRst[1]);
+    }
+
+    free(ptrSoftRst);
+
     return 0;
 }
 
@@ -174,10 +204,10 @@ int8_t BME280_SetMode(uint8_t deviceMode)
 
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrWrite, lenWrite, false);
     sleep_ms(10);
-    debugVal("[X]  Writing Mode Register:0x%02X [X] \r\n", (*ptrWrite));
+    debugVal("[X] Writing Mode Register:0x%02X [X] \r\n", (*ptrWrite));
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrRead, lenRead, false);
     sleep_ms(10);
-    debugVal("[X]  Reading Mode Register:0x%02X [X] \r\n", (*ptrRead));
+    debugVal("[X] Reading Mode Register:0x%02X [X] \r\n", (*ptrRead));
 
     status = *ptrRead & ~(BME280_MODE_MSK);
     status |= (deviceMode & BME280_MODE_MSK);
@@ -221,7 +251,7 @@ int8_t BME280_ReadMode(void)
     sleep_ms(10);
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenRead, false);
     sleep_ms(10);
-    debugVal("[X]  Reading Mode Register:0x%02X [X] \r\n", (*ptrData));
+    debugVal("[X] Reading Mode Register:0x%02X [X] \r\n", (*ptrData));
 
     return status;
 }
@@ -297,7 +327,7 @@ int8_t BME280_ReadStatus(void)
 int8_t BME280_ReadComp(void)
 {
     debugMsg("====================  BME280 COMP DATA READ STARTED ==================\r\n");
-    /* Table 16 : Compensation parameter storage, naming and data type */
+    /*== Table 16 : Compensation parameter storage, naming and data type ==*/
 
     ptrComp = &Comp;
 
@@ -309,22 +339,22 @@ int8_t BME280_ReadComp(void)
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, buffer, 24, true);
     sleep_ms(10);
 
-    ptrComp->dig_T1 = buffer[0] | (buffer[1] << 8); //0x88 / 0x89 dig_T1 [7:0] / [15:8] uint8_t
-    ptrComp->dig_T2 = buffer[2] | (buffer[3] << 8); //0x8A / 0x8B dig_T2 [7:0] / [15:8] int16_t
-    ptrComp->dig_T3 = buffer[4] | (buffer[5] << 8); //0x8C / 0x8D dig_T3 [7:0] / [15:8] int16_t
-    ptrComp->dig_P1 = buffer[6] | (buffer[7] << 8); //0x8E / 0x8F dig_P1 [7:0] / [15:8] uint16_t
-    ptrComp->dig_P2 = buffer[8] | (buffer[9] << 8); //0x90 / 0x91 dig_P2 [7:0] / [15:8] int16_t
+    ptrComp->dig_T1 = buffer[0] | (buffer[1] << 8); /*== 0x88 / 0x89 dig_T1 [7:0] / [15:8] uint8_t ==*/
+    ptrComp->dig_T2 = buffer[2] | (buffer[3] << 8); /*== 0x8A / 0x8B dig_T2 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_T3 = buffer[4] | (buffer[5] << 8); /*== 0x8C / 0x8D dig_T3 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_P1 = buffer[6] | (buffer[7] << 8); /*== 0x8E / 0x8F dig_P1 [7:0] / [15:8] uint16_t ==*/
+    ptrComp->dig_P2 = buffer[8] | (buffer[9] << 8); /*== 0x90 / 0x91 dig_P2 [7:0] / [15:8] int16_t ==*/
 
-    ptrComp->dig_P3 = buffer[10] | (buffer[11] << 8); //0x92 / 0x93 dig_P3 [7:0] / [15:8] int16_t
-    ptrComp->dig_P4 = buffer[12] | (buffer[13] << 8); //0x94 / 0x95 dig_P4 [7:0] / [15:8] int16_t
-    ptrComp->dig_P5 = buffer[14] | (buffer[15] << 8); //0x96 / 0x97 dig_P5 [7:0] / [15:8] int16_t
-    ptrComp->dig_P6 = buffer[16] | (buffer[17] << 8); //0x98 / 0x99 dig_P6 [7:0] / [15:8] int16_t
-    ptrComp->dig_P7 = buffer[18] | (buffer[19] << 8); //0x9A / 0x9B dig_P7 [7:0] / [15:8] int16_t
-    ptrComp->dig_P8 = buffer[20] | (buffer[21] << 8); //0x9C / 0x9D dig_P8 [7:0] / [15:8] int16_t
-    ptrComp->dig_P9 = buffer[22] | (buffer[23] << 8); //0x9E / 0x9F dig_P9 [7:0] / [15:8] int16_t
+    ptrComp->dig_P3 = buffer[10] | (buffer[11] << 8); /*== 0x92 / 0x93 dig_P3 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_P4 = buffer[12] | (buffer[13] << 8); /*== 0x94 / 0x95 dig_P4 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_P5 = buffer[14] | (buffer[15] << 8); /*== 0x96 / 0x97 dig_P5 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_P6 = buffer[16] | (buffer[17] << 8); /*== 0x98 / 0x99 dig_P6 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_P7 = buffer[18] | (buffer[19] << 8); /*== 0x9A / 0x9B dig_P7 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_P8 = buffer[20] | (buffer[21] << 8); /*== 0x9C / 0x9D dig_P8 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_P9 = buffer[22] | (buffer[23] << 8); /*== 0x9E / 0x9F dig_P9 [7:0] / [15:8] int16_t ==*/
 
     /*This Same Register-> BME280_HUMIDITY_CALIB_DATA_LEN-1 */
-    ptrComp->dig_H1 = buffer[24]; //0xA1 dig_H1 [7:0] uint8_t
+    ptrComp->dig_H1 = buffer[24];   /*== 0xA1 dig_H1 [7:0] uint8_t==*/
 
     *ptrData = BME280_REGISTER_DIG_H2;
     uint8_t dataLen = BME280_HUMIDITY_CALIB_DATA_LEN - 1;
@@ -333,12 +363,12 @@ int8_t BME280_ReadComp(void)
     sleep_ms(10);
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, &buffer[25], dataLen, true);
     sleep_ms(10);
-    //memset(&buffer[25], 0, 8);
-    ptrComp->dig_H2 = buffer[25] | (buffer[26] << 8);             //0xE1 / 0xE2 dig_H2 [7:0] / [15:8] int16_t
-    ptrComp->dig_H3 = buffer[27];                                 //0xE3 dig_H3 [7:0] uint8_t
-    ptrComp->dig_H4 = buffer[28] << 4 | ((buffer[29]) & ~(0x78)); //0xE4 / 0xE5[3:0] dig_H4 [11:4] / [3:0] int16_t
-    ptrComp->dig_H5 = (buffer[30] >> 4) | (buffer[31] << 4);      //0xE5[7:4] / 0xE6 dig_H5 [3:0] / [11:4] int16_t
-    ptrComp->dig_H6 = buffer[32];                                 //0xE7 dig_H6 int8_t
+    /*==memset(&buffer[25], 0, 8);
+    ptrComp->dig_H2 = buffer[25] | (buffer[26] << 8);             /*== 0xE1 / 0xE2 dig_H2 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_H3 = buffer[27];                                 /*== 0xE3 dig_H3 [7:0] uint8_t ==*/
+    ptrComp->dig_H4 = buffer[28] << 4 | ((buffer[29]) & ~(0x78)); /*== 0xE4 / 0xE5[3:0] dig_H4 [11:4] / [3:0] int16_t ==*/
+    ptrComp->dig_H5 = (buffer[30] >> 4) | (buffer[31] << 4);      /*== 0xE5[7:4] / 0xE6 dig_H5 [3:0] / [11:4] int16_t ==*/
+    ptrComp->dig_H6 = buffer[32];                                 /*== 0xE7 dig_H6 int8_t ==*/
     memset(buffer, '\0', 33);
     printCompParam(ptrComp);
 
@@ -362,24 +392,24 @@ int8_t BME280_ReadComp(void)
  */
 void printCompParam(struct CompData *ptrComp)
 {
-    debugVal("[X]  dig_T1:%d [X] \r\n", ptrComp->dig_T1);
-    debugVal("[X]  dig_T2:%d [X] \r\n", ptrComp->dig_T2);
-    debugVal("[X]  dig_T3:%d [X] \r\n", ptrComp->dig_T3);
-    debugVal("[X]  dig_P1:%d [X] \r\n", ptrComp->dig_P1);
-    debugVal("[X]  dig_P2:%d [X] \r\n", ptrComp->dig_P2);
-    debugVal("[X]  dig_P3:%d [X] \r\n", ptrComp->dig_P3);
-    debugVal("[X]  dig_P4:%d [X] \r\n", ptrComp->dig_P4);
-    debugVal("[X]  dig_P5:%d [X] \r\n", ptrComp->dig_P5);
-    debugVal("[X]  dig_P6:%d [X] \r\n", ptrComp->dig_P6);
-    debugVal("[X]  dig_P7:%d [X] \r\n", ptrComp->dig_P7);
-    debugVal("[X]  dig_P8:%d [X] \r\n", ptrComp->dig_P8);
-    debugVal("[X]  dig_P9:%d [X] \r\n", ptrComp->dig_P9);
-    debugVal("[X]  dig_H1:%d [X] \r\n", ptrComp->dig_H1);
-    debugVal("[X]  dig_H2:%d [X] \r\n", ptrComp->dig_H2);
-    debugVal("[X]  dig_H3:%d [X] \r\n", ptrComp->dig_H3);
-    debugVal("[X]  dig_H4:%d [X] \r\n", ptrComp->dig_H4);
-    debugVal("[X]  dig_H5:%d [X] \r\n", ptrComp->dig_H5);
-    debugVal("[X]  dig_H6:%d [X] \r\n", ptrComp->dig_H6);
+    debugVal("[X] dig_T1:%d [X] \r\n", ptrComp->dig_T1);
+    debugVal("[X] dig_T2:%d [X] \r\n", ptrComp->dig_T2);
+    debugVal("[X] dig_T3:%d [X] \r\n", ptrComp->dig_T3);
+    debugVal("[X] dig_P1:%d [X] \r\n", ptrComp->dig_P1);
+    debugVal("[X] dig_P2:%d [X] \r\n", ptrComp->dig_P2);
+    debugVal("[X] dig_P3:%d [X] \r\n", ptrComp->dig_P3);
+    debugVal("[X] dig_P4:%d [X] \r\n", ptrComp->dig_P4);
+    debugVal("[X] dig_P5:%d [X] \r\n", ptrComp->dig_P5);
+    debugVal("[X] dig_P6:%d [X] \r\n", ptrComp->dig_P6);
+    debugVal("[X] dig_P7:%d [X] \r\n", ptrComp->dig_P7);
+    debugVal("[X] dig_P8:%d [X] \r\n", ptrComp->dig_P8);
+    debugVal("[X] dig_P9:%d [X] \r\n", ptrComp->dig_P9);
+    debugVal("[X] dig_H1:%d [X] \r\n", ptrComp->dig_H1);
+    debugVal("[X] dig_H2:%d [X] \r\n", ptrComp->dig_H2);
+    debugVal("[X] dig_H3:%d [X] \r\n", ptrComp->dig_H3);
+    debugVal("[X] dig_H4:%d [X] \r\n", ptrComp->dig_H4);
+    debugVal("[X] dig_H5:%d [X] \r\n", ptrComp->dig_H5);
+    debugVal("[X] dig_H6:%d [X] \r\n", ptrComp->dig_H6);
 }
 /*!
 **************************************************************
@@ -408,15 +438,15 @@ void BME280_SetStandby(uint8_t tsb)
 
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenWrite, false);
     sleep_ms(10);
-    debugVal("[X]  Writing STANDBY Register:0x%02X [X] \r\n", (*ptrData));
+    debugVal("[X] Writing STANDBY Register:0x%02X [X] \r\n", (*ptrData));
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenRead, false);
     sleep_ms(10);
-    debugVal("[X]  Reading STANDBY Register:0x%02X [X] \r\n", (*ptrData));
+    debugVal("[X] Reading STANDBY Register:0x%02X [X] \r\n", (*ptrData));
 
     status = *ptrData & ~BME280_STBY_MSK;
     status |= tsb & BME280_STBY_MSK;
     mode = status;
-    debugVal("[X]  Setting STANDBY:0x%02X [X] \r\n", status);
+    debugVal("[X] Setting STANDBY:0x%02X [X] \r\n", status);
 
     uint8_t ptrWriteMode[] = {BME280_CONFIG_ADDR, mode};
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrWriteMode, 2, false);
