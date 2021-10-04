@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+
 #include "bme280.h"
 #include "hardware/i2c.h"
 #include "waterpipe.h" /* Insert for Error Log Function! */
@@ -137,7 +138,7 @@ int8_t BME280ChipID(void)
 int8_t BME280_SoftReset(void)
 {
     debugMsg("====================  BME280 SOFTRESET PROGRESS STARTED  ============= \r\n");
-    size_t  lenSoftRst  = sizeof(BME280_SOFTRESET_ADDR) + sizeof(BME280_SOFTRESET_VALUE);
+    size_t lenSoftRst = sizeof(BME280_SOFTRESET_ADDR) + sizeof(BME280_SOFTRESET_VALUE);
     uint8_t *ptrSoftRst = malloc(sizeof(*ptrSoftRst) * lenSoftRst);
 
     /*== MEMORY CHECK ============================*/
@@ -156,8 +157,8 @@ int8_t BME280_SoftReset(void)
         __NOP();
     }
 
-    *ptrSoftRst     = BME280_SOFTRESET_ADDR;
-    *(ptrSoftRst+1) = BME280_SOFTRESET_VALUE;
+    *ptrSoftRst = BME280_SOFTRESET_ADDR;
+    *(ptrSoftRst + 1) = BME280_SOFTRESET_VALUE;
 
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrSoftRst, lenSoftRst, false);
 
@@ -339,11 +340,11 @@ int8_t BME280_ReadComp(void)
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, buffer, 25, true);
     sleep_ms(10);
 
-    ptrComp->dig_T1 = buffer[0] | (buffer[1] << 8); /*== 0x88 / 0x89 dig_T1 [7:0] / [15:8] uint8_t ==*/
-    ptrComp->dig_T2 = (int16_t)(buffer[2] | (buffer[3] << 8)); /*== 0x8A / 0x8B dig_T2 [7:0] / [15:8] int16_t ==*/
-    ptrComp->dig_T3 = (int16_t)(buffer[4] | (buffer[5] << 8)); /*== 0x8C / 0x8D dig_T3 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_T1 = buffer[0] | (buffer[1] << 8);             /*== 0x88 / 0x89 dig_T1 [7:0] / [15:8] uint8_t ==*/
+    ptrComp->dig_T2 = (int16_t)(buffer[2] | (buffer[3] << 8));  /*== 0x8A / 0x8B dig_T2 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_T3 = (int16_t)(buffer[4] | (buffer[5] << 8));  /*== 0x8C / 0x8D dig_T3 [7:0] / [15:8] int16_t ==*/
     ptrComp->dig_P1 = (uint16_t)(buffer[6] | (buffer[7] << 8)); /*== 0x8E / 0x8F dig_P1 [7:0] / [15:8] uint16_t ==*/
-    ptrComp->dig_P2 = (int16_t)(buffer[8] | (buffer[9] << 8)); /*== 0x90 / 0x91 dig_P2 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_P2 = (int16_t)(buffer[8] | (buffer[9] << 8));  /*== 0x90 / 0x91 dig_P2 [7:0] / [15:8] int16_t ==*/
 
     ptrComp->dig_P3 = (int16_t)(buffer[10] | (buffer[11] << 8)); /*== 0x92 / 0x93 dig_P3 [7:0] / [15:8] int16_t ==*/
     ptrComp->dig_P4 = (int16_t)(buffer[12] | (buffer[13] << 8)); /*== 0x94 / 0x95 dig_P4 [7:0] / [15:8] int16_t ==*/
@@ -354,7 +355,7 @@ int8_t BME280_ReadComp(void)
     ptrComp->dig_P9 = (int16_t)(buffer[22] | (buffer[23] << 8)); /*== 0x9E / 0x9F dig_P9 [7:0] / [15:8] int16_t ==*/
 
     /*This Same Register-> BME280_HUMIDITY_CALIB_DATA_LEN-1 */
-    ptrComp->dig_H1 = buffer[24];   /*== 0xA1 dig_H1 [7:0] uint8_t==*/
+    ptrComp->dig_H1 = buffer[24]; /*== 0xA1 dig_H1 [7:0] uint8_t==*/
 
     *ptrData = BME280_REGISTER_DIG_H2;
     uint8_t dataLen = BME280_HUMIDITY_CALIB_DATA_LEN - 1;
@@ -364,11 +365,11 @@ int8_t BME280_ReadComp(void)
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, &buffer[25], dataLen, true);
     sleep_ms(10);
 
-    ptrComp->dig_H2 = (int16_t)buffer[25] | (buffer[26] << 8);          /*== 0xE1 / 0xE2 dig_H2 [7:0] / [15:8] int16_t ==*/
-    ptrComp->dig_H3 = buffer[27];                                       /*== 0xE3 dig_H3 [7:0] uint8_t ==*/
-    ptrComp->dig_H4 = (int16_t)(buffer[28] << 4 | (((buffer[29]) & ~(0x78)))); /*== 0xE4 / 0xE5[3:0] dig_H4 [11:4] / [3:0] int16_t ==*/
+    ptrComp->dig_H2 = (int16_t)buffer[25] | (buffer[26] << 8);                      /*== 0xE1 / 0xE2 dig_H2 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_H3 = buffer[27];                                                   /*== 0xE3 dig_H3 [7:0] uint8_t ==*/
+    ptrComp->dig_H4 = (int16_t)(buffer[28] << 4 | (((buffer[29]) & ~(0x78))));      /*== 0xE4 / 0xE5[3:0] dig_H4 [11:4] / [3:0] int16_t ==*/
     ptrComp->dig_H5 = (int16_t)(((buffer[30] & ~(0xF0)) >> 4) | (buffer[31] << 4)); /*== 0xE5[7:4] / 0xE6 dig_H5 [3:0] / [11:4] int16_t ==*/
-    ptrComp->dig_H6 = (int8_t)(buffer[32]);                                       /*== 0xE7 dig_H6 int8_t ==*/
+    ptrComp->dig_H6 = (int8_t)(buffer[32]);                                         /*== 0xE7 dig_H6 int8_t ==*/
     memset(buffer, '\0', sizeof(buffer));
     printCompParam(ptrComp);
 
@@ -796,7 +797,6 @@ void BME280_RawData(void)
     debugVal("[X] Temperature:%X \r\n", temp);
     debugVal("[X] Pressure:%X  \r\n", press);
     debugVal("[X] Humidity:%X  \r\n", hum);
-    
 }
 
 /*!
@@ -827,7 +827,7 @@ int32_t BME280_CompTemp(void)
     int32_t temperature_max = 8500;
 
     var1 = (((adc_T >> 3) - ((int32_t)Comp.dig_T1 << 1)) * ((int32_t)Comp.dig_T2)) >> 11;
-    var2 = ((((adc_T >> 4) - ((int32_t)Comp.dig_T1)) * ( (adc_T >> 4) - ( (int32_t)Comp.dig_T1)) >> 12) * ((int32_t)Comp.dig_T3)) >> 14;
+    var2 = ((((adc_T >> 4) - ((int32_t)Comp.dig_T1)) * ((adc_T >> 4) - ((int32_t)Comp.dig_T1)) >> 12) * ((int32_t)Comp.dig_T3)) >> 14;
     t_fine = var1 + var2;
     temperature = (t_fine * 5 + 128) >> 8;
 
@@ -866,7 +866,6 @@ uint32_t BME280_CompPressure(void)
     int32_t var1;
     int32_t var2;
     int32_t pressure;
-
 
     var1 = (((int32_t)t_fine) >> 1) - (int32_t)64000;
     var2 = (((var1 >> 2) * (var1 >> 2)) >> 11) * ((int32_t)Comp.dig_P6);
@@ -912,12 +911,11 @@ uint32_t BME280_CompPressure(void)
  */
 double BME280_CompHumDouble(void)
 {
-    int32_t adc_H=hum;
+    int32_t adc_H = hum;
     double var_H;
     var_H = (((double)t_fine) - 76800.0);
     var_H = (adc_H - (((double)Comp.dig_H4) * 64.0 + ((double)Comp.dig_H5) / 16384.0 * var_H)) *
-            (((double)Comp.dig_H2) / 65536.0 * (1.0 + ((double)Comp.dig_H6) / 67108864.0 * var_H * \
-             (1.0 + ((double)Comp.dig_H3) / 67108864.0 * var_H)));
+            (((double)Comp.dig_H2) / 65536.0 * (1.0 + ((double)Comp.dig_H6) / 67108864.0 * var_H * (1.0 + ((double)Comp.dig_H3) / 67108864.0 * var_H)));
     var_H = var_H * (1.0 - ((double)Comp.dig_H1) * var_H / 524288.0);
     if (var_H > 100.0)
     {
@@ -936,9 +934,10 @@ uint32_t BME280_CompHumInt32(void)
     int32_t adc_H = hum;
     int32_t var_H;
     var_H = (t_fine - ((int32_t)76800));
-    var_H = (((((adc_H << 14) - (((int32_t)Comp.dig_H4) << 20) - (((int32_t)Comp.dig_H5) * var_H)) + \
-        ((int32_t)16384)) >> 15) * (((((((var_H * ((int32_t)Comp.dig_H6)) >> 10) * (((var_H *((int32_t)Comp.dig_H3)) >> 11) + ((int32_t)32768))) >> 10) + \
-        ((int32_t)2097152)) * ((int32_t)Comp.dig_H2) + 8192) >> 14));
+    var_H = (((((adc_H << 14) - (((int32_t)Comp.dig_H4) << 20) - (((int32_t)Comp.dig_H5) * var_H)) +
+               ((int32_t)16384)) >>
+              15) *
+             (((((((var_H * ((int32_t)Comp.dig_H6)) >> 10) * (((var_H * ((int32_t)Comp.dig_H3)) >> 11) + ((int32_t)32768))) >> 10) + ((int32_t)2097152)) * ((int32_t)Comp.dig_H2) + 8192) >> 14));
     var_H = (var_H - (((((var_H >> 15) * (var_H >> 15)) >> 7) * ((int32_t)Comp.dig_H1)) >> 4));
     var_H = (var_H < 0 ? 0 : var_H);
     var_H = (var_H > 419430400 ? 419430400 : var_H);
@@ -965,170 +964,170 @@ uint32_t BME280_CompHumInt32(void)
 **************************************************************
  */
 
-        void BME280_MeasurementTime(void)
-        {
-            float32_t timeTyp;
-            float32_t timeMax;
-            uint8_t osTime;
-            uint8_t osHum;
-            uint8_t osPress;
-            float32_t stdByMode;
+void BME280_MeasurementTime(void)
+{
+    float32_t timeTyp;
+    float32_t timeMax;
+    uint8_t osTime;
+    uint8_t osHum;
+    uint8_t osPress;
+    float32_t stdByMode;
 
-            switch (ovsTime)
-            {
-            case BME280_OSRS_T_SKIP:
-                osTime = 0;
-                break;
-            case BME280_OSRS_T_x1:
-                osTime = 1;
-                break;
-            case BME280_OSRS_T_x2:
-                osTime = 2;
-                break;
-            case BME280_OSRS_T_x4:
-                osTime = 4;
-                break;
-            case BME280_OSRS_T_x8:
-                osTime = 8;
-                break;
-            case BME280_OSRS_T_x16:
-                osTime = 16;
-                break;
+    switch (ovsTime)
+    {
+    case BME280_OSRS_T_SKIP:
+        osTime = 0;
+        break;
+    case BME280_OSRS_T_x1:
+        osTime = 1;
+        break;
+    case BME280_OSRS_T_x2:
+        osTime = 2;
+        break;
+    case BME280_OSRS_T_x4:
+        osTime = 4;
+        break;
+    case BME280_OSRS_T_x8:
+        osTime = 8;
+        break;
+    case BME280_OSRS_T_x16:
+        osTime = 16;
+        break;
 
-            default:
-                break;
-            }
+    default:
+        break;
+    }
 
-            switch (ovsHumidity)
-            {
-            case BME280_OSRS_H_SKIP:
-                osHum = 0;
-                break;
-            case BME280_OSRS_H_x1:
-                osHum = 1;
-                break;
-            case BME280_OSRS_H_x2:
-                osHum = 2;
-                break;
-            case BME280_OSRS_H_x4:
-                osHum = 4;
-                break;
-            case BME280_OSRS_H_x8:
-                osHum = 8;
-                break;
-            case BME280_OSRS_H_x16:
-                osHum = 16;
-                break;
+    switch (ovsHumidity)
+    {
+    case BME280_OSRS_H_SKIP:
+        osHum = 0;
+        break;
+    case BME280_OSRS_H_x1:
+        osHum = 1;
+        break;
+    case BME280_OSRS_H_x2:
+        osHum = 2;
+        break;
+    case BME280_OSRS_H_x4:
+        osHum = 4;
+        break;
+    case BME280_OSRS_H_x8:
+        osHum = 8;
+        break;
+    case BME280_OSRS_H_x16:
+        osHum = 16;
+        break;
 
-            default:
-                break;
-            }
+    default:
+        break;
+    }
 
-            switch (ovsPressure)
-            {
-            case BME280_OSRS_P_SKIP:
-                osPress = 0;
-                break;
-            case BME280_OSRS_P_x1:
-                osPress = 1;
-                break;
-            case BME280_OSRS_P_x2:
-                osPress = 2;
-                break;
-            case BME280_OSRS_P_x4:
-                osPress = 4;
-                break;
-            case BME280_OSRS_P_x8:
-                osPress = 8;
-                break;
-            case BME280_OSRS_P_x16:
-                osPress = 16;
-                break;
+    switch (ovsPressure)
+    {
+    case BME280_OSRS_P_SKIP:
+        osPress = 0;
+        break;
+    case BME280_OSRS_P_x1:
+        osPress = 1;
+        break;
+    case BME280_OSRS_P_x2:
+        osPress = 2;
+        break;
+    case BME280_OSRS_P_x4:
+        osPress = 4;
+        break;
+    case BME280_OSRS_P_x8:
+        osPress = 8;
+        break;
+    case BME280_OSRS_P_x16:
+        osPress = 16;
+        break;
 
-            default:
-                break;
-            }
+    default:
+        break;
+    }
 
-            timeTyp = 1 + (2 * osTime) + (2 * osPress + 0.5) + (2 * osHum + 0.5);
-            timeMax = 1.25 + (2.3 * osTime) + (2.3 * osPress + 0.5) + (2.3 * osHum + 0.575);
+    timeTyp = 1 + (2 * osTime) + (2 * osPress + 0.5) + (2 * osHum + 0.5);
+    timeMax = 1.25 + (2.3 * osTime) + (2.3 * osPress + 0.5) + (2.3 * osHum + 0.575);
 
-            switch (stdBy)
-            {
-            case BME280_STBY_0_5:
-                stdByMode = 0.5;
-                break;
-            case BME280_STBY_62_5:
-                stdByMode = 62.5;
-                break;
-            case BME280_STBY_125:
-                stdByMode = 125;
-                break;
-            case BME280_STBY_250:
-                stdByMode = 250;
-                break;
-            case BME280_STBY_500:
-                stdByMode = 5;
-                break;
-            case BME280_STBY_1000:
-                stdByMode = 1000;
-                break;
-            case BME280_STBY_10:
-                stdByMode = 10;
-                break;
-            case BME280_STBY_20:
-                stdByMode = 20;
-                break;
+    switch (stdBy)
+    {
+    case BME280_STBY_0_5:
+        stdByMode = 0.5;
+        break;
+    case BME280_STBY_62_5:
+        stdByMode = 62.5;
+        break;
+    case BME280_STBY_125:
+        stdByMode = 125;
+        break;
+    case BME280_STBY_250:
+        stdByMode = 250;
+        break;
+    case BME280_STBY_500:
+        stdByMode = 5;
+        break;
+    case BME280_STBY_1000:
+        stdByMode = 1000;
+        break;
+    case BME280_STBY_10:
+        stdByMode = 10;
+        break;
+    case BME280_STBY_20:
+        stdByMode = 20;
+        break;
 
-            default:
-                break;
-            }
+    default:
+        break;
+    }
 
-            float32_t odrMs;
-            if (measureMode == BME280_NORMAL_MODE)
-            {
-                odrMs = 1000 / (timeMax + stdByMode);
-            }
-            else if (measureMode == BME280_FORCED_MODE)
-            {
-                odrMs = 1000 / (timeMax);
-            }
-            else
-            {
-                __NOP();
-            }
+    float32_t odrMs;
+    if (measureMode == BME280_NORMAL_MODE)
+    {
+        odrMs = 1000 / (timeMax + stdByMode);
+    }
+    else if (measureMode == BME280_FORCED_MODE)
+    {
+        odrMs = 1000 / (timeMax);
+    }
+    else
+    {
+        __NOP();
+    }
 
-            uint32_t stepRsp = 0;
+    uint32_t stepRsp = 0;
 
-            switch (filtCoeff)
-            {
-            case BME280_FILTER_OFF:
-                stepRsp = 1;
-                break;
-            case BME280_FILTER_2:
-                stepRsp = 2;
-                break;
-            case BME280_FILTER_4:
-                stepRsp = 5;
-                break;
-            case BME280_FILTER_8:
-                stepRsp = 11;
-                break;
-            case BME280_FILTER_16:
-                stepRsp = 22;
-                break;
+    switch (filtCoeff)
+    {
+    case BME280_FILTER_OFF:
+        stepRsp = 1;
+        break;
+    case BME280_FILTER_2:
+        stepRsp = 2;
+        break;
+    case BME280_FILTER_4:
+        stepRsp = 5;
+        break;
+    case BME280_FILTER_8:
+        stepRsp = 11;
+        break;
+    case BME280_FILTER_16:
+        stepRsp = 22;
+        break;
 
-            default:
-                break;
-            }
+    default:
+        break;
+    }
 
-            float32_t rspTimeIIR;
-            rspTimeIIR = 1000 * stepRsp / odrMs;
-            debugMsg("====================  BME280 RESPONSE TIMING STARTED =================\r\n");
-            debug2Val("[X] MeasurementRate: %f Hz\n[X] IIR-ResponseTime: %.2f ms\n", odrMs, rspTimeIIR);
-            debug2Val("[X] Typ. MeasurementTime: %f ms\n[X] Max. MeasurementTime: %.2f ms\n", timeTyp, timeMax);
-        }
+    float32_t rspTimeIIR;
+    rspTimeIIR = 1000 * stepRsp / odrMs;
+    debugMsg("====================  BME280 RESPONSE TIMING STARTED =================\r\n");
+    debug2Val("[X] MeasurementRate: %f Hz\n[X] IIR-ResponseTime: %.2f ms\n", odrMs, rspTimeIIR);
+    debug2Val("[X] Typ. MeasurementTime: %f ms\n[X] Max. MeasurementTime: %.2f ms\n", timeTyp, timeMax);
+}
 
-void BME280_DataRead(int32_t temperature, uint32_t pressure,uint32_t humidity)
+void BME280_DataRead(int32_t temperature, uint32_t pressure, uint32_t humidity)
 {
     debugMsg("====================  BME280 SENSOR DATA READING STARTED =============\r\n");
     temperature = BME280_CompTemp();

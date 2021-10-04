@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <math.h>
+
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
 #include "hardware/i2c.h"
@@ -50,8 +51,7 @@ int main()
     gpio_set_function(PICO_DEFAULT_I2C_SCL_PIN, GPIO_FUNC_I2C);
     gpio_pull_up(PICO_DEFAULT_I2C_SDA_PIN);
     gpio_pull_up(PICO_DEFAULT_I2C_SCL_PIN);
-    bi_decl(bi_2pins_with_func(PICO_DEFAULT_I2C_SDA_PIN,
-                               PICO_DEFAULT_I2C_SCL_PIN, GPIO_FUNC_I2C));
+    bi_decl(bi_2pins_with_func(PICO_DEFAULT_I2C_SDA_PIN, PICO_DEFAULT_I2C_SCL_PIN, GPIO_FUNC_I2C));
     debugMsg("[X] I2C HARDWARE SUCCESSFULLY SET [X]\r\n");
     sleep_ms(1000);
 #endif
