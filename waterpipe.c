@@ -26,7 +26,6 @@
 #include "bme280.h"
 #include "waterpipe.h"
 
-
 int main()
 {
     stdio_init_all();
@@ -40,7 +39,8 @@ int main()
     debugMsg("==================\r\n");
     debugMsg("INIT I2C HARDWARE: ");
 
-#if !defined(i2c_default) || !defined(PICO_DEFAULT_I2C_SDA_PIN) || !defined(PICO_DEFAULT_I2C_SCL_PIN)
+#if !defined(i2c_default) || !defined(PICO_DEFAULT_I2C_SDA_PIN) || \
+    !defined(PICO_DEFAULT_I2C_SCL_PIN)
 #warning Programm requires a board with I2C pins
 #error "Seems hardware/i2c.h" is missing
     DebugMsg("Default I2C pins were not defined\r\n");
@@ -50,7 +50,8 @@ int main()
     gpio_set_function(PICO_DEFAULT_I2C_SCL_PIN, GPIO_FUNC_I2C);
     gpio_pull_up(PICO_DEFAULT_I2C_SDA_PIN);
     gpio_pull_up(PICO_DEFAULT_I2C_SCL_PIN);
-    bi_decl(bi_2pins_with_func(PICO_DEFAULT_I2C_SDA_PIN, PICO_DEFAULT_I2C_SCL_PIN, GPIO_FUNC_I2C));
+    bi_decl(bi_2pins_with_func(PICO_DEFAULT_I2C_SDA_PIN,
+                               PICO_DEFAULT_I2C_SCL_PIN, GPIO_FUNC_I2C));
     debugMsg("[X] I2C HARDWARE SUCCESSFULLY SET [X]\r\n");
     sleep_ms(1000);
 #endif
@@ -82,15 +83,14 @@ int main()
 
     if (gpio_is_dir_out(LED) != GPIO_OUT)
     {
-        debugMsg("[X] CHECK YOUR DEFAULT LED CONFIGURATION OF THE BOARD [X]\r\n");
+        debugMsg(
+            "[X] CHECK YOUR DEFAULT LED CONFIGURATION OF THE BOARD [X]\r\n");
     }
     else
     {
         __NOP();
     }
 #endif
-
-
 
     debugMsg("[X] GPIO HARDWARE SUCCESSFULLY SET [X]\r\n");
     sleep_ms(1000);
@@ -99,8 +99,6 @@ int main()
     debugModMsg;
     debugMsg("==========================\r\n");
     sleep_ms(1000);
-
-
 
     /*=========================================================*/
     /*== BME280 SETTINGS ======================================*/
@@ -120,7 +118,6 @@ int main()
     BME280_ReadMode();
     BME280_ReadStandby();
     BME280_Read_OSRS_h();
-  
 
     while (true)
     {
@@ -128,15 +125,15 @@ int main()
         BME280_RawData();
 
         int32_t bmeTemp;
-        uint32_t bmePress; 
+        uint32_t bmePress;
         uint32_t bmeHum;
         BME280_DataRead(bmeTemp, bmePress, bmeHum);
         BME280_MeasurementTime();
 
         toggleLed();
-        
+
         /*== TEST FUNCTION == */
-       /*  while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)
+        /*  while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)
         {
             debugMsg("=================================== STORING\n");
             //return -1;
@@ -149,49 +146,59 @@ int main()
 
 /*!
 **************************************************************
- * @brief 
- *
- * @param[in]  : 
- *
- * @return Result of API execution status
- *
- * @retval = 0 -> Success.
- * @retval > 0 -> Warning.
- * @retval < 0 -> Fail.
- *
- * 
+* @brief
+*
+* @param[in]  :
+*
+* @return Result of API execution status
+*
+* @retval = 0 -> Success.
+* @retval > 0 -> Warning.
+* @retval < 0 -> Fail.
+*
+*
 **************************************************************
- */
+*/
 void toggleLed()
 {
     if (gpio_get_out_level(LED) != true)
     {
-        
+        gpio_put(TEMPERATURE_OK, true);
+        gpio_put(PRESSURE_OK, true);
+        gpio_put(HUMIDITY_OK, true);
+        gpio_put(WATER_TEMP_OK, true);
+        gpio_put(PRESSURE_FSR_OK, true);
+        gpio_put(WATER_LEVEL_OK, true);
         gpio_put(LED, true);
         debugMsg("[X] LED ON\r\n");
     }
     else
     {
-        
+        gpio_put(TEMPERATURE_OK, false);
+        gpio_put(PRESSURE_OK, false);
+        gpio_put(HUMIDITY_OK, false);
+        gpio_put(WATER_TEMP_OK, false);
+        gpio_put(PRESSURE_FSR_OK, false);
+        gpio_put(WATER_LEVEL_OK, false);
         gpio_put(LED, false);
         debugMsg("[X] LED OFF\r\n");
     }
 }
 /*!
 **************************************************************
- * @brief 
- *
- * @param[in]  : 
- *
- * @return Result of API execution status
- *
- * @retval = 0 -> Success.
- * @retval > 0 -> Warning.
- * @retval < 0 -> Fail.
- *
- * 
+* @brief
+*
+* @param[in]  :
+*
+* @return Result of API execution status
+*
+* @retval = 0 -> Success.
+* @retval > 0 -> Warning.
+* @retval < 0 -> Fail.
+*
+*
 **************************************************************
- */
+*/
 void debugTerm(void)
 {
     debugMsg("\n\n======================================================================\r\n");
@@ -200,17 +207,16 @@ void debugTerm(void)
 }
 /*!
 **************************************************************
- * @brief 
- *
- * @param[in]  : 
- *
- * @return Result of API execution status
- *
- * @retval = 0 -> Success.
- * @retval > 0 -> Warning.
- * @retval < 0 -> Fail.
- *
- * 
+* @brief
+*
+* @param[in]  :
+*
+* @return Result of API execution status
+*
+* @retval = 0 -> Success.
+* @retval > 0 -> Warning.
+* @retval < 0 -> Fail.
+*
+*
 **************************************************************
- */
-
+*/
