@@ -25,8 +25,18 @@
 /* DISABLE GoTo */
 #pragma GCC poison goto
 
+/*=========================================================*/
+/*== GPIO MACROS ==========================================*/
+/*=========================================================*/
+
 /* SET GPIO MACROS */
 #define LED 25
+#define TEMPERATURE_OK  9
+#define PRESSURE_OK     10
+#define HUMIDITY_OK     11
+#define WATER_TEMP_OK   12
+#define PRESSURE_FSR_OK 13
+#define WATER_LEVEL_OK  14
 
 /* SET USER __NOP() MACRO */
 #define __NOP() __asm("NOP");
@@ -38,12 +48,12 @@
 /*== DEBUG DEFINITION =====================================*/
 /*=========================================================*/
 #if DEBUG == 1
-#define debugModMsg printf("-- DEBUGGING MODE IS ON --\n")
+#define debugModMsg printf("[X] DEBUGGING MODE IS ON [X]\r\n")
 #define debugMsg(x) printf(x)
 #define debugVal(x, y) printf(x, y)
 #define debug2Val(x, y, z) printf(x, y, z)
 #else
-#define debugModMsg printf("-- DEBUGGING MODE IS OFF--\n")
+#define debugModMsg printf("[X] DEBUGGING MODE IS OFF[X]\r\n")
 #define debugMsg(x)
 #define debugVal(x, y)
 #define debug2Val(x, y, z)

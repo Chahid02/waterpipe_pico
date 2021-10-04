@@ -59,6 +59,13 @@ int main()
     /*== GPIO SETTINGS ========================================*/
     /*=========================================================*/
     gpio_init(LED);
+    gpio_init(TEMPERATURE_OK);
+    gpio_init(PRESSURE_OK);
+    gpio_init(HUMIDITY_OK);
+    gpio_init(WATER_TEMP_OK);
+    gpio_init(PRESSURE_FSR_OK);
+    gpio_init(WATER_LEVEL_OK);
+
     debugMsg("==================\r\n");
     debugMsg("INIT GPIO HARDWARE: ");
 
@@ -66,6 +73,13 @@ int main()
 #warning Programm requires a board with a regular LED
 #else
     gpio_set_dir(LED, GPIO_OUT);
+    gpio_set_dir(TEMPERATURE_OK, GPIO_OUT);
+    gpio_set_dir(PRESSURE_OK, GPIO_OUT);
+    gpio_set_dir(HUMIDITY_OK, GPIO_OUT);
+    gpio_set_dir(WATER_TEMP_OK, GPIO_OUT);
+    gpio_set_dir(PRESSURE_FSR_OK, GPIO_OUT);
+    gpio_set_dir(WATER_LEVEL_OK, GPIO_OUT);
+
     if (gpio_is_dir_out(LED) != GPIO_OUT)
     {
         debugMsg("[X] CHECK YOUR DEFAULT LED CONFIGURATION OF THE BOARD [X]\r\n");
@@ -75,6 +89,9 @@ int main()
         __NOP();
     }
 #endif
+
+
+
     debugMsg("[X] GPIO HARDWARE SUCCESSFULLY SET [X]\r\n");
     sleep_ms(1000);
     debugMsg("==========================\r\n");
@@ -110,17 +127,20 @@ int main()
         debugTerm();
         BME280_RawData();
 
-        BME280_DataRead();
+        int32_t bmeTemp;
+        uint32_t bmePress; 
+        uint32_t bmeHum;
+        BME280_DataRead(bmeTemp, bmePress, bmeHum);
         BME280_MeasurementTime();
 
         toggleLed();
-
+        
         /*== TEST FUNCTION == */
-        while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)
+       /*  while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)
         {
             debugMsg("=================================== STORING\n");
             //return -1;
-        };
+        }; */
 
         sleep_ms(1000);
     }
@@ -146,11 +166,13 @@ void toggleLed()
 {
     if (gpio_get_out_level(LED) != true)
     {
+        
         gpio_put(LED, true);
         debugMsg("[X] LED ON\r\n");
     }
     else
     {
+        
         gpio_put(LED, false);
         debugMsg("[X] LED OFF\r\n");
     }
@@ -176,3 +198,30 @@ void debugTerm(void)
     debugMsg("======================== DEBUG TERMINAL===============================\r\n");
     debugMsg("======================================================================\r\n\n");
 }
+/*!
+**************************************************************
+ * @brief 
+ *
+ * @param[in]  : 
+ *
+ * @return Result of API execution status
+ *
+ * @retval = 0 -> Success.
+ * @retval > 0 -> Warning.
+ * @retval < 0 -> Fail.
+ *
+ * 
+**************************************************************
+ */
+/* void toggleLed()
+{
+   switch (expression)
+   {
+   case /* constant-expression */:
+       /* code */
+       break;
+   
+   default:
+       break;
+   }
+} */

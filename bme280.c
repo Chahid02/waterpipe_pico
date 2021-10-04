@@ -336,7 +336,7 @@ int8_t BME280_ReadComp(void)
 
     i2c_write_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, 1, false);
     sleep_ms(10);
-    i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, buffer, 24, true);
+    i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, buffer, 25, true);
     sleep_ms(10);
 
     ptrComp->dig_T1 = buffer[0] | (buffer[1] << 8); /*== 0x88 / 0x89 dig_T1 [7:0] / [15:8] uint8_t ==*/
@@ -364,12 +364,12 @@ int8_t BME280_ReadComp(void)
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, &buffer[25], dataLen, true);
     sleep_ms(10);
     
-    ptrComp->dig_H2 = buffer[25] | (buffer[26] << 8);             /*== 0xE1 / 0xE2 dig_H2 [7:0] / [15:8] int16_t ==*/
-    ptrComp->dig_H3 = buffer[27];                                 /*== 0xE3 dig_H3 [7:0] uint8_t ==*/
-    ptrComp->dig_H4 = buffer[28] << 4 | ((buffer[29]) & ~(0x78)); /*== 0xE4 / 0xE5[3:0] dig_H4 [11:4] / [3:0] int16_t ==*/
-    ptrComp->dig_H5 = (buffer[30] >> 4) | (buffer[31] << 4);      /*== 0xE5[7:4] / 0xE6 dig_H5 [3:0] / [11:4] int16_t ==*/
-    ptrComp->dig_H6 = buffer[32];                                 /*== 0xE7 dig_H6 int8_t ==*/
-    memset(buffer, '\0', 33);
+    ptrComp->dig_H2 = buffer[25] | (buffer[26] << 8);                   /*== 0xE1 / 0xE2 dig_H2 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_H3 = buffer[27];                                       /*== 0xE3 dig_H3 [7:0] uint8_t ==*/
+    ptrComp->dig_H4 = buffer[28] << 4 | (((buffer[29]) & ~(0x78)));     /*== 0xE4 / 0xE5[3:0] dig_H4 [11:4] / [3:0] int16_t ==*/
+    ptrComp->dig_H5 = ((buffer[30] &~(0xF0)) >> 4) | (buffer[31] << 4); /*== 0xE5[7:4] / 0xE6 dig_H5 [3:0] / [11:4] int16_t ==*/
+    ptrComp->dig_H6 = buffer[32];                                       /*== 0xE7 dig_H6 int8_t ==*/
+    memset(buffer, '\0', sizeof(buffer));
     printCompParam(ptrComp);
 
     return 0;
@@ -1124,21 +1124,21 @@ uint32_t BME280_CompHumInt32(void)
             float32_t rspTimeIIR;
             rspTimeIIR = 1000 * stepRsp / odrMs;
             debugMsg("====================  BME280 RESPONSE TIMING STARTED =================\r\n");
-            debug2Val("[X] MeasurementRate: %f Hz\n[X] ResponseTime: %.2f ms\n", odrMs, rspTimeIIR);
+            debug2Val("[X] MeasurementRate: %f Hz\n[X] IIR-ResponseTime: %.2f ms\n", odrMs, rspTimeIIR);
             debug2Val("[X] Typ. MeasurementTime: %f ms\n[X] Max. MeasurementTime: %.2f ms\n", timeTyp, timeMax);
         }
 
-void BME280_DataRead(void)
+void BME280_DataRead(int32_t temperature, uint32_t pressure,uint32_t humidity)
 {
     debugMsg("====================  BME280 SENSOR DATA READING STARTED =============\r\n");
-    int32_t temperature = BME280_CompTemp();
+    temperature = BME280_CompTemp();
     debugVal("[X] Temperature: %.2f °C \r\n", temperature / 100.0f);
-    uint32_t pressure = BME280_CompPressure();
+    pressure = BME280_CompPressure();
     debugVal("[X] Pressure: %.2f °hPa \r\n", pressure / 100.0f);
     /* 
     double humidity = BME280_CompHumDouble();
     debugVal("[X] Humidity: %lf \r\n", humidity); 
     */
-    uint32_t humidity2 = BME280_CompHumInt32();
-    debugVal("[X] Humidity: %.2f %% \r\n", humidity2 / 1024.0f);
+    humidity = BME280_CompHumInt32();
+    debugVal("[X] Humidity: %.2f %% \r\n", humidity / 1024.0f);
 }
