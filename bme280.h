@@ -111,8 +111,8 @@ typedef struct CompData
     uint8_t	 	dig_H1:8;
     int16_t 	dig_H2:16;
     uint8_t 	dig_H3:8;
-    int16_t 	dig_H4:12;
-    int16_t 	dig_H5:12;
+    int16_t 	dig_H4:16;
+    int16_t 	dig_H5:16;
     int8_t 		dig_H6:8;
 }BME280_Comp;
 

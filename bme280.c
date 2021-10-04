@@ -340,18 +340,18 @@ int8_t BME280_ReadComp(void)
     sleep_ms(10);
 
     ptrComp->dig_T1 = buffer[0] | (buffer[1] << 8); /*== 0x88 / 0x89 dig_T1 [7:0] / [15:8] uint8_t ==*/
-    ptrComp->dig_T2 = buffer[2] | (buffer[3] << 8); /*== 0x8A / 0x8B dig_T2 [7:0] / [15:8] int16_t ==*/
-    ptrComp->dig_T3 = buffer[4] | (buffer[5] << 8); /*== 0x8C / 0x8D dig_T3 [7:0] / [15:8] int16_t ==*/
-    ptrComp->dig_P1 = buffer[6] | (buffer[7] << 8); /*== 0x8E / 0x8F dig_P1 [7:0] / [15:8] uint16_t ==*/
-    ptrComp->dig_P2 = buffer[8] | (buffer[9] << 8); /*== 0x90 / 0x91 dig_P2 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_T2 = (int16_t)(buffer[2] | (buffer[3] << 8)); /*== 0x8A / 0x8B dig_T2 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_T3 = (int16_t)(buffer[4] | (buffer[5] << 8)); /*== 0x8C / 0x8D dig_T3 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_P1 = (uint16_t)(buffer[6] | (buffer[7] << 8)); /*== 0x8E / 0x8F dig_P1 [7:0] / [15:8] uint16_t ==*/
+    ptrComp->dig_P2 = (int16_t)(buffer[8] | (buffer[9] << 8)); /*== 0x90 / 0x91 dig_P2 [7:0] / [15:8] int16_t ==*/
 
-    ptrComp->dig_P3 = buffer[10] | (buffer[11] << 8); /*== 0x92 / 0x93 dig_P3 [7:0] / [15:8] int16_t ==*/
-    ptrComp->dig_P4 = buffer[12] | (buffer[13] << 8); /*== 0x94 / 0x95 dig_P4 [7:0] / [15:8] int16_t ==*/
-    ptrComp->dig_P5 = buffer[14] | (buffer[15] << 8); /*== 0x96 / 0x97 dig_P5 [7:0] / [15:8] int16_t ==*/
-    ptrComp->dig_P6 = buffer[16] | (buffer[17] << 8); /*== 0x98 / 0x99 dig_P6 [7:0] / [15:8] int16_t ==*/
-    ptrComp->dig_P7 = buffer[18] | (buffer[19] << 8); /*== 0x9A / 0x9B dig_P7 [7:0] / [15:8] int16_t ==*/
-    ptrComp->dig_P8 = buffer[20] | (buffer[21] << 8); /*== 0x9C / 0x9D dig_P8 [7:0] / [15:8] int16_t ==*/
-    ptrComp->dig_P9 = buffer[22] | (buffer[23] << 8); /*== 0x9E / 0x9F dig_P9 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_P3 = (int16_t)(buffer[10] | (buffer[11] << 8)); /*== 0x92 / 0x93 dig_P3 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_P4 = (int16_t)(buffer[12] | (buffer[13] << 8)); /*== 0x94 / 0x95 dig_P4 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_P5 = (int16_t)(buffer[14] | (buffer[15] << 8)); /*== 0x96 / 0x97 dig_P5 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_P6 = (int16_t)(buffer[16] | (buffer[17] << 8)); /*== 0x98 / 0x99 dig_P6 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_P7 = (int16_t)(buffer[18] | (buffer[19] << 8)); /*== 0x9A / 0x9B dig_P7 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_P8 = (int16_t)(buffer[20] | (buffer[21] << 8)); /*== 0x9C / 0x9D dig_P8 [7:0] / [15:8] int16_t ==*/
+    ptrComp->dig_P9 = (int16_t)(buffer[22] | (buffer[23] << 8)); /*== 0x9E / 0x9F dig_P9 [7:0] / [15:8] int16_t ==*/
 
     /*This Same Register-> BME280_HUMIDITY_CALIB_DATA_LEN-1 */
     ptrComp->dig_H1 = buffer[24];   /*== 0xA1 dig_H1 [7:0] uint8_t==*/
@@ -363,12 +363,12 @@ int8_t BME280_ReadComp(void)
     sleep_ms(10);
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, &buffer[25], dataLen, true);
     sleep_ms(10);
-    
-    ptrComp->dig_H2 = buffer[25] | (buffer[26] << 8);                   /*== 0xE1 / 0xE2 dig_H2 [7:0] / [15:8] int16_t ==*/
+
+    ptrComp->dig_H2 = (int16_t)buffer[25] | (buffer[26] << 8);          /*== 0xE1 / 0xE2 dig_H2 [7:0] / [15:8] int16_t ==*/
     ptrComp->dig_H3 = buffer[27];                                       /*== 0xE3 dig_H3 [7:0] uint8_t ==*/
-    ptrComp->dig_H4 = buffer[28] << 4 | (((buffer[29]) & ~(0x78)));     /*== 0xE4 / 0xE5[3:0] dig_H4 [11:4] / [3:0] int16_t ==*/
-    ptrComp->dig_H5 = ((buffer[30] &~(0xF0)) >> 4) | (buffer[31] << 4); /*== 0xE5[7:4] / 0xE6 dig_H5 [3:0] / [11:4] int16_t ==*/
-    ptrComp->dig_H6 = buffer[32];                                       /*== 0xE7 dig_H6 int8_t ==*/
+    ptrComp->dig_H4 = (int16_t)(buffer[28] << 4 | (((buffer[29]) & ~(0x78)))); /*== 0xE4 / 0xE5[3:0] dig_H4 [11:4] / [3:0] int16_t ==*/
+    ptrComp->dig_H5 = (int16_t)(((buffer[30] & ~(0xF0)) >> 4) | (buffer[31] << 4)); /*== 0xE5[7:4] / 0xE6 dig_H5 [3:0] / [11:4] int16_t ==*/
+    ptrComp->dig_H6 = (int8_t)(buffer[32]);                                       /*== 0xE7 dig_H6 int8_t ==*/
     memset(buffer, '\0', sizeof(buffer));
     printCompParam(ptrComp);
 
