@@ -14,8 +14,14 @@
 /*=========================================================*/
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <stdint.h>
 #include <math.h>
+
+/*=========================================================*/
+/*== PICO INCLUDES ========================================*/
+/*=========================================================*/
 
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
@@ -24,8 +30,11 @@
 /*=========================================================*/
 /*== PRIVATE INCLUDES =====================================*/
 /*=========================================================*/
+
 #include "bme280.h"
 #include "waterpipe.h"
+#include "ds18b20.h"
+
 
 int main()
 {
@@ -66,6 +75,8 @@ int main()
     gpio_init(WATER_TEMP_OK);
     gpio_init(PRESSURE_FSR_OK);
     gpio_init(WATER_LEVEL_OK);
+    gpio_init(DS18B20_PIN);
+
 
     debugMsg("==================\r\n");
     debugMsg("INIT GPIO HARDWARE: ");
@@ -119,6 +130,16 @@ int main()
     BME280_ReadStandby();
     BME280_Read_OSRS_h();
 
+    float32_t t;
+   
+
+    int i;
+    presence(DS18B20_PIN);
+    writeByte(DS18B20_PIN, 0xCC);
+    writeByte(DS18B20_PIN, 0x4E);
+    writeByte(DS18B20_PIN, 0x00);
+    writeByte(DS18B20_PIN, 0x00);
+    writeByte(DS18B20_PIN, 0x3F);
     while (true)
     {
         debugTerm();
@@ -131,6 +152,10 @@ int main()
         BME280_MeasurementTime();
 
         toggleLed();
+        t = DS18B20_tempRead(DS18B20_PIN);
+
+        printf("DS18B20 Temperature:%f\r\n", t);
+
 
         /*== TEST FUNCTION == */
         /*  while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)

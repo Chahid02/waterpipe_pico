@@ -19,7 +19,7 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(waterpipe waterpipe.c bme280.c )
+add_executable(waterpipe waterpipe.c bme280.c ds18b20.c )
 
 pico_set_program_name(waterpipe "waterpipe")
 pico_set_program_version(waterpipe "0.1")
