@@ -25,7 +25,7 @@
 
 
 
-int DS18B20_Reset(uint8_t ds18b20_gpio_pin)
+uint8_t DS18B20_Reset(uint8_t ds18b20_gpio_pin)
 {
 	gpio_set_dir(ds18b20_gpio_pin, GPIO_OUT);
 	gpio_put(ds18b20_gpio_pin, 1);
@@ -34,15 +34,15 @@ int DS18B20_Reset(uint8_t ds18b20_gpio_pin)
 	sleep_us(480);
 	gpio_set_dir(ds18b20_gpio_pin, GPIO_IN);
 	sleep_us(100);
-	int b = gpio_get(ds18b20_gpio_pin);
+	uint8_t slaveResponse = gpio_get(ds18b20_gpio_pin);
 	sleep_us(400);
-	return b;
+	return slaveResponse;
 }
 
-void DS18B20_Write_Bit(uint8_t ds18b20_gpio_pin, int b)
+void DS18B20_Write_Bit(uint8_t ds18b20_gpio_pin, uint8_t bitValue)
 {
 	uint16_t delay1, delay2;
-	if (b == 1)
+	if (bitValue == 1)
 	{
 		delay1 = 10;
 		delay2 = 45;
@@ -59,11 +59,11 @@ void DS18B20_Write_Bit(uint8_t ds18b20_gpio_pin, int b)
 	sleep_us(delay2);
 }
 
-void DS18B20_Write_Byte(uint8_t ds18b20_gpio_pin, int byte)
+void DS18B20_Write_Byte(uint8_t ds18b20_gpio_pin, uint8_t writeByte)
 {
-	for (int i = 0; i < 8; i++)
+	for (int16_t i = 0; i < 8; i++)
 	{
-		if (byte & 1)
+		if (writeByte & 0x01)
 		{
 			DS18B20_Write_Bit(ds18b20_gpio_pin, 1);
 		}
@@ -71,7 +71,7 @@ void DS18B20_Write_Byte(uint8_t ds18b20_gpio_pin, int byte)
 		{
 			DS18B20_Write_Bit(ds18b20_gpio_pin, 0);
 		}
-		byte = byte >> 1;
+		writeByte >>= 1;
 	}
 }
 uint8_t DS18B20_Read_Bit(uint8_t ds18b20_gpio_pin)
@@ -81,52 +81,37 @@ uint8_t DS18B20_Read_Bit(uint8_t ds18b20_gpio_pin)
 	sleep_us(8);
 	gpio_set_dir(ds18b20_gpio_pin, GPIO_IN);
 	sleep_us(2);
-	uint8_t b = gpio_get(ds18b20_gpio_pin);
+	uint8_t bitValue = gpio_get(ds18b20_gpio_pin);
 	sleep_us(60);
-	return b;
+	return bitValue;
 }
-int32_t DS18B20_Read_Byte(uint8_t ds18b20_gpio_pin)
+uint8_t DS18B20_Read_Byte(uint8_t ds18b20_gpio_pin)
 {
-	int byte = 0;
-	int i;
-	for (i = 0; i < 8; i++)
+	uint8_t readByte = 0;
+	for (size_t i = 0; i < 8; i++)
 	{
-		byte = byte | DS18B20_Read_Bit(ds18b20_gpio_pin) << i;
+		readByte = readByte | DS18B20_Read_Bit(ds18b20_gpio_pin) << i;
 	};
-	return byte;
+	return readByte;
 }
-uint32_t DS18B20_Request_Temp(uint8_t ds18b20_gpio_pin)
+uint16_t DS18B20_Request_Temp(uint8_t ds18b20_gpio_pin)
 {
-	uint32_t i = 0;
+	uint16_t i = 0;
 	DS18B20_Write_Byte(ds18b20_gpio_pin, THERM_CMD_CONVERTTEMP);
 	while (!DS18B20_Read_Bit(ds18b20_gpio_pin))
 	{
 		sleep_ms(1);
 		i++;
+		if (i = 750)
+		{
+			break;
+		}
+		
 	}
 	return i;
 }
 
-uint8_t DS18B20_Crc8_Check(uint8_t *data, uint8_t len)
-{
-	
-	uint8_t temp_dsb;
-	uint8_t databyte;
-	uint8_t crc = 0;
-	for (uint8_t i = 0; i < len; i++)
-	{
-		databyte = data[i];
-		for (uint8_t j = 0; j < 8; j++)
-		{
-			temp_dsb = (crc ^ databyte) & 0x01;
-			crc >>= 1;
-			if (temp_dsb)
-				crc ^= 0x8C;
-			databyte >>= 1;
-		}
-	}
-	return crc;
-}
+
 
 float32_t DS18B20_tempRead(uint8_t ds18b20_gpio_pin)
 {
@@ -152,19 +137,42 @@ float32_t DS18B20_tempRead(uint8_t ds18b20_gpio_pin)
 	DS18B20_Reset(DS18B20_PIN);
 	DS18B20_Write_Byte(DS18B20_PIN, THERM_CMD_SKIPROM);
 	DS18B20_Write_Byte(DS18B20_PIN, THERM_CMD_RSCRATCHPAD);
-	int i;
-	uint8_t data[9];
-	for (i = 0; i < 9; i++)
+	uint8_t memoryRead[9];
+	for (size_t i = 0; i < 9; i++)
 	{
-		data[i] = DS18B20_Read_Byte(DS18B20_PIN);
+		memoryRead[i] = DS18B20_Read_Byte(DS18B20_PIN);
 	}
-	uint8_t crc = DS18B20_Crc8_Check(data, 9);
+	uint8_t crc = DS18B20_Crc8_Check(memoryRead, 9);
 	if (crc != 0)
+	{
 		return -2000;
-	int t1 = data[0];
-	int t2 = data[1];
-	int16_t temp1 = ((t2 << 8 | t1));// for 9 Bits
-	float temp22 = (float)temp1 / 16;
-	debugVal("[X] DS18B20 Temperature: %f °C\r\n", temp22);
-	return temp22;
+	}
+	int16_t tempLSB= memoryRead[0];
+	int16_t tempMSB = memoryRead[1];
+	int16_t temperature = ((tempMSB << 8 | tempLSB));// for 9 Bits
+	float32_t temperatureFloat = (float32_t)(temperature / 16.0f);
+	debugVal("[X] DS18B20 Temperature: %.2f °C\r\n", temperatureFloat);
+
+	return temperature;
+}
+
+uint8_t DS18B20_Crc8_Check(uint8_t *data, uint8_t len)
+{
+
+	uint8_t temp;
+	uint8_t databyte;
+	uint8_t crc = 0;
+	for (uint8_t i = 0; i < len; i++)
+	{
+		databyte = data[i];
+		for (uint8_t j = 0; j < 8; j++)
+		{
+			temp = (crc ^ databyte) & 0x01;
+			crc >>= 1;
+			if (temp)
+				crc ^= 0x8C;
+			databyte >>= 1;
+		}
+	}
+	return crc;
 }

@@ -14,7 +14,6 @@
 /*=========================================================*/
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
 #include <math.h>
@@ -129,11 +128,7 @@ int main()
     BME280_ReadMode();
     BME280_ReadStandby();
     BME280_Read_OSRS_h();
-
-    float32_t t;
    
-
-    int i;
     if (DS18B20_Reset(DS18B20_PIN) == 1)
     {
         debugMsg("\n[X] NO DEVICE found ...");
@@ -147,6 +142,8 @@ int main()
         DS18B20_Write_Byte(DS18B20_PIN, 0x00);
         DS18B20_Write_Byte(DS18B20_PIN, THERM_CMD_12BIT_RES);
     }
+
+    /*== User Code starts here == */
     while (true)
     {
         debugTerm();
@@ -173,6 +170,7 @@ int main()
 
         sleep_ms(500);
     }
+    /*== User Code ends here == */
     return 0;
 }
 
