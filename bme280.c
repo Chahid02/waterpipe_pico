@@ -837,7 +837,10 @@ int32_t BME280_CompTemp(void)
     int32_t temperature_max = 8500;
 
     var1 = (((adc_T >> 3) - ((int32_t)Comp.dig_T1 << 1)) * ((int32_t)Comp.dig_T2)) >> 11;
-    var2 = ((((adc_T >> 4) - ((int32_t)Comp.dig_T1)) * ((adc_T >> 4) - ((int32_t)Comp.dig_T1)) >> 12) * ((int32_t)Comp.dig_T3)) >> 14;
+    //var2 = ((((adc_T >> 4) - ((int32_t)Comp.dig_T1)) * ((adc_T >> 4) - ((int32_t)Comp.dig_T1)) >> 12) * ((int32_t)Comp.dig_T3)) >> 14;
+    var2 = (((adc_T >> 4) - ((int32_t)Comp.dig_T1)) * ((adc_T >> 4) - ((int32_t)Comp.dig_T1)) >> 12);
+    var2 = (var2 * ((int32_t)Comp.dig_T3)) >> 14;
+
     t_fine = var1 + var2;
     temperature = (t_fine * 5 + 128) >> 8;
 
@@ -881,7 +884,10 @@ uint32_t BME280_CompPressure(void)
     var2 = (((var1 >> 2) * (var1 >> 2)) >> 11) * ((int32_t)Comp.dig_P6);
     var2 = var2 + ((var1 * ((int32_t)Comp.dig_P5)) << 1);
     var2 = (var2 >> 2) + (((int32_t)Comp.dig_P4) << 16);
-    var1 = (((Comp.dig_P3 * (((var1 >> 2) * (var1 >> 2)) >> 13)) >> 3) + ((((int32_t)Comp.dig_P2) * var1) >> 1)) >> 18;
+    // var1 = (((Comp.dig_P3 * (((var1 >> 2) * (var1 >> 2)) >> 13)) >> 3) + ((((int32_t)Comp.dig_P2) * var1) >> 1)) >> 18;
+    var1 = ((Comp.dig_P3 * (((var1 >> 2) * (var1 >> 2)) >> 13)) >> 3);
+    var1 = (var1 + ((((int32_t)Comp.dig_P2) * var1) >> 1)) >> 18;
+
     var1 = ((((32768 + var1)) * ((int32_t)Comp.dig_P1)) >> 15);
     if (var1 == 0)
     {
@@ -924,9 +930,11 @@ double BME280_CompHumDouble(void)
     int32_t adc_H = hum;
     double var_H;
     var_H = (((double)t_fine) - 76800.0);
-    var_H = (adc_H - (((double)Comp.dig_H4) * 64.0 + ((double)Comp.dig_H5) / 16384.0 * var_H)) *
-            (((double)Comp.dig_H2) / 65536.0 * (1.0 + ((double)Comp.dig_H6) / 67108864.0 * var_H * (1.0 + ((double)Comp.dig_H3) / 67108864.0 * var_H)));
+    var_H = (adc_H - (((double)Comp.dig_H4) * 64.0 + ((double)Comp.dig_H5) / 16384.0 * var_H));
+    var_H = var_H * (((double)Comp.dig_H2) / 65536.0);
+    var_H = var_H * (1.0 + ((double)Comp.dig_H6) / 67108864.0 * var_H * (1.0 + ((double)Comp.dig_H3) / 67108864.0 * var_H));
     var_H = var_H * (1.0 - ((double)Comp.dig_H1) * var_H / 524288.0);
+
     if (var_H > 100.0)
     {
         var_H = 100.0;
@@ -943,11 +951,16 @@ uint32_t BME280_CompHumInt32(void)
 {
     int32_t adc_H = hum;
     int32_t var_H;
+ 
+    int32_t var_H3 = ((int32_t)Comp.dig_H3); 
+    int32_t var_H4 = ((int32_t)Comp.dig_H4) << 20;
+    int32_t var_H5 = ((int32_t)Comp.dig_H5);
+    int32_t var_H6 = ((int32_t)Comp.dig_H6);
+
     var_H = (t_fine - ((int32_t)76800));
-    var_H = (((((adc_H << 14) - (((int32_t)Comp.dig_H4) << 20) - (((int32_t)Comp.dig_H5) * var_H)) +
-               ((int32_t)16384)) >>
-              15) *
-             (((((((var_H * ((int32_t)Comp.dig_H6)) >> 10) * (((var_H * ((int32_t)Comp.dig_H3)) >> 11) + ((int32_t)32768))) >> 10) + ((int32_t)2097152)) * ((int32_t)Comp.dig_H2) + 8192) >> 14));
+    var_H = (((((adc_H << 14) - var_H4 - (var_H5 * var_H)) + ((int32_t)16384)) >> 15) * \
+            (((((((var_H * var_H6) >> 10) * (((var_H * var_H3) >> 11) + ((int32_t)32768))) >> 10) + \
+            ((int32_t)2097152)) * ((int32_t)Comp.dig_H2) + 8192) >> 14));
     var_H = (var_H - (((((var_H >> 15) * (var_H >> 15)) >> 7) * ((int32_t)Comp.dig_H1)) >> 4));
     var_H = (var_H < 0 ? 0 : var_H);
     var_H = (var_H > 419430400 ? 419430400 : var_H);

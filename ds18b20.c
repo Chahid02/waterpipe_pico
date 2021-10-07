@@ -33,7 +33,7 @@ int presence(uint8_t ds18b20_gpio_pin)
 	gpio_put(ds18b20_gpio_pin, 0);
 	sleep_us(480);
 	gpio_set_dir(ds18b20_gpio_pin, GPIO_IN);
-	sleep_us(80);
+	sleep_us(100);
 	int b = gpio_get(ds18b20_gpio_pin);
 	sleep_us(400);
 	return b;
@@ -95,26 +95,15 @@ int32_t readByte(uint8_t ds18b20_gpio_pin)
 	};
 	return byte;
 }
-int32_t convert(uint8_t ds18b20_gpio_pin)
+uint32_t convert(uint8_t ds18b20_gpio_pin)
 {
-	uint16_t i=750;
+	uint32_t i = 0;
 	writeByte(ds18b20_gpio_pin, THERM_CMD_CONVERTTEMP);
-
-	do
+	while (!readBit(ds18b20_gpio_pin))
 	{
 		sleep_ms(1);
-		if (readBit(ds18b20_gpio_pin))
-		{
-			return i;
-		}
-		else
-		{
-			__NOP();
-		}
-		
-		
-	} while (i--);
-	debugVal("\n [X] Conversation time:%d", i);
+		i++;
+	}
 	return i;
 }
 
@@ -141,19 +130,25 @@ uint8_t crc8(uint8_t *data, uint8_t len)
 
 float32_t DS18B20_tempRead(uint8_t ds18b20_gpio_pin)
 {
+	debugMsg("====================  DS18B20 SENSOR DATA READING STARTED  =========== \r\n");
 	if (presence(DS18B20_PIN) == 1)
 	{
-		debugMsg("\n [X] NO DEVICE found ...");
+		debugMsg("\n[X] NO DEVICE found ...");
 		return -1000;
 	}
 	writeByte(DS18B20_PIN, THERM_CMD_SKIPROM);
-	if (convert(DS18B20_PIN) == 750)
+	uint16_t convTime;
+	if ((convTime = convert(DS18B20_PIN)) == 750)
 	{
-		debugMsg("\n [X] Max. Conversion time reached...");
+		debugMsg("\n[X] Max. Conversion time reached...");
 		return -3000;
 	}
+	else
+	{
+		debugVal("[X] Conversion time:%d\n", convTime);
+	}
+	
 
-	debugVal("\n [X] Conversion time:%d", i);
 	presence(DS18B20_PIN);
 	writeByte(DS18B20_PIN, THERM_CMD_SKIPROM);
 	writeByte(DS18B20_PIN, THERM_CMD_RSCRATCHPAD);
@@ -168,7 +163,7 @@ float32_t DS18B20_tempRead(uint8_t ds18b20_gpio_pin)
 		return -2000;
 	int t1 = data[0];
 	int t2 = data[1];
-	int16_t temp1 = (t2 << 8 | t1);
+	int16_t temp1 = ((t2 << 8 | t1)) &(~0x01);// for 9 Bits
 	float temp22 = (float)temp1 / 16;
 	return temp22;
 }

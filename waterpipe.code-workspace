@@ -1,0 +1,36 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"cmake.statusbar.advanced": {
+			"debug": {
+				"visibility": "hidden"
+			},
+			"launch": {
+				"visibility": "hidden"
+			},
+			"build": {
+				"visibility": "hidden"
+			},
+			"buildTarget": {
+				"visibility": "hidden"
+			}
+		},
+		"files.associations": {
+			"binary_info.h": "c",
+			"i2c.h": "c",
+			"stdint.h": "c",
+			"array": "c",
+			"string_view": "c",
+			"initializer_list": "c",
+			"utility": "c",
+			"waterpipe.h": "c",
+			"bme280.h": "c",
+			"stdlib.h": "c",
+			"ds18b20.h": "c"
+		}
+	}
+}

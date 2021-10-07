@@ -139,7 +139,7 @@ int main()
     writeByte(DS18B20_PIN, 0x4E);
     writeByte(DS18B20_PIN, 0x00);
     writeByte(DS18B20_PIN, 0x00);
-    writeByte(DS18B20_PIN, 0x3F);
+    writeByte(DS18B20_PIN, THERM_CMD_12BIT_RES);
     while (true)
     {
         debugTerm();
@@ -154,7 +154,7 @@ int main()
         toggleLed();
         t = DS18B20_tempRead(DS18B20_PIN);
 
-        printf("DS18B20 Temperature:%f\r\n", t);
+        printf("[X] DS18B20 Temperature:%f\r\n", t);
 
 
         /*== TEST FUNCTION == */
@@ -164,7 +164,7 @@ int main()
             //return -1;
         }; */
 
-        sleep_ms(1000);
+        //sleep_ms(1000);
     }
     return 0;
 }
