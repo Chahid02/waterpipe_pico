@@ -134,12 +134,19 @@ int main()
    
 
     int i;
-    presence(DS18B20_PIN);
-    writeByte(DS18B20_PIN, 0xCC);
-    writeByte(DS18B20_PIN, 0x4E);
-    writeByte(DS18B20_PIN, 0x00);
-    writeByte(DS18B20_PIN, 0x00);
-    writeByte(DS18B20_PIN, THERM_CMD_12BIT_RES);
+    if (DS18B20_Reset(DS18B20_PIN) == 1)
+    {
+        debugMsg("\n[X] NO DEVICE found ...");
+        return -1000;
+    }
+    else
+    {
+        DS18B20_Write_Byte(DS18B20_PIN, 0xCC);
+        DS18B20_Write_Byte(DS18B20_PIN, 0x4E);
+        DS18B20_Write_Byte(DS18B20_PIN, 0x00);
+        DS18B20_Write_Byte(DS18B20_PIN, 0x00);
+        DS18B20_Write_Byte(DS18B20_PIN, THERM_CMD_12BIT_RES);
+    }
     while (true)
     {
         debugTerm();
@@ -152,9 +159,9 @@ int main()
         BME280_MeasurementTime();
 
         toggleLed();
-        t = DS18B20_tempRead(DS18B20_PIN);
+        DS18B20_tempRead(DS18B20_PIN);
 
-        printf("[X] DS18B20 Temperature:%f\r\n", t);
+
 
 
         /*== TEST FUNCTION == */
@@ -164,7 +171,7 @@ int main()
             //return -1;
         }; */
 
-        //sleep_ms(1000);
+        sleep_ms(500);
     }
     return 0;
 }

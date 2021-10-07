@@ -46,13 +46,13 @@ typedef float float32_t;
 /*== PROTOTYPE DECLARATION ================================*/
 /*=========================================================*/
 
-int presence(uint8_t ds18b20_gpio_pin);
-void writeBit(uint8_t ds18b20_gpio_pin, int b);
-void writeByte(uint8_t ds18b20_gpio_pin, int byte);
-uint8_t readBit(uint8_t ds18b20_gpio_pin);
-int32_t readByte(uint8_t ds18b20_gpio_pin);
-uint32_t convert(uint8_t ds18b20_gpio_pin);
-uint8_t crc8(uint8_t *data, uint8_t len);
+int DS18B20_Reset(uint8_t ds18b20_gpio_pin);
+void DS18B20_Write_Bit(uint8_t ds18b20_gpio_pin, int b);
+void DS18B20_Write_Byte(uint8_t ds18b20_gpio_pin, int byte);
+uint8_t DS18B20_Read_Bit(uint8_t ds18b20_gpio_pin);
+int32_t DS18B20_Read_Byte(uint8_t ds18b20_gpio_pin);
+uint32_t DS18B20_Request_Temp(uint8_t ds18b20_gpio_pin);
+uint8_t DS18B20_Crc8_Check(uint8_t *data, uint8_t len);
 float32_t DS18B20_tempRead(uint8_t ds18b20_gpio_pin);
 
 #endif

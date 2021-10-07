@@ -837,8 +837,8 @@ int32_t BME280_CompTemp(void)
     int32_t temperature_max = 8500;
 
     var1 = (((adc_T >> 3) - ((int32_t)Comp.dig_T1 << 1)) * ((int32_t)Comp.dig_T2)) >> 11;
-    //var2 = ((((adc_T >> 4) - ((int32_t)Comp.dig_T1)) * ((adc_T >> 4) - ((int32_t)Comp.dig_T1)) >> 12) * ((int32_t)Comp.dig_T3)) >> 14;
-    var2 = (((adc_T >> 4) - ((int32_t)Comp.dig_T1)) * ((adc_T >> 4) - ((int32_t)Comp.dig_T1)) >> 12);
+    var2 = ((adc_T >> 4) - ((int32_t)Comp.dig_T1)); 
+    var2 = (var2 *((adc_T >> 4) - ((int32_t)Comp.dig_T1)) >> 12);
     var2 = (var2 * ((int32_t)Comp.dig_T3)) >> 14;
 
     t_fine = var1 + var2;
@@ -884,7 +884,6 @@ uint32_t BME280_CompPressure(void)
     var2 = (((var1 >> 2) * (var1 >> 2)) >> 11) * ((int32_t)Comp.dig_P6);
     var2 = var2 + ((var1 * ((int32_t)Comp.dig_P5)) << 1);
     var2 = (var2 >> 2) + (((int32_t)Comp.dig_P4) << 16);
-    // var1 = (((Comp.dig_P3 * (((var1 >> 2) * (var1 >> 2)) >> 13)) >> 3) + ((((int32_t)Comp.dig_P2) * var1) >> 1)) >> 18;
     var1 = ((Comp.dig_P3 * (((var1 >> 2) * (var1 >> 2)) >> 13)) >> 3);
     var1 = (var1 + ((((int32_t)Comp.dig_P2) * var1) >> 1)) >> 18;
 

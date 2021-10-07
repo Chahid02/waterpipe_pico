@@ -25,7 +25,7 @@
 
 
 
-int presence(uint8_t ds18b20_gpio_pin)
+int DS18B20_Reset(uint8_t ds18b20_gpio_pin)
 {
 	gpio_set_dir(ds18b20_gpio_pin, GPIO_OUT);
 	gpio_put(ds18b20_gpio_pin, 1);
@@ -39,7 +39,7 @@ int presence(uint8_t ds18b20_gpio_pin)
 	return b;
 }
 
-void writeBit(uint8_t ds18b20_gpio_pin, int b)
+void DS18B20_Write_Bit(uint8_t ds18b20_gpio_pin, int b)
 {
 	uint16_t delay1, delay2;
 	if (b == 1)
@@ -59,22 +59,22 @@ void writeBit(uint8_t ds18b20_gpio_pin, int b)
 	sleep_us(delay2);
 }
 
-void writeByte(uint8_t ds18b20_gpio_pin, int byte)
+void DS18B20_Write_Byte(uint8_t ds18b20_gpio_pin, int byte)
 {
 	for (int i = 0; i < 8; i++)
 	{
 		if (byte & 1)
 		{
-			writeBit(ds18b20_gpio_pin, 1);
+			DS18B20_Write_Bit(ds18b20_gpio_pin, 1);
 		}
 		else
 		{
-			writeBit(ds18b20_gpio_pin, 0);
+			DS18B20_Write_Bit(ds18b20_gpio_pin, 0);
 		}
 		byte = byte >> 1;
 	}
 }
-uint8_t readBit(uint8_t ds18b20_gpio_pin)
+uint8_t DS18B20_Read_Bit(uint8_t ds18b20_gpio_pin)
 {
 	gpio_set_dir(ds18b20_gpio_pin, GPIO_OUT);
 	gpio_put(ds18b20_gpio_pin, 0);
@@ -85,21 +85,21 @@ uint8_t readBit(uint8_t ds18b20_gpio_pin)
 	sleep_us(60);
 	return b;
 }
-int32_t readByte(uint8_t ds18b20_gpio_pin)
+int32_t DS18B20_Read_Byte(uint8_t ds18b20_gpio_pin)
 {
 	int byte = 0;
 	int i;
 	for (i = 0; i < 8; i++)
 	{
-		byte = byte | readBit(ds18b20_gpio_pin) << i;
+		byte = byte | DS18B20_Read_Bit(ds18b20_gpio_pin) << i;
 	};
 	return byte;
 }
-uint32_t convert(uint8_t ds18b20_gpio_pin)
+uint32_t DS18B20_Request_Temp(uint8_t ds18b20_gpio_pin)
 {
 	uint32_t i = 0;
-	writeByte(ds18b20_gpio_pin, THERM_CMD_CONVERTTEMP);
-	while (!readBit(ds18b20_gpio_pin))
+	DS18B20_Write_Byte(ds18b20_gpio_pin, THERM_CMD_CONVERTTEMP);
+	while (!DS18B20_Read_Bit(ds18b20_gpio_pin))
 	{
 		sleep_ms(1);
 		i++;
@@ -107,7 +107,7 @@ uint32_t convert(uint8_t ds18b20_gpio_pin)
 	return i;
 }
 
-uint8_t crc8(uint8_t *data, uint8_t len)
+uint8_t DS18B20_Crc8_Check(uint8_t *data, uint8_t len)
 {
 	
 	uint8_t temp_dsb;
@@ -131,39 +131,40 @@ uint8_t crc8(uint8_t *data, uint8_t len)
 float32_t DS18B20_tempRead(uint8_t ds18b20_gpio_pin)
 {
 	debugMsg("====================  DS18B20 SENSOR DATA READING STARTED  =========== \r\n");
-	if (presence(DS18B20_PIN) == 1)
+	if (DS18B20_Reset(DS18B20_PIN) == 1)
 	{
 		debugMsg("\n[X] NO DEVICE found ...");
 		return -1000;
 	}
-	writeByte(DS18B20_PIN, THERM_CMD_SKIPROM);
+	DS18B20_Write_Byte(DS18B20_PIN, THERM_CMD_SKIPROM);
 	uint16_t convTime;
-	if ((convTime = convert(DS18B20_PIN)) == 750)
+	if ((convTime = DS18B20_Request_Temp(DS18B20_PIN)) == 750)
 	{
 		debugMsg("\n[X] Max. Conversion time reached...");
 		return -3000;
 	}
 	else
 	{
-		debugVal("[X] Conversion time:%d\n", convTime);
+		debugVal("[X] Conversion time: %d ms\n", convTime);
 	}
 	
 
-	presence(DS18B20_PIN);
-	writeByte(DS18B20_PIN, THERM_CMD_SKIPROM);
-	writeByte(DS18B20_PIN, THERM_CMD_RSCRATCHPAD);
+	DS18B20_Reset(DS18B20_PIN);
+	DS18B20_Write_Byte(DS18B20_PIN, THERM_CMD_SKIPROM);
+	DS18B20_Write_Byte(DS18B20_PIN, THERM_CMD_RSCRATCHPAD);
 	int i;
 	uint8_t data[9];
 	for (i = 0; i < 9; i++)
 	{
-		data[i] = readByte(DS18B20_PIN);
+		data[i] = DS18B20_Read_Byte(DS18B20_PIN);
 	}
-	uint8_t crc = crc8(data, 9);
+	uint8_t crc = DS18B20_Crc8_Check(data, 9);
 	if (crc != 0)
 		return -2000;
 	int t1 = data[0];
 	int t2 = data[1];
-	int16_t temp1 = ((t2 << 8 | t1)) &(~0x01);// for 9 Bits
+	int16_t temp1 = ((t2 << 8 | t1));// for 9 Bits
 	float temp22 = (float)temp1 / 16;
+	debugVal("[X] DS18B20 Temperature: %f °C\r\n", temp22);
 	return temp22;
 }
