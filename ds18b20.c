@@ -61,7 +61,7 @@ void DS18B20_Write_Bit(uint8_t ds18b20_gpio_pin, uint8_t bitValue)
 
 void DS18B20_Write_Byte(uint8_t ds18b20_gpio_pin, uint8_t writeByte)
 {
-	for (int16_t i = 0; i < 8; i++)
+	for (size_t i = 0; i < 8; i++)
 	{
 		if (writeByte & 0x01)
 		{
@@ -96,19 +96,19 @@ uint8_t DS18B20_Read_Byte(uint8_t ds18b20_gpio_pin)
 }
 uint16_t DS18B20_Request_Temp(uint8_t ds18b20_gpio_pin)
 {
-	uint16_t i = 0;
+	uint16_t requestTime = 0;
 	DS18B20_Write_Byte(ds18b20_gpio_pin, THERM_CMD_CONVERTTEMP);
 	while (!DS18B20_Read_Bit(ds18b20_gpio_pin))
 	{
 		sleep_ms(1);
-		i++;
-		if (i = 750)
+		requestTime++;
+		if (requestTime == 750)
 		{
 			break;
-		}
+		} 
 		
 	}
-	return i;
+	return requestTime;
 }
 
 
@@ -126,7 +126,8 @@ float32_t DS18B20_tempRead(uint8_t ds18b20_gpio_pin)
 	if ((convTime = DS18B20_Request_Temp(DS18B20_PIN)) == 750)
 	{
 		debugMsg("\n[X] Max. Conversion time reached...");
-		return -3000;
+		debugVal("[X] Conversion time: %d ms\n", convTime);
+		return -2000;
 	}
 	else
 	{
@@ -145,7 +146,7 @@ float32_t DS18B20_tempRead(uint8_t ds18b20_gpio_pin)
 	uint8_t crc = DS18B20_Crc8_Check(memoryRead, 9);
 	if (crc != 0)
 	{
-		return -2000;
+		return -3000;
 	}
 	int16_t tempLSB= memoryRead[0];
 	int16_t tempMSB = memoryRead[1];
