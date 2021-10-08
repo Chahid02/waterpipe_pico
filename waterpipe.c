@@ -37,7 +37,6 @@
 #include "ds18b20.h"
 #include "waterlevel.h"
 
-
 int main()
 {
     stdio_init_all();
@@ -85,7 +84,6 @@ int main()
     gpio_init(WATER_LEVEL_OK);
     gpio_init(DS18B20_PIN);
 
-
     debugMsg("INIT GPIO HARDWARE: ");
     debugMsg("\n==================\r\n");
 
@@ -119,10 +117,9 @@ int main()
     sleep_ms(1000);
     debugMsg("==========================\r\n");
 
-
     debugMsg("INIT ADC CONFIGURATION: ");
     /*!< Init ADC for waterlevel sensor */
-    if(WATERLEVEL_ADC_SET() >= 3)
+    if (WATERLEVEL_ADC_SET() >= 3)
     {
         debugMsg("[X] ADC HARDWARE FAILED TO BE SET [X]\r\n");
     }
@@ -130,7 +127,7 @@ int main()
     {
         debugMsg("[X] ADC HARDWARE SUCCESSFULLY SET [X]\r\n");
     }
-    
+
     sleep_ms(1000);
     debugMsg("======================\r\n");
 
@@ -152,10 +149,10 @@ int main()
     /*!< User Code starts here */
     while (true)
     {
-        
+
         debugTerm();
 
-        int32_t bmeTemp;                    
+        int32_t bmeTemp;
         uint32_t bmePress;
         uint32_t bmeHum;
         BME280_Temp_Reading(bmeTemp, bmePress, bmeHum);
@@ -163,9 +160,8 @@ int main()
         toggleLed();
 
         WATERLEVEL_RUN();
-        
+
         DS18B20_tempRead(DS18B20_PIN);
-      
 
         /*== TEST FUNCTION ==*/
         /*  while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)

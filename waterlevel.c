@@ -70,10 +70,9 @@ int8_t WATERLEVEL_DMA_SET(void)
 		channel_config_set_read_increment(&dma_config, false);
 		channel_config_set_write_increment(&dma_config, true);
 		channel_config_set_dreq(&dma_config, DREQ_ADC);
-
 	}
-	
-return 0;
+
+	return 0;
 }
 
 void WATERLEVEL_RUN(void)
@@ -87,7 +86,7 @@ void WATERLEVEL_RUN(void)
 
 	adc_run(true);
 	dma_channel_configure(dma_channel, &dma_config, adcWaterLevel, &adc_hw->fifo, ADC_SAMPLES, true);
-	
+
 	dma_channel_wait_for_finish_blocking(dma_channel);
 	adc_run(false);
 	//adc_fifo_drain();
@@ -95,11 +94,10 @@ void WATERLEVEL_RUN(void)
 	{
 
 		buff += (adcWaterLevel[i] * conversion_factor);
-
 	}
 	adc_fifo_drain();
 
-	waterLevelVoltage = (float32_t)(buff/ADC_SAMPLES);
+	waterLevelVoltage = (float32_t)(buff / ADC_SAMPLES);
 	debugVal("[X] Voltage: %f V (DMA READ) [x]\n", waterLevelVoltage);
 
 	uint16_t result = adc_read();
