@@ -46,7 +46,6 @@ int8_t WATERLEVEL_DMA_SET(void)
 	}
 	else
 	{
-	
 		switch (dma_channel)
 		{
 		case 0:
