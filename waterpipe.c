@@ -25,6 +25,8 @@
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
 #include "hardware/i2c.h"
+#include "hardware/adc.h"
+#include "hardware/dma.h"
 
 /*=========================================================*/
 /*== PRIVATE INCLUDES =====================================*/
@@ -93,8 +95,7 @@ int main()
 
     if (gpio_is_dir_out(LED) != GPIO_OUT)
     {
-        debugMsg(
-            "[X] CHECK YOUR DEFAULT LED CONFIGURATION OF THE BOARD [X]\r\n");
+        debugMsg("[X] CHECK YOUR DEFAULT LED CONFIGURATION OF THE BOARD [X]\r\n");
     }
     else
     {
@@ -123,8 +124,8 @@ int main()
     BME280_Set_OSRS_p(BME280_OSRS_P_x16);
     BME280_SetMode(BME280_NORMAL_MODE);
 
-    /*==  Reading the register values ==*/
-    BME280_Read_CTRL_MEAS();
+    /*!< Reading the register values !*/
+    BME280_Read_CTRL_MEAS();   
     BME280_ReadMode();
     BME280_ReadStandby();
     BME280_Read_OSRS_h();
@@ -144,25 +145,26 @@ int main()
         DS18B20_Write_Byte(DS18B20_PIN, THERM_CMD_12BIT_RES);
     }
 
-    /*== User Code starts here == */
+
+    /*!< User Code starts here */
     while (true)
     {
         debugTerm();
         BME280_RawData();
 
-        int32_t bmeTemp;
+        int32_t bmeTemp;                    
         uint32_t bmePress;
         uint32_t bmeHum;
         BME280_DataRead(bmeTemp, bmePress, bmeHum);
         BME280_MeasurementTime();
 
         toggleLed();
-        DS18B20_tempRead(DS18B20_PIN);
+        DS18B20_tempRead(DS18B20_PIN);     
 
 
 
 
-        /*== TEST FUNCTION == */
+        /*== TEST FUNCTION ==*/
         /*  while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)
         {
             debugMsg("=================================== STORING\n");
@@ -171,7 +173,7 @@ int main()
 
         sleep_ms(500);
     }
-    /*== User Code ends here == */
+    /*!< User Code ends here */
     return 0;
 }
 

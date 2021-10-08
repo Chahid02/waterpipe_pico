@@ -23,7 +23,9 @@
 #include "waterpipe.h" /* Insert for Error Log Function! */
 #include "ds18b20.h"
 
-
+/*=========================================================*/
+/*== DS18B20 FUNCTIONS ====================================*/
+/*=========================================================*/
 
 uint8_t DS18B20_Reset(uint8_t ds18b20_gpio_pin)
 {
@@ -133,8 +135,6 @@ float32_t DS18B20_tempRead(uint8_t ds18b20_gpio_pin)
 	{
 		debugVal("[X] Conversion time: %d ms\n", convTime);
 	}
-	
-
 	DS18B20_Reset(DS18B20_PIN);
 	DS18B20_Write_Byte(DS18B20_PIN, THERM_CMD_SKIPROM);
 	DS18B20_Write_Byte(DS18B20_PIN, THERM_CMD_RSCRATCHPAD);
@@ -148,7 +148,7 @@ float32_t DS18B20_tempRead(uint8_t ds18b20_gpio_pin)
 	{
 		return -3000;
 	}
-	int16_t tempLSB= memoryRead[0];
+	int16_t tempLSB = memoryRead[0];
 	int16_t tempMSB = memoryRead[1];
 	int16_t temperature = ((tempMSB << 8 | tempLSB));// for 9 Bits
 	float32_t temperatureFloat = (float32_t)(temperature / 16.0f);
