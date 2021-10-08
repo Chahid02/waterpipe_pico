@@ -32,11 +32,12 @@ typedef float float32_t;
 * 		access-time
 **************************************************************
 */
-#define CLOCK_DIV 9600
+#define CLOCK_DIV 0
 
-#define ADC_CHANNEL0 (uint8_t) (0x1A)
-#define ADC_CHANNEL1 (uint8_t) (0x1B)
-#define ADC_CHANNEL2 (uint8_t) (0x1C)
+#define ADC_CHANNEL0 	(uint8_t) (0x1A)
+#define ADC_CHANNEL1 	(uint8_t) (0x1B)
+#define ADC_CHANNEL2 	(uint8_t) (0x1C)
+#define ADC_SAMPLES		5000
 
 /*=========================================================*/
 /*== DMA MACROS ===========================================*/
@@ -49,5 +50,6 @@ typedef float float32_t;
 /*=========================================================*/
 uint8_t WATERLEVEL_ADC_SET(void);
 int8_t WATERLEVEL_DMA_SET(void);
+void WATERLEVEL_RUN(void);
 
 #endif

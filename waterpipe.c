@@ -152,6 +152,7 @@ int main()
     /*!< User Code starts here */
     while (true)
     {
+        
         debugTerm();
 
         int32_t bmeTemp;                    
@@ -160,8 +161,11 @@ int main()
         BME280_Temp_Reading(bmeTemp, bmePress, bmeHum);
 
         toggleLed();
-        DS18B20_tempRead(DS18B20_PIN);
 
+        WATERLEVEL_RUN();
+        
+        DS18B20_tempRead(DS18B20_PIN);
+      
 
         /*== TEST FUNCTION ==*/
         /*  while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)
@@ -170,7 +174,7 @@ int main()
             //return -1;
         }; */
 
-        sleep_ms(500);
+        //sleep_ms(500);
     }
     /*!< User Code ends here */
     return 0;
