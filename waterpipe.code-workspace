@@ -30,7 +30,8 @@
 			"waterpipe.h": "c",
 			"bme280.h": "c",
 			"stdlib.h": "c",
-			"ds18b20.h": "c"
+			"ds18b20.h": "c",
+			"random": "c"
 		}
 	}
 }
