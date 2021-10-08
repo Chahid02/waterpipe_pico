@@ -233,7 +233,8 @@ uint32_t BME280_CompPressure(void);
 double BME280_CompHumDouble(void);
 uint32_t BME280_CompHumInt32(void);
 void BME280_DataRead(int32_t temperature, uint32_t pressure, uint32_t humidity);
-void BME280_INIT(void);
-void BME280_READ_REGVALUE(void);
+void BME280_Init(void);
+void BME280_Read_RegValue(void);
+void BME280_Temp_Reading(int32_t bmeTemp, uint32_t bmePress, uint32_t bmeHum);
 
 #endif

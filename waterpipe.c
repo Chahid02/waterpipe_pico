@@ -42,13 +42,18 @@ int main()
 {
     stdio_init_all();
     sleep_ms(2000);
+    debugMsg("======================================================================\r\n");
+    debugMsg("OPERATION MODE STARTED: ");
+    debugModMsg;
+    debugMsg("=======================\r\n");
+    sleep_ms(1000);
 
     /*=========================================================*/
     /*== I2C SETTINGS =========================================*/
     /*=========================================================*/
 
     i2c_init(i2c_default, 400 * 1000);
-    debugMsg("==================\r\n");
+
     debugMsg("INIT I2C HARDWARE: ");
 
 #if !defined(i2c_default) || !defined(PICO_DEFAULT_I2C_SDA_PIN) || \
@@ -65,6 +70,7 @@ int main()
     bi_decl(bi_2pins_with_func(PICO_DEFAULT_I2C_SDA_PIN, PICO_DEFAULT_I2C_SCL_PIN, GPIO_FUNC_I2C));
     debugMsg("[X] I2C HARDWARE SUCCESSFULLY SET [X]\r\n");
     sleep_ms(1000);
+    debugMsg("==================\r\n");
 #endif
 
     /*=========================================================*/
@@ -80,20 +86,13 @@ int main()
     gpio_init(DS18B20_PIN);
 
 
-    debugMsg("==================\r\n");
     debugMsg("INIT GPIO HARDWARE: ");
+    debugMsg("\n==================\r\n");
 
 #ifndef PICO_DEFAULT_LED_PIN
 #warning Programm requires a board with a regular LED
 #else
     gpio_set_dir(LED, GPIO_OUT);
-    gpio_set_dir(TEMPERATURE_OK, GPIO_OUT);
-    gpio_set_dir(PRESSURE_OK, GPIO_OUT);
-    gpio_set_dir(HUMIDITY_OK, GPIO_OUT);
-    gpio_set_dir(WATER_TEMP_OK, GPIO_OUT);
-    gpio_set_dir(PRESSURE_FSR_OK, GPIO_OUT);
-    gpio_set_dir(WATER_LEVEL_OK, GPIO_OUT);
-
     if (gpio_is_dir_out(LED) != GPIO_OUT)
     {
         debugMsg("[X] CHECK YOUR DEFAULT LED CONFIGURATION OF THE BOARD [X]\r\n");
@@ -102,75 +101,66 @@ int main()
     {
         __NOP();
     }
+
 #endif
+    gpio_set_dir(TEMPERATURE_OK, GPIO_OUT);
+    gpio_set_dir(PRESSURE_OK, GPIO_OUT);
+    gpio_set_dir(HUMIDITY_OK, GPIO_OUT);
+    gpio_set_dir(WATER_TEMP_OK, GPIO_OUT);
+    gpio_set_dir(PRESSURE_FSR_OK, GPIO_OUT);
+    gpio_set_dir(WATER_LEVEL_OK, GPIO_OUT);
 
     debugMsg("[X] GPIO HARDWARE SUCCESSFULLY SET [X]\r\n");
     sleep_ms(1000);
+
     debugMsg("==========================\r\n");
     debugMsg("OPERATION MODE STARTED: ");
     debugModMsg;
-    debugMsg("==========================\r\n");
     sleep_ms(1000);
+    debugMsg("==========================\r\n");
 
-    /*=========================================================*/
-    /*== BME280 SETTINGS ======================================*/
-    /*=========================================================*/
-    BME280_INIT();
 
-/*  BME280ChipID();
-    BME280_ReadComp();
-    BME280_SoftReset();
-    BME280_SetStandby(BME280_STBY_0_5);
-    BME280_Set_OSRS_h(BME280_OSRS_H_x1);
-    BME280_SetFilter(BME280_FILTER_16);
-    BME280_Set_OSRS_t(BME280_OSRS_T_x2);
-    BME280_Set_OSRS_p(BME280_OSRS_P_x16);
-    BME280_SetMode(BME280_NORMAL_MODE); 
-*/
-
-    /*!< Reading the register values !*/
-    BME280_READ_REGVALUE();
-
-/*     
-    BME280_Read_CTRL_MEAS();   
-    BME280_ReadMode();
-    BME280_ReadStandby();
-    BME280_Read_OSRS_h(); 
-*/
-    DS18B20_INIT();
-
-/*  if (DS18B20_Reset(DS18B20_PIN) == 1)
+    debugMsg("INIT ADC CONFIGURATION: ");
+    /*!< Init ADC for waterlevel sensor */
+    if(WATERLEVEL_ADC_SET() >= 3)
     {
-        debugMsg("\n[X] NO DEVICE found ...");
-        return -1000;
+        debugMsg("[X] ADC HARDWARE FAILED TO BE SET [X]\r\n");
     }
     else
     {
-        debugMsg("\n[X] DSB18B20 is ready");
-        DS18B20_Write_Byte(DS18B20_PIN, 0xCC);
-        DS18B20_Write_Byte(DS18B20_PIN, 0x4E);
-        DS18B20_Write_Byte(DS18B20_PIN, 0x00);
-        DS18B20_Write_Byte(DS18B20_PIN, 0x00);
-        DS18B20_Write_Byte(DS18B20_PIN, THERM_CMD_12BIT_RES);
-    } 
-*/
+        debugMsg("[X] ADC HARDWARE SUCCESSFULLY SET [X]\r\n");
+    }
+    
+    sleep_ms(1000);
+    debugMsg("======================\r\n");
+
+    debugMsg("INIT DMA CONFIGURATION: ");
+    /*!< Init DMA for waterlevel sensor */
+    WATERLEVEL_DMA_SET();
+    sleep_ms(1000);
+    debugMsg("======================\r\n");
+
+    /*!< Init BME280 Sensor */
+    BME280_Init();
+
+    /*!< Reading the register values */
+    BME280_Read_RegValue();
+
+    /*!< Init DS18B20 Sensor */
+    DS18B20_INIT();
 
     /*!< User Code starts here */
     while (true)
     {
         debugTerm();
-        BME280_RawData();
 
         int32_t bmeTemp;                    
         uint32_t bmePress;
         uint32_t bmeHum;
-        BME280_DataRead(bmeTemp, bmePress, bmeHum);
-        BME280_MeasurementTime();
+        BME280_Temp_Reading(bmeTemp, bmePress, bmeHum);
 
         toggleLed();
-        DS18B20_tempRead(DS18B20_PIN);     
-
-
+        DS18B20_tempRead(DS18B20_PIN);
 
 
         /*== TEST FUNCTION ==*/

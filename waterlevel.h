@@ -47,6 +47,7 @@ typedef float float32_t;
 /*=========================================================*/
 /*== PROTOTYPE DECLARATION ================================*/
 /*=========================================================*/
-
+uint8_t WATERLEVEL_ADC_SET(void);
+int8_t WATERLEVEL_DMA_SET(void);
 
 #endif

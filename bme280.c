@@ -771,7 +771,7 @@ void BME280_Read_CTRL_MEAS(void)
 /*!
 **************************************************************
  * @brief 
- * the ctrl_meas register has to be set
+ * 
  *
  *
  * @param[in]  deviceAddr Description
@@ -812,7 +812,7 @@ void BME280_RawData(void)
 /*!
 **************************************************************
  * @brief 
- * the ctrl_meas register has to be set
+ * 
  *
  *
  * @param[in]  deviceAddr Description
@@ -858,7 +858,7 @@ int32_t BME280_CompTemp(void)
 /*!
 **************************************************************
  * @brief 
- * the ctrl_meas register has to be set
+ * 
  *
  *
  * @param[in]  deviceAddr Description
@@ -909,7 +909,7 @@ uint32_t BME280_CompPressure(void)
 /*!
 **************************************************************
  * @brief 
- * the ctrl_meas register has to be set
+ * 
  *
  *
  * @param[in]  deviceAddr Description
@@ -970,7 +970,7 @@ uint32_t BME280_CompHumInt32(void)
 /*!
 **************************************************************
  * @brief 
- * the ctrl_meas register has to be set
+ * 
  *
  *
  * @param[in]  deviceAddr Description
@@ -985,7 +985,6 @@ uint32_t BME280_CompHumInt32(void)
  * 
 **************************************************************
  */
-
 void BME280_MeasurementTime(void)
 {
     float32_t timeTyp;
@@ -1148,7 +1147,24 @@ void BME280_MeasurementTime(void)
     debug2Val("[X] MeasurementRate: %f Hz\n[X] IIR-ResponseTime: %.2f ms\n", odrMs, rspTimeIIR);
     debug2Val("[X] Typ. MeasurementTime: %f ms\n[X] Max. MeasurementTime: %.2f ms\n", timeTyp, timeMax);
 }
-
+/*!
+**************************************************************
+ * @brief 
+ * 
+ *
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+**************************************************************
+ */
 void BME280_DataRead(int32_t temperature, uint32_t pressure, uint32_t humidity)
 {
     debugMsg("====================  BME280 SENSOR DATA READING STARTED =============\r\n");
@@ -1163,9 +1179,25 @@ void BME280_DataRead(int32_t temperature, uint32_t pressure, uint32_t humidity)
     humidity = BME280_CompHumInt32();
     debugVal("[X] Humidity: %.2f %% \r\n", humidity / 1024.0f);
 }
-
-
-void BME280_INIT(void)
+/*!
+**************************************************************
+ * @brief 
+ * 
+ *
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+**************************************************************
+ */
+void BME280_Init(void)
 {
     /*=========================================================*/
     /*== BME280 SETTINGS ======================================*/
@@ -1180,11 +1212,52 @@ void BME280_INIT(void)
     BME280_Set_OSRS_p(BME280_OSRS_P_x16);
     BME280_SetMode(BME280_NORMAL_MODE);
 }
-
-void BME280_READ_REGVALUE(void)
+/*!
+**************************************************************
+ * @brief 
+ * 
+ *
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+**************************************************************
+ */
+void BME280_Read_RegValue(void)
 {
     BME280_Read_CTRL_MEAS();
     BME280_ReadMode();
     BME280_ReadStandby();
     BME280_Read_OSRS_h();
-};
+}
+/*!
+**************************************************************
+ * @brief 
+ * 
+ *
+ *
+ * @param[in]  deviceAddr Description
+ * @param[out]   
+ *
+ * @return Result of 
+ *
+ * @retval = 0 -> Success
+ * @retval > 0 -> Warning
+ * @retval < 0 -> Fail
+ *
+ * 
+**************************************************************
+ */
+void BME280_Temp_Reading(int32_t bmeTemp, uint32_t bmePress, uint32_t bmeHum)
+{
+    BME280_RawData();
+    BME280_DataRead(bmeTemp, bmePress, bmeHum);
+    BME280_MeasurementTime();
+}
