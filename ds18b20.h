@@ -54,5 +54,6 @@ uint8_t DS18B20_Read_Byte(uint8_t ds18b20_gpio_pin);
 uint16_t DS18B20_Request_Temp(uint8_t ds18b20_gpio_pin);
 uint8_t DS18B20_Crc8_Check(uint8_t *data, uint8_t len);
 float32_t DS18B20_tempRead(uint8_t ds18b20_gpio_pin);
+int16_t DS18B20_INIT(void);
 
 #endif

@@ -177,3 +177,21 @@ uint8_t DS18B20_Crc8_Check(uint8_t *data, uint8_t len)
 	}
 	return crc;
 }
+
+int16_t DS18B20_INIT(void)
+{
+	if (DS18B20_Reset(DS18B20_PIN) == 1)
+	{
+		debugMsg("\n[X] NO DEVICE found ...");
+		return -1000;
+	}
+	else
+	{
+		debugMsg("\n[X] DSB18B20 is ready");
+		DS18B20_Write_Byte(DS18B20_PIN, 0xCC);
+		DS18B20_Write_Byte(DS18B20_PIN, 0x4E);
+		DS18B20_Write_Byte(DS18B20_PIN, 0x00);
+		DS18B20_Write_Byte(DS18B20_PIN, 0x00);
+		DS18B20_Write_Byte(DS18B20_PIN, THERM_CMD_12BIT_RES);
+	}
+}

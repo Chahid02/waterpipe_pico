@@ -1163,3 +1163,28 @@ void BME280_DataRead(int32_t temperature, uint32_t pressure, uint32_t humidity)
     humidity = BME280_CompHumInt32();
     debugVal("[X] Humidity: %.2f %% \r\n", humidity / 1024.0f);
 }
+
+
+void BME280_INIT(void)
+{
+    /*=========================================================*/
+    /*== BME280 SETTINGS ======================================*/
+    /*=========================================================*/
+    BME280ChipID();
+    BME280_ReadComp();
+    BME280_SoftReset();
+    BME280_SetStandby(BME280_STBY_0_5);
+    BME280_Set_OSRS_h(BME280_OSRS_H_x1);
+    BME280_SetFilter(BME280_FILTER_16);
+    BME280_Set_OSRS_t(BME280_OSRS_T_x2);
+    BME280_Set_OSRS_p(BME280_OSRS_P_x16);
+    BME280_SetMode(BME280_NORMAL_MODE);
+}
+
+void BME280_READ_REGVALUE(void)
+{
+    BME280_Read_CTRL_MEAS();
+    BME280_ReadMode();
+    BME280_ReadStandby();
+    BME280_Read_OSRS_h();
+};

@@ -35,6 +35,7 @@
 #include "bme280.h"
 #include "waterpipe.h"
 #include "ds18b20.h"
+#include "waterlevel.h"
 
 
 int main()
@@ -114,7 +115,9 @@ int main()
     /*=========================================================*/
     /*== BME280 SETTINGS ======================================*/
     /*=========================================================*/
-    BME280ChipID();
+    BME280_INIT();
+
+/*  BME280ChipID();
     BME280_ReadComp();
     BME280_SoftReset();
     BME280_SetStandby(BME280_STBY_0_5);
@@ -122,15 +125,21 @@ int main()
     BME280_SetFilter(BME280_FILTER_16);
     BME280_Set_OSRS_t(BME280_OSRS_T_x2);
     BME280_Set_OSRS_p(BME280_OSRS_P_x16);
-    BME280_SetMode(BME280_NORMAL_MODE);
+    BME280_SetMode(BME280_NORMAL_MODE); 
+*/
 
     /*!< Reading the register values !*/
+    BME280_READ_REGVALUE();
+
+/*     
     BME280_Read_CTRL_MEAS();   
     BME280_ReadMode();
     BME280_ReadStandby();
-    BME280_Read_OSRS_h();
-   
-    if (DS18B20_Reset(DS18B20_PIN) == 1)
+    BME280_Read_OSRS_h(); 
+*/
+    DS18B20_INIT();
+
+/*  if (DS18B20_Reset(DS18B20_PIN) == 1)
     {
         debugMsg("\n[X] NO DEVICE found ...");
         return -1000;
@@ -143,8 +152,8 @@ int main()
         DS18B20_Write_Byte(DS18B20_PIN, 0x00);
         DS18B20_Write_Byte(DS18B20_PIN, 0x00);
         DS18B20_Write_Byte(DS18B20_PIN, THERM_CMD_12BIT_RES);
-    }
-
+    } 
+*/
 
     /*!< User Code starts here */
     while (true)

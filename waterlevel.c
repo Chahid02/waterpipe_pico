@@ -18,10 +18,18 @@
 /*== PRIVATE INCLUDES =====================================*/
 /*=========================================================*/
 
-#include "waterpipe.h" /* Insert for Error Log Function! */
+#include "waterpipe.h" /*!< Insert for Error Log Function! */
 #include "ds18b20.h"
 #include "waterlevel.h"
 
 /*=========================================================*/
 /*== WATERLEVEL FUNCTIONS =================================*/
 /*=========================================================*/
+
+int adc_waterlevel()
+{
+
+	stdio_init_all();
+	adc_gpio_init(ADC_CHANNEL0);
+	return 0;
+}
