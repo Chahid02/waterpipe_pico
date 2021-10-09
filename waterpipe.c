@@ -14,6 +14,7 @@
 /*=========================================================*/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
 #include <math.h>
@@ -36,6 +37,7 @@
 #include "waterpipe.h"
 #include "ds18b20.h"
 #include "waterlevel.h"
+#include "hc05.h"
 
 int main()
 {
