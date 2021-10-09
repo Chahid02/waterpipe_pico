@@ -92,7 +92,6 @@ void WATERLEVEL_RUN(void)
     //adc_fifo_drain();
     for (size_t i = 0; i < ADC_SAMPLES - 1; i++)
     {
-
         buff += (adcWaterLevel[i] * conversion_factor);
     }
     adc_fifo_drain();
