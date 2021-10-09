@@ -25,9 +25,9 @@ typedef float float32_t;
 /*!
 **************************************************************
 * @brief Sample Rate => 1 sample = 96 cycles = 2us
-* 0/96  = 500 000 Hz 	-> 500 kS/s 
-* 960   = 50 000 Hz 	-> 50 kS/s
-* 9600  = 5 000 Hz 		-> 5 kS/s
+* 0/96  = 500 000 Hz             -> 500 kS/s 
+* 960   = 50 000 Hz             -> 50 kS/s
+* 9600  = 5 000 Hz              -> 5 kS/s
 * @note For DMA-Interaction 0.5 MHz is the max. memory
 * 		access-time
 **************************************************************

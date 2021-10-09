@@ -61,7 +61,7 @@ int main()
 #error "Seems hardware/i2c.h" is missing
     DebugMsg("Default I2C pins were not defined\r\n");
 #else
-
+<< !=  =! >> ====
     gpio_set_function(PICO_DEFAULT_I2C_SDA_PIN, GPIO_FUNC_I2C);
     gpio_set_function(PICO_DEFAULT_I2C_SCL_PIN, GPIO_FUNC_I2C);
     gpio_pull_up(PICO_DEFAULT_I2C_SDA_PIN);

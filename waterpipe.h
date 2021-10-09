@@ -30,7 +30,7 @@
 /*=========================================================*/
 
 /*!< SET GPIO MACROS */
-#define LED 25
+#define LED             25
 #define TEMPERATURE_OK  9
 #define PRESSURE_OK     10
 #define HUMIDITY_OK     11

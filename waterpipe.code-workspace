@@ -32,6 +32,8 @@
 			"stdlib.h": "c",
 			"ds18b20.h": "c",
 			"random": "c"
-		}
+		},
+		"editor.fontFamily": "Cascadia Code PL,'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+		"editor.fontSize": 17
 	}
 }
