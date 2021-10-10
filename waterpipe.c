@@ -87,7 +87,7 @@ int main()
     gpio_init(DS18B20_PIN);
 
     debugMsg("INIT GPIO HARDWARE: ");
-    debugMsg("\n==================\r\n");
+    //debugMsg("\n==================\r\n");
 
 #ifndef PICO_DEFAULT_LED_PIN
 #warning Programm requires a board with a regular LED
@@ -139,7 +139,8 @@ int main()
     sleep_ms(1000);
     debugMsg("======================\r\n");
 
-    /*!< Init BME280 Sensor */
+
+
     BME280_Init();
 
     /*!< Reading the register values */
@@ -148,6 +149,21 @@ int main()
     /*!< Init DS18B20 Sensor */
     DS18B20_INIT();
 
+
+    /*!< SETUP HC-05 Module */
+    HC05_PROGRAMM_SETUP();
+    HC05_CHECK(UART_ID0, HC05_CHECK_NAME,"NAME-SETUP:\n");   
+    sleep_ms(1000); 
+    HC05_CHECK(UART_ID0, HC05_CHECK_ADDR,"ADRESS-SETUP:\n");
+    sleep_ms(1000);
+
+    HC05_CHECK(UART_ID0, HC05_CHECK_UART,"UART-SETUP:");   
+    sleep_ms(1000);  
+
+    HC05_CHECK(UART_ID0, HC05_CHECK_ROLE,"ROLE-SETUP:");   
+    sleep_ms(1000); 
+    HC05_CHECK(UART_ID0, HC05_CHECK_PWD,"PIN-SETUP:");   
+    sleep_ms(1000); 
     /*!< User Code starts here */
     while (true)
     {

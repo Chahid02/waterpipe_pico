@@ -187,7 +187,7 @@ int16_t DS18B20_INIT(void)
     }
     else
     {
-        debugMsg("\n[X] DSB18B20 is ready");
+        debugMsg("\n[X] DSB18B20 is ready\n");
         DS18B20_Write_Byte(DS18B20_PIN, 0xCC);
         DS18B20_Write_Byte(DS18B20_PIN, 0x4E);
         DS18B20_Write_Byte(DS18B20_PIN, 0x00);
