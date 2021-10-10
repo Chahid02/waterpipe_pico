@@ -27,7 +27,7 @@
 /*== WATERLEVEL FUNCTIONS =================================*/
 /*=========================================================*/
 
-uint8_t WATERLEVEL_ADC_SET(void)
+uint8_t WATERLEVEL_AdcSet(void)
 {
     adc_gpio_init(26);
     adc_init();
@@ -39,7 +39,7 @@ uint8_t WATERLEVEL_ADC_SET(void)
 
 dma_channel_config dma_config;
 int8_t dma_channel;
-int8_t WATERLEVEL_DMA_SET(void)
+int8_t WATERLEVEL_DmaSet(void)
 {
     dma_channel = dma_claim_unused_channel(true);
     if (dma_channel == -1)
@@ -76,7 +76,7 @@ int8_t WATERLEVEL_DMA_SET(void)
     return 0;
 }
 
-void WATERLEVEL_RUN(void)
+void WATERLEVEL_Run(void)
 {
     uint16_t adcWaterLevel[ADC_SAMPLES];
     const float32_t conversion_factor = 3.3f / (1 << 12);

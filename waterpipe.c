@@ -121,7 +121,7 @@ int main()
 
     debugMsg("INIT ADC CONFIGURATION: ");
     /*!< Init ADC for waterlevel sensor */
-    if (WATERLEVEL_ADC_SET() >= 3)
+    if (WATERLEVEL_AdcSet() >= 3)
     {
         debugMsg("[X] ADC HARDWARE FAILED TO BE SET [X]\r\n");
     }
@@ -135,58 +135,52 @@ int main()
 
     debugMsg("INIT DMA CONFIGURATION: ");
     /*!< Init DMA for waterlevel sensor */
-    WATERLEVEL_DMA_SET();
+    WATERLEVEL_DmaSet();
     sleep_ms(1000);
     debugMsg("======================\r\n");
 
 
-
+    /*!< Init BME280 Sensor */
     BME280_Init();
 
     /*!< Reading the register values */
     BME280_Read_RegValue();
 
     /*!< Init DS18B20 Sensor */
-    DS18B20_INIT();
-
+    DS18B20_Init();
 
     /*!< SETUP HC-05 Module */
-    HC05_PROGRAMM_SETUP();
-    HC05_CHECK(UART_ID0, HC05_CHECK_NAME,"NAME-SETUP:\n");   
+    HC05_ProgSetup();
+    HC05_Check(UART_ID0, HC05_CHECK_NAME,"NAME-SETUP:\n");   
     sleep_ms(1000); 
-    HC05_CHECK(UART_ID0, HC05_CHECK_ADDR,"ADRESS-SETUP:\n");
+    HC05_Check(UART_ID0, HC05_CHECK_ADDR,"ADRESS-SETUP:\n");
     sleep_ms(1000);
-
-    HC05_CHECK(UART_ID0, HC05_CHECK_UART,"UART-SETUP:");   
+    HC05_Check(UART_ID0, HC05_CHECK_UART,"UART-SETUP:");   
     sleep_ms(1000);  
+    HC05_Check(UART_ID0, HC05_CHECK_ROLE,"ROLE-SETUP:");   
+    sleep_ms(1000); 
+    HC05_Check(UART_ID0, HC05_CHECK_PWD,"PIN-SETUP:");   
+    sleep_ms(1000); 
 
-    HC05_CHECK(UART_ID0, HC05_CHECK_ROLE,"ROLE-SETUP:");   
-    sleep_ms(1000); 
-    HC05_CHECK(UART_ID0, HC05_CHECK_PWD,"PIN-SETUP:");   
-    sleep_ms(1000); 
     /*!< User Code starts here */
     while (true)
     {
 
         debugTerm();
-
+        while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)
+        {
+            /*!< Waiting for updated values */
+        };
         int32_t bmeTemp;
         uint32_t bmePress;
         uint32_t bmeHum;
         BME280_Temp_Reading(bmeTemp, bmePress, bmeHum);
-
+         
         toggleLed();
 
-        WATERLEVEL_RUN();
+        WATERLEVEL_Run();
 
         DS18B20_tempRead(DS18B20_PIN);
-
-        /*== TEST FUNCTION ==*/
-        /*  while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)
-        {
-            debugMsg("=================================== STORING\n");
-            //return -1;
-        }; */
 
         //sleep_ms(500);
     }

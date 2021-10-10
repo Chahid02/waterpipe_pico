@@ -39,9 +39,8 @@
 #include "waterpipe.h" /* Insert for Error Log Function! */
 #include "hc05.h"
 
-void HC05_CHECK(uart_inst_t *uart, uint8_t *sendCommand, uint8_t *getCommand)
+void HC05_Check(uart_inst_t *uart, uint8_t *sendCommand, uint8_t *getCommand)
 {
-
     uart_puts(uart, sendCommand);
     int8_t HC_05_NL;
     size_t maxSize = 100;
@@ -85,7 +84,7 @@ void HC05_CHECK(uart_inst_t *uart, uint8_t *sendCommand, uint8_t *getCommand)
     debug2Val("[X] Checking %s %s\r\n", getCommand, buffRx);
 }
 
-uint8_t HC05_PROGRAMM_SETUP(void)
+uint8_t HC05_ProgSetup(void)
 {
 
     debugMsg("====================  HC-05 SETUP PROCESS STARTED  ====================\n");

@@ -159,7 +159,6 @@ float32_t DS18B20_tempRead(uint8_t ds18b20_gpio_pin)
 
 uint8_t DS18B20_Crc8_Check(uint8_t *data, uint8_t len)
 {
-
     uint8_t temp;
     uint8_t databyte;
     uint8_t crc = 0;
@@ -178,7 +177,7 @@ uint8_t DS18B20_Crc8_Check(uint8_t *data, uint8_t len)
     return crc;
 }
 
-int16_t DS18B20_INIT(void)
+int16_t DS18B20_Init(void)
 {
     if (DS18B20_Reset(DS18B20_PIN) == 1)
     {

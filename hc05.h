@@ -45,7 +45,7 @@ typedef float float32_t;
 
 
 
-uint8_t HC05_PROGRAMM_SETUP(void);
-void HC05_CHECK(uart_inst_t *uart, uint8_t *sendCommand, uint8_t *getCommand);
+uint8_t HC05_ProgSetup(void);
+void HC05_Check(uart_inst_t *uart, uint8_t *sendCommand, uint8_t *getCommand);
 
 #endif
