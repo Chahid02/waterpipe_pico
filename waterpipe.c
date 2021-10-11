@@ -155,9 +155,11 @@ int main()
     HC05_PROG_SETUP();
 
 
- /*    irq_set_exclusive_handler(UART0_IRQ, HC05_UART_RX_READ_IRQ);
+ /*    
+    irq_set_exclusive_handler(UART0_IRQ, HC05_UART_RX_READ_IRQ);
     irq_set_enabled(UART0_IRQ, true);
-    uart_set_irq_enables(UART_ID0, true, false); */
+    uart_set_irq_enables(UART_ID0, true, false); 
+*/
     IRQ_SETUP_EN(HC05_UART_RX_READ_IRQ);
 
     HC05_SET(UART_ID0,HC05_SET_NAME);
