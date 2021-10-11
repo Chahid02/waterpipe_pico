@@ -32,6 +32,7 @@ uint8_t WATERLEVEL_AdcSet(void)
     adc_gpio_init(26);
     adc_init();
     adc_select_input(0);
+    //adc_set_round_robin(0x01);
     adc_fifo_setup(true, true, 0, false, false);
     adc_set_clkdiv(CLOCK_DIV);
     return adc_get_selected_input();

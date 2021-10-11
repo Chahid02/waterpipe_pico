@@ -120,7 +120,7 @@ uint8_t HC05_PROG_FINISHED(void)
     gpio_set_function(UART1_RX, GPIO_FUNC_UART);
     uart_set_hw_flow(UART_ID0, false, false);
     uart_set_format(UART_ID0, DATA_BITS, STOP_BITS, PARITY_BIT);
-    uart_set_fifo_enabled(UART_ID0, true);
+    uart_set_fifo_enabled(UART_ID0, false);
     gpio_put(HC05_PROG_GPIO, false);
     sleep_ms(1000);
     if (!gpio_get_out_level(HC05_PROG_GPIO))

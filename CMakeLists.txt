@@ -40,7 +40,8 @@ target_link_libraries(  waterpipe
                         hardware_adc 
                         hardware_dma 
                         hardware_uart 
-                        hardware_irq)
+                        hardware_irq
+                        pico_multicore)
 
 # Add any user requested libraries
 target_link_libraries(waterpipe)

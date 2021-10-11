@@ -294,7 +294,7 @@ int8_t BME280_READ_STATUS(void)
     i2c_read_blocking(i2c_default, BME280_I2C_ADDR_PRIMARY, ptrData, lenRead, false);
     sleep_ms(10);
     debugVal("[X] Reading Status Register:0x%02X [X] \r\n", (*ptrData));
-    *ptrData &= ~(BME280_STATUS_MSK); /*== clear unused or corrupt bits ==*/
+    *ptrData &= ~(BME280_STATUS_MSK); /*!< clear unused or corrupt bits */
     switch (*ptrData)
     {
     case 0x09:
