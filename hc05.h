@@ -33,7 +33,7 @@ typedef float float32_t;
 #define BAUD_RATE_DEFAULT   (int16_t) 9600
 
 #define HC05_CHECK_NAME         "AT+NAME?\r\n"
-#define HC05_SET_NAME           "AT+NAME=HC-06\r\n"
+#define HC05_SET_NAME           "AT+NAME=WATERPIPE\r\n"
 #define HC05_CHECK_ADDR         "AT+ADDR?\r\n"
 #define HC05_CHECK_VERSION      "AT+VERSION?\r\n"
 #define HC05_CHECK_UART         "AT+UART?\r\n"
@@ -49,5 +49,9 @@ uint8_t HC05_ProgSetup(void);
 void HC05_Check(uart_inst_t *uart, uint8_t *sendCommand);
 void HC05_Set(uart_inst_t *uart, uint8_t *sendCommand);
 uint8_t HC05_ProgFinished(void);
-
+void HC05_UART_RX_IRQ(void);
+void HC05_UART_RX_READ_IRQ(void);
+void IRQ_SETUP_EN(irq_handler_t handler);
+void IRQ_SETUP_DIS(irq_handler_t handler);
+void HC05_READ_CHECK(uart_inst_t *uart, uint8_t *sendCommand);
 #endif

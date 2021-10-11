@@ -28,6 +28,8 @@
 #include "hardware/i2c.h"
 #include "hardware/adc.h"
 #include "hardware/dma.h"
+#include "hardware/uart.h"
+#include "hardware/irq.h"
 
 /*=========================================================*/
 /*== PRIVATE INCLUDES =====================================*/
@@ -153,10 +155,17 @@ int main()
     HC05_ProgSetup();
 
 
+    irq_set_exclusive_handler(UART0_IRQ, HC05_UART_RX_READ_IRQ);
+    irq_set_enabled(UART0_IRQ, true);
+    uart_set_irq_enables(UART_ID0, true, false);
 
+
+    HC05_Set(UART_ID0,HC05_SET_NAME);
+
+    HC05_Set(UART_ID0,HC05_SET_PWD);
 
     HC05_Check(UART_ID0,HC05_CHECK_NAME);
-
+/*     
     HC05_Check(UART_ID0,HC05_CHECK_ADDR);
   
     HC05_Check(UART_ID0,HC05_CHECK_VERSION);
@@ -165,7 +174,7 @@ int main()
    
     HC05_Check(UART_ID0,HC05_CHECK_PWD);
   
-    HC05_Check(UART_ID0,HC05_CHECK_ROLE);
+    HC05_Check(UART_ID0,HC05_CHECK_ROLE); */
   
     HC05_ProgFinished();
 

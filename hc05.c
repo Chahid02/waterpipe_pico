@@ -50,50 +50,36 @@
 } */
 
 
-void HC05_Check(uart_inst_t *uart, uint8_t *sendCommand)
-{
-
-    uart_puts(uart, sendCommand);
-
-    int8_t HC_05_NL;
-    size_t maxSize = 100;
-    uint8_t buffRx[maxSize];
-    memset(buffRx,'\0',maxSize);
-    uint8_t RxCount;
-    uint8_t getCharRx;
-    uint8_t *arrayRtr;
-    uint8_t searchPoint='\n';
-    uint8_t searchNL = '+';
-    uint8_t HC_OK[] = "\nOK";
-    uint8_t *arrayOK = NULL;
-    uint8_t carriageReturn = 0;
-    while ((arrayOK = strstr(buffRx, HC_OK)) == NULL)
-    {
-    getCharRx = uart_getc(UART_ID0); 
-    //printf("%d-Nr: %s\r\n",RxCount, buffRx);
-    buffRx[RxCount] = getCharRx;
-    //buffRx[RxCount+1]='\0'; 
-    //printf("%d-Nr: %s\r\n",RxCount, buffRx);
-    RxCount++;
-    }
-    printf("%s\r\n",buffRx);
-    memset(buffRx,'\0',maxSize);
-    sleep_ms(1000);
-
-} 
 
 
 void HC05_Set(uart_inst_t *uart, uint8_t *sendCommand)
 {
-uart_puts(uart,sendCommand);
+    debugMsg("[X] SET [X]\r\n");
+
+    while (uart_is_writable(uart) )
+    {
+        uart_puts(uart, sendCommand);
+    }
+    
+    sleep_ms(1000);
     
 }
 
+void HC05_Check(uart_inst_t *uart, uint8_t *sendCommand)
+{
+    debugMsg("[X] CHECK [X]\r\n");
 
+    while (uart_is_writable(uart) )
+    {
+        uart_puts(uart, sendCommand);
+    }
+    
+    sleep_ms(1000);
+    
+}
 
 uint8_t HC05_ProgSetup(void)
 {
-
     debugMsg("====================  HC-05 SETUP PROCESS STARTED  ====================\n");
     gpio_init(HC05_PROG_GPIO);
     gpio_set_dir(HC05_PROG_GPIO, GPIO_OUT);
@@ -127,9 +113,7 @@ uint8_t HC05_ProgSetup(void)
 
 uint8_t HC05_ProgFinished(void)
 {
-
     debugMsg("====================  HC-05 FINISHED PROCESS STARTED  ================\n");
-    
     uart_deinit(UART_ID0);
     uart_init(UART_ID0, 115200);
     gpio_set_function(UART0_TX, GPIO_FUNC_UART);
@@ -181,6 +165,17 @@ uint8_t HC05_INIT(void)
 }
 
 uint16_t getCharRxCnt = 0;
+void HC05_UART_RX_READ_IRQ(void)
+{
+    uint8_t RecData;
+    while (uart_is_readable(UART_ID0))
+    {       
+        uint8_t getCharRx = uart_getc(UART_ID0);
+        //uart_read_blocking(UART_ID0, &RecData, sizeof(RecData));
+        printf("%c",getCharRx);
+    }
+}
+
 void HC05_UART_RX_IRQ(void)
 {
     while (uart_is_readable(UART_ID0))
@@ -188,7 +183,7 @@ void HC05_UART_RX_IRQ(void)
         uint8_t getCharRx = uart_getc(UART_ID0);
         if (uart_is_writable(UART_ID0))
         {
-            getCharRx++;
+            getCharRx;
             uart_putc(UART_ID0, getCharRx);
         }
         else
@@ -199,9 +194,45 @@ void HC05_UART_RX_IRQ(void)
     }
 }
 
+
 void IRQ_SETUP(void)
 {
     irq_set_exclusive_handler(UART_IRQ, HC05_UART_RX_IRQ);
     irq_set_enabled(UART_IRQ, true);
     uart_set_irq_enables(UART_ID0, true, false);
 }
+
+
+
+
+
+
+
+/* 
+void HC05_Check(uart_inst_t *uart, uint8_t *sendCommand)
+{
+    debugMsg("[X] CHECK [X]\r\n");
+    uart_puts(uart, sendCommand);
+
+    size_t maxSize = 32;
+    uint8_t buffRx[maxSize];
+    memset(buffRx,'\0',maxSize);
+    uint8_t RxCount;
+    uint8_t getCharRx;
+    uint8_t HC_OK[] = "\nOK";
+    uint8_t *arrayOK = NULL;
+    while ((arrayOK = strstr(buffRx, HC_OK)) == NULL)
+    {
+    getCharRx = uart_getc(UART_ID0); 
+    //printf("%d-Nr: %s\r\n",RxCount, buffRx);
+    buffRx[RxCount] = getCharRx;
+    //buffRx[RxCount+1]='\0'; 
+    //printf("%d-Nr: %s\r\n",RxCount, buffRx);
+    RxCount++;
+    }
+    printf("%s\r\n",buffRx);
+    memset(buffRx,'\0',maxSize);
+    sleep_ms(1000);
+
+}  
+*/
