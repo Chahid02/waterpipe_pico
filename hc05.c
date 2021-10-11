@@ -110,11 +110,11 @@ uint8_t HC05_ProgSetup(void)
     gpio_put(HC05_PROG_GPIO, true);
       if (!gpio_get_out_level(HC05_PROG_GPIO))
     {
-        debugVal("[X] PROGRAMMING PIN %d ->KEY PUT: LOW [X] \r\n", HC05_PROG_GPIO);
+        debugVal("[X] PROGRAMMING GPIO_PIN %d ->KEY PUT: LOW [X] \r\n", HC05_PROG_GPIO);
     }
     else
     {
-        debugVal("[X] PROGRAMMING PIN %d ->KEY PUT: HIGH [X] \r\n", HC05_PROG_GPIO);
+        debugVal("[X] PROGRAMMING GPIO_PIN %d ->KEY PUT: HIGH [X] \r\n", HC05_PROG_GPIO);
         debugMsg("[X] PROGRAMMING STARTED [X]\r\n");
     }
    sleep_ms(1000);
@@ -140,11 +140,11 @@ uint8_t HC05_ProgFinished(void)
     sleep_ms(1000);
     if (!gpio_get_out_level(HC05_PROG_GPIO))
     {
-        debugVal("[X] PROGRAMMING PIN %d ->KEY PUT: LOW [X] \r\n", HC05_PROG_GPIO);
+        debugVal("[X] PROGRAMMING GPIO_PIN %d ->KEY PUT: LOW [X] \r\n", HC05_PROG_GPIO);
     }
     else
     {
-        debugVal("[X] PROGRAMMING PIN %d ->KEY PUT: HIGH [X] \r\n", HC05_PROG_GPIO);
+        debugVal("[X] PROGRAMMING GPIO_PIN %d ->KEY PUT: HIGH [X] \r\n", HC05_PROG_GPIO);
         debugMsg("[X] PROGRAMMING FINISHED [X]\r\n");
     }
     sleep_ms(1000);
