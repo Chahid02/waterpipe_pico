@@ -149,41 +149,34 @@ int main()
     BME280_Read_RegValue();
 
     /*!< Init DS18B20 Sensor */
-    DS18B20_Init();
+    DS18B20_INIT();
 
     /*!< SETUP HC-05 Module */
-    HC05_ProgSetup();
+    HC05_PROG_SETUP();
 
 
-    irq_set_exclusive_handler(UART0_IRQ, HC05_UART_RX_READ_IRQ);
+ /*    irq_set_exclusive_handler(UART0_IRQ, HC05_UART_RX_READ_IRQ);
     irq_set_enabled(UART0_IRQ, true);
-    uart_set_irq_enables(UART_ID0, true, false);
+    uart_set_irq_enables(UART_ID0, true, false); */
+    IRQ_SETUP_EN(HC05_UART_RX_READ_IRQ);
 
-
-    HC05_Set(UART_ID0,HC05_SET_NAME);
-
-    HC05_Set(UART_ID0,HC05_SET_PWD);
-
-    HC05_Check(UART_ID0,HC05_CHECK_NAME);
-/*     
-    HC05_Check(UART_ID0,HC05_CHECK_ADDR);
+    HC05_SET(UART_ID0,HC05_SET_NAME);
+    HC05_SET(UART_ID0,HC05_SET_PWD);
+    HC05_CHECK(UART_ID0,HC05_CHECK_NAME);  
+    HC05_CHECK(UART_ID0,HC05_CHECK_ADDR);
+    HC05_CHECK(UART_ID0,HC05_CHECK_VERSION);
+    HC05_CHECK(UART_ID0,HC05_CHECK_UART); 
+    HC05_CHECK(UART_ID0,HC05_CHECK_PWD); 
+    HC05_CHECK(UART_ID0,HC05_CHECK_ROLE); 
   
-    HC05_Check(UART_ID0,HC05_CHECK_VERSION);
-
-    HC05_Check(UART_ID0,HC05_CHECK_UART);
-   
-    HC05_Check(UART_ID0,HC05_CHECK_PWD);
-  
-    HC05_Check(UART_ID0,HC05_CHECK_ROLE); */
-  
-    HC05_ProgFinished();
+    HC05_PROG_FINISHED();
 
     /*!< User Code starts here */
     while (true)
     {
 
         debugTerm();
-        while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE)
+        while (BME280_READ_STATUS() & BME280_STATUS_IM_UPDATE)
         {
             /*!< Waiting for updated values */
         };
@@ -196,7 +189,7 @@ int main()
 
         WATERLEVEL_Run();
 
-        DS18B20_tempRead(DS18B20_PIN);
+        DS18B20_TEMP_READ(DS18B20_PIN);
 
         //sleep_ms(500);
     }

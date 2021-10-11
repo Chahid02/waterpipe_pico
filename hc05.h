@@ -45,10 +45,10 @@ typedef float float32_t;
 
 
 
-uint8_t HC05_ProgSetup(void);
-void HC05_Check(uart_inst_t *uart, uint8_t *sendCommand);
-void HC05_Set(uart_inst_t *uart, uint8_t *sendCommand);
-uint8_t HC05_ProgFinished(void);
+uint8_t HC05_PROG_SETUP(void);
+void HC05_CHECK(uart_inst_t *uart, uint8_t *sendCommand);
+void HC05_SET(uart_inst_t *uart, uint8_t *sendCommand);
+uint8_t HC05_PROG_FINISHED(void);
 void HC05_UART_RX_IRQ(void);
 void HC05_UART_RX_READ_IRQ(void);
 void IRQ_SETUP_EN(irq_handler_t handler);

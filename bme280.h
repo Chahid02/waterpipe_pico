@@ -210,18 +210,18 @@ int32_t press, temp, hum;
 /*== PROTOTYPE DECLARATION ================================*/
 /*=========================================================*/
 
-int8_t BME280ChipID(void);
-int8_t BME280_ReadStatus(void);
-int8_t BME280_SoftReset(void);
-int8_t BME280_SetMode(uint8_t deviceMode);
-int8_t BME280_ReadMode(void);
-int8_t BME280_ReadComp(void);
-void printCompParam(struct CompData *ptrComp);
-void BME280_SetStandby(uint8_t tsb);
-void BME280_ReadStandby(void);
-void BME280_SetFilter(uint8_t filter);
-void BME280_ReadFilter(void);
-void BME280_Set_OSRS_h(uint8_t osrs_h);
+int8_t BME280_CHIPID(void);
+int8_t BME280_READ_STATUS(void);
+int8_t BME280_SOFT_RESET(void);
+int8_t BME280_SET_MODE(uint8_t deviceMode);
+int8_t BME280_READ_MODE(void);
+int8_t BME280_READ_COMP(void);
+void BME280_PRINT_COMP(struct CompData *ptrComp);
+void BME280_SET_STANDBY(uint8_t tsb);
+void BME280_READ_STANDBY(void);
+void BME280_SET_FILTER(uint8_t filter);
+void BME280_READ_FILTER(void);
+void BME280_SET_OSRS_H(uint8_t osrs_h);
 void BME280_Read_OSRS_h(void);
 void BME280_Set_OSRS_t(uint8_t osrs_t);
 void BME280_Set_OSRS_p(uint8_t osrs_p);

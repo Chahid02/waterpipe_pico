@@ -57,7 +57,7 @@
  *
 **************************************************************
  */
-int8_t BME280ChipID(void)
+int8_t BME280_CHIPID(void)
 {
     debugMsg("====================  BME280 CHIP INIT PROGRESS STARTED  ============= \r\n");
     size_t lenChipAddr = sizeof(BME280_CHIP_ID_ADDR);
@@ -145,7 +145,7 @@ int8_t BME280ChipID(void)
  * 
 **************************************************************
  */
-int8_t BME280_SoftReset(void)
+int8_t BME280_SOFT_RESET(void)
 {
     debugMsg("====================  BME280 SOFTRESET PROGRESS STARTED  ============= \r\n");
     size_t lenSoftRst = sizeof(BME280_SOFTRESET_ADDR) + sizeof(BME280_SOFTRESET_VALUE);
@@ -203,7 +203,7 @@ int8_t BME280_SoftReset(void)
  * 
 **************************************************************
  */
-int8_t BME280_SetMode(uint8_t deviceMode)
+int8_t BME280_SET_MODE(uint8_t deviceMode)
 {
     debugMsg("====================  BME280 MODE SETTING STARTED  ===================\r\n");
     uint8_t ptrWrite[] = {BME280_CTRL_MEAS_ADDR};
@@ -250,7 +250,7 @@ int8_t BME280_SetMode(uint8_t deviceMode)
  * 
 **************************************************************
  */
-int8_t BME280_ReadMode(void)
+int8_t BME280_READ_MODE(void)
 {
     debugMsg("====================  BME280 MODE STATUS STARTED  ================== \r\n");
     uint8_t ptrData[] = {BME280_CTRL_MEAS_ADDR};
@@ -282,7 +282,7 @@ int8_t BME280_ReadMode(void)
  * 
 **************************************************************
  */
-int8_t BME280_ReadStatus(void)
+int8_t BME280_READ_STATUS(void)
 {
     debugMsg("====================  BME280 UPDATE STATUS STARTED  ==================\r\n");
     uint8_t ptrData[] = {BME280_REGISTER_STATUS};
@@ -335,7 +335,7 @@ int8_t BME280_ReadStatus(void)
  * 
 **************************************************************
  */
-int8_t BME280_ReadComp(void)
+int8_t BME280_READ_COMP(void)
 {
     debugMsg("====================  BME280 COMP DATA READ STARTED  =================\r\n");
     /*== Table 16 : Compensation parameter storage, naming and data type ==*/
@@ -381,7 +381,7 @@ int8_t BME280_ReadComp(void)
     ptrComp->dig_H5 = (int16_t)(((buffer[30] & ~(0xF0)) >> 4) | (buffer[31] << 4)); /*== 0xE5[7:4] / 0xE6 dig_H5 [3:0] / [11:4] int16_t ==*/
     ptrComp->dig_H6 = (int8_t)(buffer[32]);                                         /*== 0xE7 dig_H6 int8_t ==*/
     memset(buffer, '\0', sizeof(buffer));
-    printCompParam(ptrComp);
+    BME280_PRINT_COMP(ptrComp);
 
     return 0;
 }
@@ -401,7 +401,7 @@ int8_t BME280_ReadComp(void)
  * 
 **************************************************************
  */
-void printCompParam(struct CompData *ptrComp)
+void BME280_PRINT_COMP(struct CompData *ptrComp)
 {
     debugVal("[X] dig_T1:%d [X] \r\n", ptrComp->dig_T1);
     debugVal("[X] dig_T2:%d [X] \r\n", ptrComp->dig_T2);
@@ -438,7 +438,7 @@ void printCompParam(struct CompData *ptrComp)
  * 
 **************************************************************
  */
-void BME280_SetStandby(uint8_t tsb)
+void BME280_SET_STANDBY(uint8_t tsb)
 {
     uint8_t status = 0x00;
     uint8_t mode = 0x00;
@@ -478,7 +478,7 @@ void BME280_SetStandby(uint8_t tsb)
  * 
 **************************************************************
  */
-void BME280_ReadStandby(void)
+void BME280_READ_STANDBY(void)
 {
     debugMsg("====================  BME280 STANDBY STATUS STARTED  =================\r\n");
     uint8_t ptrData[] = {BME280_CONFIG_ADDR};
@@ -508,7 +508,7 @@ void BME280_ReadStandby(void)
  * 
 **************************************************************
  */
-void BME280_SetFilter(uint8_t filter)
+void BME280_SET_FILTER(uint8_t filter)
 {
     uint8_t status = 0x00;
     uint8_t mode = 0x00;
@@ -551,7 +551,7 @@ void BME280_SetFilter(uint8_t filter)
  * 
 **************************************************************
  */
-void BME280_ReadFilter(void)
+void BME280_READ_FILTER(void)
 {
     debugMsg("====================  BME280 FILTER READING STARTED  =================\r\n");
     uint8_t ptrData[] = {BME280_CONFIG_ADDR};
@@ -667,7 +667,7 @@ void BME280_Set_OSRS_p(uint8_t osrs_p)
  * 
 **************************************************************
  */
-void BME280_Set_OSRS_h(uint8_t osrs_h)
+void BME280_SET_OSRS_H(uint8_t osrs_h)
 {
     uint8_t status = 0x00;
     uint8_t mode = 0x00;
@@ -1202,15 +1202,15 @@ void BME280_Init(void)
     /*=========================================================*/
     /*== BME280 SETTINGS ======================================*/
     /*=========================================================*/
-    BME280ChipID();
-    BME280_ReadComp();
-    BME280_SoftReset();
-    BME280_SetStandby(BME280_STBY_0_5);
-    BME280_Set_OSRS_h(BME280_OSRS_H_x1);
-    BME280_SetFilter(BME280_FILTER_16);
+    BME280_CHIPID();
+    BME280_READ_COMP();
+    BME280_SOFT_RESET();
+    BME280_SET_STANDBY(BME280_STBY_0_5);
+    BME280_SET_OSRS_H(BME280_OSRS_H_x1);
+    BME280_SET_FILTER(BME280_FILTER_16);
     BME280_Set_OSRS_t(BME280_OSRS_T_x2);
     BME280_Set_OSRS_p(BME280_OSRS_P_x16);
-    BME280_SetMode(BME280_NORMAL_MODE);
+    BME280_SET_MODE(BME280_NORMAL_MODE);
 }
 /*!
 **************************************************************
@@ -1233,8 +1233,8 @@ void BME280_Init(void)
 void BME280_Read_RegValue(void)
 {
     BME280_Read_CTRL_MEAS();
-    BME280_ReadMode();
-    BME280_ReadStandby();
+    BME280_READ_MODE();
+    BME280_READ_STANDBY();
     BME280_Read_OSRS_h();
 }
 /*!

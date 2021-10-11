@@ -27,7 +27,7 @@
 /*== DS18B20 FUNCTIONS ====================================*/
 /*=========================================================*/
 
-uint8_t DS18B20_Reset(uint8_t ds18b20_gpio_pin)
+uint8_t DS18B20_RESET(uint8_t ds18b20_gpio_pin)
 {
     gpio_set_dir(ds18b20_gpio_pin, GPIO_OUT);
     gpio_put(ds18b20_gpio_pin, 1);
@@ -41,7 +41,7 @@ uint8_t DS18B20_Reset(uint8_t ds18b20_gpio_pin)
     return slaveResponse;
 }
 
-void DS18B20_Write_Bit(uint8_t ds18b20_gpio_pin, uint8_t bitValue)
+void DS18B20_WRITE_BIT(uint8_t ds18b20_gpio_pin, uint8_t bitValue)
 {
     uint16_t delay1, delay2;
     if (bitValue == 1)
@@ -61,22 +61,22 @@ void DS18B20_Write_Bit(uint8_t ds18b20_gpio_pin, uint8_t bitValue)
     sleep_us(delay2);
 }
 
-void DS18B20_Write_Byte(uint8_t ds18b20_gpio_pin, uint8_t writeByte)
+void DS18B20_WRITE_BYTE(uint8_t ds18b20_gpio_pin, uint8_t writeByte)
 {
     for (size_t i = 0; i < 8; i++)
     {
         if (writeByte & 0x01)
         {
-            DS18B20_Write_Bit(ds18b20_gpio_pin, 1);
+            DS18B20_WRITE_BIT(ds18b20_gpio_pin, 1);
         }
         else
         {
-            DS18B20_Write_Bit(ds18b20_gpio_pin, 0);
+            DS18B20_WRITE_BIT(ds18b20_gpio_pin, 0);
         }
         writeByte >>= 1;
     }
 }
-uint8_t DS18B20_Read_Bit(uint8_t ds18b20_gpio_pin)
+uint8_t DS18B20_READ_BIT(uint8_t ds18b20_gpio_pin)
 {
     gpio_set_dir(ds18b20_gpio_pin, GPIO_OUT);
     gpio_put(ds18b20_gpio_pin, 0);
@@ -87,20 +87,20 @@ uint8_t DS18B20_Read_Bit(uint8_t ds18b20_gpio_pin)
     sleep_us(60);
     return bitValue;
 }
-uint8_t DS18B20_Read_Byte(uint8_t ds18b20_gpio_pin)
+uint8_t DS18B20_READ_BYTE(uint8_t ds18b20_gpio_pin)
 {
     uint8_t readByte = 0;
     for (size_t i = 0; i < 8; i++)
     {
-        readByte = readByte | DS18B20_Read_Bit(ds18b20_gpio_pin) << i;
+        readByte = readByte | DS18B20_READ_BIT(ds18b20_gpio_pin) << i;
     };
     return readByte;
 }
-uint16_t DS18B20_Request_Temp(uint8_t ds18b20_gpio_pin)
+uint16_t DS18B20_REQUEST_TEMP(uint8_t ds18b20_gpio_pin)
 {
     uint16_t requestTime = 0;
-    DS18B20_Write_Byte(ds18b20_gpio_pin, THERM_CMD_CONVERTTEMP);
-    while (!DS18B20_Read_Bit(ds18b20_gpio_pin))
+    DS18B20_WRITE_BYTE(ds18b20_gpio_pin, THERM_CMD_CONVERTTEMP);
+    while (!DS18B20_READ_BIT(ds18b20_gpio_pin))
     {
         sleep_ms(1);
         requestTime++;
@@ -115,17 +115,17 @@ uint16_t DS18B20_Request_Temp(uint8_t ds18b20_gpio_pin)
 
 
 
-float32_t DS18B20_tempRead(uint8_t ds18b20_gpio_pin)
+float32_t DS18B20_TEMP_READ(uint8_t ds18b20_gpio_pin)
 {
     debugMsg("====================  DS18B20 SENSOR DATA READING STARTED  =========== \r\n");
-    if (DS18B20_Reset(DS18B20_PIN) == 1)
+    if (DS18B20_RESET(DS18B20_PIN) == 1)
     {
         debugMsg("\n[X] NO DEVICE found ...");
         return -1000;
     }
-    DS18B20_Write_Byte(DS18B20_PIN, THERM_CMD_SKIPROM);
+    DS18B20_WRITE_BYTE(DS18B20_PIN, THERM_CMD_SKIPROM);
     uint16_t convTime;
-    if ((convTime = DS18B20_Request_Temp(DS18B20_PIN)) == 750)
+    if ((convTime = DS18B20_REQUEST_TEMP(DS18B20_PIN)) == 750)
     {
         debugMsg("\n[X] Max. Conversion time reached...");
         debugVal("[X] Conversion time: %d ms\n", convTime);
@@ -135,15 +135,15 @@ float32_t DS18B20_tempRead(uint8_t ds18b20_gpio_pin)
     {
         debugVal("[X] Conversion time: %d ms\n", convTime);
     }
-    DS18B20_Reset(DS18B20_PIN);
-    DS18B20_Write_Byte(DS18B20_PIN, THERM_CMD_SKIPROM);
-    DS18B20_Write_Byte(DS18B20_PIN, THERM_CMD_RSCRATCHPAD);
+    DS18B20_RESET(DS18B20_PIN);
+    DS18B20_WRITE_BYTE(DS18B20_PIN, THERM_CMD_SKIPROM);
+    DS18B20_WRITE_BYTE(DS18B20_PIN, THERM_CMD_RSCRATCHPAD);
     uint8_t memoryRead[9];
     for (size_t i = 0; i < 9; i++)
     {
-        memoryRead[i] = DS18B20_Read_Byte(DS18B20_PIN);
+        memoryRead[i] = DS18B20_READ_BYTE(DS18B20_PIN);
     }
-    uint8_t crc = DS18B20_Crc8_Check(memoryRead, 9);
+    uint8_t crc = DS18B20_CRC8_CHECK(memoryRead, 9);
     if (crc != 0)
     {
         return -3000;
@@ -157,7 +157,7 @@ float32_t DS18B20_tempRead(uint8_t ds18b20_gpio_pin)
     return temperature;
 }
 
-uint8_t DS18B20_Crc8_Check(uint8_t *data, uint8_t len)
+uint8_t DS18B20_CRC8_CHECK(uint8_t *data, uint8_t len)
 {
     uint8_t temp;
     uint8_t databyte;
@@ -177,9 +177,9 @@ uint8_t DS18B20_Crc8_Check(uint8_t *data, uint8_t len)
     return crc;
 }
 
-int16_t DS18B20_Init(void)
+int16_t DS18B20_INIT(void)
 {
-    if (DS18B20_Reset(DS18B20_PIN) == 1)
+    if (DS18B20_RESET(DS18B20_PIN) == 1)
     {
         debugMsg("\n[X] NO DEVICE found ...");
         return -1000;
@@ -187,10 +187,10 @@ int16_t DS18B20_Init(void)
     else
     {
         debugMsg("\n[X] DSB18B20 is ready\n");
-        DS18B20_Write_Byte(DS18B20_PIN, 0xCC);
-        DS18B20_Write_Byte(DS18B20_PIN, 0x4E);
-        DS18B20_Write_Byte(DS18B20_PIN, 0x00);
-        DS18B20_Write_Byte(DS18B20_PIN, 0x00);
-        DS18B20_Write_Byte(DS18B20_PIN, THERM_CMD_12BIT_RES);
+        DS18B20_WRITE_BYTE(DS18B20_PIN, 0xCC);
+        DS18B20_WRITE_BYTE(DS18B20_PIN, 0x4E);
+        DS18B20_WRITE_BYTE(DS18B20_PIN, 0x00);
+        DS18B20_WRITE_BYTE(DS18B20_PIN, 0x00);
+        DS18B20_WRITE_BYTE(DS18B20_PIN, THERM_CMD_12BIT_RES);
     }
 }

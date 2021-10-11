@@ -39,7 +39,7 @@
 #include "waterpipe.h" /* Insert for Error Log Function! */
 #include "hc05.h"
 
-/* void HC05_Check(uart_inst_t *uart, uint8_t *sendCommand)
+/* void HC05_CHECK(uart_inst_t *uart, uint8_t *sendCommand)
 {
     uint8_t getCharRx;
     uart_puts(uart, sendCommand);
@@ -52,7 +52,7 @@
 
 
 
-void HC05_Set(uart_inst_t *uart, uint8_t *sendCommand)
+void HC05_SET(uart_inst_t *uart, uint8_t *sendCommand)
 {
     debugMsg("[X] SET [X]\r\n");
 
@@ -65,7 +65,7 @@ void HC05_Set(uart_inst_t *uart, uint8_t *sendCommand)
     
 }
 
-void HC05_Check(uart_inst_t *uart, uint8_t *sendCommand)
+void HC05_CHECK(uart_inst_t *uart, uint8_t *sendCommand)
 {
     debugMsg("[X] CHECK [X]\r\n");
 
@@ -78,7 +78,7 @@ void HC05_Check(uart_inst_t *uart, uint8_t *sendCommand)
     
 }
 
-uint8_t HC05_ProgSetup(void)
+uint8_t HC05_PROG_SETUP(void)
 {
     debugMsg("====================  HC-05 SETUP PROCESS STARTED  ====================\n");
     gpio_init(HC05_PROG_GPIO);
@@ -111,7 +111,7 @@ uint8_t HC05_ProgSetup(void)
 }
 
 
-uint8_t HC05_ProgFinished(void)
+uint8_t HC05_PROG_FINISHED(void)
 {
     debugMsg("====================  HC-05 FINISHED PROCESS STARTED  ================\n");
     uart_deinit(UART_ID0);
@@ -195,10 +195,18 @@ void HC05_UART_RX_IRQ(void)
 }
 
 
-void IRQ_SETUP(void)
+
+void IRQ_SETUP_EN(irq_handler_t handler)
 {
-    irq_set_exclusive_handler(UART_IRQ, HC05_UART_RX_IRQ);
-    irq_set_enabled(UART_IRQ, true);
+    irq_set_exclusive_handler(UART0_IRQ, handler);
+    irq_set_enabled(UART0_IRQ, true);
+    uart_set_irq_enables(UART_ID0, true, false);
+}
+
+void IRQ_SETUP_DIS(irq_handler_t handler)
+{
+    irq_set_exclusive_handler(UART0_IRQ, handler);
+    irq_set_enabled(UART0_IRQ, false);
     uart_set_irq_enables(UART_ID0, true, false);
 }
 
@@ -207,9 +215,8 @@ void IRQ_SETUP(void)
 
 
 
-
 /* 
-void HC05_Check(uart_inst_t *uart, uint8_t *sendCommand)
+void HC05_CHECK(uart_inst_t *uart, uint8_t *sendCommand)
 {
     debugMsg("[X] CHECK [X]\r\n");
     uart_puts(uart, sendCommand);

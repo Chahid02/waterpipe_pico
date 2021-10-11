@@ -46,14 +46,14 @@ typedef float float32_t;
 /*== PROTOTYPE DECLARATION ================================*/
 /*=========================================================*/
 
-uint8_t DS18B20_Reset(uint8_t ds18b20_gpio_pin);
-void DS18B20_Write_Bit(uint8_t ds18b20_gpio_pin, uint8_t bitValue);
-void DS18B20_Write_Byte(uint8_t ds18b20_gpio_pin, uint8_t writeByte);
-uint8_t DS18B20_Read_Bit(uint8_t ds18b20_gpio_pin);
-uint8_t DS18B20_Read_Byte(uint8_t ds18b20_gpio_pin);
-uint16_t DS18B20_Request_Temp(uint8_t ds18b20_gpio_pin);
-uint8_t DS18B20_Crc8_Check(uint8_t *data, uint8_t len);
-float32_t DS18B20_tempRead(uint8_t ds18b20_gpio_pin);
-int16_t DS18B20_Init(void);
+uint8_t DS18B20_RESET(uint8_t ds18b20_gpio_pin);
+void DS18B20_WRITE_BIT(uint8_t ds18b20_gpio_pin, uint8_t bitValue);
+void DS18B20_WRITE_BYTE(uint8_t ds18b20_gpio_pin, uint8_t writeByte);
+uint8_t DS18B20_READ_BIT(uint8_t ds18b20_gpio_pin);
+uint8_t DS18B20_READ_BYTE(uint8_t ds18b20_gpio_pin);
+uint16_t DS18B20_REQUEST_TEMP(uint8_t ds18b20_gpio_pin);
+uint8_t DS18B20_CRC8_CHECK(uint8_t *data, uint8_t len);
+float32_t DS18B20_TEMP_READ(uint8_t ds18b20_gpio_pin);
+int16_t DS18B20_INIT(void);
 
 #endif
