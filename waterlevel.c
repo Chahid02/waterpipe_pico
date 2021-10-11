@@ -101,5 +101,5 @@ void WATERLEVEL_Run(void)
     debugVal("[X] Voltage: %f V (DMA READ) [x]\n", waterLevelVoltage);
 
     uint16_t result = adc_read();
-    debug2Val("[X]Compare Voltage: %f V (DIRECT ADC READ) [X]\n", result, result * conversion_factor);
+    debug2Val("[X] Compare Voltage: %f V (DIRECT ADC READ) [X]\n", result, result * conversion_factor);
 }
