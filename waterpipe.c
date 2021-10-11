@@ -154,8 +154,6 @@ int main()
 
 
 
- 
-
 
     HC05_Check(UART_ID0,HC05_CHECK_NAME);
 
@@ -169,6 +167,7 @@ int main()
   
     HC05_Check(UART_ID0,HC05_CHECK_ROLE);
   
+    HC05_ProgFinished();
 
     /*!< User Code starts here */
     while (true)
