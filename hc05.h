@@ -32,20 +32,20 @@ typedef float float32_t;
 #define PARITY_BIT          (uint8_t) UART_PARITY_NONE
 #define BAUD_RATE_DEFAULT   (int16_t) 9600
 
-#define HC05_CHECK_CONNECTION   "AT?\r\n"
 #define HC05_CHECK_NAME         "AT+NAME?\r\n"
-#define HC05_SET_NAME           "AT+NAME=WATERPIPE_HC\r\n"
-#define HC05_CHECK_ADDR         "AT+ADDR\r\n"
+#define HC05_SET_NAME           "AT+NAME=HC-06\r\n"
+#define HC05_CHECK_ADDR         "AT+ADDR?\r\n"
 #define HC05_CHECK_VERSION      "AT+VERSION?\r\n"
 #define HC05_CHECK_UART         "AT+UART?\r\n"
 #define HC05_SET_UART           "AT+UARTBAUD=8\r\n"
 #define HC05_CHECK_ROLE         "AT+ROLE?\r\n"
+#define HC05_SET_ROLE           "AT+ROLE=1\r\n"
 #define HC05_CHECK_PWD          "AT+PSWD?\r\n"
-#define HC05_SET_PWD            "AT+PSWD=waterpipe\r\n"
+#define HC05_SET_PWD            "AT+PSWD=123456\r\n"
 
 
 
 uint8_t HC05_ProgSetup(void);
-void HC05_Check(uart_inst_t *uart, uint8_t *sendCommand, uint8_t *getCommand);
-
+void HC05_Check(uart_inst_t *uart, uint8_t *sendCommand);
+void HC05_Set(uart_inst_t *uart, uint8_t *sendCommand);
 #endif

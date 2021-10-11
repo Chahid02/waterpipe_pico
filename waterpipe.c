@@ -151,16 +151,24 @@ int main()
 
     /*!< SETUP HC-05 Module */
     HC05_ProgSetup();
-    HC05_Check(UART_ID0, HC05_CHECK_NAME,"NAME-SETUP:\n");   
-    sleep_ms(1000); 
-    HC05_Check(UART_ID0, HC05_CHECK_ADDR,"ADRESS-SETUP:\n");
-    sleep_ms(1000);
-    HC05_Check(UART_ID0, HC05_CHECK_UART,"UART-SETUP:");   
-    sleep_ms(1000);  
-    HC05_Check(UART_ID0, HC05_CHECK_ROLE,"ROLE-SETUP:");   
-    sleep_ms(1000); 
-    HC05_Check(UART_ID0, HC05_CHECK_PWD,"PIN-SETUP:");   
-    sleep_ms(1000); 
+
+
+
+ 
+
+
+    HC05_Check(UART_ID0,HC05_CHECK_NAME);
+
+    HC05_Check(UART_ID0,HC05_CHECK_ADDR);
+  
+    HC05_Check(UART_ID0,HC05_CHECK_VERSION);
+
+    HC05_Check(UART_ID0,HC05_CHECK_UART);
+   
+    HC05_Check(UART_ID0,HC05_CHECK_PWD);
+  
+    HC05_Check(UART_ID0,HC05_CHECK_ROLE);
+  
 
     /*!< User Code starts here */
     while (true)

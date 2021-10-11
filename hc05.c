@@ -39,50 +39,57 @@
 #include "waterpipe.h" /* Insert for Error Log Function! */
 #include "hc05.h"
 
-void HC05_Check(uart_inst_t *uart, uint8_t *sendCommand, uint8_t *getCommand)
+/* void HC05_Check(uart_inst_t *uart, uint8_t *sendCommand)
 {
+    uint8_t getCharRx;
     uart_puts(uart, sendCommand);
+    while (getCharRx = uart_getc(UART_ID0))
+    {
+    debugVal("%c",getCharRx);
+    }
+} */
+
+
+void HC05_Check(uart_inst_t *uart, uint8_t *sendCommand)
+{
+
+    uart_puts(uart, sendCommand);
+
     int8_t HC_05_NL;
     size_t maxSize = 100;
     uint8_t buffRx[maxSize];
+    memset(buffRx,'\0',maxSize);
     uint8_t RxCount;
     uint8_t getCharRx;
+    uint8_t *arrayRtr;
+    uint8_t searchPoint='\n';
     uint8_t searchNL = '+';
-    uint8_t HC_OK[] = "OK";
-    uint8_t *arrayNL = NULL;
-    while (!HC_05_NL && RxCount < maxSize )
+    uint8_t HC_OK[] = "\nOK";
+    uint8_t *arrayOK = NULL;
+    uint8_t carriageReturn = 0;
+    while ((arrayOK = strstr(buffRx, HC_OK)) == NULL)
     {
-        size_t j=0 ;
-        getCharRx = uart_getc(UART_ID0);
-        buffRx[RxCount] = getCharRx;
-        arrayNL = strchr(buffRx, searchNL);
-        /*      
-        debugVal("%c", getCharRx);
-        arrayNL = strchr(buffRx, searchNL);
-        if (arrayNL != NULL)
-        {}  
-         */
-        if (strstr(arrayNL, HC_OK) != NULL)
-        {
-            HC_05_NL = 1;
-            for (size_t i = 3; i > 0; i--)
-            {
-                buffRx[RxCount-i] = '\0';
-            }
-        }
-        else if (RxCount == maxSize-1)
-        {
-            debugMsg("[X] Error!!! Buffer Overflow [X]");
-            RxCount = 0;
-        }       
-        else
-        {
-            HC_05_NL = 0;
-        }  
-        RxCount++;
+    getCharRx = uart_getc(UART_ID0); 
+    //printf("%d-Nr: %s\r\n",RxCount, buffRx);
+    buffRx[RxCount] = getCharRx;
+    //buffRx[RxCount+1]='\0'; 
+    //printf("%d-Nr: %s\r\n",RxCount, buffRx);
+    RxCount++;
     }
-    debug2Val("[X] Checking %s %s\r\n", getCommand, buffRx);
+    printf("%s\r\n",buffRx);
+    memset(buffRx,'\0',maxSize);
+    sleep_ms(1000);
+
+} 
+
+
+void HC05_Set(uart_inst_t *uart, uint8_t *sendCommand)
+{
+uart_puts(uart,sendCommand);
+    
 }
+
+
 
 uint8_t HC05_ProgSetup(void)
 {
@@ -97,11 +104,12 @@ uint8_t HC05_ProgSetup(void)
     uart_set_baudrate(UART_ID0, BAUD_RATE_DEFAULT);
     uart_set_hw_flow(UART_ID0, false, false);
     uart_set_format(UART_ID0, DATA_BITS, STOP_BITS, PARITY_BIT);
-    uart_set_fifo_enabled(UART_ID0, true);
+    uart_set_fifo_enabled(UART_ID0, false);
     gpio_put(HC05_PROG_GPIO, false);
     sleep_ms(1000);
     gpio_put(HC05_PROG_GPIO, true);
-    //debug2Val("[X] PROGRAMMING PIN %d ->KEY PUT: %d[X] \r\n", HC05_PROG_GPIO, gpio_get_out_level(HC05_PROG_GPIO));
+   debug2Val("[X] PROGRAMMING PIN %d ->KEY PUT: %d [X] \r\n", HC05_PROG_GPIO, gpio_get_out_level(HC05_PROG_GPIO));
+   sleep_ms(1000);
 
     
     return 0;
