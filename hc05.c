@@ -199,6 +199,7 @@ void HC05_UART_RX_IRQ(void)
 void IRQ_SETUP_EN(irq_handler_t handler)
 {
     irq_set_exclusive_handler(UART0_IRQ, handler);
+    irq_set_priority(UART0_IRQ,0x01);
     irq_set_enabled(UART0_IRQ, true);
     uart_set_irq_enables(UART_ID0, true, false);
 }
