@@ -43,18 +43,20 @@
 
 
 
+/* 
 void core1_entry() 
 {
 
     multicore_fifo_clear_irq();
-    irq_set_exclusive_handler(SIO_IRQ_PROC1, core1_interrupt_handler);
-    irq_set_enabled(SIO_IRQ_PROC1, true);
+    //irq_add_shared_handler(SIO_IRQ_PROC1, core1_interrupt_handler,PICO_SHARED_IRQ_HANDLER_DEFAULT_ORDER_PRIORITY);
+   // irq_set_enabled(SIO_IRQ_PROC1, true);
     while (true)
     {   
-        /*!< Test Print */
         tight_loop_contents();
     }
-}
+} 
+
+*/
 
 
  
@@ -62,7 +64,7 @@ void core1_entry()
 int main()
 {
     stdio_init_all();
-    multicore_launch_core1(core1_entry);
+    //multicore_launch_core1(core1_entry);
 
     sleep_ms(2000);
     debugMsg("======================================================================\r\n");
@@ -205,14 +207,14 @@ int main()
         toggleLed();
 
         WATERLEVEL_Run();
-
+/* 
 
         uint32_t dataCore0=200;
         debugVal("[X] CORE 0 SENDS %d [X]\r\n",dataCore0);
         multicore_fifo_push_blocking(dataCore0);
         uint32_t dataCore1=multicore_fifo_pop_blocking();
         debugVal("[X] CORE 1 SENDS %d [X]\r\n",dataCore1);
-
+ */
         DS18B20_TEMP_READ(DS18B20_PIN);
 
         //sleep_ms(500);
@@ -297,7 +299,7 @@ void debugTerm(void)
 *
 **************************************************************
 */
-void core1_interrupt_handler(void)
+/* void core1_interrupt_handler(void)
 {
 
     while (multicore_fifo_rvalid())
@@ -308,4 +310,4 @@ void core1_interrupt_handler(void)
         
     }
     multicore_fifo_clear_irq();// Clear IRQ
-}
+} */

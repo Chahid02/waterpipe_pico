@@ -214,7 +214,7 @@ void IRQ_SETUP_DIS(irq_handler_t handler)
 
 
 
- /*!< Tryout Function -> don't use it !!! */
+
 /* 
 void HC05_CHECK(uart_inst_t *uart, uint8_t *sendCommand)
 {
