@@ -58,6 +58,8 @@ void core1_interrupt_handler(void) {
     multicore_fifo_clear_irq();// Clear IRQ
 }
 
+
+
 void core1_entry() {
 
 multicore_fifo_clear_irq();
