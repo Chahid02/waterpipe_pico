@@ -28,7 +28,7 @@
 #include "hardware/i2c.h"
 #include "hardware/adc.h"
 #include "hardware/dma.h"
-#include "hardware/uart.h".
+#include "hardware/uart.h"
 #include "hardware/irq.h"
 #include "pico/multicore.h"
 /*=========================================================*/
@@ -42,43 +42,27 @@
 #include "hc05.h"
 
 
-/* 
-void core1_interrupt_handler(void) {
 
-    while (multicore_fifo_rvalid())
-    {
-        int32_t blueDAta=multicore_fifo_pop_blocking();
-        //calc
-        multicore_fifo_push_blocking(blueDAta);
-        
+void core1_entry() 
+{
+
+    multicore_fifo_clear_irq();
+    irq_set_exclusive_handler(SIO_IRQ_PROC1, core1_interrupt_handler);
+    irq_set_enabled(SIO_IRQ_PROC1, true);
+    while (true)
+    {   
+        /*!< Test Print */
+        tight_loop_contents();
     }
-    
-
-
-    multicore_fifo_clear_irq();// Clear IRQ
 }
 
 
-
-void core1_entry() {
-
-multicore_fifo_clear_irq();
-
-irq_set_exclusive_handler(SIO_IRQ_PROC1, core1_interrupt_handler);
-
-
-}
-
-
- */
+ 
 
 int main()
 {
     stdio_init_all();
-
-    //multicore_launch_core1(core1_entry);
- 
-
+    multicore_launch_core1(core1_entry);
 
     sleep_ms(2000);
     debugMsg("======================================================================\r\n");
@@ -191,12 +175,7 @@ int main()
     HC05_PROG_SETUP();
 
 
- /*    
-    irq_set_exclusive_handler(UART0_IRQ, HC05_UART_RX_READ_IRQ);
-    irq_set_enabled(UART0_IRQ, true);
-    uart_set_irq_enables(UART_ID0, true, false); 
-*/
-    IRQ_SETUP_EN(HC05_UART_RX_READ_IRQ);
+    IRQ_SETUP_EN(HC05_UART_RX_READ_IRQ); /*!< Enable IRQ for TX-Received Messages */
 
     HC05_SET(UART_ID0,HC05_SET_NAME);
     HC05_SET(UART_ID0,HC05_SET_PWD);
@@ -227,10 +206,14 @@ int main()
 
         WATERLEVEL_Run();
 
+
+        uint32_t dataCore0=200;
+        debugVal("[X] CORE 0 SENDS %d [X]\r\n",dataCore0);
+        multicore_fifo_push_blocking(dataCore0);
+        uint32_t dataCore1=multicore_fifo_pop_blocking();
+        debugVal("[X] CORE 1 SENDS %d [X]\r\n",dataCore1);
+
         DS18B20_TEMP_READ(DS18B20_PIN);
-
-      
-
 
         //sleep_ms(500);
     }
@@ -314,3 +297,15 @@ void debugTerm(void)
 *
 **************************************************************
 */
+void core1_interrupt_handler(void)
+{
+
+    while (multicore_fifo_rvalid())
+    {
+        uint32_t blueDAta=multicore_fifo_pop_blocking();
+        blueDAta = blueDAta * 2;
+        multicore_fifo_push_blocking(blueDAta);
+        
+    }
+    multicore_fifo_clear_irq();// Clear IRQ
+}

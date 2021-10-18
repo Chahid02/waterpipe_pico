@@ -65,5 +65,5 @@
 
 void debugTerm(void);
 void toggleLed(void);
-
+void core1_interrupt_handler(void);
 #endif
