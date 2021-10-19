@@ -24,23 +24,21 @@ typedef float float32_t;
 /*== MEMORY MACROS ========================================*/
 /*=========================================================*/
 
-#define THERM_CMD_CONVERTTEMP	(uint8_t)0x44
-#define THERM_CMD_RSCRATCHPAD	(uint8_t)0xBE
-#define THERM_CMD_WSCRATCHPAD 	(uint8_t)0x4E
-#define THERM_CMD_CPYSCRATCHPAD (uint8_t)0x48
-#define THERM_CMD_RECEEPROM 	(uint8_t)0xB8
-#define THERM_CMD_RPWRSUPPLY 	(uint8_t)0xB4
-#define THERM_CMD_SEARCHROM 	(uint8_t)0xF0
-#define THERM_CMD_READROM 		(uint8_t)0x33
-#define THERM_CMD_MATCHROM 		(uint8_t)0x55
-#define THERM_CMD_SKIPROM 		(uint8_t)0xCC
-#define THERM_CMD_ALARMSEARCH 	(uint8_t)0xEC
-#define THERM_CMD_10BIT_RES 	(uint8_t) 0x3F
-#define THERM_CMD_9BIT_RES 		(uint8_t) 0x1F
-#define THERM_CMD_11BIT_RES 	(uint8_t) 0x5F
-#define THERM_CMD_12BIT_RES 	(uint8_t) 0x7F
-
-
+#define THERM_CMD_CONVERTTEMP   (uint8_t) 0x44
+#define THERM_CMD_RSCRATCHPAD   (uint8_t) 0xBE
+#define THERM_CMD_WSCRATCHPAD   (uint8_t) 0x4E
+#define THERM_CMD_CPYSCRATCHPAD (uint8_t) 0x48
+#define THERM_CMD_RECEEPROM     (uint8_t) 0xB8
+#define THERM_CMD_RPWRSUPPLY    (uint8_t) 0xB4
+#define THERM_CMD_SEARCHROM     (uint8_t) 0xF0
+#define THERM_CMD_READROM       (uint8_t) 0x33
+#define THERM_CMD_MATCHROM      (uint8_t) 0x55
+#define THERM_CMD_SKIPROM       (uint8_t) 0xCC
+#define THERM_CMD_ALARMSEARCH   (uint8_t) 0xEC
+#define THERM_CMD_10BIT_RES     (uint8_t) 0x3F
+#define THERM_CMD_9BIT_RES      (uint8_t) 0x1F
+#define THERM_CMD_11BIT_RES     (uint8_t) 0x5F
+#define THERM_CMD_12BIT_RES     (uint8_t) 0x7F
 
 /*=========================================================*/
 /*== PROTOTYPE DECLARATION ================================*/

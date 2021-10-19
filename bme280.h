@@ -96,25 +96,25 @@ typedef float float32_t;
 
 typedef struct CompData
 {
-    uint16_t 	dig_T1:16;
-    int16_t 	dig_T2:16;
-    int16_t 	dig_T3:16;
-    uint16_t 	dig_P1:16;
-    int16_t 	dig_P2:16;
-    int16_t 	dig_P3:16;
-    int16_t 	dig_P4:16;
-    int16_t 	dig_P5:16;
-    int16_t 	dig_P6:16;
-    int16_t 	dig_P7:16;
-    int16_t 	dig_P8:16;
-    int16_t 	dig_P9:16;
-    uint8_t	 	dig_H1:8;
-    int16_t 	dig_H2:16;
-    uint8_t 	dig_H3:8;
-    int16_t 	dig_H4:16;
-    int16_t 	dig_H5:16;
-    int8_t 		dig_H6:8;
-}BME280_Comp;
+    uint16_t    dig_T1 : 16;
+    int16_t     dig_T2 : 16;
+    int16_t     dig_T3 : 16;
+    uint16_t    dig_P1 : 16;
+    int16_t     dig_P2 : 16;
+    int16_t     dig_P3 : 16;
+    int16_t     dig_P4 : 16;
+    int16_t     dig_P5 : 16;
+    int16_t     dig_P6 : 16;
+    int16_t     dig_P7 : 16;
+    int16_t     dig_P8 : 16;
+    int16_t     dig_P9 : 16;
+    uint8_t     dig_H1 : 8;
+    int16_t     dig_H2 : 16;
+    uint8_t     dig_H3 : 8;
+    int16_t     dig_H4 : 16;
+    int16_t     dig_H5 : 16;
+    int8_t      dig_H6 : 8;
+} BME280_Comp;
 
 /*=========================================================*/
 /*== COMPENSATION REGISTER ================================*/
