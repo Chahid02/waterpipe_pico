@@ -222,7 +222,7 @@ int main()
        
 
         WATERLEVEL_Run();
- 
+        HC05_UART_RX_IRQ();
 
         uint32_t dataCore0=200;
         debugVal("[X] CORE 0 SENDS %d [X]\r\n",dataCore0);

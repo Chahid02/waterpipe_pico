@@ -33,7 +33,7 @@ typedef float float32_t;
 #define BAUD_RATE_DEFAULT   (int16_t) 9600
 
 #define HC05_CHECK_NAME         "AT+NAME?\r\n"
-#define HC05_SET_NAME           "AT+NAME=WATERPIPE_HC\r\n"
+#define HC05_SET_NAME           "AT+NAME=WATERPIPE\r\n"
 #define HC05_CHECK_ADDR         "AT+ADDR?\r\n"
 #define HC05_CHECK_VERSION      "AT+VERSION?\r\n"
 #define HC05_CHECK_UART         "AT+UART?\r\n"

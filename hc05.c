@@ -177,7 +177,7 @@ void HC05_UART_RX_READ_IRQ(void)
     irq_clear(UART0_IRQ);
 }
 
-/* 
+ 
 void HC05_UART_RX_IRQ(void)
 {
     while (uart_is_readable(UART_ID0))
@@ -194,7 +194,7 @@ void HC05_UART_RX_IRQ(void)
         }
         getCharRxCnt++;
     }
-} */
+} 
 
 
 
