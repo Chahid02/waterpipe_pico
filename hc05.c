@@ -52,9 +52,9 @@
 
 
 
-void HC05_SET(uart_inst_t *uart, uint8_t *sendCommand)
+void HC05_SET(uart_inst_t *uart, uint8_t *sendCommand, uint8_t *ATCommand )
 {
-    debugMsg("[X] SET [X]\r\n");
+    debugVal("[X] SET %s [X]\r\n", ATCommand);
 
     while (uart_is_writable(uart) )
     {
@@ -65,9 +65,9 @@ void HC05_SET(uart_inst_t *uart, uint8_t *sendCommand)
     
 }
 
-void HC05_CHECK(uart_inst_t *uart, uint8_t *sendCommand)
+void HC05_CHECK(uart_inst_t *uart, uint8_t *sendCommand, uint8_t *ATCommand )
 {
-    debugMsg("[X] CHECK [X]\r\n");
+    debugVal("[X] CHECK %s [X]\r\n", ATCommand);
 
     while (uart_is_writable(uart) )
     {
@@ -174,8 +174,10 @@ void HC05_UART_RX_READ_IRQ(void)
         //uart_read_blocking(UART_ID0, &RecData, sizeof(RecData));
         printf("%c",getCharRx);
     }
+    irq_clear(UART0_IRQ);
 }
 
+/* 
 void HC05_UART_RX_IRQ(void)
 {
     while (uart_is_readable(UART_ID0))
@@ -192,7 +194,7 @@ void HC05_UART_RX_IRQ(void)
         }
         getCharRxCnt++;
     }
-}
+} */
 
 
 

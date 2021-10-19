@@ -43,15 +43,25 @@
 
 
 
-
 void core1_entry() 
 {
 
     multicore_fifo_clear_irq();
-    irq_add_shared_handler(SIO_IRQ_PROC1, core1_interrupt_handler,PICO_SHARED_IRQ_HANDLER_DEFAULT_ORDER_PRIORITY);
+    //irq_add_shared_handler(SIO_IRQ_PROC1, core1_interrupt_handler,0x01); /*!< May be used for multiple IRQ functions */
+    irq_set_exclusive_handler(SIO_IRQ_PROC1, core1_interrupt_handler);
     irq_set_enabled(SIO_IRQ_PROC1, true);
     while (true)
     {   
+        /*!< Just for testing purpose */
+        uint32_t count =1;
+        count++;
+        if (count == 1000)
+        {
+            count = 0;
+        }
+        
+
+
         tight_loop_contents();
     }
 } 
@@ -178,17 +188,21 @@ int main()
 
 
     IRQ_SETUP_EN(HC05_UART_RX_READ_IRQ); /*!< Enable IRQ for TX-Received Messages */
-
-    HC05_SET(UART_ID0,HC05_SET_NAME);
-    HC05_SET(UART_ID0,HC05_SET_PWD);
-    HC05_CHECK(UART_ID0,HC05_CHECK_NAME);  
-    HC05_CHECK(UART_ID0,HC05_CHECK_ADDR);
-    HC05_CHECK(UART_ID0,HC05_CHECK_VERSION);
-    HC05_CHECK(UART_ID0,HC05_CHECK_UART); 
-    HC05_CHECK(UART_ID0,HC05_CHECK_PWD); 
-    HC05_CHECK(UART_ID0,HC05_CHECK_ROLE); 
+    
+    HC05_SET(UART_ID0,HC05_SET_NAME,"NAME");
+    HC05_SET(UART_ID0,HC05_SET_PWD,"PASSWORD");
+    HC05_SET(UART_ID0,HC05_SET_ROLE_MS,"MASTER ROLE");
+  
+    HC05_CHECK(UART_ID0,HC05_CHECK_NAME,"NAME");  
+    HC05_CHECK(UART_ID0,HC05_CHECK_ADDR,"ADRESS");
+    HC05_CHECK(UART_ID0,HC05_CHECK_VERSION,"VERSION");
+    HC05_CHECK(UART_ID0,HC05_CHECK_UART,"BAUDRATE"); 
+    HC05_CHECK(UART_ID0,HC05_CHECK_PWD,"PASSWORD"); 
+    HC05_CHECK(UART_ID0,HC05_CHECK_ROLE,"ROLE"); 
   
     HC05_PROG_FINISHED();
+    HC05_SET(UART_ID0,HC05_SET_RESET,"RESET");
+    debugMsg("[X] RESETING HC-05 BLUETOOTH MODULE [X]\r\n");
 
     /*!< User Code starts here */
     while (true)
@@ -204,7 +218,7 @@ int main()
         uint32_t bmeHum;
         BME280_Temp_Reading(bmeTemp, bmePress, bmeHum);
 
-        toggleLed();
+       
 
         WATERLEVEL_Run();
  
@@ -216,7 +230,7 @@ int main()
         debugVal("[X] CORE 1 SENDS %d [X]\r\n",dataCore1);
  
         DS18B20_TEMP_READ(DS18B20_PIN);
-
+        toggleLed();
         //sleep_ms(500);
     }
     /*!< User Code ends here */
@@ -249,7 +263,8 @@ void toggleLed()
         gpio_put(PRESSURE_FSR_OK, true);
         gpio_put(WATER_LEVEL_OK, true);
         gpio_put(LED, true);
-        debugMsg("[X] LED ON\r\n");
+        /*!< NO PRINTF on the SECOND CORE !!! */
+        //debugMsg("[X] LED ON\r\n");
     }
     else
     {
@@ -260,7 +275,8 @@ void toggleLed()
         gpio_put(PRESSURE_FSR_OK, false);
         gpio_put(WATER_LEVEL_OK, false);
         gpio_put(LED, false);
-        debugMsg("[X] LED OFF\r\n");
+        /*!< NO PRINTF on the SECOND CORE !!! */
+        //debugMsg("[X] LED OFF\r\n");
     }
 }
 /*!
@@ -304,10 +320,9 @@ void debugTerm(void)
 
     while (multicore_fifo_rvalid())
     {
-        uint32_t blueDAta=multicore_fifo_pop_blocking();
+        uint32_t blueDAta = multicore_fifo_pop_blocking();    
         blueDAta = blueDAta * 2;
-        multicore_fifo_push_blocking(blueDAta);
-        
+        multicore_fifo_push_blocking(blueDAta);  
     }
     multicore_fifo_clear_irq();// Clear IRQ
 } 

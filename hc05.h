@@ -33,21 +33,23 @@ typedef float float32_t;
 #define BAUD_RATE_DEFAULT   (int16_t) 9600
 
 #define HC05_CHECK_NAME         "AT+NAME?\r\n"
-#define HC05_SET_NAME           "AT+NAME=WATERPIPE\r\n"
+#define HC05_SET_NAME           "AT+NAME=WATERPIPE_HC\r\n"
 #define HC05_CHECK_ADDR         "AT+ADDR?\r\n"
 #define HC05_CHECK_VERSION      "AT+VERSION?\r\n"
 #define HC05_CHECK_UART         "AT+UART?\r\n"
 #define HC05_SET_UART           "AT+UARTBAUD=8\r\n"
 #define HC05_CHECK_ROLE         "AT+ROLE?\r\n"
-#define HC05_SET_ROLE           "AT+ROLE=1\r\n"
+#define HC05_SET_ROLE_MS        "AT+ROLE=1\r\n"
+#define HC05_SET_ROLE_SL        "AT+ROLE=0\r\n"
 #define HC05_CHECK_PWD          "AT+PSWD?\r\n"
 #define HC05_SET_PWD            "AT+PSWD=123456\r\n"
+#define HC05_SET_RESET          "AT+RESET\r\n"
 
 
 
 uint8_t HC05_PROG_SETUP(void);
-void HC05_CHECK(uart_inst_t *uart, uint8_t *sendCommand);
-void HC05_SET(uart_inst_t *uart, uint8_t *sendCommand);
+void HC05_CHECK(uart_inst_t *uart, uint8_t *sendCommand, uint8_t *ATCommand);
+void HC05_SET(uart_inst_t *uart, uint8_t *sendCommand, uint8_t *ATCommand);
 uint8_t HC05_PROG_FINISHED(void);
 void HC05_UART_RX_IRQ(void);
 void HC05_UART_RX_READ_IRQ(void);
