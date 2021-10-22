@@ -144,6 +144,7 @@ int main()
     gpio_set_dir(PRESSURE_FSR_OK, GPIO_OUT);
     gpio_set_dir(WATER_LEVEL_OK, GPIO_OUT);
 
+    /*!< Init GPIOs on LOW-LEVEL */
     gpio_put(TEMPERATURE_OK, false);
     gpio_put(PRESSURE_OK, false);
     gpio_put(HUMIDITY_OK, false);
@@ -211,7 +212,8 @@ int main()
     HC05_CHECK(UART_ID0,HC05_CHECK_ROLE,"ROLE"); 
   
     HC05_PROG_FINISHED();
-    //HC05_SET(UART_ID0,HC05_SET_RESET,"RESET");
+
+    //HC05_SET(UART_ID0,HC05_SET_RESET,"RESET");    /*!< Isnt nesserarly so for because HC-05 overtake new values */
     //debugMsg("[X] RESETING HC-05 BLUETOOTH MODULE [X]\r\n");
 
     /*!< User Code starts here */
@@ -233,10 +235,10 @@ int main()
         WATERLEVEL_Run();
         HC05_UART_RX_IRQ();
 
-        uint32_t dataCore0=200;
+        uint32_t dataCore0 = 200;
         debugVal("[X] CORE 0 SENDS %d [X]\r\n",dataCore0);
         multicore_fifo_push_blocking(dataCore0);
-        uint32_t dataCore1=multicore_fifo_pop_blocking();
+        uint32_t dataCore1 = multicore_fifo_pop_blocking();
         debugVal("[X] CORE 1 SENDS %d [X]\r\n",dataCore1);
  
         DS18B20_TEMP_READ(DS18B20_PIN);
