@@ -42,7 +42,7 @@
 #include "hc05.h"
 
 
-
+uint32_t count =0;
 void core1_entry() 
 {
 
@@ -53,16 +53,16 @@ void core1_entry()
     while (true)
     {   
         /*!< Just for testing purpose */
-        uint32_t count =1;
         count++;
-        if (count == 1000)
+        if (count == (2^32))
         {
+            toggleBuzz();
             count = 0;
         }
         
 
 
-        tight_loop_contents();
+        
     }
 } 
 
@@ -143,6 +143,15 @@ int main()
     gpio_set_dir(WATER_TEMP_OK, GPIO_OUT);
     gpio_set_dir(PRESSURE_FSR_OK, GPIO_OUT);
     gpio_set_dir(WATER_LEVEL_OK, GPIO_OUT);
+
+    gpio_put(TEMPERATURE_OK, false);
+    gpio_put(PRESSURE_OK, false);
+    gpio_put(HUMIDITY_OK, false);
+    gpio_put(WATER_TEMP_OK, false);
+    gpio_put(PRESSURE_FSR_OK, false);
+    gpio_put(WATER_LEVEL_OK, false);
+    gpio_put(LED, false);
+
 
     debugMsg("[X] GPIO HARDWARE SUCCESSFULLY SET [X]\r\n");
     sleep_ms(1000);
@@ -295,6 +304,38 @@ void toggleLed()
 *
 **************************************************************
 */
+void toggleBuzz()
+{
+    if (gpio_get_out_level(LED) != true)
+    {
+        gpio_put(PRESSURE_FSR_OK, true);
+        /*!< NO PRINTF on the SECOND CORE !!! */
+        //debugMsg("[X] LED ON\r\n");
+    }
+    else
+    {
+        gpio_put(PRESSURE_FSR_OK, false);
+        /*!< NO PRINTF on the SECOND CORE !!! */
+        //debugMsg("[X] LED OFF\r\n");
+    }
+}
+
+
+/*!
+**************************************************************
+* @brief
+*
+* @param[in]  :
+*
+* @return Result of API execution status
+*
+* @retval = 0 -> Success.
+* @retval > 0 -> Warning.
+* @retval < 0 -> Fail.
+*
+*
+**************************************************************
+*/
 void debugTerm(void)
 {
     debugMsg("\n\n======================================================================\r\n");
@@ -322,7 +363,7 @@ void debugTerm(void)
     while (multicore_fifo_rvalid())
     {
         uint32_t blueDAta = multicore_fifo_pop_blocking();    
-        blueDAta = blueDAta * 2;
+        blueDAta += blueDAta ;
         multicore_fifo_push_blocking(blueDAta);  
     }
     multicore_fifo_clear_irq();// Clear IRQ
