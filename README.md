@@ -14,3 +14,6 @@ see https://github.com/Chahid02/waterpipe_rpi
 -->
 
 <img src="videos/PWM_Motor.gif?raw=true" />
+
+<object data="pin.pdf" type="application/pdf" width="100%"> 
+</object>
