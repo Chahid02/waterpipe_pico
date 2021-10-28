@@ -4,20 +4,35 @@
 <!-- picture -->
 ![Kesselsteuerung](/images/Kessel.png)
 
-### Motor PWM
-see https://github.com/Chahid02/waterpipe_rpi
 
-<!-- video -->
+
+### Pico Pinout
+<img src="images/Pinout.svg?sanitize=true">
+
+<!---
+![Alt text](images/Pinout.svg?sanitize=true)
+-->
+
+
 <!---
 ![caption](videos/PWM_Motor.
  gif?raw=true)
 -->
 
+<!-- video -->
+### Motor PWM
+ Repo: https://github.com/Chahid02/waterpipe_rpi 
+  
+ For mp4 format with sound go to https://raw.githubusercontent.com/Chahid02/waterpipe_pico/master/videos/PWM_Motor.mp4
+
+
+<video width="320" height="240" controls>
+  <source src="videos/PWM_Motor.gif" type="video/mp4">
+</video>
+
+
 <img src="videos/PWM_Motor.gif?raw=true" />
 
-<object data="https://raw.githubusercontent.com/Chahid02/waterpipe_pico/master/pin.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="https://raw.githubusercontent.com/Chahid02/waterpipe_pico/master/pin.pdf">
-        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="https://raw.githubusercontent.com/Chahid02/waterpipe_pico/master/pin.pdf">Download PDF</a>.</p>
-    </embed>
-</object>
+
+
 
