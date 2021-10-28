@@ -23,5 +23,18 @@ Original [Repo:](https://github.com/Chahid02/waterpipe_rpi)`https://github.com/C
 [![PWM Motor](videos/PWM_Motor.gif)](https://raw.githubusercontent.com/Chahid02/waterpipe_pico/master/videos/PWM_Motor.mp4)
 
 
+___
+# Terminal
+___
+
+### Init terminal
+<img src="images/Init.png?sanitize=true">
+
+
+### Bluetooth terminal
+<img src="images/BLUETOOTH.png?sanitize=true">
+
+### Data terminal
+<img src="images/data.png?sanitize=true">
 
 
