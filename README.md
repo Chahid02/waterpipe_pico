@@ -6,4 +6,4 @@
 
 
 <!-- blank line -->
-<video src="PWM_Motor.mp4" width=180/>
+<video src="videos/PWM_Motor.mp4" width=380/>
