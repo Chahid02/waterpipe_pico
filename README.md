@@ -7,4 +7,5 @@
 ### Motor PWM
 
 <!-- blank line -->
-<video src="videos/PWM_Motor.mp4" width=380/>
+
+![caption](videos/PWM_Motor.gif)
