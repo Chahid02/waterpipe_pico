@@ -8,4 +8,4 @@
 
 <!-- video -->
 
-![caption](videos/PWM_Motor.gif)
+![caption](videos/PWM_Motor.gif?raw=true)
