@@ -5,7 +5,12 @@
 ![Kesselsteuerung](/images/Kessel.png)
 
 ### Motor PWM
+see https://github.com/Chahid02/waterpipe_rpi
 
 <!-- video -->
+<!---
+![caption](videos/PWM_Motor.
+ gif?raw=true)
+-->
 
-![caption](videos/PWM_Motor.gif?raw=true)
+<img src="videos/PWM_Motor.gif?raw=true" />
