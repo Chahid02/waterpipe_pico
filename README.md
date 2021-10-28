@@ -1,39 +1,26 @@
 # Waterpipe Project
 
-### This project is a Raspberry Pi Pico waterpipe control system prototype.
+ This project is a Raspberry Pi Pico waterpipe control system prototype.
 <!-- picture -->
 ![Kesselsteuerung](/images/Kessel.png)
 
 
-
+___
 ### Pico Pinout
+___
+
 <img src="images/Pinout.svg?sanitize=true">
 
-<!---
-![Alt text](images/Pinout.svg?sanitize=true)
--->
-
-
-<!---
-![caption](videos/PWM_Motor.
- gif?raw=true)
--->
-
 <!-- video -->
+___
 ### Motor PWM
- Repo: https://github.com/Chahid02/waterpipe_rpi 
-  
- For mp4 format with sound go to https://raw.githubusercontent.com/Chahid02/waterpipe_pico/master/videos/PWM_Motor.mp4
+___
+Original [Repo:](https://github.com/Chahid02/waterpipe_rpi)`https://github.com/Chahid02/waterpipe_rpi` is here.
+
+ For mp4 format (motor sound) **click on the gif** below.
 
 
-<video controls="controls">
-  <source type="video/mp4" src="videos/PWM_Motor.mp4"></source>
-  <source type="video/webm" src="videos/PWM_Motor.gif"></source>
-  <p>Your browser does not support the video element.</p>
-</video>
-
-
-<img src="videos/PWM_Motor.gif?raw=true" />
+[![PWM Motor](videos/PWM_Motor.gif)](https://raw.githubusercontent.com/Chahid02/waterpipe_pico/master/videos/PWM_Motor.mp4)
 
 
 
