@@ -26,8 +26,10 @@
  For mp4 format with sound go to https://raw.githubusercontent.com/Chahid02/waterpipe_pico/master/videos/PWM_Motor.mp4
 
 
-<video width="320" height="240" controls>
-  <source src="videos/PWM_Motor.gif" type="video/mp4">
+<video controls="controls">
+  <source type="video/mp4" src="videos/PWM_Motor.mp4"></source>
+  <source type="video/webm" src="videos/PWM_Motor.gif"></source>
+  <p>Your browser does not support the video element.</p>
 </video>
 
 
