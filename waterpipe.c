@@ -213,8 +213,12 @@ int main()
   
     HC05_PROG_FINISHED();
 
-    //HC05_SET(UART_ID0,HC05_SET_RESET,"RESET");    /*!< Isnt nesserarly so for because HC-05 overtake new values */
+    //HC05_SET(UART_ID0,HC05_SET_RESET,"RESET");    /*!< Isnt nesserarly so far because HC-05 overtake new values */
     //debugMsg("[X] RESETING HC-05 BLUETOOTH MODULE [X]\r\n");
+
+    int32_t bmeTemp;
+    uint32_t bmePress;
+    uint32_t bmeHum;
 
     /*!< User Code starts here */
     while (true)
@@ -225,9 +229,7 @@ int main()
         {
             /*!< Waiting for updated values */
         };
-        int32_t bmeTemp;
-        uint32_t bmePress;
-        uint32_t bmeHum;
+
         BME280_Temp_Reading(bmeTemp, bmePress, bmeHum);
 
        
