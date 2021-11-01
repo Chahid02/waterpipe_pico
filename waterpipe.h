@@ -48,7 +48,7 @@
 /*=========================================================*/
 /*== DEBUG DEFINITION =====================================*/
 /*=========================================================*/
-#if DEBUG == 1
+#if DEBUG == 0
 #define debugModMsg printf("[X] DEBUGGING MODE IS ON [X]\r\n")
 #define debugMsg(x) printf(x)
 #define debugVal(x, y) printf(x, y)
@@ -59,6 +59,24 @@
 #define debugVal(x, y)
 #define debug2Val(x, y, z)
 #endif
+
+/*=========================================================*/
+/*== MONITORING DEFINITION ================================*/
+/*=========================================================*/
+#if MONITOR == 1
+#define monitorModMsg printf("[X] MONITORING MODE IS ON [X]\r\n")
+#define monitorMsg(x) printf(x)
+#define monitorVal(x, y) printf(x, y)
+#define monitor2Val(x, y, z) printf(x, y, z)
+#else
+#define monitorModMsg printf("[X] MONITORING MODE IS OFF[X]\r\n")
+#define monitorMsg(x)
+#define monitorVal(x, y)
+#define monitor2Val(x, y, z)
+#endif
+
+
+
 
 /*=========================================================*/
 /*== PROTOTYPE DECLARATION ================================*/
