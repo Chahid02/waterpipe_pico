@@ -149,14 +149,14 @@ int main()
     gpio_set_dir(PRESSURE_FSR_OK, GPIO_OUT);
     gpio_set_dir(WATER_LEVEL_OK, GPIO_OUT);
 
-    /*!< Init GPIOs on LOW-LEVEL */
-    gpio_put(TEMPERATURE_OK, false);
-    gpio_put(PRESSURE_OK, false);
-    gpio_put(HUMIDITY_OK, false);
-    gpio_put(WATER_TEMP_OK, false);
-    gpio_put(PRESSURE_FSR_OK, false);
-    gpio_put(WATER_LEVEL_OK, false);
-    gpio_put(LED, false);
+    /*!< Init GPIOs on HIGH-LEVEL */
+    gpio_put(TEMPERATURE_OK, true);
+    gpio_put(PRESSURE_OK, true);
+    gpio_put(HUMIDITY_OK, true);
+    gpio_put(WATER_TEMP_OK, true);
+    gpio_put(PRESSURE_FSR_OK, true);
+    gpio_put(WATER_LEVEL_OK, true);
+    gpio_put(LED, true);
 
 
     debugMsg("[X] GPIO HARDWARE SUCCESSFULLY SET [X]\r\n");
@@ -251,8 +251,11 @@ int main()
         hcHum= bmeHum / 1024.0f;
 
         HC05_TX_BME280(hcTemp, hcPress, hcHum);
-        WATERLEVEL_Run();
-        HC05_TX_DS18B20(tempCompr);
+
+        float_t waterlevelAdc;
+        waterlevelAdc = WATERLEVEL_Run();
+
+        HC05_TX_WATERLEVEL(waterlevelAdc);
     
   
         if(multicore_fifo_wready())
@@ -271,13 +274,42 @@ int main()
         debugMsg("======================== CORE1 FIFO ==================================\r\n");
         debugVal("[X] CORE 1 SENDS %d [X]\r\n",dataCore1);  
         }
-
+        HC05_TX_DS18B20(tempCompr); 
        
     
 
         
           
         toggleLed();
+        debugMsg("======================== WARNING LEVEL ===============================\r\n");
+        debugVal("[X] TEMPERATURE TOLERANZ: %f [X]\r\n",20.0f - hcTemp);
+        if (hcTemp >= 20.0f)
+        {
+            gpio_put(TEMPERATURE_OK, false);
+        }
+        debugVal("[X] PRESSURE TOLERANZ: %f [X]\r\n",1300.0f - hcPress);
+        if (hcPress >= 1300.0f)
+        {
+            gpio_put(PRESSURE_OK, false);
+        }
+        debugVal("[X] HUMIDITY TOLERANZ: %f [X]\r\n",30.0f - hcHum);
+        if (hcHum >= 30.0f)
+        {
+            gpio_put(HUMIDITY_OK, false);
+        }
+        debugVal("[X] WATERELEVEL TOLERANZ: %f [X]\r\n",waterlevelAdc - 1.0);
+        if (waterlevelAdc  >= 1.0f)
+        {
+            gpio_put(WATER_LEVEL_OK, false);
+        }
+        debugVal("[X] WATER TEMP TOLERANZ: %f [X]\r\n",20.0f - tempCompr );
+        if (tempCompr >= 20.0f)
+        {
+            gpio_put(WATER_TEMP_OK, false);
+        }
+
+    
+
         sleep_ms(200);
 
     }
@@ -304,24 +336,28 @@ void toggleLed()
 {
     if (gpio_get_out_level(LED) != true)
     {
+        /*
         gpio_put(TEMPERATURE_OK, true);
         gpio_put(PRESSURE_OK, true);
         gpio_put(HUMIDITY_OK, true);
         gpio_put(WATER_TEMP_OK, true);
         gpio_put(PRESSURE_FSR_OK, true);
         gpio_put(WATER_LEVEL_OK, true);
+         */
         gpio_put(LED, true);
         /*!< NO PRINTF on the SECOND CORE !!! */
         //debugMsg("[X] LED ON\r\n");
     }
     else
     {
+        /*
         gpio_put(TEMPERATURE_OK, false);
         gpio_put(PRESSURE_OK, false);
         gpio_put(HUMIDITY_OK, false);
         gpio_put(WATER_TEMP_OK, false);
         gpio_put(PRESSURE_FSR_OK, false);
         gpio_put(WATER_LEVEL_OK, false);
+        */
         gpio_put(LED, false);
         /*!< NO PRINTF on the SECOND CORE !!! */
         //debugMsg("[X] LED OFF\r\n");

@@ -35,8 +35,9 @@
 #define PRESSURE_OK     10
 #define HUMIDITY_OK     11
 #define WATER_TEMP_OK   12
-#define PRESSURE_FSR_OK 13
 #define WATER_LEVEL_OK  14
+#define PRESSURE_FSR_OK 13
+
 
 /*!< SET USER __NOP() MACRO */
 #define __NOP() __asm("NOP");

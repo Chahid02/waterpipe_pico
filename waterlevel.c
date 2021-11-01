@@ -76,7 +76,7 @@ int8_t WATERLEVEL_DmaSet(void)
     return 0;
 }
 
-void WATERLEVEL_Run(void)
+float32_t WATERLEVEL_Run(void)
 {
     uint16_t adcWaterLevel[ADC_SAMPLES];
     const float32_t conversion_factor = 3.3f / (1 << 12);
@@ -102,4 +102,5 @@ void WATERLEVEL_Run(void)
 
     uint16_t result = adc_read();
     debug2Val("[X] Compare Voltage: %f V (DIRECT ADC READ) [X]\n", result, result * conversion_factor);
+    return waterLevelVoltage;
 }

@@ -32,7 +32,7 @@ typedef float float32_t;
 * 		access-time
 **************************************************************
 */
-#define CLOCK_DIV 0
+#define CLOCK_DIV 9600
 
 #define ADC_CHANNEL0 	(uint8_t) (0x1A)
 #define ADC_CHANNEL1 	(uint8_t) (0x1B)
@@ -50,6 +50,6 @@ typedef float float32_t;
 /*=========================================================*/
 uint8_t WATERLEVEL_AdcSet(void);
 int8_t WATERLEVEL_DmaSet(void);
-void WATERLEVEL_Run(void);
+float32_t WATERLEVEL_Run(void);
 
 #endif

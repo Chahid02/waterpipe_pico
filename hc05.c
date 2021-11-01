@@ -178,6 +178,21 @@ void HC05_UART_RX_READ_IRQ(void)
     irq_clear(UART0_IRQ);
 }
 
+void HC05_TX_WATERLEVEL(float32_t adc)
+{
+    uint8_t RecData[50];
+    uint8_t WTData[6];
+    /*!< ADC float to string */
+    gcvt(adc, 2, WTData);
+    debugMsg("====================  HC-05 WT SEND STARTED  ========================= \r\n");
+    debugVal("[X] Waterlevel:%s [X]\r\n",WTData);
+    strcpy(RecData,"Waterlevel:");
+    strncat(RecData,WTData,sizeof(WTData));
+    strncat(RecData,"\r\n",sizeof("\r\n"));
+
+    uart_puts(UART_ID0, RecData);
+    //getCharRxCnt++;
+} 
  
 void HC05_TX_DS18B20(float_t temperature)
 {

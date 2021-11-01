@@ -53,6 +53,7 @@ void HC05_SET(uart_inst_t *uart, uint8_t *sendCommand, uint8_t *ATCommand);
 uint8_t HC05_PROG_FINISHED(void);
 void HC05_TX_DS18B20(float32_t temperature);
 void HC05_TX_BME280(float_t temperature, float_t pressure, float_t humidity);
+void HC05_TX_WATERLEVEL(float_t adc);
 void HC05_UART_RX_READ_IRQ(void);
 void IRQ_SETUP_EN(irq_handler_t handler);
 void IRQ_SETUP_DIS(irq_handler_t handler);
