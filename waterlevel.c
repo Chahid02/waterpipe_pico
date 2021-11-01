@@ -79,6 +79,8 @@ int8_t WATERLEVEL_DmaSet(void)
 float32_t WATERLEVEL_Run(void)
 {
     uint16_t adcWaterLevel[ADC_SAMPLES];
+    uint16_t WaterLevelSamples;
+    uint16_t WaterLevelSamplesBuff;
     const float32_t conversion_factor = 3.3f / (1 << 12);
     float32_t waterLevelVoltage;
     float32_t buff;
@@ -91,16 +93,29 @@ float32_t WATERLEVEL_Run(void)
     dma_channel_wait_for_finish_blocking(dma_channel);
     adc_run(false);
     //adc_fifo_drain();
-    for (size_t i = 0; i < ADC_SAMPLES - 1; i++)
+    for (size_t i = 0; i < ADC_SAMPLES; i++)
     {
         buff += (adcWaterLevel[i] * conversion_factor);
+        WaterLevelSamples += adcWaterLevel[i];
     }
     adc_fifo_drain();
 
-    waterLevelVoltage = (float32_t)(buff / ADC_SAMPLES);
-    debugVal("[X] Voltage: %f V (DMA READ) [x]\n", waterLevelVoltage);
+    float32_t offsetWater = 0.08;
+    float32_t waterMaxLevel = 0.92;
 
+    waterLevelVoltage = (float32_t)(buff / ADC_SAMPLES);
+    debugVal("[X] Voltage: %f V (DMA READ) [x]\r\n", waterLevelVoltage);
+ 
+    WaterLevelSamplesBuff = WaterLevelSamples / ADC_SAMPLES;
+    debugVal("[X] WaterLevel Height: %.3f cm (DMA READ) [x]\r\n",((waterLevelVoltage - offsetWater) / (waterMaxLevel - offsetWater)) * 4);
+  
     uint16_t result = adc_read();
-    debug2Val("[X] Compare Voltage: %f V (DIRECT ADC READ) [X]\n", result, result * conversion_factor);
-    return waterLevelVoltage;
+    debugVal("[X] Compare Voltage: %f V (DIRECT ADC READ) [X]\r\n", result * conversion_factor);
+    debugVal("[X] WaterLevel Height: %.3f cm (DIRECT ADC READ) [x]\r\n",(((result * conversion_factor) - offsetWater) / (waterMaxLevel - offsetWater)) * 4);
+  
+
+    //return waterLevelVoltage;
+    //return (((waterLevelVoltage - offsetWater) / (waterMaxLevel - offsetWater)) * 4);
+    return (((result * conversion_factor) - offsetWater) / (waterMaxLevel - offsetWater)) * 4;
+
 }

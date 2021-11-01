@@ -161,7 +161,8 @@ uint8_t HC05_INIT(void)
         UART_IRQ = UART1_IRQ;
     }
     debugMsg("[X] BLUETOOTH MODULE IS READY [X] \r\n");
-    //uart_puts(UART_ID0, "Sensor Unit BT-Module is Ready!!! \r\n");
+    monitorMsg("[X] BLUETOOTH MODULE IS READY [X] \r\n");
+ 
 }
 
 uint16_t getCharRxCnt = 0;
@@ -186,6 +187,10 @@ void HC05_TX_WATERLEVEL(float32_t adc)
     gcvt(adc, 2, WTData);
     debugMsg("====================  HC-05 WT SEND STARTED  ========================= \r\n");
     debugVal("[X] Waterlevel:%s [X]\r\n",WTData);
+
+    monitorMsg("====================  HC-05 WT SEND STARTED  ========================= \r\n");
+    monitorVal("[X] Waterlevel:%s [X]\r\n",WTData);
+
     strcpy(RecData,"Waterlevel:");
     strncat(RecData,WTData,sizeof(WTData));
     strncat(RecData,"\r\n",sizeof("\r\n"));
@@ -207,6 +212,8 @@ void HC05_TX_DS18B20(float_t temperature)
 
     debugMsg("====================  HC-05 DSB SEND STARTED  ======================== \r\n");
     debugVal("[X] DS1820 Temperature %s [X]\r\n",TempData);
+    monitorMsg("====================  HC-05 DSB SEND STARTED  ======================== \r\n");
+    monitorVal("[X] DS1820 Temperature %s [X]\r\n",TempData);
     uart_puts(UART_ID0, RecData);
     //getCharRxCnt++;
 } 
@@ -240,6 +247,11 @@ void HC05_TX_BME280(float_t temperature, float_t pressure, float_t humidity)
     debugVal("[X] Temperature:%s [X]\r\n",TempData);
     debugVal("[X] Pressure:%s [X]\r\n",PressData);
     debugVal("[X] Humidity:%s [X]\r\n",HumData);
+
+    monitorMsg("====================  HC-05 BME SEND STARTED  ======================== \r\n");
+    monitorVal("[X] Temperature:%s [X]\r\n",TempData);
+    monitorVal("[X] Pressure:%s [X]\r\n",PressData);
+    monitorVal("[X] Humidity:%s [X]\r\n",HumData);
     uart_puts(UART_ID0, RecData);
     //getCharRxCnt++;
 } 

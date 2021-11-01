@@ -43,12 +43,14 @@
 #define __NOP() __asm("NOP");
 
 /*!< SET DEBUG MODE ON/OFF */
-#define DEBUG 1
+#define DEBUG 0
 
+/*!< SET MONITOR MODE ON/OFF */
+#define MONITOR 1
 /*=========================================================*/
 /*== DEBUG DEFINITION =====================================*/
 /*=========================================================*/
-#if DEBUG == 0
+#if DEBUG == 1
 #define debugModMsg printf("[X] DEBUGGING MODE IS ON [X]\r\n")
 #define debugMsg(x) printf(x)
 #define debugVal(x, y) printf(x, y)

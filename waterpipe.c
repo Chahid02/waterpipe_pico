@@ -85,6 +85,7 @@ int main()
     debugMsg("======================================================================\r\n");
     debugMsg("OPERATION MODE STARTED: ");
     debugModMsg;
+    monitorModMsg;
     debugMsg("=======================\r\n");
     sleep_ms(1000);
 
@@ -164,7 +165,6 @@ int main()
 
     debugMsg("==========================\r\n");
     debugMsg("OPERATION MODE STARTED: ");
-    debugModMsg;
     sleep_ms(1000);
     debugMsg("==========================\r\n");
 
@@ -222,7 +222,7 @@ int main()
     //HC05_SET(UART_ID0,HC05_SET_RESET,"RESET");    /*!< Isnt nesserarly so far because HC-05 overtake new values */
     //debugMsg("[X] RESETING HC-05 BLUETOOTH MODULE [X]\r\n");
 
-    
+    size_t hcCount = 1;
     /*!< User Code starts here */
     while (true)
     {
@@ -249,6 +249,16 @@ int main()
         hcTemp = bmeTemp / 100.0f; 
         hcPress = bmePress / 100.0f; 
         hcHum= bmeHum / 1024.0f;
+
+        uint8_t sendBuffer[50]; 
+        snprintf(sendBuffer,100,"========== %d Value ========== \r\n",hcCount);
+        uart_puts(UART_ID0, sendBuffer);
+        hcCount++; 
+        if (hcCount == 60)
+        {
+            hcCount = 1;
+        }       
+        
 
         HC05_TX_BME280(hcTemp, hcPress, hcHum);
 
@@ -281,27 +291,38 @@ int main()
           
         toggleLed();
         debugMsg("======================== WARNING LEVEL ===============================\r\n");
+        monitorMsg("======================== WARNING LEVEL ===============================\r\n");
+
         debugVal("[X] TEMPERATURE TOLERANZ: %f [X]\r\n",20.0f - hcTemp);
+        monitorVal("[X] TEMPERATURE TOLERANZ: %f [X]\r\n",20.0f - hcTemp);
         if (hcTemp >= 20.0f)
         {
             gpio_put(TEMPERATURE_OK, false);
         }
+
         debugVal("[X] PRESSURE TOLERANZ: %f [X]\r\n",1300.0f - hcPress);
+        monitorVal("[X] PRESSURE TOLERANZ: %f [X]\r\n",1300.0f - hcPress);
         if (hcPress >= 1300.0f)
         {
             gpio_put(PRESSURE_OK, false);
         }
+
         debugVal("[X] HUMIDITY TOLERANZ: %f [X]\r\n",30.0f - hcHum);
+        monitorVal("[X] HUMIDITY TOLERANZ: %f [X]\r\n",30.0f - hcHum);
         if (hcHum >= 30.0f)
         {
             gpio_put(HUMIDITY_OK, false);
         }
-        debugVal("[X] WATERELEVEL TOLERANZ: %f [X]\r\n",1.0 - waterlevelAdc);
-        if (waterlevelAdc  >= 1.0f)
+
+        debugVal("[X] WATERELEVEL TOLERANZ: %f cm [X]\r\n",3.5f - waterlevelAdc);
+        monitorVal("[X] WATERELEVEL TOLERANZ: %f cm [X]\r\n",3.5f - waterlevelAdc);
+        if (waterlevelAdc  >= 3.5f)
         {
             gpio_put(WATER_LEVEL_OK, false);
         }
+
         debugVal("[X] WATER TEMP TOLERANZ: %f [X]\r\n",20.0f - tempCompr );
+        monitorVal("[X] WATER TEMP TOLERANZ: %f [X]\r\n",20.0f - tempCompr );
         if (tempCompr >= 20.0f)
         {
             gpio_put(WATER_TEMP_OK, false);
@@ -309,7 +330,7 @@ int main()
 
     
 
-        sleep_ms(200);
+        sleep_ms(1000); /*<! For monitoring purpose */
 
     }
     /*!< User Code ends here */
@@ -414,6 +435,11 @@ void debugTerm(void)
     debugMsg("\n\n======================================================================\r\n");
     debugMsg("======================== DEBUG TERMINAL===============================\r\n");
     debugMsg("======================================================================\r\n\n");
+
+    monitorMsg("\n\n======================================================================\r\n");
+    monitorMsg("======================== DEBUG TERMINAL===============================\r\n");
+    monitorMsg("======================================================================\r\n\n");
+
 }
 /*!
 **************************************************************
