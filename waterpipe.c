@@ -256,7 +256,6 @@ int main()
         waterlevelAdc = WATERLEVEL_Run();
 
         HC05_TX_WATERLEVEL(waterlevelAdc);
-    
   
         if(multicore_fifo_wready())
         {

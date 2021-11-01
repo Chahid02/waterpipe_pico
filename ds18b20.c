@@ -47,12 +47,12 @@ void DS18B20_WRITE_BIT(uint8_t ds18b20_gpio_pin, uint8_t bitValue)
     if (bitValue == 1)
     {
         delay1 = 15;
-        delay2 = 45;
+        delay2 = 65;
     }
     else
     {
         delay1 = 60;
-        delay2 = 10;
+        delay2 = 20;
     }
     gpio_set_dir(ds18b20_gpio_pin, GPIO_OUT);
     gpio_put(ds18b20_gpio_pin, 0);
@@ -80,9 +80,11 @@ uint8_t DS18B20_READ_BIT(uint8_t ds18b20_gpio_pin)
 {
     gpio_set_dir(ds18b20_gpio_pin, GPIO_OUT);
     gpio_put(ds18b20_gpio_pin, 0);
-    sleep_us(8);
+    //sleep_us(8);
+    sleep_us(10);
     gpio_set_dir(ds18b20_gpio_pin, GPIO_IN);
-    sleep_us(2);
+    //sleep_us(2);
+    sleep_us(5);
     uint8_t bitValue = gpio_get(ds18b20_gpio_pin);
     sleep_us(60);
     return bitValue;
