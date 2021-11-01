@@ -170,7 +170,7 @@ int main()
 
     debugMsg("INIT ADC CONFIGURATION: ");
     /*!< Init ADC for waterlevel sensor */
-    if (WATERLEVEL_AdcSet() >= 3)
+    if (WATERLEVEL_SET_ADC() >= 3)
     {
         debugMsg("[X] ADC HARDWARE FAILED TO BE SET [X]\r\n");
     }
@@ -184,16 +184,16 @@ int main()
 
     debugMsg("INIT DMA CONFIGURATION: ");
     /*!< Init DMA for waterlevel sensor */
-    WATERLEVEL_DmaSet();
+    WATERLEVEL_SET_DMA();
     sleep_ms(1000);
     debugMsg("======================\r\n");
 
 
     /*!< Init BME280 Sensor */
-    BME280_Init();
+    BME280_INIT();
 
     /*!< Reading the register values */
-    BME280_Read_RegValue();
+    BME280_READ_REGVALUE();
 
     /*!< Init DS18B20 Sensor */
     DS18B20_INIT();
@@ -238,17 +238,17 @@ int main()
         uint32_t bmePress;
         uint32_t bmeHum;
 
-        BME280_Temp_Reading(bmeTemp, bmePress, bmeHum);
+        BME280_TEMP_READ(bmeTemp, bmePress, bmeHum);
 
 
-        bmeTemp = BME280_CompTemp();
-        bmePress = BME280_CompPressure();
-        bmeHum = BME280_CompHumInt32();
+        bmeTemp = BME280_COMP_TEMP();
+        bmePress = BME280_COMP_PRESSURE();
+        bmeHum = BME280_COMP_HUM_INT32();
 
         
         hcTemp = bmeTemp / 100.0f; 
         hcPress = bmePress / 100.0f; 
-        hcHum= bmeHum / 1024.0f;
+        hcHum = bmeHum / 1024.0f;
 
         uint8_t sendBuffer[50]; 
         snprintf(sendBuffer,100,"========== %d Value ========== \r\n",hcCount);
@@ -263,7 +263,7 @@ int main()
         HC05_TX_BME280(hcTemp, hcPress, hcHum);
 
         float_t waterlevelAdc;
-        waterlevelAdc = WATERLEVEL_Run();
+        waterlevelAdc = WATERLEVEL_RUN();
 
         HC05_TX_WATERLEVEL(waterlevelAdc);
   

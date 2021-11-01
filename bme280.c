@@ -582,7 +582,7 @@ void BME280_READ_FILTER(void)
  * 
 **************************************************************
  */
-void BME280_Set_OSRS_t(uint8_t osrs_t)
+void BBME280_SET_OSRS_T(uint8_t osrs_t)
 {
     uint8_t status = 0x00;
     uint8_t mode = 0x00;
@@ -624,7 +624,7 @@ void BME280_Set_OSRS_t(uint8_t osrs_t)
  * 
 **************************************************************
  */
-void BME280_Set_OSRS_p(uint8_t osrs_p)
+void BME280_SET_OSRS_P(uint8_t osrs_p)
 {
     uint8_t status = 0x00;
     uint8_t mode = 0x00;
@@ -723,7 +723,7 @@ void BME280_SET_OSRS_H(uint8_t osrs_h)
  * 
 **************************************************************
  */
-void BME280_Read_OSRS_h(void)
+void BME280_READ_OSRS_H(void)
 {
     debugMsg("====================  BME280 OSRS_h READING STARTED  =================\r\n");
     uint8_t ptrData[] = {BME280_CTRL_HUM_ADDR};
@@ -755,7 +755,7 @@ void BME280_Read_OSRS_h(void)
  * 
 **************************************************************
  */
-void BME280_Read_CTRL_MEAS(void)
+void BME280_READ_CTRL_MEAS(void)
 {
     debugMsg("====================  BME280 CTRL_MEAS READING STARTED  ==============\r\n");
     uint8_t ptrData[] = {BME280_CTRL_MEAS_ADDR};
@@ -787,7 +787,7 @@ void BME280_Read_CTRL_MEAS(void)
 **************************************************************
  */
 
-void BME280_RawData(void)
+void BME280_RAW_DATA(void)
 {
     uint8_t buffer[8];
 
@@ -827,7 +827,7 @@ void BME280_RawData(void)
  * 
 **************************************************************
  */
-int32_t BME280_CompTemp(void)
+int32_t BME280_COMP_TEMP(void)
 {
     int32_t adc_T = temp;
     int32_t var1;
@@ -873,7 +873,7 @@ int32_t BME280_CompTemp(void)
  * 
 **************************************************************
  */
-uint32_t BME280_CompPressure(void)
+uint32_t BME280_COMP_PRESSURE(void)
 {
     int32_t adc_P = press;
     int32_t var1;
@@ -924,7 +924,7 @@ uint32_t BME280_CompPressure(void)
  * 
 **************************************************************
  */
-double BME280_CompHumDouble(void)
+double BME280_COMP_HUM_DOUBLE(void)
 {
     int32_t adc_H = hum;
     double var_H;
@@ -946,7 +946,7 @@ double BME280_CompHumDouble(void)
     return var_H;
 }
 
-uint32_t BME280_CompHumInt32(void)
+uint32_t BME280_COMP_HUM_INT32(void)
 {
     int32_t adc_H = hum;
     int32_t var_H;
@@ -985,7 +985,7 @@ uint32_t BME280_CompHumInt32(void)
  * 
 **************************************************************
  */
-void BME280_MeasurementTime(void)
+void BME280_MEASUREMENT_TIME(void)
 {
     float32_t timeTyp;
     float32_t timeMax;
@@ -1165,18 +1165,18 @@ void BME280_MeasurementTime(void)
  * 
 **************************************************************
  */
-void BME280_DataRead(int32_t temperature, uint32_t pressure, uint32_t humidity)
+void BME280_DATA_READ(int32_t temperature, uint32_t pressure, uint32_t humidity)
 {
     debugMsg("====================  BME280 SENSOR DATA READING STARTED =============\r\n");
-    temperature = BME280_CompTemp();
+    temperature = BME280_COMP_TEMP();
     debugVal("[X] Temperature: %.2f °C \r\n", temperature / 100.0f);
-    pressure = BME280_CompPressure();
+    pressure = BME280_COMP_PRESSURE();
     debugVal("[X] Pressure: %.2f °hPa \r\n", pressure / 100.0f);
     /* 
-    double humidity = BME280_CompHumDouble();
+    double humidity = BME280_COMP_HUM_DOUBLE();
     debugVal("[X] Humidity: %lf \r\n", humidity); 
     */
-    humidity = BME280_CompHumInt32();
+    humidity = BME280_COMP_HUM_INT32();
     debugVal("[X] Humidity: %.2f %% \r\n", humidity / 1024.0f);
 }
 /*!
@@ -1197,7 +1197,7 @@ void BME280_DataRead(int32_t temperature, uint32_t pressure, uint32_t humidity)
  * 
 **************************************************************
  */
-void BME280_Init(void)
+void BME280_INIT(void)
 {
     /*=========================================================*/
     /*== BME280 SETTINGS ======================================*/
@@ -1208,8 +1208,8 @@ void BME280_Init(void)
     BME280_SET_STANDBY(BME280_STBY_0_5);
     BME280_SET_OSRS_H(BME280_OSRS_H_x1);
     BME280_SET_FILTER(BME280_FILTER_16);
-    BME280_Set_OSRS_t(BME280_OSRS_T_x2);
-    BME280_Set_OSRS_p(BME280_OSRS_P_x16);
+    BBME280_SET_OSRS_T(BME280_OSRS_T_x2);
+    BME280_SET_OSRS_P(BME280_OSRS_P_x16);
     BME280_SET_MODE(BME280_NORMAL_MODE);
 }
 /*!
@@ -1230,12 +1230,12 @@ void BME280_Init(void)
  * 
 **************************************************************
  */
-void BME280_Read_RegValue(void)
+void BME280_READ_REGVALUE(void)
 {
-    BME280_Read_CTRL_MEAS();
+    BME280_READ_CTRL_MEAS();
     BME280_READ_MODE();
     BME280_READ_STANDBY();
-    BME280_Read_OSRS_h();
+    BME280_READ_OSRS_H();
 }
 /*!
 **************************************************************
@@ -1255,9 +1255,9 @@ void BME280_Read_RegValue(void)
  * 
 **************************************************************
  */
-void BME280_Temp_Reading(int32_t bmeTemp, uint32_t bmePress, uint32_t bmeHum)
+void BME280_TEMP_READ(int32_t bmeTemp, uint32_t bmePress, uint32_t bmeHum)
 {
-    BME280_RawData();
-    BME280_DataRead(bmeTemp, bmePress, bmeHum);
-    BME280_MeasurementTime();
+    BME280_RAW_DATA();
+    BME280_DATA_READ(bmeTemp, bmePress, bmeHum);
+    BME280_MEASUREMENT_TIME();
 }
