@@ -37,7 +37,7 @@ typedef float float32_t;
 #define ADC_CHANNEL0 	(uint8_t) (0x1A)
 #define ADC_CHANNEL1 	(uint8_t) (0x1B)
 #define ADC_CHANNEL2 	(uint8_t) (0x1C)
-#define ADC_SAMPLES		5000
+#define ADC_SAMPLES		1000
 
 /*=========================================================*/
 /*== DMA MACROS ===========================================*/

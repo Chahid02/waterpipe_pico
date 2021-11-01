@@ -46,7 +46,7 @@ void DS18B20_WRITE_BIT(uint8_t ds18b20_gpio_pin, uint8_t bitValue)
     uint16_t delay1, delay2;
     if (bitValue == 1)
     {
-        delay1 = 10;
+        delay1 = 15;
         delay2 = 45;
     }
     else
@@ -128,13 +128,14 @@ float32_t DS18B20_TEMP_READ(uint8_t ds18b20_gpio_pin)
     if ((convTime = DS18B20_REQUEST_TEMP(DS18B20_PIN)) == 750)
     {
         debugMsg("\n[X] Max. Conversion time reached...");
-        debugVal("[X] Conversion time: %d ms\n", convTime);
+        debugVal("[X] Conversion time: %d ms\r\n", convTime);
         return -2000;
     }
     else
     {
-        debugVal("[X] Conversion time: %d ms\n", convTime);
+        debugVal("[X] Conversion time: %d ms\r\n", convTime);
     }
+
     DS18B20_RESET(DS18B20_PIN);
     DS18B20_WRITE_BYTE(DS18B20_PIN, THERM_CMD_SKIPROM);
     DS18B20_WRITE_BYTE(DS18B20_PIN, THERM_CMD_RSCRATCHPAD);
@@ -154,7 +155,7 @@ float32_t DS18B20_TEMP_READ(uint8_t ds18b20_gpio_pin)
     float32_t temperatureFloat = (float32_t)(temperature / 16.0f);
     debugVal("[X] DS18B20 Temperature: %.2f °C\r\n", temperatureFloat);
 
-    return temperature;
+    return temperatureFloat;
 }
 
 uint8_t DS18B20_CRC8_CHECK(uint8_t *data, uint8_t len)

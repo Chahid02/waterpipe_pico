@@ -31,6 +31,7 @@
 #include "hardware/uart.h"
 #include "hardware/irq.h"
 #include "pico/multicore.h"
+#include <pico/time.h>
 /*=========================================================*/
 /*== PRIVATE INCLUDES =====================================*/
 /*=========================================================*/
@@ -41,8 +42,16 @@
 #include "waterlevel.h"
 #include "hc05.h"
 
+float32_t hcTemp;
+float32_t hcPress;
+float32_t hcHum;
 
-uint32_t count =0;
+float32_t tempCompr ;
+
+uint32_t count = 0;
+
+
+
 void core1_entry() 
 {
 
@@ -50,19 +59,15 @@ void core1_entry()
     //irq_add_shared_handler(SIO_IRQ_PROC1, core1_interrupt_handler,0x01); /*!< May be used for multiple IRQ functions */
     irq_set_exclusive_handler(SIO_IRQ_PROC1, core1_interrupt_handler);
     irq_set_enabled(SIO_IRQ_PROC1, true);
-    while (true)
+
+    while (1)
     {   
+
         /*!< Just for testing purpose */
-        count++;
-        if (count == (2^32))
-        {
-            toggleBuzz();
-            count = 0;
-        }
-        
+        tight_loop_contents();
+        //tempCompr = DS18B20_TEMP_READ(DS18B20_PIN);
 
-
-        
+  
     }
 } 
 
@@ -212,40 +217,69 @@ int main()
     HC05_CHECK(UART_ID0,HC05_CHECK_ROLE,"ROLE"); 
   
     HC05_PROG_FINISHED();
+    IRQ_SETUP_DIS(HC05_UART_RX_READ_IRQ);
 
     //HC05_SET(UART_ID0,HC05_SET_RESET,"RESET");    /*!< Isnt nesserarly so far because HC-05 overtake new values */
     //debugMsg("[X] RESETING HC-05 BLUETOOTH MODULE [X]\r\n");
 
-    int32_t bmeTemp;
-    uint32_t bmePress;
-    uint32_t bmeHum;
-
+    
     /*!< User Code starts here */
     while (true)
     {
-
+        
+   
         debugTerm();
         while (BME280_READ_STATUS() & BME280_STATUS_IM_UPDATE)
         {
             /*!< Waiting for updated values */
         };
 
+        int32_t bmeTemp;
+        uint32_t bmePress;
+        uint32_t bmeHum;
+
         BME280_Temp_Reading(bmeTemp, bmePress, bmeHum);
 
-       
 
+        bmeTemp = BME280_CompTemp();
+        bmePress = BME280_CompPressure();
+        bmeHum = BME280_CompHumInt32();
+
+        
+        hcTemp = bmeTemp / 100.0f; 
+        hcPress = bmePress / 100.0f; 
+        hcHum= bmeHum / 1024.0f;
+
+        HC05_TX_BME280(hcTemp, hcPress, hcHum);
         WATERLEVEL_Run();
-        HC05_UART_RX_IRQ();
+        HC05_TX_DS18B20(tempCompr);
+    
+  
+        if(multicore_fifo_wready())
+        {
+            uint32_t dataCore0 = 200;
+            debugMsg("======================== CORE0 FIFO ==================================\r\n");
+            debugVal("[X] CORE 0 SENDS %d [X]\r\n",dataCore0);
+            multicore_fifo_push_blocking(dataCore0);
+        }
+     
+        
 
-        uint32_t dataCore0 = 200;
-        debugVal("[X] CORE 0 SENDS %d [X]\r\n",dataCore0);
-        multicore_fifo_push_blocking(dataCore0);
+        if(multicore_fifo_rvalid())
+        {
         uint32_t dataCore1 = multicore_fifo_pop_blocking();
-        debugVal("[X] CORE 1 SENDS %d [X]\r\n",dataCore1);
- 
-        DS18B20_TEMP_READ(DS18B20_PIN);
+        debugMsg("======================== CORE1 FIFO ==================================\r\n");
+        debugVal("[X] CORE 1 SENDS %d [X]\r\n",dataCore1);  
+        }
+
+       
+    
+
+        
+          
         toggleLed();
-        //sleep_ms(500);
+        sleep_ms(200);
+
     }
     /*!< User Code ends here */
     return 0;
@@ -366,9 +400,10 @@ void debugTerm(void)
 
     while (multicore_fifo_rvalid())
     {
-        uint32_t blueDAta = multicore_fifo_pop_blocking();    
-        blueDAta += blueDAta ;
-        multicore_fifo_push_blocking(blueDAta);  
+        uint32_t blueDAta = multicore_fifo_pop_blocking();      
+        blueDAta += blueDAta ; 
+        multicore_fifo_push_blocking(blueDAta);
+        tempCompr = DS18B20_TEMP_READ(DS18B20_PIN);
     }
     multicore_fifo_clear_irq();// Clear IRQ
 } 

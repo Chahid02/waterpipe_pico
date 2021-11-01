@@ -26,7 +26,7 @@ typedef float float32_t;
 #define UART_ID0            uart0
 #define UART_ID1            uart1
 #define UART0_TX            (uint8_t) 0
-#define UART1_RX            (uint8_t) 1
+#define UART0_RX            (uint8_t) 1
 #define DATA_BITS           (uint8_t) 8
 #define STOP_BITS           (uint8_t) 1
 #define PARITY_BIT          (uint8_t) UART_PARITY_NONE
@@ -51,7 +51,8 @@ uint8_t HC05_PROG_SETUP(void);
 void HC05_CHECK(uart_inst_t *uart, uint8_t *sendCommand, uint8_t *ATCommand);
 void HC05_SET(uart_inst_t *uart, uint8_t *sendCommand, uint8_t *ATCommand);
 uint8_t HC05_PROG_FINISHED(void);
-void HC05_UART_RX_IRQ(void);
+void HC05_TX_DS18B20(float32_t temperature);
+void HC05_TX_BME280(float_t temperature, float_t pressure, float_t humidity);
 void HC05_UART_RX_READ_IRQ(void);
 void IRQ_SETUP_EN(irq_handler_t handler);
 void IRQ_SETUP_DIS(irq_handler_t handler);

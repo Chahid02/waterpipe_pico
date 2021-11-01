@@ -36,7 +36,7 @@
 /*== PRIVATE INCLUDES =====================================*/
 /*=========================================================*/
 
-#include "waterpipe.h" /* Insert for Error Log Function! */
+#include "waterpipe.h" /*!< Insert for Error Log Function! */
 #include "hc05.h"
 
 /* void HC05_CHECK(uart_inst_t *uart, uint8_t *sendCommand)
@@ -86,7 +86,7 @@ uint8_t HC05_PROG_SETUP(void)
 
     uart_init(UART_ID0, BAUD_RATE_DEFAULT);
     gpio_set_function(UART0_TX, GPIO_FUNC_UART);
-    gpio_set_function(UART1_RX, GPIO_FUNC_UART);
+    gpio_set_function(UART0_RX, GPIO_FUNC_UART);
     uart_set_baudrate(UART_ID0, BAUD_RATE_DEFAULT);
     uart_set_hw_flow(UART_ID0, false, false);
     uart_set_format(UART_ID0, DATA_BITS, STOP_BITS, PARITY_BIT);
@@ -114,10 +114,10 @@ uint8_t HC05_PROG_SETUP(void)
 uint8_t HC05_PROG_FINISHED(void)
 {
     debugMsg("====================  HC-05 FINISHED PROCESS STARTED  ================\n");
-    uart_deinit(UART_ID0);
-    uart_init(UART_ID0, 115200);
+    //uart_deinit(UART_ID0);
+    //uart_init(UART_ID0, 115200);
     gpio_set_function(UART0_TX, GPIO_FUNC_UART);
-    gpio_set_function(UART1_RX, GPIO_FUNC_UART);
+    gpio_set_function(UART0_RX, GPIO_FUNC_UART);
     uart_set_hw_flow(UART_ID0, false, false);
     uart_set_format(UART_ID0, DATA_BITS, STOP_BITS, PARITY_BIT);
     uart_set_fifo_enabled(UART_ID0, false);
@@ -146,7 +146,7 @@ uint8_t HC05_INIT(void)
     debugMsg("====================  HC-05 INITIALIZATION PROCESS STARTED  =========== \r\n");
     uart_init(UART_ID0, BAUD_RATE_DEFAULT);
     gpio_set_function(UART0_TX, GPIO_FUNC_UART);
-    gpio_set_function(UART1_RX, GPIO_FUNC_UART);
+    gpio_set_function(UART0_RX, GPIO_FUNC_UART);
     uart_set_baudrate(UART_ID0, 115200);
     uart_set_hw_flow(UART_ID0, false, false);
     uart_set_format(UART_ID0, DATA_BITS, STOP_BITS, PARITY_BIT);
@@ -161,10 +161,11 @@ uint8_t HC05_INIT(void)
         UART_IRQ = UART1_IRQ;
     }
     debugMsg("[X] BLUETOOTH MODULE IS READY [X] \r\n");
-    uart_puts(UART_ID0, "Sensor Unit BT-Module is Ready!!! \r\n");
+    //uart_puts(UART_ID0, "Sensor Unit BT-Module is Ready!!! \r\n");
 }
 
 uint16_t getCharRxCnt = 0;
+
 void HC05_UART_RX_READ_IRQ(void)
 {
     uint8_t RecData;
@@ -172,30 +173,61 @@ void HC05_UART_RX_READ_IRQ(void)
     {       
         uint8_t getCharRx = uart_getc(UART_ID0);
         //uart_read_blocking(UART_ID0, &RecData, sizeof(RecData));
-        printf("%c",getCharRx);
+        debugVal("%c",getCharRx);
     }
     irq_clear(UART0_IRQ);
 }
 
  
-void HC05_UART_RX_IRQ(void)
+void HC05_TX_DS18B20(float_t temperature)
 {
-    while (uart_is_readable(UART_ID0))
-    {
-        uint8_t getCharRx = uart_getc(UART_ID0);
-        if (uart_is_writable(UART_ID0))
-        {
-            getCharRx;
-            uart_putc(UART_ID0, getCharRx);
-        }
-        else
-        {
-            __NOP();
-        }
-        getCharRxCnt++;
-    }
+    uint8_t RecData[100];
+    uint8_t TempData[5];
+    /*!< Temperature float to string */
+    gcvt(temperature,5,TempData);
+    strcpy(RecData,"DS18B20 Temperature:");
+    strncat(RecData,TempData,sizeof(TempData));
+    strncat(RecData,"\r\n",sizeof("\r\n"));
+
+
+    debugMsg("====================  HC-05 DSB SEND STARTED  ======================== \r\n");
+    debugVal("[X] DS1820 Temperature %s [X]\r\n",TempData);
+    uart_puts(UART_ID0, RecData);
+    //getCharRxCnt++;
 } 
 
+void HC05_TX_BME280(float_t temperature, float_t pressure, float_t humidity)
+{
+    uint8_t RecData[100];
+    uint8_t TempData[5];
+    uint8_t HumData[5];
+    uint8_t PressData[7];
+
+    /*!< Temperature float to string */
+    gcvt(temperature,5,TempData);
+    strcpy(RecData,"Temperature:");
+    strncat(RecData,TempData,sizeof(TempData));
+    strncat(RecData,"\r\n",sizeof("\r\n"));
+
+    /*!< Pressure float to string */
+    gcvt(pressure,7,PressData);
+    strncat(RecData,"Pressure:",sizeof("Pressure:"));
+    strncat(RecData,PressData,sizeof(PressData));
+    strncat(RecData,"\r\n",sizeof("\r\n"));
+
+    /*!< Humidity float to string */
+    gcvt(humidity,5,HumData);
+    strncat(RecData,"Humidity:",sizeof("Humidity:"));
+    strncat(RecData,HumData,sizeof(HumData));
+    strncat(RecData,"\r\n",sizeof("\r\n"));
+
+    debugMsg("====================  HC-05 BME SEND STARTED  ======================== \r\n");
+    debugVal("[X] Temperature:%s [X]\r\n",TempData);
+    debugVal("[X] Pressure:%s [X]\r\n",PressData);
+    debugVal("[X] Humidity:%s [X]\r\n",HumData);
+    uart_puts(UART_ID0, RecData);
+    //getCharRxCnt++;
+} 
 
 
 void IRQ_SETUP_EN(irq_handler_t handler)
