@@ -297,7 +297,7 @@ int main()
         {
             gpio_put(HUMIDITY_OK, false);
         }
-        debugVal("[X] WATERELEVEL TOLERANZ: %f [X]\r\n",waterlevelAdc - 1.0);
+        debugVal("[X] WATERELEVEL TOLERANZ: %f [X]\r\n",1.0 - waterlevelAdc);
         if (waterlevelAdc  >= 1.0f)
         {
             gpio_put(WATER_LEVEL_OK, false);
