@@ -199,7 +199,7 @@ void HC05_TX_WATERLEVEL(float32_t adc)
     //getCharRxCnt++;
 } 
  
-void HC05_TX_DS18B20(float_t temperature)
+void HC05_TX_DS18B20(float32_t temperature)
 {
     uint8_t RecData[100];
     uint8_t TempData[5];
@@ -218,7 +218,7 @@ void HC05_TX_DS18B20(float_t temperature)
     //getCharRxCnt++;
 } 
 
-void HC05_TX_BME280(float_t temperature, float_t pressure, float_t humidity)
+void HC05_TX_BME280(float32_t temperature, float32_t pressure, float32_t humidity)
 {
     uint8_t RecData[100];
     uint8_t TempData[5];

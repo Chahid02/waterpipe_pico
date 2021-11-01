@@ -262,7 +262,7 @@ int main()
 
         HC05_TX_BME280(hcTemp, hcPress, hcHum);
 
-        float_t waterlevelAdc;
+        float32_t waterlevelAdc;
         waterlevelAdc = WATERLEVEL_RUN();
 
         HC05_TX_WATERLEVEL(waterlevelAdc);
