@@ -189,7 +189,7 @@ int main()
     sleep_ms(1000);
     debugMsg("======================\r\n");
 
-
+    /*!< Enable IRQ for TX-Received Messages */
     /*!< Init BME280 Sensor */
     BME280_INIT();
 
