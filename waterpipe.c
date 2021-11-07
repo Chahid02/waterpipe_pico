@@ -290,16 +290,16 @@ int main()
         debugMsg("======================== WARNING LEVEL ===============================\r\n");
         monitorMsg("======================== WARNING LEVEL ===============================\r\n");
 
-        debugVal("[X] TEMPERATURE TOLERANZ: %f [X]\r\n",20.0f - hcTemp);
-        monitorVal("[X] TEMPERATURE TOLERANZ: %f [X]\r\n",20.0f - hcTemp);
-        if (hcTemp >= 20.0f)
+        debugVal("[X] TEMPERATURE TOLERANZ: %f [X]\r\n",30.0f - hcTemp);
+        monitorVal("[X] TEMPERATURE TOLERANZ: %f [X]\r\n",30.0f - hcTemp);
+        if (hcTemp >= 30.0f)
         {
             gpio_put(TEMPERATURE_OK, false);
         }
 
-        debugVal("[X] PRESSURE TOLERANZ: %f [X]\r\n",1300.0f - hcPress);
-        monitorVal("[X] PRESSURE TOLERANZ: %f [X]\r\n",1300.0f - hcPress);
-        if (hcPress >= 1300.0f)
+        debugVal("[X] PRESSURE TOLERANZ: %f [X]\r\n",1100.0f - hcPress);
+        monitorVal("[X] PRESSURE TOLERANZ: %f [X]\r\n",1100.0f - hcPress);
+        if (hcPress >= 1100.0f)
         {
             gpio_put(PRESSURE_OK, false);
         }
@@ -318,9 +318,9 @@ int main()
             gpio_put(WATER_LEVEL_OK, false);
         }
 
-        debugVal("[X] WATER TEMP TOLERANZ: %f [X]\r\n",20.0f - tempCompr );
-        monitorVal("[X] WATER TEMP TOLERANZ: %f [X]\r\n",20.0f - tempCompr );
-        if (tempCompr >= 20.0f)
+        debugVal("[X] WATER TEMP TOLERANZ: %f [X]\r\n",25.0f - tempCompr );
+        monitorVal("[X] WATER TEMP TOLERANZ: %f [X]\r\n",25.0f - tempCompr );
+        if (tempCompr >= 25.0f)
         {
             gpio_put(WATER_TEMP_OK, false);
         }
