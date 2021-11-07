@@ -151,6 +151,7 @@ int main()
     gpio_set_dir(WATER_LEVEL_OK, GPIO_OUT);
 
     /*!< Init GPIOs on HIGH-LEVEL */
+                                        /*!< GPIO DIRECTION CONTROL missing yet gpio_get_out_level(LED) != true) */
     gpio_put(TEMPERATURE_OK, true);
     gpio_put(PRESSURE_OK, true);
     gpio_put(HUMIDITY_OK, true);
@@ -226,8 +227,6 @@ int main()
     /*!< User Code starts here */
     while (true)
     {
-        
-   
         debugTerm();
         while (BME280_READ_STATUS() & BME280_STATUS_IM_UPDATE)
         {
@@ -238,9 +237,10 @@ int main()
         uint32_t bmePress;
         uint32_t bmeHum;
 
+        /*!< Reading out register values*/
         BME280_TEMP_READ(bmeTemp, bmePress, bmeHum);
 
-
+        /*!< Storing BME280 values */
         bmeTemp = BME280_COMP_TEMP();
         bmePress = BME280_COMP_PRESSURE();
         bmeHum = BME280_COMP_HUM_INT32();
@@ -285,10 +285,7 @@ int main()
         }
         HC05_TX_DS18B20(tempCompr); 
        
-    
-
-        
-          
+     
         toggleLed();
         debugMsg("======================== WARNING LEVEL ===============================\r\n");
         monitorMsg("======================== WARNING LEVEL ===============================\r\n");
@@ -468,3 +465,4 @@ void debugTerm(void)
     }
     multicore_fifo_clear_irq();// Clear IRQ
 } 
+
