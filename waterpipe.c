@@ -279,11 +279,11 @@ int main()
 
         if(multicore_fifo_rvalid())
         {
-        uint32_t dataCore1 = multicore_fifo_pop_blocking();
-        debugMsg("======================== CORE1 FIFO ==================================\r\n");
-        debugVal("[X] CORE 1 SENDS %d [X]\r\n",dataCore1);  
+            uint32_t dataCore1 = multicore_fifo_pop_blocking();
+            debugMsg("======================== CORE1 FIFO ==================================\r\n");
+            debugVal("[X] CORE 1 SENDS %d [X]\r\n",dataCore1);  
         }
-        HC05_TX_DS18B20(tempCompr); 
+        HC05_TX_DS18B20(tempCompr);
        
      
         toggleLed();
