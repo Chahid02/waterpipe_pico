@@ -328,6 +328,7 @@ int main()
     
 
         sleep_ms(1000); /*<! For monitoring purpose */
+        clrscr();
 
     }
     /*!< User Code ends here */
