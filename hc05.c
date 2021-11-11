@@ -191,9 +191,9 @@ void HC05_TX_WATERLEVEL(float32_t adc)
     monitorMsg("====================  HC-05 WT SEND STARTED  ========================= \r\n");
     monitorVal("[X] Waterlevel:%s [X]\r\n",WTData);
 
-    strcpy(RecData,"Waterlevel:");
+    strcpy(RecData,"WL:");
     strncat(RecData,WTData,sizeof(WTData));
-    strncat(RecData,"\r\n",sizeof("\r\n"));
+    strncat(RecData,"ÿ",sizeof("ÿ"));
 
     uart_puts(UART_ID0, RecData);
     //getCharRxCnt++;
@@ -205,9 +205,9 @@ void HC05_TX_DS18B20(float32_t temperature)
     uint8_t TempData[5];
     /*!< Temperature float to string */
     gcvt(temperature,5,TempData);
-    strcpy(RecData,"DS18B20 Temperature:");
+    strcpy(RecData,"TW:");
     strncat(RecData,TempData,sizeof(TempData));
-    strncat(RecData,"\r\n",sizeof("\r\n"));
+    strncat(RecData,"ÿ",sizeof("ÿ"));
 
 
     debugMsg("====================  HC-05 DSB SEND STARTED  ======================== \r\n");
@@ -227,21 +227,21 @@ void HC05_TX_BME280(float32_t temperature, float32_t pressure, float32_t humidit
 
     /*!< Temperature float to string */
     gcvt(temperature,5,TempData);
-    strcpy(RecData,"Temperature:");
+    strcpy(RecData,"TE:");
     strncat(RecData,TempData,sizeof(TempData));
-    strncat(RecData,"\r\n",sizeof("\r\n"));
+    strncat(RecData,"ÿ",sizeof("ÿ"));
 
     /*!< Pressure float to string */
     gcvt(pressure,7,PressData);
-    strncat(RecData,"Pressure:",sizeof("Pressure:"));
+    strncat(RecData,"PR:",sizeof("PR:"));
     strncat(RecData,PressData,sizeof(PressData));
-    strncat(RecData,"\r\n",sizeof("\r\n"));
+    strncat(RecData,"ÿ",sizeof("ÿ"));
 
     /*!< Humidity float to string */
     gcvt(humidity,5,HumData);
-    strncat(RecData,"Humidity:",sizeof("Humidity:"));
+    strncat(RecData,"HM:",sizeof("HM:"));
     strncat(RecData,HumData,sizeof(HumData));
-    strncat(RecData,"\r\n",sizeof("\r\n"));
+    strncat(RecData,"ÿ",sizeof("ÿ"));
 
     debugMsg("====================  HC-05 BME SEND STARTED  ======================== \r\n");
     debugVal("[X] Temperature:%s [X]\r\n",TempData);

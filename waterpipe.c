@@ -327,7 +327,7 @@ int main()
 
     
 
-        sleep_ms(1000); /*<! For monitoring purpose */
+        sleep_ms(100); /*<! For monitoring purpose */
         clrscr();
 
     }
