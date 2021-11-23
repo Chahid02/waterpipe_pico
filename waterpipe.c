@@ -251,13 +251,14 @@ int main()
         hcHum = bmeHum / 1024.0f;
 
         uint8_t sendBuffer[50]; 
-        snprintf(sendBuffer,100,"========== %d Value ========== \r\n",hcCount);
+/*      snprintf(sendBuffer,100,"========== %d Value ========== \r\n",hcCount);
         uart_puts(UART_ID0, sendBuffer);
         hcCount++; 
         if (hcCount == 60)
         {
             hcCount = 1;
-        }       
+        }    
+        */    
         
 
         HC05_TX_BME280(hcTemp, hcPress, hcHum);
@@ -327,8 +328,8 @@ int main()
 
     
 
-        sleep_ms(100); /*<! For monitoring purpose */
-        clrscr();
+        sleep_ms(500); /*<! For monitoring purpose */
+        //clrscr();
 
     }
     /*!< User Code ends here */
