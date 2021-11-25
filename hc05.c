@@ -191,7 +191,7 @@ void HC05_TX_WATERLEVEL(float32_t adc)
     monitorMsg("====================  HC-05 WT SEND STARTED  ========================= \r\n");
     monitorVal("[X] Waterlevel:%s [X]\r\n",WTData);
 
-    strcpy(RecData,"WL:");
+    strcpy(RecData,"E:");
     strncat(RecData,WTData,sizeof(WTData));
     strncat(RecData,"ÿ",sizeof("ÿ"));
 
@@ -205,7 +205,7 @@ void HC05_TX_DS18B20(float32_t temperature)
     uint8_t TempData[5];
     /*!< Temperature float to string */
     gcvt(temperature,5,TempData);
-    strcpy(RecData,"TW:");
+    strcpy(RecData,"D:");
     strncat(RecData,TempData,sizeof(TempData));
     strncat(RecData,"ÿ",sizeof("ÿ"));
 
@@ -227,19 +227,19 @@ void HC05_TX_BME280(float32_t temperature, float32_t pressure, float32_t humidit
 
     /*!< Temperature float to string */
     gcvt(temperature,5,TempData);
-    strcpy(RecData,"TE:");
+    strcpy(RecData,"A:");
     strncat(RecData,TempData,sizeof(TempData));
     strncat(RecData,"ÿ",sizeof("ÿ"));
 
     /*!< Pressure float to string */
     gcvt(pressure,7,PressData);
-    strncat(RecData,"PR:",sizeof("PR:"));
+    strncat(RecData,"B:",sizeof("PR:"));
     strncat(RecData,PressData,sizeof(PressData));
     strncat(RecData,"ÿ",sizeof("ÿ"));
 
     /*!< Humidity float to string */
     gcvt(humidity,5,HumData);
-    strncat(RecData,"HM:",sizeof("HM:"));
+    strncat(RecData,"C:",sizeof("HM:"));
     strncat(RecData,HumData,sizeof(HumData));
     strncat(RecData,"ÿ",sizeof("ÿ"));
 
