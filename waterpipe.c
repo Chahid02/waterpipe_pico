@@ -41,6 +41,7 @@
 #include "ds18b20.h"
 #include "waterlevel.h"
 #include "hc05.h"
+#include "test.c"
 
 float32_t hcTemp;
 float32_t hcPress;
@@ -188,7 +189,30 @@ int main()
     WATERLEVEL_SET_DMA();
     sleep_ms(1000);
     debugMsg("======================\r\n");
-  
+
+
+    debugMsg("[X] AES INIT SET [X]\r\n");
+    int exit;
+
+#if defined(AES256)
+    printf("\nTesting AES256\n\n");
+#elif defined(AES192)
+    printf("\nTesting AES192\n\n");
+#elif defined(AES128)
+    printf("\nTesting AES128\n\n");
+#else
+    printf("You need to specify a symbol between AES128, AES192 or AES256. Exiting");
+    return 0;
+#endif
+
+    exit = test_encrypt_cbc() + test_decrypt_cbc() +
+	test_encrypt_ctr() + test_decrypt_ctr() +
+	test_decrypt_ecb() + test_encrypt_ecb();
+    test_encrypt_ecb_verbose();
+    debugVal("Return %d",exit);
+
+    sleep_ms(1000);
+
     /*!< Enable IRQ for TX-Received Messages */
     /*!< Init BME280 Sensor */
     BME280_INIT();
@@ -261,12 +285,12 @@ int main()
         */    
         
 
-        HC05_TX_BME280(hcTemp, hcPress, hcHum);
+        //HC05_TX_BME280(hcTemp, hcPress, hcHum);
 
         float32_t waterlevelAdc;
         waterlevelAdc = WATERLEVEL_RUN();
 
-        HC05_TX_WATERLEVEL(waterlevelAdc);
+        //HC05_TX_WATERLEVEL(waterlevelAdc);
   
         if(multicore_fifo_wready())
         {
@@ -284,7 +308,7 @@ int main()
             debugMsg("======================== CORE1 FIFO ==================================\r\n");
             debugVal("[X] CORE 1 SENDS %d [X]\r\n",dataCore1);  
         }
-        HC05_TX_DS18B20(tempCompr);
+        //HC05_TX_DS18B20(tempCompr);
        
      
         toggleLed();
@@ -325,9 +349,18 @@ int main()
         {
             gpio_put(WATER_TEMP_OK, false);
         }
+        monitorMsg("======================== BT RECEIVED MSG =============================\r\n");
+        IRQ_SETUP_EN(HC05_UART_RX_READ_IRQ);
 
-    
+        //HC05_TX_BME280(hcTemp, hcPress, hcHum);
+        //HC05_TX_WATERLEVEL(waterlevelAdc);
+        //HC05_TX_DS18B20(tempCompr);
 
+        HC05_RX_MSG_IRQ();
+        HC_MSG_COUNT = 0;
+        memset(MSGData, 0, sizeof(MSGData));
+
+        
         sleep_ms(500); /*<! For monitoring purpose */
         //clrscr();
 

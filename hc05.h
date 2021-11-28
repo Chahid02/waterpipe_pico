@@ -45,7 +45,8 @@ typedef float float32_t;
 #define HC05_SET_PWD            "AT+PSWD=123456\r\n"
 #define HC05_SET_RESET          "AT+RESET\r\n"
 
-
+int32_t HC_MSG_COUNT;
+uint8_t MSGData[1024];
 
 uint8_t HC05_PROG_SETUP(void);
 void HC05_CHECK(uart_inst_t *uart, uint8_t *sendCommand, uint8_t *ATCommand);
@@ -54,7 +55,8 @@ uint8_t HC05_PROG_FINISHED(void);
 void HC05_TX_DS18B20(float32_t temperature);
 void HC05_TX_BME280(float32_t temperature, float32_t pressure, float32_t humidity);
 void HC05_TX_WATERLEVEL(float32_t adc);
-void HC05_UART_RX_READ_IRQ(void);
+uint8_t HC05_UART_RX_READ_IRQ(void);
+void HC05_UART_RX_READ_MSG_IRQ(void);
 void IRQ_SETUP_EN(irq_handler_t handler);
 void IRQ_SETUP_DIS(irq_handler_t handler);
 void HC05_READ_CHECK(uart_inst_t *uart, uint8_t *sendCommand);

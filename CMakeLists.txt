@@ -24,7 +24,8 @@ add_executable( waterpipe
                 bme280.c 
                 ds18b20.c 
                 waterlevel.c 
-                hc05.c)
+                hc05.c
+                aes.c)
 
 pico_set_program_name(waterpipe "waterpipe")
 pico_set_program_version(waterpipe "0.1")
@@ -42,6 +43,15 @@ target_link_libraries(  waterpipe
                         hardware_uart 
                         hardware_irq
                         pico_multicore)
+
+target_sources(${PROJECT_NAME}
+    PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/aes.c
+    INTERFACE
+        ${CMAKE_CURRENT_LIST_DIR}/aes.h
+         ${CMAKE_CURRENT_LIST_DIR}/aes.hpp)
+
+
 
 # Add any user requested libraries
 target_link_libraries(waterpipe)

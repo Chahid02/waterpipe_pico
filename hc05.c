@@ -165,19 +165,57 @@ uint8_t HC05_INIT(void)
  
 }
 
-uint16_t getCharRxCnt = 0;
-
-void HC05_UART_RX_READ_IRQ(void)
+void HC05_RX_MSG_IRQ(void)
 {
-    uint8_t RecData;
-    while (uart_is_readable(UART_ID0))
-    {       
-        uint8_t getCharRx = uart_getc(UART_ID0);
-        //uart_read_blocking(UART_ID0, &RecData, sizeof(RecData));
-        debugVal("%c",getCharRx);
+
+    //debugVal("[X] GET BLUETOOTH MSG: %s [X]\r\n", MSGData);
+
+    /*!< Just for Testing */
+    if (MSGData[0] != NULL)
+    {
+      monitorVal("[X] GET BLUETOOTH MSG: %s\r\n", MSGData);
     }
-    irq_clear(UART0_IRQ);
+    else
+    {
+       monitorMsg("[X] NO BLUETOOTH MSG !!! [X]\r\n");    
+    }
+    
+
+
+    if (HC_MSG_COUNT >= 127)
+    {
+        HC_MSG_COUNT = 0;
+        //memset(MSGData, 0, sizeof(MSGData));
+    }
+
 }
+
+
+uint8_t HC05_UART_RX_READ_IRQ(void)
+{
+
+    uint8_t getCharRx;
+
+    while (uart_is_readable(UART_ID0))
+    {    
+        getCharRx = uart_getc(UART_ID0);
+        //debugVal("%c", getCharRx);
+        //monitorVal("%c", getCharRx);
+        MSGData[HC_MSG_COUNT] = getCharRx;
+        HC_MSG_COUNT++;
+        //printf("%d",HC_MSG_COUNT);
+    }    
+    irq_clear(UART0_IRQ);
+    return getCharRx;
+}
+
+
+void HC05_UART_RX_READ_MSG_IRQ(void)
+{
+
+}
+
+
 
 void HC05_TX_WATERLEVEL(float32_t adc)
 {
@@ -233,13 +271,13 @@ void HC05_TX_BME280(float32_t temperature, float32_t pressure, float32_t humidit
 
     /*!< Pressure float to string */
     gcvt(pressure,7,PressData);
-    strncat(RecData,"B:",sizeof("PR:"));
+    strncat(RecData,"B:",sizeof("B:"));
     strncat(RecData,PressData,sizeof(PressData));
     strncat(RecData,"ÿ",sizeof("ÿ"));
 
     /*!< Humidity float to string */
     gcvt(humidity,5,HumData);
-    strncat(RecData,"C:",sizeof("HM:"));
+    strncat(RecData,"C:",sizeof("C:"));
     strncat(RecData,HumData,sizeof(HumData));
     strncat(RecData,"ÿ",sizeof("ÿ"));
 
