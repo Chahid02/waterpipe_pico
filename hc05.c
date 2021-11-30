@@ -198,12 +198,16 @@ uint8_t HC05_UART_RX_READ_IRQ(void)
 
     while (uart_is_readable(UART_ID0))
     {    
+ 
         getCharRx = uart_getc(UART_ID0);
         //debugVal("%c", getCharRx);
         //monitorVal("%c", getCharRx);
         MSGData[HC_MSG_COUNT] = getCharRx;
         HC_MSG_COUNT++;
         //printf("%d",HC_MSG_COUNT);
+        
+
+        
     }    
     irq_clear(UART0_IRQ);
     return getCharRx;

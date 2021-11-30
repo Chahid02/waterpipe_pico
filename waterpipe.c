@@ -242,12 +242,14 @@ int main()
     HC05_CHECK(UART_ID0,HC05_CHECK_ROLE,"ROLE"); 
   
     HC05_PROG_FINISHED();
-    IRQ_SETUP_DIS(HC05_UART_RX_READ_IRQ);
+    //IRQ_SETUP_DIS(HC05_UART_RX_READ_IRQ);
 
     //HC05_SET(UART_ID0,HC05_SET_RESET,"RESET");    /*!< Isnt nesserarly so far because HC-05 overtake new values */
     //debugMsg("[X] RESETING HC-05 BLUETOOTH MODULE [X]\r\n");
 
     size_t hcCount = 1;
+
+    IRQ_SETUP_EN(HC05_UART_RX_READ_IRQ);
     /*!< User Code starts here */
     while (true)
     {
@@ -352,11 +354,11 @@ int main()
 
 
         monitorMsg("======================== BT RECEIVED MSG =============================\r\n");
-        IRQ_SETUP_EN(HC05_UART_RX_READ_IRQ);
+        
 
-        //HC05_TX_BME280(hcTemp, hcPress, hcHum);
-        //HC05_TX_WATERLEVEL(waterlevelAdc);
-        //HC05_TX_DS18B20(tempCompr);
+        HC05_TX_BME280(hcTemp, hcPress, hcHum);
+        HC05_TX_WATERLEVEL(waterlevelAdc);
+        HC05_TX_DS18B20(tempCompr);
 
         HC05_RX_MSG_IRQ();
         HC_MSG_COUNT = 0;
