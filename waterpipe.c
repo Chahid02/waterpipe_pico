@@ -349,6 +349,8 @@ int main()
         {
             gpio_put(WATER_TEMP_OK, false);
         }
+
+
         monitorMsg("======================== BT RECEIVED MSG =============================\r\n");
         IRQ_SETUP_EN(HC05_UART_RX_READ_IRQ);
 
@@ -359,6 +361,7 @@ int main()
         HC05_RX_MSG_IRQ();
         HC_MSG_COUNT = 0;
         memset(MSGData, 0, sizeof(MSGData));
+
 
         
         sleep_ms(500); /*<! For monitoring purpose */
