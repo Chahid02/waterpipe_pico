@@ -199,7 +199,7 @@ uint8_t HC05_UART_RX_READ_IRQ(void)
 
     uint8_t getCharRx;
 
-    while (uart_is_readable(UART_ID0) != false)
+    while (uart_is_readable(UART_ID0) != false && uart_is_writable(UART_ID0) == true)
     {    
  
         getCharRx = uart_getc(UART_ID0);
