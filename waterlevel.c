@@ -18,7 +18,7 @@
 /*=========================================================*/
 /*== PRIVATE INCLUDES =====================================*/
 /*=========================================================*/
-#include "waterpipe.h" /*!< Insert for Error Log Function! */
+#include "waterpipe.h" /* Insert for Error Log Function! */
 #include "ds18b20.h"
 #include "waterlevel.h"
 

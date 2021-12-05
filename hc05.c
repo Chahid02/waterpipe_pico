@@ -36,7 +36,7 @@
 /*== PRIVATE INCLUDES =====================================*/
 /*=========================================================*/
 
-#include "waterpipe.h" /*!< Insert for Error Log Function! */
+#include "waterpipe.h" /* Insert for Error Log Function! */
 #include "hc05.h"
 
 /* void HC05_CHECK(uart_inst_t *uart, uint8_t *sendCommand)
@@ -170,7 +170,7 @@ void HC05_RX_MSG_IRQ(void)
 
     //debugVal("[X] GET BLUETOOTH MSG: %s [X]\r\n", MSGData);
 
-    /*!< Just for Testing */
+    /* Just for Testing */
     if (MSGData[0] != NULL)
     {
       monitorVal("[X] GET BLUETOOTH MSG: %s\r\n", MSGData);
@@ -228,7 +228,7 @@ void HC05_TX_WATERLEVEL(float32_t adc)
 {
     uint8_t RecData[50];
     uint8_t WTData[6];
-    /*!< ADC float to string */
+    /* ADC float to string */
     gcvt(adc, 2, WTData);
     debugMsg("====================  HC-05 WT SEND STARTED  ========================= \r\n");
     debugVal("[X] Waterlevel:%s [X]\r\n",WTData);
@@ -248,7 +248,7 @@ void HC05_TX_DS18B20(float32_t temperature)
 {
     uint8_t RecData[100];
     uint8_t TempData[5];
-    /*!< Temperature float to string */
+    /* Temperature float to string */
     gcvt(temperature,5,TempData);
     strcpy(RecData,"D:");
     strncat(RecData,TempData,sizeof(TempData));
@@ -270,19 +270,19 @@ void HC05_TX_BME280(float32_t temperature, float32_t pressure, float32_t humidit
     uint8_t HumData[5];
     uint8_t PressData[7];
 
-    /*!< Temperature float to string */
+    /* Temperature float to string */
     gcvt(temperature,5,TempData);
     strcpy(RecData,"A:");
     strncat(RecData,TempData,sizeof(TempData));
     strncat(RecData,"ÿ",sizeof("ÿ"));
 
-    /*!< Pressure float to string */
+    /* Pressure float to string */
     gcvt(pressure,7,PressData);
     strncat(RecData,"B:",sizeof("B:"));
     strncat(RecData,PressData,sizeof(PressData));
     strncat(RecData,"ÿ",sizeof("ÿ"));
 
-    /*!< Humidity float to string */
+    /* Humidity float to string */
     gcvt(humidity,5,HumData);
     strncat(RecData,"C:",sizeof("C:"));
     strncat(RecData,HumData,sizeof(HumData));

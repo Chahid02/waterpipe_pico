@@ -57,14 +57,14 @@ void core1_entry()
 {
 
     multicore_fifo_clear_irq();
-    //irq_add_shared_handler(SIO_IRQ_PROC1, core1_interrupt_handler,0x01); /*!< May be used for multiple IRQ functions */
+    //irq_add_shared_handler(SIO_IRQ_PROC1, core1_interrupt_handler,0x01); /* May be used for multiple IRQ functions */
     irq_set_exclusive_handler(SIO_IRQ_PROC1, core1_interrupt_handler);
     irq_set_enabled(SIO_IRQ_PROC1, true);
 
     while (1)
     {   
 
-        /*!< Just for testing purpose */
+        /* Just for testing purpose */
         //tight_loop_contents();
         //tempCompr = DS18B20_TEMP_READ(DS18B20_PIN);
 
@@ -151,8 +151,8 @@ int main()
     gpio_set_dir(PRESSURE_FSR_OK, GPIO_OUT);
     gpio_set_dir(WATER_LEVEL_OK, GPIO_OUT);
 
-    /*!< Init GPIOs on HIGH-LEVEL */
-                                        /*!< GPIO DIRECTION CONTROL missing yet gpio_get_out_level(LED) != true) */
+    /* Init GPIOs on HIGH-LEVEL */
+                                        /* GPIO DIRECTION CONTROL missing yet gpio_get_out_level(LED) != true) */
     gpio_put(TEMPERATURE_OK, true);
     gpio_put(PRESSURE_OK, true);
     gpio_put(HUMIDITY_OK, true);
@@ -171,7 +171,7 @@ int main()
     debugMsg("==========================\r\n");
 
     debugMsg("INIT ADC CONFIGURATION: ");
-    /*!< Init ADC for waterlevel sensor */
+    /* Init ADC for waterlevel sensor */
     if (WATERLEVEL_SET_ADC() >= 3)
     {
         debugMsg("[X] ADC HARDWARE FAILED TO BE SET [X]\r\n");
@@ -185,7 +185,7 @@ int main()
     debugMsg("======================\r\n");
 
     debugMsg("INIT DMA CONFIGURATION: ");
-    /*!< Init DMA for waterlevel sensor */
+    /* Init DMA for waterlevel sensor */
     WATERLEVEL_SET_DMA();
     sleep_ms(1000);
     debugMsg("======================\r\n");
@@ -213,25 +213,25 @@ int main()
 
     sleep_ms(1000);
 
-    /*!< Enable IRQ for TX-Received Messages */
-    /*!< Init BME280 Sensor */
+    /* Enable IRQ for TX-Received Messages */
+    /* Init BME280 Sensor */
     BME280_INIT();
 
-    /*!< Reading the register values */
+    /* Reading the register values */
     BME280_READ_REGVALUE();
 
-    /*!< Init DS18B20 Sensor */
+    /* Init DS18B20 Sensor */
     DS18B20_INIT();
 
-    /*!< SETUP HC-05 Module */
+    /* SETUP HC-05 Module */
     HC05_PROG_SETUP();
 
 
-    IRQ_SETUP_EN(HC05_UART_RX_READ_IRQ); /*!< Enable IRQ for TX-Received Messages */
+    IRQ_SETUP_EN(HC05_UART_RX_READ_IRQ); /* Enable IRQ for TX-Received Messages */
     
     HC05_SET(UART_ID0,"AT+NAMEWATERPIPE\r\n","NAME");
 
-    /*<! 
+    /* 
     Has to be commment because of the use of HC-06 instead.
     There is no programming inside the code !!!
     */
@@ -252,29 +252,29 @@ int main()
     HC05_PROG_FINISHED();
     //IRQ_SETUP_DIS(HC05_UART_RX_READ_IRQ);
 
-    //HC05_SET(UART_ID0,HC05_SET_RESET,"RESET");    /*!< Isnt nesserarly so far because HC-05 overtake new values */
+    //HC05_SET(UART_ID0,HC05_SET_RESET,"RESET");    /* Isnt nesserarly so far because HC-05 overtake new values */
     //debugMsg("[X] RESETING HC-05 BLUETOOTH MODULE [X]\r\n");
 
     size_t hcCount = 1;
 
     //IRQ_SETUP_EN(HC05_UART_RX_READ_IRQ);
-    /*!< User Code starts here */
+    /* User Code starts here */
     while (true)
     {
         debugTerm();
         while (BME280_READ_STATUS() & BME280_STATUS_IM_UPDATE)
         {
-            /*!< Waiting for updated values */
+            /* Waiting for updated values */
         };
 
         int32_t bmeTemp;
         uint32_t bmePress;
         uint32_t bmeHum;
 
-        /*!< Reading out register values*/
+        /* Reading out register values*/
         BME280_TEMP_READ(bmeTemp, bmePress, bmeHum);
 
-        /*!< Storing BME280 values */
+        /* Storing BME280 values */
         bmeTemp = BME280_COMP_TEMP();
         bmePress = BME280_COMP_PRESSURE();
         bmeHum = BME280_COMP_HUM_INT32();
@@ -373,11 +373,11 @@ int main()
 
 
         
-        sleep_ms(500); /*<! For monitoring purpose */
+        sleep_ms(500); /* For monitoring purpose */
         //clrscr();
 
     }
-    /*!< User Code ends here */
+    /* User Code ends here */
     return 0;
 }
 
@@ -409,7 +409,7 @@ void toggleLed()
         gpio_put(WATER_LEVEL_OK, true);
          */
         gpio_put(LED, true);
-        /*!< NO PRINTF on the SECOND CORE !!! */
+        /* NO PRINTF on the SECOND CORE !!! */
         //debugMsg("[X] LED ON\r\n");
     }
     else
@@ -423,7 +423,7 @@ void toggleLed()
         gpio_put(WATER_LEVEL_OK, false);
         */
         gpio_put(LED, false);
-        /*!< NO PRINTF on the SECOND CORE !!! */
+        /* NO PRINTF on the SECOND CORE !!! */
         //debugMsg("[X] LED OFF\r\n");
     }
 }
@@ -447,13 +447,13 @@ void toggleBuzz()
     if (gpio_get_out_level(LED) != true)
     {
         gpio_put(PRESSURE_FSR_OK, true);
-        /*!< NO PRINTF on the SECOND CORE !!! */
+        /* NO PRINTF on the SECOND CORE !!! */
         //debugMsg("[X] LED ON\r\n");
     }
     else
     {
         gpio_put(PRESSURE_FSR_OK, false);
-        /*!< NO PRINTF on the SECOND CORE !!! */
+        /* NO PRINTF on the SECOND CORE !!! */
         //debugMsg("[X] LED OFF\r\n");
     }
 }

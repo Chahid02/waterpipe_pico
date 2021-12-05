@@ -16,20 +16,20 @@
 /*== PRIVATE MACROS =======================================*/
 /*=========================================================*/
 
-/*!< SET LOG INFO */
+/* SET LOG INFO */
 #define LOG_ERROR(MSG)                                                   \
     {                                                                    \
         printf("ErrorLog: %s [%s:%d]\n\n", MSG, __FUNCTION__, __LINE__); \
     }
 
-/*!<  DISABLE GoTo */
+/*  DISABLE GoTo */
 #pragma GCC poison goto
 
 /*=========================================================*/
 /*== GPIO MACROS ==========================================*/
 /*=========================================================*/
 
-/*!< SET GPIO MACROS */
+/* SET GPIO MACROS */
 #define LED             25
 #define TEMPERATURE_OK  9
 #define PRESSURE_OK     10
@@ -39,13 +39,13 @@
 #define PRESSURE_FSR_OK 13
 
 
-/*!< SET USER __NOP() MACRO */
+/* SET USER __NOP() MACRO */
 #define __NOP() __asm("NOP");
 
-/*!< SET DEBUG MODE ON/OFF */
+/* SET DEBUG MODE ON/OFF */
 #define DEBUG 1
 
-/*!< SET MONITOR MODE ON/OFF */
+/* SET MONITOR MODE ON/OFF */
 #define MONITOR 1
 /*=========================================================*/
 /*== DEBUG DEFINITION =====================================*/
