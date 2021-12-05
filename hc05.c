@@ -174,6 +174,7 @@ void HC05_RX_MSG_IRQ(void)
     if (MSGData[0] != NULL)
     {
       monitorVal("[X] GET BLUETOOTH MSG: %s\r\n", MSGData);
+      monitorVal("[X] WITH LENGTH: %d\r\n",HC_MSG_COUNT);
     }
     else
     {
@@ -187,7 +188,9 @@ void HC05_RX_MSG_IRQ(void)
         HC_MSG_COUNT = 0;
         //memset(MSGData, 0, sizeof(MSGData));
     }
-
+    HC_MSG_COUNT = 0;
+    memset(MSGData, 0, sizeof(MSGData));
+    irq_clear(UART0_IRQ);
 }
 
 
@@ -196,7 +199,7 @@ uint8_t HC05_UART_RX_READ_IRQ(void)
 
     uint8_t getCharRx;
 
-    while (uart_is_readable(UART_ID0))
+    while (uart_is_readable(UART_ID0) != false)
     {    
  
         getCharRx = uart_getc(UART_ID0);

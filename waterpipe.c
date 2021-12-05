@@ -65,7 +65,7 @@ void core1_entry()
     {   
 
         /*!< Just for testing purpose */
-        tight_loop_contents();
+        //tight_loop_contents();
         //tempCompr = DS18B20_TEMP_READ(DS18B20_PIN);
 
   
@@ -229,7 +229,7 @@ int main()
 
     IRQ_SETUP_EN(HC05_UART_RX_READ_IRQ); /*!< Enable IRQ for TX-Received Messages */
     
-    HC05_SET(UART_ID0,"AT+NAME=WATERPIPE\r\n","NAME");
+    HC05_SET(UART_ID0,"AT+NAMEWATERPIPE\r\n","NAME");
 
     /*<! 
     Has to be commment because of the use of HC-06 instead.
@@ -257,7 +257,7 @@ int main()
 
     size_t hcCount = 1;
 
-    IRQ_SETUP_EN(HC05_UART_RX_READ_IRQ);
+    //IRQ_SETUP_EN(HC05_UART_RX_READ_IRQ);
     /*!< User Code starts here */
     while (true)
     {
@@ -321,7 +321,7 @@ int main()
         //HC05_TX_DS18B20(tempCompr);
        
      
-        toggleLed();
+        //toggleLed();
         debugMsg("======================== WARNING LEVEL ===============================\r\n");
         monitorMsg("======================== WARNING LEVEL ===============================\r\n");
 
@@ -368,9 +368,8 @@ int main()
         HC05_TX_WATERLEVEL(waterlevelAdc);
         HC05_TX_DS18B20(tempCompr);
 
+
         HC05_RX_MSG_IRQ();
-        HC_MSG_COUNT = 0;
-        memset(MSGData, 0, sizeof(MSGData));
 
 
         
