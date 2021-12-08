@@ -268,6 +268,11 @@ int main()
             while (BME280_READ_STATUS() & BME280_STATUS_IM_UPDATE)
             {
             /* Waiting for updated values */
+            for (size_t i = 0; i < count; i++)
+            {
+                /* code */
+            }
+            
             }; 
         
 
