@@ -263,7 +263,7 @@ int main()
     {
         debugTerm();
 
-        if (BME280_SOFT_RESET() != 0
+        if (BME280_SOFT_RESET() != 0)
         {
             while (BME280_READ_STATUS() & BME280_STATUS_IM_UPDATE)
             {
