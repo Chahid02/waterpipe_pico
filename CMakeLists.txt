@@ -17,7 +17,6 @@ set(PICO_SDK_PATH "/home/luki/pico/pico-sdk")
 include(pico_sdk_import.cmake)
 
 project(waterpipe C CXX ASM)
-#test Luki
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
