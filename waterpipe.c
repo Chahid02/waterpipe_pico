@@ -279,7 +279,7 @@ int main()
 
                    BME280_INIT();
                    BME280_READ_REGVALUE();
-                   
+
                    printf("[X] REINIT BME280 [X]\r\n");
                    printf("[X] WAITING ... [X]\r\n");
                    sleep_ms(500);
@@ -392,7 +392,6 @@ int main()
 
 
         monitorMsg("======================== BT RECEIVED MSG =============================\r\n");
-        
 
         HC05_TX_BME280(hcTemp, hcPress, hcHum);
         HC05_TX_WATERLEVEL(waterlevelAdc);
