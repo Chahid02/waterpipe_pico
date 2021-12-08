@@ -232,7 +232,7 @@ int main()
     HC05_SET(UART_ID0,"AT+NAMEWATERPIPE\r\n","NAME");
 
     /* 
-    Has to be commment because of the use of HC-06 instead.
+    Has to be commment because of the use of HC-05 instead.
     There is no programming inside the code !!!
     */
 
