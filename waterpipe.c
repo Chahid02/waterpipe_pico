@@ -268,17 +268,27 @@ int main()
             while (BME280_READ_STATUS() & BME280_STATUS_IM_UPDATE & freezeFlag)
             {
             /* Waiting for updated values */
-            for (size_t i = 0; i < 27000000; i++)
+            for (size_t i = 0; i <= 27000000; i++)
             {
-                if(i <= (27000000-1))
+                if(i == (27000000-1))
                 {
                    freezeFlag = 0;
+                   printf("[X] ERROR BME280 NO CONNECTION [X]\r\n");
+                   printf("[X] ANALYZING ... [X]\r\n");
+                   sleep_ms(500);
+
+                   BME280_INIT();
+                   BME280_READ_REGVALUE();
+                   
+                   printf("[X] REINIT BME280 [X]\r\n");
+                   printf("[X] WAITING ... [X]\r\n");
+                   sleep_ms(500);
+
                 }
                 else
                 {
-                    NOP();
+                    freezeFlag = 1;
                 }
-                
             }
             
             }; 
