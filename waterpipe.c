@@ -263,8 +263,8 @@ int main()
     {
         debugTerm();
 
-        if (BME280_SOFT_RESET() != 0)
-        {
+ 
+            printf("%d",BME280_READ_STATUS());
             while (BME280_READ_STATUS() & BME280_STATUS_IM_UPDATE)
             {
             /* Waiting for updated values */
