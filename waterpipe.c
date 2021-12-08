@@ -264,7 +264,7 @@ int main()
         debugTerm();
 
  
-            printf("\r\n LALLALALALLALALALA%p",BME280_READ_STATUS());
+            printf("\r\n LALLALALALLALALALA%d",BME280_READ_STATUS());
             while (BME280_READ_STATUS() & BME280_STATUS_IM_UPDATE)
             {
             /* Waiting for updated values */
