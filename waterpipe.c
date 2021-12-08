@@ -262,10 +262,17 @@ int main()
     while (true)
     {
         debugTerm();
-        while (BME280_READ_STATUS() & BME280_STATUS_IM_UPDATE)
+
+        if (BME280_SOFT_RESET() != 0
         {
+            while (BME280_READ_STATUS() & BME280_STATUS_IM_UPDATE)
+            {
             /* Waiting for updated values */
-        };
+            }; 
+        }
+
+
+
 
         int32_t bmeTemp;
         uint32_t bmePress;
