@@ -264,13 +264,21 @@ int main()
         debugTerm();
 
  
-            printf("\r\n LALLALALALLALALALA%d",BME280_READ_STATUS());
-            while (BME280_READ_STATUS() & BME280_STATUS_IM_UPDATE)
+            uint8_t freezeFlag = 1;
+            while (BME280_READ_STATUS() & BME280_STATUS_IM_UPDATE & freezeFlag)
             {
             /* Waiting for updated values */
-            for (size_t i = 0; i < count; i++)
+            for (size_t i = 0; i < 27000000; i++)
             {
-                /* code */
+                if(i <= (27000000-1))
+                {
+                   freezeFlag = 0;
+                }
+                else
+                {
+                    NOP();
+                }
+                
             }
             
             }; 
