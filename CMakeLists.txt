@@ -9,7 +9,6 @@ set(CMAKE_CXX_STANDARD 17)
 # (note this can come from environment, CMake cache etc)
 
 #set(PICO_SDK_PATH "/home/thomas/pico/pico-sdk")
-#test
 set(PICO_SDK_PATH "/home/luki/pico/pico-sdk")
 
 
