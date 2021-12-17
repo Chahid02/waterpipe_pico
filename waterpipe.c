@@ -51,7 +51,11 @@ float32_t tempCompr ;
 
 uint32_t count = 0;
 
-
+uint8_t ds18b20_flag = 0;
+uint8_t bmeTemp_flag = 0;
+uint8_t bmePress_flag = 0;
+uint8_t bmeHum_flag = 0;
+uint8_t waterlevel_flag = 0;
 
 void core1_entry() 
 {
@@ -156,7 +160,7 @@ int main()
     gpio_put(TEMPERATURE_OK, true);
     gpio_put(PRESSURE_OK, true);
     gpio_put(HUMIDITY_OK, true);
-    gpio_put(WATER_TEMP_OK, true);
+    gpio_put(WATER_TEMP_OK, false);  //buzzer - activate = true
     gpio_put(PRESSURE_FSR_OK, true);
     gpio_put(WATER_LEVEL_OK, true);
     gpio_put(LED, true);
@@ -360,39 +364,97 @@ int main()
         if (hcTemp >= 30.0f)
         {
             gpio_put(TEMPERATURE_OK, false);
+            bmeTemp_flag = 1;
+        }
+        else
+        {
+            bmeTemp_flag = 0;
+            gpio_put(TEMPERATURE_OK, true);
         }
 
         debugVal("[X] PRESSURE TOLERANZ: %f [X]\r\n",1100.0f - hcPress);
         monitorVal("[X] PRESSURE TOLERANZ: %f [X]\r\n",1100.0f - hcPress);
+
         if (hcPress >= 1100.0f)
         {
             gpio_put(PRESSURE_OK, false);
+            bmePress_flag = 1;
+        }
+        else
+        {
+            bmePress_flag = 0;
+            gpio_put(PRESSURE_OK, true);
         }
 
-        debugVal("[X] HUMIDITY TOLERANZ: %f [X]\r\n",30.0f - hcHum);
-        monitorVal("[X] HUMIDITY TOLERANZ: %f [X]\r\n",30.0f - hcHum);
-        if (hcHum >= 30.0f)
+        debugVal("[X] HUMIDITY TOLERANZ: %f [X]\r\n",45.0f - hcHum);
+        monitorVal("[X] HUMIDITY TOLERANZ: %f [X]\r\n",45.0f - hcHum);
+        if (hcHum >= 45.0f)
         {
             gpio_put(HUMIDITY_OK, false);
+            bmeHum_flag = 1;
+        }
+        else
+        {
+            bmeHum_flag = 0;
+            gpio_put(HUMIDITY_OK, true);
         }
 
         debugVal("[X] WATERELEVEL TOLERANZ: %f cm [X]\r\n",3.5f - waterlevelAdc);
         monitorVal("[X] WATERELEVEL TOLERANZ: %f cm [X]\r\n",3.5f - waterlevelAdc);
-        if (waterlevelAdc  >= 3.5f)
+
+        if ((waterlevelAdc <=1.0) || (waterlevelAdc >= 3.5))
         {
+            waterlevel_flag = 1;
             gpio_put(WATER_LEVEL_OK, false);
+        }
+        else
+        {
+            waterlevel_flag = 0;
+            gpio_put(WATER_LEVEL_OK, true); 
         }
 
         debugVal("[X] WATER TEMP TOLERANZ: %f [X]\r\n",25.0f - tempCompr );
         monitorVal("[X] WATER TEMP TOLERANZ: %f [X]\r\n",25.0f - tempCompr );
-        if (tempCompr >= 25.0f)
+
+        if (tempCompr >= 25.0f)     //Watertemperature too high
         {
-            gpio_put(WATER_TEMP_OK, false);
+            gpio_put(WATER_TEMP_OK, true); //activate buzzer
+            ds18b20_flag = 1;
+        }
+        else
+        {
+            gpio_put(WATER_TEMP_OK, false); //deactivate buzzer
+            ds18b20_flag = 0;
         }
 
 
         monitorMsg("======================== BT RECEIVED MSG =============================\r\n");
+        if (waterlevel_flag == 1)
+        {
+            waterlevelAdc = -4000;
+            LOG_ERROR("[X] Waterlevel outside of defined range [X] ErrorCode: -4000 [X] ");
+        }
 
+        if (bmeTemp_flag == 1)
+        {
+            hcTemp = -5000;
+            LOG_ERROR("[X] Overtemperature in the boiler [X] ErrorCode: -5000 [X] ");
+        }
+         if (bmePress_flag == 1)
+        {
+            hcPress = -6000;
+            LOG_ERROR("[X] Overpressure in the boiler [X] ErrorCode: -6000 [X] ");
+        }
+        if (bmeHum_flag == 1)
+        {
+            hcPress = -7000;
+            LOG_ERROR("[X] Humidity in the boiler to high [X] ErrorCode: -7000 [X] ");
+        }
+        if (ds18b20_flag == 1)
+        {
+            hcPress = -8000;
+            LOG_ERROR("[X] Watertemperature in the boiler to high [X] ErrorCode: -8000 [X] ");
+        }
         HC05_TX_BME280(hcTemp, hcPress, hcHum);
         HC05_TX_WATERLEVEL(waterlevelAdc);
         HC05_TX_DS18B20(tempCompr);

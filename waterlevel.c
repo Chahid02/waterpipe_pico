@@ -103,33 +103,20 @@ float32_t WATERLEVEL_RUN(void)
     float32_t offsetWater = 0.08;
     float32_t waterMaxLevel = 0.92;
 
+ 
     waterLevelVoltage = (float32_t)(buff / ADC_SAMPLES);
     debugVal("[X] Voltage: %f V (DMA READ) [x]\r\n", waterLevelVoltage);
  
     WaterLevelSamplesBuff = WaterLevelSamples / ADC_SAMPLES;
     debugVal("[X] WaterLevel Height: %.3f cm (DMA READ) [x]\r\n",((waterLevelVoltage - offsetWater) / (waterMaxLevel - offsetWater)) * 4);
   
-     uint16_t result = adc_read();
-   // debugVal("[X] Compare Voltage: %f V (DIRECT ADC READ) [X]\r\n", result * conversion_factor);
-    //debugVal("[X] WaterLevel Height: %.3f cm (DIRECT ADC READ) [x]\r\n",(((result * conversion_factor) - offsetWater) / (waterMaxLevel - offsetWater)) * 4);
-
-    float32_t currentlevel = (((result * conversion_factor) - offsetWater) / (waterMaxLevel - offsetWater)) * 4;
-    if ((currentlevel <=-0.0) || (currentlevel >= 4.5))
-    {
-        LOG_ERROR("[X] Device not found [X] ErrorCode: -4000 [X] ");
-        debugMsg("\n[X] Waterlevel outside of defined range [X]\r\n");
-
-        return  -4000;
-    }
-    else
-    {
-        debugVal("[X] Compare Voltage: %f V (DIRECT ADC READ) [X]\r\n", result * conversion_factor);
-        debugVal("[X] WaterLevel Height: %.3f cm (DIRECT ADC READ) [x]\r\n", currentlevel);
-    }
+    uint16_t result = adc_read();
+    debugVal("[X] Compare Voltage: %f V (DIRECT ADC READ) [X]\r\n", result * conversion_factor);
+    debugVal("[X] WaterLevel Height: %.3f cm (DIRECT ADC READ) [x]\r\n",(((result * conversion_factor) - offsetWater) / (waterMaxLevel - offsetWater)) * 4);
+  
 
     //return waterLevelVoltage;
     //return (((waterLevelVoltage - offsetWater) / (waterMaxLevel - offsetWater)) * 4);
-    return(currentlevel);
-    //return (((result * conversion_factor) - offsetWater) / (waterMaxLevel - offsetWater)) * 4;
+    return (((result * conversion_factor) - offsetWater) / (waterMaxLevel - offsetWater)) * 4;
 
 }

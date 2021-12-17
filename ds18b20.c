@@ -123,6 +123,7 @@ float32_t DS18B20_TEMP_READ(uint8_t ds18b20_gpio_pin)
     if (DS18B20_RESET(DS18B20_PIN) == 1)
     {
         debugMsg("\n[X] NO DEVICE found ...");
+        LOG_ERROR("[X] DS18B20 No Device found ... [X] ErrorCode: -1000 [X] ");
         return -1000;
     }
     DS18B20_WRITE_BYTE(DS18B20_PIN, THERM_CMD_SKIPROM);
