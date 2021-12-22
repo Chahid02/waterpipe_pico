@@ -429,32 +429,32 @@ int main()
 
 
         monitorMsg("======================== BT RECEIVED MSG =============================\r\n");
-        if (waterlevel_flag == 1)
-        {
-            waterlevelAdc = -4000;
-            LOG_ERROR("[X] Waterlevel outside of defined range [X] ErrorCode: -4000 [X] ");
-        }
+        // if (waterlevel_flag == 1)
+        // {
+        //     waterlevelAdc = -4000;
+        //     LOG_ERROR("[X] Waterlevel outside of defined range [X] ErrorCode: -4000 [X] ");
+        // }
 
-        if (bmeTemp_flag == 1)
-        {
-            hcTemp = -5000;
-            LOG_ERROR("[X] Overtemperature in the boiler [X] ErrorCode: -5000 [X] ");
-        }
-         if (bmePress_flag == 1)
-        {
-            hcPress = -6000;
-            LOG_ERROR("[X] Overpressure in the boiler [X] ErrorCode: -6000 [X] ");
-        }
-        if (bmeHum_flag == 1)
-        {
-            hcPress = -7000;
-            LOG_ERROR("[X] Humidity in the boiler to high [X] ErrorCode: -7000 [X] ");
-        }
-        if (ds18b20_flag == 1)
-        {
-            hcPress = -8000;
-            LOG_ERROR("[X] Watertemperature in the boiler to high [X] ErrorCode: -8000 [X] ");
-        }
+        // if (bmeTemp_flag == 1)
+        // {
+        //     hcTemp = -5000;
+        //     LOG_ERROR("[X] Overtemperature in the boiler [X] ErrorCode: -5000 [X] ");
+        // }
+        //  if (bmePress_flag == 1)
+        // {
+        //     hcPress = -6000;
+        //     LOG_ERROR("[X] Overpressure in the boiler [X] ErrorCode: -6000 [X] ");
+        // }
+        // if (bmeHum_flag == 1)
+        // {
+        //     hcPress = -7000;
+        //     LOG_ERROR("[X] Humidity in the boiler to high [X] ErrorCode: -7000 [X] ");
+        // }
+        // if (ds18b20_flag == 1)
+        // {
+        //     hcPress = -8000;
+        //     LOG_ERROR("[X] Watertemperature in the boiler to high [X] ErrorCode: -8000 [X] ");
+        // }
         HC05_TX_BME280(hcTemp, hcPress, hcHum);
         HC05_TX_WATERLEVEL(waterlevelAdc);
         HC05_TX_DS18B20(tempCompr);
